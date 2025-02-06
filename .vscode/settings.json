@@ -24,7 +24,11 @@
   "stylelint.snippet": ["css", "scss"],
   "stylelint.validate": ["css", "scss"],
   // Run tasks in macOS
+  // Run tasks in macOS
   "terminal.integrated.profiles.osx": {
-    "zsh": { "path": "/bin/zsh", "args": ["-l", "-i"] }
+    "bash": { "path": "/opt/homebrew/bin/bash", "args": ["-l", "-i"] }
+  },
+  "terminal.integrated.env.osx": {
+    "LOAD_SSH_KEY": "/usr/bin/ssh-add --apple-load-keychain -q"
   }
 }

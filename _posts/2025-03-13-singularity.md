@@ -1,6 +1,6 @@
 ---
 title: The Singularity
-date: 2024-03-13 13:29:02 +0800
+date: 2025-03-13 13:29:02 +0800
 math: true
 categories: [ math, computer-science ]
 tags: [ algorithms, artificial-intelligence, machine-learning, singularity, technology, robotics, ethics, deep-neural-networks, alignment ]

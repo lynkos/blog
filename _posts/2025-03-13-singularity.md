@@ -121,40 +121,40 @@ $\quad$ Peter Salib, assistant professor of law at the University of Houston, is
 $\quad$ Even though the singularity has yet to be reached, it is self-evident that humanity is undergoing a massive paradigm shift. Increased productivity and safety coupled with mass layoffs, job displacement, increased global tensions, security concerns, and AI misalignment underscores the need for ethical considerations, thoughtful policies, and global cooperation in order to maximize the benefit and minimize the harm of such technologies.
 
 ## References
-<a name="1" id="1">[1]</a> Chat-GPT-3. (2024, July 15). “Please provide a detailed outline of the paper.” Generated using OpenAI. https://chat.openai.com
+<a href="#1" name="1" id="1">[1]</a> Chat-GPT-3. (2024, July 15). “Please provide a detailed outline of the paper.” Generated using OpenAI. https://chat.openai.com
 
-<a name="2" id="2">[2]</a>	N. Bostrom, *Superintelligence: Paths, Dangers, Strategies*. Oxford: Oxford University Press, 2014.
+<a href="#2" name="2" id="2">[2]</a>	N. Bostrom, *Superintelligence: Paths, Dangers, Strategies*. Oxford: Oxford University Press, 2014.
 
-<a name="3" id="3">[3]</a>	R. Kurzweil, *The Singularity Is Near: When Humans Transcend Biology*. London: Duckworth, 2005.
+<a href="#3" name="3" id="3">[3]</a>	R. Kurzweil, *The Singularity Is Near: When Humans Transcend Biology*. London: Duckworth, 2005.
 
-<a name="4" id="4">[4]</a>	S. Russel and P. Norvig, *Artificial Intelligence: A Modern Approach*, 4th ed. Prentice Hall, 2021.
+<a href="#4" name="4" id="4">[4]</a>	S. Russel and P. Norvig, *Artificial Intelligence: A Modern Approach*, 4th ed. Prentice Hall, 2021.
 
-<a name="5" id="5">[5]</a>	V. Vinge, “The Coming Technological Singularity: How to Survive in the Post-Human Era,” *NASA Conference Publication*, pp. 11–22, Dec. 1993, Accessed: Jul. 29, 2024. [Online]. Available: https://ntrs.nasa.gov/citations/19940022856
+<a href="#5" name="5" id="5">[5]</a>	V. Vinge, “The Coming Technological Singularity: How to Survive in the Post-Human Era,” *NASA Conference Publication*, pp. 11–22, Dec. 1993, Accessed: Jul. 29, 2024. [Online]. Available: https://ntrs.nasa.gov/citations/19940022856
 
-<a name="6" id="6">[6]</a>	J.A. Lewis, “Waiting for Skynet,” *CSIS*, Jan. 18, 2018. https://www.csis.org/analysis/waiting-skynet. Accessed 19 Feb. 2025.
+<a href="#6" name="6" id="6">[6]</a>	J.A. Lewis, “Waiting for Skynet,” *CSIS*, Jan. 18, 2018. https://www.csis.org/analysis/waiting-skynet. Accessed 19 Feb. 2025.
 
-<a name="7" id="7">[7]</a>	T. Frey, “The Singularity and Our Collision Path with the Future,” *Futurist Speaker*, Apr. 17, 2014. https://futuristspeaker.com/business-trends/the-singularity-and-our-collision-path-with-the-future. Accessed 19 Feb. 2025.
+<a href="#7" name="7" id="7">[7]</a>	T. Frey, “The Singularity and Our Collision Path with the Future,” *Futurist Speaker*, Apr. 17, 2014. https://futuristspeaker.com/business-trends/the-singularity-and-our-collision-path-with-the-future. Accessed 19 Feb. 2025.
 
-<a name="8" id="8">[8]</a>	C. Mishra and D. L. Gupta, “Deep Machine Learning and Neural Networks: An Overview,” *IAES International Journal of Artificial Intelligence (IJ-AI)*, vol. 6, no. 2, p. 66, Jun. 2017, doi: https://doi.org/10.11591/ijai.v6.i2.pp66-73.
+<a href="#8" name="8" id="8">[8]</a>	C. Mishra and D. L. Gupta, “Deep Machine Learning and Neural Networks: An Overview,” *IAES International Journal of Artificial Intelligence (IJ-AI)*, vol. 6, no. 2, p. 66, Jun. 2017, doi: https://doi.org/10.11591/ijai.v6.i2.pp66-73.
 
-<a name="9" id="9">[9]</a>	G. Kutyniok, “The Mathematics of Artificial Intelligence,” *International Congress of Mathematics*, vol. 7, pp. 5118–5139, Mar. 2022, doi: https://doi.org/10.48550/arxiv.2203.08890.
+<a href="#9" name="9" id="9">[9]</a>	G. Kutyniok, “The Mathematics of Artificial Intelligence,” *International Congress of Mathematics*, vol. 7, pp. 5118–5139, Mar. 2022, doi: https://doi.org/10.48550/arxiv.2203.08890.
 
-<a name="10" id="10">[10]</a> R. Lakshmanan, “DeepSeek AI Database Exposed: Over 1 Million Log Lines, Secret Keys Leaked,” *The Hacker News*, Jan. 30, 2025. https://thehackernews.com/2025/01/deepseek-ai-database-exposed-over-1.html. Accessed 19 Feb. 2025.
+<a href="#10" name="10" id="10">[10]</a> R. Lakshmanan, “DeepSeek AI Database Exposed: Over 1 Million Log Lines, Secret Keys Leaked,” *The Hacker News*, Jan. 30, 2025. https://thehackernews.com/2025/01/deepseek-ai-database-exposed-over-1.html. Accessed 19 Feb. 2025.
 
-<a name="11" id="11">[11]</a> Henry, Nathan I. N., et al. *A Hormetic Approach to the Value-Loading Problem: Preventing the Paperclip Apocalypse?* arXiv.org, Feb. 2024, https://doi.org/10.48550/arXiv.2402.07462. Accessed 20 Feb. 2025.
+<a href="#11" name="11" id="11">[11]</a> Henry, Nathan I. N., et al. *A Hormetic Approach to the Value-Loading Problem: Preventing the Paperclip Apocalypse?* arXiv.org, Feb. 2024, https://doi.org/10.48550/arXiv.2402.07462. Accessed 20 Feb. 2025.
 
-<a name="12" id="12">[12]</a> Fox, Stephen. “Adaptive AI Alignment: Established Resources for Aligning Machine Learning with Human Intentions and Values in Changing Environments.” *Machine Learning and Knowledge Extraction*, vol. 6, no. 4, Multidisciplinary Digital Publishing Institute, Nov. 2024, pp. 2570–600, https://doi.org/10.3390/make6040124. Accessed 20 Feb. 2025.
+<a href="#12" name="12" id="12">[12]</a> Fox, Stephen. “Adaptive AI Alignment: Established Resources for Aligning Machine Learning with Human Intentions and Values in Changing Environments.” *Machine Learning and Knowledge Extraction*, vol. 6, no. 4, Multidisciplinary Digital Publishing Institute, Nov. 2024, pp. 2570–600, https://doi.org/10.3390/make6040124. Accessed 20 Feb. 2025.
 
-<a name="13" id="13">[13]</a> Gans, Joshua. *Self-Regulating Artificial General Intelligence*. Cornell University, Feb. 2018, https://doi.org/10.3386/w24352. Accessed 20 Feb. 2025.
+<a href="#13" name="13" id="13">[13]</a> Gans, Joshua. *Self-Regulating Artificial General Intelligence*. Cornell University, Feb. 2018, https://doi.org/10.3386/w24352. Accessed 20 Feb. 2025.
 
-<a name="14" id="14">[14]</a> Corbett-Davies, Sam, et al. “Algorithmic Decision Making and the Cost of Fairness.” ArXiv, Jan. 2017, https://doi.org/10.48550/ *arXiv* .1701.08230. Accessed 20 Feb. 2025.
+<a href="#14" name="14" id="14">[14]</a> Corbett-Davies, Sam, et al. “Algorithmic Decision Making and the Cost of Fairness.” ArXiv, Jan. 2017, https://doi.org/10.48550/ *arXiv* .1701.08230. Accessed 20 Feb. 2025.
 
-<a name="15" id="15">[15]</a> Barocas, Solon, et al. *Fairness and Machine Learning: Limitations and Opportunities*. The MIT Press, 2023, fairmlbook.org/pdf/fairmlbook.pdf. Accessed 20 Feb. 2025.
+<a href="#15" name="15" id="15">[15]</a> Barocas, Solon, et al. *Fairness and Machine Learning: Limitations and Opportunities*. The MIT Press, 2023, fairmlbook.org/pdf/fairmlbook.pdf. Accessed 20 Feb. 2025.
 
-<a name="16" id="16">[16]</a> Gans, Joshua. “AI and the Paperclip Problem.” *CEPR*, Centre for Economic Policy Research, 10 June 2018, cepr.org/voxeu/columns/ai-and-paperclip-problem. Accessed 25 Feb. 2025.
+<a href="#16" name="16" id="16">[16]</a> Gans, Joshua. “AI and the Paperclip Problem.” *CEPR*, Centre for Economic Policy Research, 10 June 2018, cepr.org/voxeu/columns/ai-and-paperclip-problem. Accessed 25 Feb. 2025.
 
-<a name="17" id="17">[17]</a> Salib, Peter. “AI Will Not Want to Self-Improve.” *Social Science Research Network*, May 2023, https://doi.org/10.2139/ssrn.4445706. Accessed 25 Feb. 2025.
+<a href="#17" name="17" id="17">[17]</a> Salib, Peter. “AI Will Not Want to Self-Improve.” *Social Science Research Network*, May 2023, https://doi.org/10.2139/ssrn.4445706. Accessed 25 Feb. 2025.
 
-<a name="18" id="18">[18]</a> Feldstein, Steven. “The Global Expansion of AI Surveillance.” *Carnegie Endowment*, Carnegie Endowment for International Peace, 17 Sept. 2019, carnegie-production-assets.s3.amazonaws.com/static/files/files__WP-Feldstein-AISurveillance_final1.pdf. Accessed 27 Feb. 2025.
+<a href="#18" name="18" id="18">[18]</a> Feldstein, Steven. “The Global Expansion of AI Surveillance.” *Carnegie Endowment*, Carnegie Endowment for International Peace, 17 Sept. 2019, carnegie-production-assets.s3.amazonaws.com/static/files/files__WP-Feldstein-AISurveillance_final1.pdf. Accessed 27 Feb. 2025.
 
-<a name="19" id="19">[19]</a> Schmid, Stefka, et al. “Arms Race or Innovation Race? Geopolitical AI Development.” *Geopolitics*, Informa UK Limited, Jan. 2025, https://doi.org/10.1080/14650045.2025.2456019. Accessed 27 Feb. 2025.
+<a href="#19" name="19" id="19">[19]</a> Schmid, Stefka, et al. “Arms Race or Innovation Race? Geopolitical AI Development.” *Geopolitics*, Informa UK Limited, Jan. 2025, https://doi.org/10.1080/14650045.2025.2456019. Accessed 27 Feb. 2025.

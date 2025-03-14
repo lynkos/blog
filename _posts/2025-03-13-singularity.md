@@ -23,6 +23,8 @@ tags: [ algorithms, artificial-intelligence, machine-learning, singularity, tech
 
 &emsp; An *artificial neuron* with *weights* $w_{1}, \ldots ,w_{n} \in \mathbb{R}$, *bias* $b \in \mathbb{R}$, and *activation function* $\rho∶ \mathbb{R} \to \mathbb{R}$ is defined as the function $f∶ \mathbb{R}^{n} \to \mathbb{R}$ given by
 
+&emsp; $f(x_{1}, \ldots, x_{n}) = \sum_{i = 1}^{n} x_{i} w_{i} - b = \rho(\langle x, w \rangle - b)$,
+
 <style type="text/css">
     table { width: 100%; }
     tr, tbody, table { border: none !important; }
@@ -34,7 +36,7 @@ tags: [ algorithms, artificial-intelligence, machine-learning, singularity, tech
 
 |||
 |:---:|:---:|
-| $\quad f(x_{1}, \ldots, x_{n}) = \sum_{i = 1}^{n} x_{i} w_{i} - b = \rho(\langle x, w \rangle - b)$, where $w = (w_{1}, \ldots ,w_{n})$ and $x = x_{1}, \ldots ,x_{n}$. | [[9]](#9) |
+| where $w = (w_{1}, \ldots, w_{n})$ and $x = x_{1}, \ldots, x_{n}$. | [[9]](#9) |
 
 ## Analysis
 ### Privacy

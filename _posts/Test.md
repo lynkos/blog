@@ -1,0 +1,10 @@
+---
+share: true
+title: Test
+date: 2025-03-17 14:23:45 +0800
+filename: 2025-03-17-test
+tags:
+  - obsidian
+---
+
+Test to see if obsidian plugin works...

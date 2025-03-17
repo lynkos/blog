@@ -1,6 +1,6 @@
 ---
 title: Quantum Search Algorithm (Full)
-date: 2025-03-13 13:59:02 +0800
+date: 2025-03-13 13:59:02 -0400
 math: true
 categories: [ math, physics, computer-science ]
 tags: [ algorithms, quantum-computing, grovers-algorithm ]

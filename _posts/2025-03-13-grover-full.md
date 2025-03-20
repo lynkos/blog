@@ -397,3 +397,12 @@ density_matrix.draw("qsphere")
 * [The Density Matrix and Mixed States](https://learn.qiskit.org/course/quantum-hardware/density-matrix)
 * [Mixed States and Measurement](https://www.cs.cmu.edu/~odonnell/quantum15/lecture16.pdf)
 * [Introduction to Quantum Computing: Grover's Algorithm](https://akyrillidis.github.io/notes/quant_post_9)
+
+<script src="https://utteranc.es/client.js"
+    repo="lynkos/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="preferred-color-scheme"
+    crossorigin="anonymous"
+    async>
+</script>

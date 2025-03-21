@@ -160,12 +160,3 @@ tags: [ algorithms, artificial-intelligence, machine-learning, singularity, tech
 <a href="#18" name="18" id="18">[18]</a> Feldstein, Steven. “The Global Expansion of AI Surveillance.” *Carnegie Endowment*, Carnegie Endowment for International Peace, 17 Sept. 2019, carnegie-production-assets.s3.amazonaws.com/static/files/files__WP-Feldstein-AISurveillance_final1.pdf. Accessed 27 Feb. 2025.
 
 <a href="#19" name="19" id="19">[19]</a> Schmid, Stefka, et al. “Arms Race or Innovation Race? Geopolitical AI Development.” *Geopolitics*, Informa UK Limited, Jan. 2025, https://doi.org/10.1080/14650045.2025.2456019. Accessed 27 Feb. 2025.
-
-<script src="https://utteranc.es/client.js"
-    repo="lynkos/blog"
-    issue-term="pathname"
-    label="comment"
-    theme="preferred-color-scheme"
-    crossorigin="anonymous"
-    async>
-</script>

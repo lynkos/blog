@@ -1,0 +1,37 @@
+<div class="tab-container" id="{{ include.id }}">
+  <div class="tab">
+    {% if include.tab1_title %}
+      <button class="tablinks" data-target="{{ include.id }}-tab1">{{ include.tab1_title }}</button>
+    {% endif %}
+    {% if include.tab2_title %}
+      <button class="tablinks" data-target="{{ include.id }}-tab2">{{ include.tab2_title }}</button>
+    {% endif %}
+    {% if include.tab3_title %}
+      <button class="tablinks" data-target="{{ include.id }}-tab3">{{ include.tab3_title }}</button>
+    {% endif %}
+    {% if include.tab4_title %}
+      <button class="tablinks" data-target="{{ include.id }}-tab4">{{ include.tab4_title }}</button>
+    {% endif %}
+  </div>
+
+  {% if include.tab1_content %}
+    <div id="{{ include.id }}-tab1" class="tabcontent">
+      {{ include.tab1_content | markdownify }}
+    </div>
+  {% endif %}
+  {% if include.tab2_content %}
+    <div id="{{ include.id }}-tab2" class="tabcontent">
+      {{ include.tab2_content | markdownify }}
+    </div>
+  {% endif %}
+  {% if include.tab3_content %}
+    <div id="{{ include.id }}-tab3" class="tabcontent">
+      {{ include.tab3_content | markdownify }}
+    </div>
+  {% endif %}
+  {% if include.tab4_content %}
+    <div id="{{ include.id }}-tab4" class="tabcontent">
+      {{ include.tab4_content | markdownify }}
+    </div>
+  {% endif %}
+</div>

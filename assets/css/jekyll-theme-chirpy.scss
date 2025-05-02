@@ -31,13 +31,13 @@
       background-color: var(--bs-primary);
       color: white;
     }
-  }
-}
 
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: var(--bs-primary);
-  color: white;
+    /* Create an active/current tablink class */
+    &.active {
+      background-color: var(--bs-primary);
+      color: white;
+    }
+  }
 }
 
 /* Style the tab content */
@@ -48,6 +48,7 @@
   background-color: var(--card-bg);
   border: 1px solid var(--btn-border-color);
   border-top: none;
+  
   p {
     margin: 0;
   }

@@ -1,8 +1,8 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 1
 ---
+This page is still under construction.
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+Visit <a target="_blank" title="My personal website" href="https://lynkos.dev">my website (lynkos.dev)</a> for further information.

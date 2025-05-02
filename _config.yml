@@ -118,9 +118,9 @@ comments:
   # Giscus options › https://giscus.app
   giscus:
     repo: lynkos/blog # <gh-username>/<repo>
-    repo_id: R_kgDONzcSbA
+    repo_id: R_kgDOOjkByg
     category: "Announcements"
-    category_id: DIC_kwDONzcSbM4CoU4U
+    category_id: DIC_kwDOOjkBys4Cptnv
     mapping: "pathname" # optional, default to 'pathname'
     strict: 0 # optional, default to '0'
     input_position: "top" # optional, default to 'bottom'

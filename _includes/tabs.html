@@ -20,7 +20,7 @@
 <div class="tab-container" id="{{ include.id }}">
   <div class="tab">
     {% for tab in include.tabs %}
-      <button class="tablinks" data-target="{{ include.id }}-tab{{ forloop.index0 }}">
+      <button style="width: calc(100% / {{ include.tabs.size }})" class="tablinks" data-target="{{ include.id }}-tab{{ forloop.index0 }}">
         {{ tab.title }}
       </button>
     {% endfor %}

@@ -7,6 +7,7 @@
 * [Jekyll](https://jekyllrb.com)
 * [Ruby](https://www.ruby-lang.org/en)
 * [Obsidian](https://obsidian.md)
+* [Enveloppe](https://enveloppe.ovh)
 * [Giscus](https://giscus.app)
 
 ## Usage

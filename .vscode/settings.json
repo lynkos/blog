@@ -1,6 +1,6 @@
 {
   // Prettier
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "GitHub.copilot",
   "editor.formatOnSave": true,
   // Shopify Liquid
   "files.associations": {
@@ -11,13 +11,17 @@
   },
   // Formatter
   "[html][liquid]": {
-    "editor.defaultFormatter": "Shopify.theme-check-vscode"
+    "editor.defaultFormatter": "GitHub.copilot"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "mkhl.shfmt"
+    "editor.defaultFormatter": "GitHub.copilot"
   },
   // Disable vscode built-in stylelint
   "css.validate": false,
   "scss.validate": false,
   "less.validate": false,
+  // Auto-load SSH key
+  "terminal.integrated.env.osx": {
+    "LOAD_SSH_KEY": "/usr/bin/ssh-add --apple-load-keychain -q"
+  }
 }

@@ -50,12 +50,7 @@
   border: 1px solid var(--btn-border-color);
   border-top: none;
   
-  p {
+  p, pre, h4 {
     margin: 0;
-  }
-
-  pre {
-    margin-top: 0;
-    margin-bottom: 0;
   }
 }

@@ -48,6 +48,7 @@ header {
 .post-tail-wrapper {
   @extend %text-sm;
   border-bottom: 1px double var(--main-border-color);
+  margin-top: 2rem;
 
   .license-wrapper {
     line-height: 1.2rem;
@@ -118,7 +119,6 @@ header {
 
     > div:first-child {
       width: 100%;
-      margin-top: 1rem;
     }
   }
 }
@@ -138,6 +138,7 @@ header {
 
 .post-tags {
   line-height: 2rem;
+  margin-bottom: 1rem !important;
 
   .post-tag {
     &:hover {

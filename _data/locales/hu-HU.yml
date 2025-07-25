@@ -35,13 +35,13 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: Néhány jog fenntartva.
-  verbose: >-
-    Az oldalon található tartalmak
-    Creative Commons Attribution 4.0 International (CC BY 4.0) licenccel rendelkeznek,
-    hacsak másképp nincs jelezve.
+#   brief: Néhány jog fenntartva.
+#   verbose: >-
+#     Az oldalon található tartalmak
+#     Creative Commons Attribution 4.0 International (CC BY 4.0) licenccel rendelkeznek,
+#     hacsak másképp nincs jelezve.
 
-meta: Készítve :THEME témával a :PLATFORM platformra.
+# meta: Készítve :THEME témával a :PLATFORM platformra.
 
 not_found:
   statement: Sajnáljuk, az URL-t rosszul helyeztük el, vagy valami nem létezőre mutat.

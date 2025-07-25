@@ -35,12 +35,13 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: Alcuni diritti riservati.
-  verbose: >-
-    Eccetto quando esplicitamente menzionato, i post di questo blog sono da ritenersi sotto
-    i termini di licenza Creative Commons Attribution 4.0 International (CC BY 4.0).
+#   brief: Alcuni diritti riservati.
+#   verbose: >-
+#     Eccetto quando esplicitamente menzionato, i post di questo blog sono da ritenersi sotto
+#     i termini di licenza Creative Commons Attribution 4.0 International (CC BY 4.0).
 
-meta: Servizio offerto da :PLATFORM con tema :THEME
+# meta: Servizio offerto da :PLATFORM con tema :THEME
+
 not_found:
   statement: Ci scusiamo, non è stato possibile trovare l'URL in questione. Potrebbe puntare ad una pagina non esistente.
 

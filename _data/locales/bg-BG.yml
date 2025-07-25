@@ -35,12 +35,12 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: Някои права запазени.
-  verbose: >-
-    Освен ако не е посочено друго, публикациите в блога на този сайт са лицензирани
-    под лиценза Creative Commons Attribution 4.0 (CC BY 4.0) от автора.
+#   brief: Някои права запазени.
+#   verbose: >-
+#     Освен ако не е посочено друго, публикациите в блога на този сайт са лицензирани
+#     под лиценза Creative Commons Attribution 4.0 (CC BY 4.0) от автора.
 
-meta: Създадено чрез :PLATFORM и :THEME тема
+# meta: Създадено чрез :PLATFORM и :THEME тема
 
 not_found:
   statement: Съжалявам, но на този URL адрес няма налично съдържание.

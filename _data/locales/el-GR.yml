@@ -35,12 +35,12 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: Ορισμένα δικαιώματα reserved.
-  verbose: >-
-    Εκτός αλλού ή οπουδήποτε αλλού, τα blog posts σε αυτήν την σελίδα βρίσκονται υπο την άδεια
-    Creative Commons Attribution 4.0 International (CC BY 4.0) του δημιουργού.
+#   brief: Ορισμένα δικαιώματα reserved.
+#   verbose: >-
+#     Εκτός αλλού ή οπουδήποτε αλλού, τα blog posts σε αυτήν την σελίδα βρίσκονται υπο την άδεια
+#     Creative Commons Attribution 4.0 International (CC BY 4.0) του δημιουργού.
 
-meta: Αξιοποιώντας την :PLATFORM theme :THEME
+# meta: Αξιοποιώντας την :PLATFORM theme :THEME
 
 not_found:
   statement: Συγνώμη, έχουμε τοποθετήσει λάθος αυτήν την διεύθυνση URL ή υποδεικνύει κάτι που δεν υπάρχει.

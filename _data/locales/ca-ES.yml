@@ -35,12 +35,12 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: Alguns drets reservats.
-  verbose: >-
-    Excepte que s'indiqui explícitament, les entrades d'aquest blog estan llicenciades
-    sota la llicència Creative Commons Attribution 4.0 International (CC BY 4.0) per l'autor.
+#   brief: Alguns drets reservats.
+#   verbose: >-
+#     Excepte que s'indiqui explícitament, les entrades d'aquest blog estan llicenciades
+#     sota la llicència Creative Commons Attribution 4.0 International (CC BY 4.0) per l'autor.
 
-meta: Fet amb :PLATFORM utilitzant el tema :THEME
+# meta: Fet amb :PLATFORM utilitzant el tema :THEME
 
 not_found:
   statement: Ho sentim, hem perdut aquesta URL o apunta a alguna cosa que no existeix.

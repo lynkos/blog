@@ -7,18 +7,18 @@
   icon: "fas fa-link"
   url:  'https://lynkos.dev'
 
+- type: email
+  icon: "fas fa-envelope"
+  noblank: true # open link in current tab
+
 - type: twitter
   icon: "fa-brands fa-x-twitter"
 
-- type: linkedin
-  icon: 'fab fa-linkedin'
-  url:  'https://linkedin.com/in/kiran-brahmatewari'
-
 # Uncomment and complete the url below to enable more contact options
 #
-# - type: email
-#   icon: "fas fa-envelope"
-#   noblank: true # open link in current tab
+# - type: linkedin
+#   icon: 'fab fa-linkedin'
+#   url:  'https://linkedin.com/in/kiran-brahmatewari'
 #
 # - type: rss
 #   icon: "fas fa-rss"

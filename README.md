@@ -224,7 +224,31 @@ git push origin main
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
 
 ### Setup Giscus
-_TODO_
+Make sure that:
+* Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
+* [Giscus app](https://github.com/apps/giscus) is installed
+* Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
+
+Install by going to [Giscus](https://giscus.app) and filling out the form. Example code:
+
+```html
+<script src="https://giscus.app/client.js"
+        data-repo="<GITHUB_USERNAME>/<REPO>"
+        data-repo-id="<REPO_ID>"
+        data-category="Announcements"
+        data-category-id="<CATEGORY_ID>"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+```
 
 ## Usage
 ```sh

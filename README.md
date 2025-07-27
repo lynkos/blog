@@ -15,6 +15,17 @@
 * [Enveloppe](https://enveloppe.ovh)
 * [Giscus](https://giscus.app)
 
+## Quick Start
+```sh
+sh tools/run.sh
+```
+
+> [!TIP]
+> Use this command if the previous one doesn't work
+> ```sh
+> bundle exec jekyll serve --incremental
+> ```
+
 ## Initial Setup
 ### Sync Fork with Upstream
 To keep fork up-to-date with original repository (i.e. Chirpy)
@@ -30,31 +41,32 @@ git remote add upstream https://github.com/cotes2020/jekyll-theme-chirpy.git
 > git remote set-url upstream https://github.com/cotes2020/jekyll-theme-chirpy.git
 > ```
 
-2. Confirm the remote URL
+2. Confirm the remote URL with either command
+  * Command #1
+    * Input:
+      ```sh
+      git remote show
+      ```
+  
+    * Output should look similar to:
+      ```
+      origin
+      upstream
+      ```
 
-```sh
-git remote -v
-```
-
-Output should look similar to:
-
-```
-origin  https://github.com/lynkos/blog.git (fetch)
-origin  https://github.com/lynkos/blog.git (push)
-upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
-upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
-```
-
-```sh
-git remote show
-```
-
-Output should look similar to:
-
-```
-origin
-upstream
-```
+  * Command #2
+    * Input:
+      ```sh
+      git remote -v
+      ```
+  
+    * Output should look similar to:
+      ```
+      origin  https://github.com/lynkos/blog.git (fetch)
+      origin  https://github.com/lynkos/blog.git (push)
+      upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
+      upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
+      ```
 
 3. Fetch latest changes from upstream repository
 
@@ -86,18 +98,44 @@ git merge upstream/main
 git push origin main
 ```
 
+### Setup Giscus
+Make sure that:
+* Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
+* [Giscus app](https://github.com/apps/giscus) is installed
+* Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
+
+Install by going to [Giscus](https://giscus.app) and filling out the form. Example code with my configuration:
+
+```html
+<script src="https://giscus.app/client.js"
+        data-repo="<GITHUB_USERNAME>/<REPO>"
+        data-repo-id="<REPO_ID>"
+        data-category="Announcements"
+        data-category-id="<CATEGORY_ID>"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+```
+
 ### Setup Enveloppe
 1. Open **Settings** (<kbd>⌘</kbd> + <kbd>,</kbd>)
 2. Go to **Community plugins** tab
 3. Turn off **Restricted mode** to enable community plugins
-4. Click <kbd>Browse</kbd>, which is next to **Community plugins**
+4. Click **Browse**, which is next to **Community plugins**
 5. Enter `Enveloppe` in the searchbar
-6. Click on [Enveloppe](obsidian://show-plugin?id=obsidian-mkdocs-publisher), then click <kbd>Install</kbd>
+6. Click on [Enveloppe](obsidian://show-plugin?id=obsidian-mkdocs-publisher), then click **Install**
 7. Once Enveloppe's installed, go to its Settings
 8. Copy my Enveloppe settings
- <details open>
-  <summary><strong>Enveloppe Settings</strong></summary>
-  <pre>{
+```json
+{
   "github": {
     "branch": "main",
     "automaticallyMergePR": true,
@@ -197,19 +235,19 @@ git push origin main
     },
     "setFrontmatterKey": "Set"
   }
-}</pre>
-</details> 
+}
+```
 
-9. Click <kbd>Import settings</kbd> and paste the copied `enveloppe.json` (from the previous step) where it says `Paste configuration here...`, then click <kbd>Save</kbd>
+9. Click **Import settings** and paste the copied `enveloppe.json` (from the previous step) where it says `Paste configuration here...`, then click **Save**
 10.  Under **GitHub config**, enter your **GitHub username**, **Repository name**, and — if your main branch is not named `main` — **Main branch** name
 11.  Generate a fine-grained personal access token for your GitHub repository in order to give Enveloppe necessary permissions to work by going to your [GitHub settings](https://github.com/settings)
 12.  Scroll down and click [**Developer settings**](https://github.com/settings/apps)
 13.  Click **Personal access tokens**, click [**Fine-grained tokens**](https://github.com/settings/personal-access-tokens), then click [**Generate new token**](https://github.com/settings/personal-access-tokens/new)
 14.  Enter a descriptive **Token name** (e.g. `Enveloppe (Obsidian)`) and **Description** (e.g. `Enveloppe (Obsidian Vault → GitHub Repo)`)
 15.  Choose your GitHub account as **Resource owner**
-16.  Select <kbd>No expiration</kbd> for **Expiration**
-17.  Under **Repository access**, click <kbd>Only select repositories</kbd> then click <kbd>Select repositories</kbd> and select the GitHub repository for your Jekyll blog (e.g. `lynkos/blog`)
-18. Click <kbd>Repository permissions</kbd> under **Permissions**
+16.  Select **No expiration** for **Expiration**
+17.  Under **Repository access**, click **Only select repositories** then click **Select repositories** and select the GitHub repository for your Jekyll blog (e.g. `lynkos/blog`)
+18. Click **Repository permissions** under **Permissions**
 19. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
 | Permission    | Access         | Reason                         |
@@ -219,47 +257,9 @@ git push origin main
 | Pull requests | Read and write | Create and merge pull requests |
 | Workflows     | Read and write | Create/update file             |
 
-20. Click <kbd>Generate token</kbd>
+20. Click **Generate token**
 21. Copy the generated GitHub personal access token; it should start with `github_` followed by a long, random string of alphanumeric characters and underscores
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
-
-### Setup Giscus
-Make sure that:
-* Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
-* [Giscus app](https://github.com/apps/giscus) is installed
-* Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
-
-Install by going to [Giscus](https://giscus.app) and filling out the form. Example code:
-
-```html
-<script src="https://giscus.app/client.js"
-        data-repo="<GITHUB_USERNAME>/<REPO>"
-        data-repo-id="<REPO_ID>"
-        data-category="Announcements"
-        data-category-id="<CATEGORY_ID>"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-```
-
-## Usage
-```sh
-sh tools/run.sh
-```
-
-> [!TIP]
-> Use this command if the previous one doesn't work
-> ```sh
-> bundle exec jekyll serve --incremental
-> ```
 
 ## Miscellaneous
 When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders `_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file from the theme's gem. If you have ever installed this theme gem, you can use the command `bundle info --path jekyll-theme-chirpy` to locate these files.

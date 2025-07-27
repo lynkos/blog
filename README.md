@@ -261,27 +261,7 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 21. Copy the generated GitHub personal access token; it should start with `github_` followed by a long, random string of alphanumeric characters and underscores
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
 
-## Miscellaneous
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders `_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file from the theme's gem. If you have ever installed this theme gem, you can use the command `bundle info --path jekyll-theme-chirpy` to locate these files.
-
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your Jekyll site. The following is a list of targets:
-
-```sh
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
-
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
-
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki) for more information.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
-
 ## Credit
-Full credit for <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> goes to <a target="_blank" href="https://github.com/cotes2020" title="Link to cotes2020 profile on GitHub"><code>cotes2020</code></a>.
+Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020).
+
+Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki) for more information and the [theme's license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE) for the license.

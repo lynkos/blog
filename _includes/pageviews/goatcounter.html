@@ -1,21 +1,24 @@
 <!-- Display GoatCounter pageviews -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const pv = document.getElementById('pageviews');
+    const pageviews = document.getElementById('pageviews');
 
-    if (pv !== null) {
+    if (pageviews !== null) {
       const uri = location.pathname.replace(/\/$/, '');
       const url = `https://{{ site.analytics.goatcounter.id }}.goatcounter.com/counter/${encodeURIComponent(uri)}.json`;
 
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          const count = data.count.replace(/\D/g, '');
-          pv.innerText = new Intl.NumberFormat().format(count);
+      try {
+        let request = new XMLHttpRequest();
+
+        request.addEventListener('load', function() {
+          pageviews.innerText = JSON.parse(this.responseText).count;
         })
-        .catch((error) => {
-          pv.innerText = '1';
-        });
+        
+        request.open('GET', url);
+        request.send();
+      } catch (error) {
+        pageviews.innerText = 'Unknown';
+      }
     }
   });
 </script>

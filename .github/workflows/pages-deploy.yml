@@ -6,6 +6,9 @@ on:
       - master
     paths-ignore:
       - .gitignore
+      - .gitattributes
+      - .gitmodules
+      - .editorconfig
       - README.md
       - LICENSE
 

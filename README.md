@@ -10,7 +10,13 @@
 
 ## Tech Stack
 * [Jekyll](https://jekyllrb.com)
-* [Ruby](https://www.ruby-lang.org/en)
+  * [Liquid](https://shopify.github.io/liquid)
+  * [Markdown](https://daringfireball.net/projects/markdown)
+  * [Ruby](https://www.ruby-lang.org/en)
+  * HTML
+  * SCSS
+  * JavaScript
+* [GitHub Actions](https://github.com/features/actions)
 * [Obsidian](https://obsidian.md)
 * [Enveloppe](https://enveloppe.ovh)
 * [Giscus](https://giscus.app)
@@ -99,10 +105,10 @@ git push origin main
 ```
 
 ### Setup Giscus
-Make sure that:
-* Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
-* [Giscus app](https://github.com/apps/giscus) is installed
-* Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
+Ensure:
+- [x] Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
+- [x] [Giscus app](https://github.com/apps/giscus) is installed
+- [x] Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
 
 Install by going to [Giscus](https://giscus.app) and filling out the form. Example code with my configuration:
 

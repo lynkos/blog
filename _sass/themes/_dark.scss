@@ -1,6 +1,11 @@
 @mixin styles {
   color-scheme: dark;
 
+  /* 'Not by AI' badge color */
+  --badge-fill: #ffffff;
+  --badge-background: #000000;
+  --badge-stroke: #acacac;
+
   /* Framework color */
   --main-bg: rgb(27, 27, 30);
   --mask-bg: rgb(68, 69, 70);

@@ -114,61 +114,49 @@ Basic Wine files[^winefiles]
 - **Optional** [Game Controller](2025-09-11-playing-windows-games.md#game-controller)
 
 ## Setup
-<details open>
-	<summary>1. Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "<strong>Evaluate your Windows executable on Apple silicon</strong>", and click <kbd>Download the evaluation environment for Windows games</kbd></summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/gptk.png"></p>
-</details>
+1. Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
+
+![gptk.png](../assets/obsidian/gptk.png)
 
 > You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
 {: .prompt-info }
 
-<details open>
-	<summary>2. You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)</summary>
-	<p align="center"><img alt="Screenshot of Apple's sign in page" src="assets/obsidian/gptk/apple_sign_in.png"></p>
-</details>
+2. You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
 
-<details open>
-	<summary>3. Once redirected to the downloads page, click <kbd>Evaluation environment for Windows games 2.1.dmg</kbd> to download the evaluation environment</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/download_gptk.png"></p>
-</details>
+![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
 
-<details open>
-	<summary>4. Double-click the <code>.dmg</code> after it's downloaded to open/mount it</summary>
-	<p align="center"><img alt="Screenshot of the evaluation environment .dmg in the Downloads folder" src="assets/obsidian/gptk/gptk_downloads.png"></p>
-</details>
+3. Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
 
-<details open>
-	<summary>5. Click <kbd>Agree</kbd> to the license agreement</summary>
-	<p align="center"><img alt="Screenshot of GPTK's license agreement during installation" src="assets/obsidian/gptk/license_agreement.png"></p>
-</details>
+![download_gptk.png](../assets/obsidian/download_gptk.png)
 
-<details open>
-	<summary>6. Once mounted, it'll open a window that should look similar to this</summary>
-	<p align="center"><img alt="Screenshot of " src="assets/obsidian/gptk/eval_env.png"></p>
-	You should also be able to see it in "Finder"
-	<p align="center"><img alt="" src="assets/obsidian/gptk/eval_env2.png"></p>
-</details>
 
-<details open>
-	<summary>7. Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a></summary>
-	<p align="center"><img alt="Screenshot of Xcode in the App Store" src="assets/obsidian/gptk/app_store.png"></p>
-</details>
+4. Double-click the `.dmg` after it's downloaded to open/mount it
 
-<details open>
-	<summary>8. Run the <code>.pkg</code> file</summary>
-	<p>Use one of these options:</p>
-	<ul>
-		<li>Manually: Double-click the <code>.pkg</code> file</li>
-		<li>Via command line (where <code>PKG_PATH</code> is the path to the <code>.pkg</code> file):
-			<pre>installer -pkg PKG_PATH -target <target_path></pre>
-		</li>
-	</ul>
-</details>
+![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
 
-<details open>
-	<summary>9. Open your terminal, then install Rosetta</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/iterm.png"></p>
-</details>
+5. Click <kbd>Agree</kbd> to the license agreement
+
+![license_agreement.png](../assets/obsidian/license_agreement.png)
+
+6. Once mounted, it'll open a window that should look similar to this
+
+![eval_env.png](../assets/obsidian/eval_env.png)
+
+You should also be able to see it in "Finder"
+
+![eval_env2.png](../assets/obsidian/eval_env2.png)
+
+7. Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
+
+![app_store.png](../assets/obsidian/app_store.png)
+
+8. Run the `.pkg` file
+	- **Manually**: Double-click the `.pkg` file
+	- Via command line (where `PKG_PATH` is the path to the `.pkg` file): `installer -pkg PKG_PATH -target <target_path>`
+
+9. Open your terminal, then install Rosetta
+
+![iterm.png](../assets/obsidian/iterm.png)
 
 ```sh
 softwareupdate --install-rosetta
@@ -182,20 +170,18 @@ softwareupdate --install-rosetta
 > {: .nolineno }
 {: .prompt-tip }
 
-<details open>
-	<summary>10. Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/x86_iterm.png"></p>
-</details>
+10. Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
+
+![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
 ```sh
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-<details open>
-	<summary>11. Install x86 version of Homebrew</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/homebrew_iterm.png"></p>
-</details>
+11. Install x86 version of Homebrew
+
+![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -204,46 +190,42 @@ arch -x86_64 /bin/bash
 
 12. Set the path, depending on the number of Homebrew versions you have
 
-	<details open>
-		<summary>If you use <strong>both x86 <em>and</em> ARM64</strong> versions of Homebrew, you can add the following to <code>.bashrc</code> (or your preferred shell config file) so it automatically switches based off architecture type</summary>
-		<p align="center"><img alt="Screenshot of the code in .bashrc file" src="assets/obsidian/gptk/bashrc1.png"></p>
-	</details>
-	
-	```sh
-	if [ "$(arch)" = "arm64" ]; then
-	    eval "$(/opt/homebrew/bin/brew shellenv)"
-	else
-	    eval "$(/usr/local/bin/brew shellenv)"
-		export PATH="/usr/local/bin:${PATH}"
-	fi
-	```
-	{: file="$HOME/.bashrc" }
-	
-	<details open>
-		<summary>Otherwise, if you <strong><em>only</em> have x86</strong> version of Homebrew (which was installed in the previous step), execute this command to append the path (<code>eval "$(/usr/local/bin/brew shellenv)"</code>) to <code>.bash_profile</code></summary>
-		<p align="center"><img alt="Screenshot of the command written and executed in the terminal" src="assets/obsidian/gptk/eval_iterm.png"></p>
-	</details>
-	
-	```sh
-	(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
-	eval "$(/usr/local/bin/brew shellenv)"
-	```
-	{: .nolineno }
+If you use <strong>both x86 <em>and</em> ARM64</strong> versions of Homebrew, you can add the following to <code>.bashrc</code> (or your preferred shell config file) so it automatically switches based off architecture type
 
-<details open>
-	<summary>13. Since your shell config file has been updated, restart the terminal and return to x86_64 shell</summary>
-	<p align="center"><img alt="Screenshot of the command written and executed in the terminal" src="assets/obsidian/gptk/x86_iterm.png"></p>
-</details>
+![bashrc1.png](../assets/obsidian/bashrc1.png)
+	
+```sh
+if [ "$(arch)" = "arm64" ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+	eval "$(/usr/local/bin/brew shellenv)"
+	export PATH="/usr/local/bin:${PATH}"
+fi
+```
+{: file="$HOME/.bashrc" }
+	
+Otherwise, if you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
+
+![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+
+```sh
+(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
+eval "$(/usr/local/bin/brew shellenv)"
+```
+{: .nolineno }
+
+13. Since your shell config file has been updated, restart the terminal and return to x86_64 shell
+
+![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
 ```sh
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-<details open>
-	<summary>14. Confirm path</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/which_brew_iterm.png"></p>
-</details>
+14. Confirm path
+
+![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
 
 ```sh
 which brew
@@ -303,10 +285,9 @@ WINEPREFIX=$HOME/Games wine winecfg
 ```
 {: .nolineno }
 
-<details open>
-	<summary>2. Once a "Wine configuration" shows up, change the version to <kbd>Windows 10</kbd>, then click <kbd>Apply</kbd> and <kbd>OK</kbd> to save and exit</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/winecfg.png"></p>
-</details>
+2. Once a "Wine configuration" shows up, change the version to **Windows 10**, then click **Apply** and **OK** to save and exit
+
+![winecfg.png](../assets/obsidian/winecfg.png)
 
 > If the "Wine configuration" window does not appear and no new icon appears in the Dock, make sure you've correctly installed:
 > - `x86_64` version of Homebrew
@@ -316,19 +297,17 @@ WINEPREFIX=$HOME/Games wine winecfg
 ### Install Game Porting Toolkit
 Apple's Game Porting Toolkit (GPTk) is a translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12).
 
-> <details>
-> <summary>Make sure that GPTk's <code>.dmg</code> (downloaded from Apple's website) is already mounted; it should be located in <code>/Volumes</code> directory</summary>
-> <p align="center"><img alt="" src="assets/obsidian/gptk/volumes.png"></p>
-> </details>
-{: .prompt-info }
-
-> <details>
-> 	<summary>Ensure you're in an x86_64 shell</summary>
-> 	<p align="center"><img alt="Screenshot of x86_64 shell in bash terminal" src="assets/obsidian/gptk/x86_iterm.png"></p>
-> </details>
+> Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
+> ![volumes.png](../assets/obsidian/volumes.png)
+>
+> Ensure you're in an x86_64 shell
+> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 > 
 > If not, run the following command:
-> <pre>arch -x86_64 /bin/bash</pre>
+> ```sh
+> arch -x86_64 /bin/bash
+> ```
+> {: .nolineno }
 {: .prompt-info }
 
 **`game-porting-toolkit`**
@@ -658,13 +637,14 @@ mv -i "$MVK_DYLIB" "$WINE_LIB"
 ### Install Steam
 > Make sure the Windows version of Steam is located in your `Downloads` folder before installing
 > 
-> <details>
-> 	<summary>Also, make sure that you're in an x86_64 shell</summary>
-> 	<p align="center"><img alt="Screenshot of x86_64 shell in bash terminal" src="assets/obsidian/gptk/x86_iterm.png"></p>
-> </details>
+> Also, make sure that you're in an x86_64 shell
+> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 > 
 > If not, run the following command:
-> <pre>arch -x86_64 /bin/bash</pre>
+> ```sh
+> arch -x86_64 /bin/bash
+> ```
+> {: .nolineno }
 {: .prompt-info }
 
 You can use the installer script in [Steam Installer](2025-09-11-playing-windows-games.md#steam-installer), or complete the following steps.
@@ -720,13 +700,14 @@ Configuring Wine is typically accomplished using:
 See [Programs](https://gitlab.winehq.org/wine/wine/-/wikis/Commands#programs) for the full list.
 
 ## Usage
-> <details>
-> 	<summary>Ensure you're in an x86_64 shell</summary>
-> 	<p align="center"><img alt="Screenshot of x86_64 shell in bash terminal" src="assets/obsidian/gptk/x86_iterm.png"></p>
-> </details>
+> Ensure you're in an x86_64 shell
+> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 > 
 > If not, run the following command:
-> <pre>arch -x86_64 /bin/bash</pre>
+> ```sh
+> arch -x86_64 /bin/bash
+> ```
+> {: .nolineno }
 {: .prompt-info }
 
 - **Steam**: `"C:\Program Files (x86)\Steam\steam.exe"`{: .filepath}
@@ -1803,18 +1784,17 @@ Some older games and applications assume that the current working directory is t
 TODO: How to make custom Wine as app bundle so that I can set game mode. (since `game-mode` cmd is currently broken so I can't set it that way.) this is bc macbook pro automatically enables game mode if it detects a game running. i think it determines it from `plist` in app bundle or sumn related. since i'm running via wine, i have to make one from scratch so mac recognizes it as a game and auto enables game mode for me. use bookmarked tut.
 
 ##### Method 1: Automator
-<details open>
-	<summary>You can use the Automator app to create a new Application that will run Steam when you click on its icon (similar to how Applications work)</summary>
-	<p align="center"><img alt="Screenshot of new custom Application in Automator" src="assets/obsidian/gptk/automator.png"></p>
-</details>
+You can use the Automator app to create a new Application that will run Steam when you click on its icon (similar to how Applications work)
+
+![automator.png](../assets/obsidian/automator.png)
 
 1. Open Automator
 
-2. Select  <kbd>Application</kbd> and click  <kbd>Choose</kbd>
+2. Select  **Application** and click **Choose**
 
-3. In the sidebar on the left, click  <kbd>Utilities</kbd>, then double-click  <kbd>Run Shell Script</kbd>
+3. In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
 
-4. Select <kbd>/bin/bash</kbd> as the shell and pass input <kbd>to stdin</kbd>, then paste the following in the textbox:
+4. Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
 
 // TEMP: ORIGINAL
 ```
@@ -1851,21 +1831,20 @@ export WINEPREFIX="$HOME/Games"
 wine "C:\Program Files (x86)\Steam\steam.exe" > /dev/null 2>&1 &
 ```
 
-5. Once you save this automated application (file format  <kbd>Application</kbd>, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
+5. Once you save this automated application (file format  **Application**, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
 
-6. Copy (i.e. right-click, then press <kbd>Copy Image</kbd>) the image you want to use as your icon (preferably `.icns` file format)
+6. Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
 
-> <details open>
-	> <summary>This is the app icon I use for Steam (Windows); click on the image to download it</summary>
-	> <p align="center"><a target="_blank" title="Link to custom Steam icon's source on Reddit" href="https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of"><img alt="Custom .webp Steam icon" src="assets/obsidian/gptk/steam_icon.webp"></a></p>
-	> <p>I've also converted it to Apple's <code>.icns</code> file format (it isn't displaying due to the file format), so you won't have to manually convert from <code>.webp</code> to <code>.icns</code></p>
-	> <p align="center"><img alt="Custom .icns Steam icon" src="assets/obsidian/gptk/steam_icon.icns"></p>
-> </details>
+> This is the app icon I use for Steam (Windows); click on the image to download it
+> ![steam_icon.webp](../assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
+> 
+> I've also converted it to Apple's `.icns` file format (it isn't displaying due to the file format), so you won't have to manually convert from `.webp` to `.icns`
+> ![steam_icon.icns](../assets/obsidian/steam_icon.icns.md)
 {: .prompt-tip }
 
-7. Find the application you saved earlier, right-click it, then click <kbd>Get Info</kbd>
+7. Find the application you saved earlier, right-click it, then click **Get Info**
 
-8. Click the default icon at the top (it'll be outlined when you do), right above the <kbd>Add Tags...</kbd> textbox
+8. Click the default icon at the top (it'll be outlined when you do), right above the **Add Tags...** textbox
 
 9. Press <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to paste the image you just copied, and you'll see the icon update accordingly
 
@@ -1896,20 +1875,17 @@ end tell
 
 Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable. You can see that you're simply telling the AppleScript to run a line of code in the Terminal: the same line of code that you could run to start your Windows program.
 
-3. Press <kbd>Compile</kbd> button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
+3. Press **Compile** button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
 
-4. Save your script; Select <kbd>File Format: Application</kbd> in the save options, and leave <kbd>Startup Screen</kbd> unchecked.
+4. Save your script; Select **File Format: Application** in the save options, and leave **Startup Screen** unchecked.
 
 5. Open up the Finder, go to where you saved your script, and drag that file to your Dock. It should stay there, just like a real application!
 
 #### Folder shortcut
-<details open>
-	<summary>Continue reading if you want easy, quick, and convenient access to both your Mac <strong>AND</strong> Windows versions of Steam</summary>
-	<p align="center">
-		<img alt="Screenshot of custom Steam folder in dock" src="assets/obsidian/gptk/steam_folder.png">
-		<img alt="Screenshot of custom Steam folder in dock when clicked/opened" src="assets/obsidian/gptk/steam_folder2.png">
-	</p>
-</details>
+Continue reading if you want easy, quick, and convenient access to both your Mac **AND** Windows versions of Steam
+
+![steam_folder.png](../assets/obsidian/steam_folder.png)
+![steam_folder2.png](../assets/obsidian/steam_folder2.png)
 
 1. Complete all steps in [Launch via Automator](2025-09-11-playing-windows-games.md#launch-via-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
 
@@ -1920,7 +1896,7 @@ cd /Applications
 ```
 {: .nolineno }
 
-3. Create a new folder in `Applications` titled `Steam`, either manually (right-click, press <kbd>New Folder</kbd>, then enter `Steam` as its name) or via terminal
+3. Create a new folder in `Applications` titled `Steam`, either manually (right-click, press **New Folder**, then enter `Steam` as its name) or via terminal
 
 ```sh
 mkdir -p Steam
@@ -1944,32 +1920,26 @@ mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
 
 5. Find and download a folder icon you like (preferably `.icns` file format)
 
-> <details open>
-	> <summary>This is the folder icon I use; click on the image to download it</summary>
-	> <p align="center"><a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a></p>
-	> <p>Alternatively, you can download it directly here</p>
-	> <p align="center"><img alt="" src="assets/obsidian/gptk/steam_folder.icns"></p>
-> </details>
+> This is the folder icon I use
+> <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
+> 
+> Alternatively, you can download it directly here
+> ![steam_folder.icns](../assets/obsidian/steam_folder.icns.md)
 {: .prompt-tip }
 
-<details open>
-	<summary>6. Once downloaded, select the folder icon and copy it</summary>
-	<p>Use one of these options:</p>
-	<ul>
-		<li><kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>)</li>
-		<li>Right-click the icon and click <kbd>Copy</kbd></li>
-	</ul>
-</details>
+6. Once downloaded, select the folder icon and copy it
+	- <kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>)
+	- Right-click the icon and click **Copy**
 
-<details open>
-	<summary>7. Back in <code>/Applications</code>, right-click <code>Steam</code> folder and click <kbd>Get Info</kbd></summary>
+7. Back in `/Applications`, right-click `Steam` folder and click **Get Info**
+
+![steam_get_info.png](../assets/obsidian/steam_get_info.png)
+
 	<p align="center"><img alt="" src="assets/obsidian/gptk/steam_get_info.png"></p>
-</details>
 
-<details open>
-	<summary>8. Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)</summary>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/steam_folder_info.png"></p>
-</details>
+8. Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
+
+![steam_folder_info.png](../assets/obsidian/steam_folder_info.png)
 
 9. Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
 
@@ -1977,14 +1947,11 @@ mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
 
 11. To adjust the appearance, right-click the `Steam` folder icon in the dock (that you just dragged)
 
-<details open>
-	<summary>12. Make the following selections</summary>
-	<ul>
-		<li>Under <strong>Display as</strong>, select <kbd>Folder</kbd></li>
-		<li>Under <strong>View content as</strong>, select <kbd>Grid</kbd></li>
-	</ul>
-	<p align="center"><img alt="" src="assets/obsidian/gptk/folder_options.png"></p>
-</details>
+12. Make the following selections
+	- Under **Display as**, select **Folder**
+	- Under **View content as**, select **Grid**
+
+![folder_options.png](../assets/obsidian/folder_options.png)
 
 13. You now have a convenient way to access both versions of Steam via your dock! If you open the `Steam` folder and click on either of the `.app`s, it should launch as expected
 

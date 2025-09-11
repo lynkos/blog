@@ -1,6 +1,7 @@
 ---
 title: Quantum Search Algorithm (Full)
 date: 2025-03-13 13:59:02 -0400
+description: A full-length article on Grover's algorithm, a quantum search algorithm that finds target(s) within an unsorted database with quadratic speed-up compared to classical algorithms.
 math: true
 categories: [ math, physics, computer-science ]
 tags: [ algorithms, quantum-computing, grovers-algorithm ]

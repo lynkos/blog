@@ -1,7 +1,7 @@
 ---
 share: true
-title: Technical Guide on Playing Windows Games on macOS (Game Porting Toolkit, DXMT, DXVK, MoltenVK, and more)
-description: Learn how to use Wine with various graphics APIs to play Windows Games on your Mac!
+title: Technical Guide on Playing Windows Games on macOS
+description: Learn how to play Windows games on your Mac for free with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, etc.
 date: 2025-09-11 14:24:14 -0400
 filename: 2025-09-11-playing-windows-games
 categories:

@@ -320,6 +320,7 @@ City plot is made up of two 3D bar graphs representing the real and imaginary pa
 # City plot of density_matrix
 density_matrix.draw("city")
 ```
+{: .nolineno }
 
 ![City plot of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/city.png)
 
@@ -358,6 +359,7 @@ Coefficients $r_{x}, r_{y}, r_{z}$ are components of the vector representing a m
 # reverse_bits = True since Qiskit uses little-endian for qubit ordering
 density_matrix.draw("bloch", reverse_bits = True)
 ```
+{: .nolineno }
 
 ![Bloch sphere representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/bloch.png)
 
@@ -368,6 +370,7 @@ Hinton plot represents the real and imaginary parts of $n$-qubit state(s) on 2D 
 # Hinton plot of density_matrix
 density_matrix.draw("hinton")
 ```
+{: .nolineno }
 
 ![Hinton plot of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/hinton.png)
 
@@ -378,6 +381,7 @@ Q-Sphere is a visualization of $n$-qubit state(s) that associates each computati
 # Qsphere representation of density_matrix
 density_matrix.draw("qsphere")
 ```
+{: .nolineno }
 
 ![Q-sphere representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/q-sphere.png)
 

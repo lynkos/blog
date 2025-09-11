@@ -18,9 +18,7 @@ tags:
   - graphics
   - development
 ---
-> **This article/tutorial is still under construction.**
-> 
-> **Feel free to bookmark this post to come back later, as there may be new information by then!**
+> **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-important }
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!
@@ -73,6 +71,9 @@ You can install multiple programs into a bottle, but it's sometimes better to cr
 The default Wine bottle, `.wine`, is located in your home directory (i.e. `$HOME/.wine`). However, I never use the default Wine bottle/prefix since I always use a specific Wine prefix (i.e. `$WINEPREFIX`).
 
 ### Builds
+> Wine is **not isolated** from your system: if _you_ can access a file or resource with your user account, programs running in Wine _can too_—see [#Running Wine under a separate user account](https://wiki.archlinux.org/title/Wine#Running_Wine_under_a_separate_user_account) for possible precautions
+{: .prompt-warning }
+
 `wine` command loads and runs the given program, which can be a DOS, Windows 3.x, Win32, or Win64 executable (on 64-bit systems).[^wine]
 
 The program name may be specified in DOS format (e.g. `C:\\WINDOWS\\SOL.EXE`{: .filepath}) or in Unix format (e.g. `/msdos/windows/sol.exe`{: .filepath}). You may pass arguments to the program being executed by adding them to the end of the command line invoking `wine`. E.g.
@@ -87,9 +88,6 @@ wine notepad "$HOME/Temp/README.txt"
 It can also be one of the Windows executables shipped with Wine, in which case specifying the full path is not mandatory, e.g. `wine explorer` or `wine notepad`.
 
 I store all my different versions of Wine (i.e. builds) in `$HOME/Wine`.
-
-> Wine is **not isolated** from your system: if _you_ can access a file or resource with your user account, programs running in Wine _can too_—see [#Running Wine under a separate user account](https://wiki.archlinux.org/title/Wine#Running_Wine_under_a_separate_user_account) for possible precautions
-{: .prompt-warning }
 
 > Wine can also run malware—see [Wine FAQ on Malware compatibility](https://gitlab.winehq.org/wine/wine/-/wikis/FAQ#is-wine-malware-compatible)
 {: .prompt-warning }

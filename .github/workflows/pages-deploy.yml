@@ -47,6 +47,7 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
+          # cache-version: 0 # Increment if you need to re-download cached gems
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"

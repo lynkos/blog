@@ -18,7 +18,7 @@ tags:
   - graphics
   - development
 ---
-> #### This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!
+> **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-important }
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!

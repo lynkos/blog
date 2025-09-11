@@ -6,11 +6,12 @@ math: true
 categories: [ math, physics, computer-science ]
 tags: [ algorithms, quantum-computing, grovers-algorithm ]
 ---
-> **NOTE**: This is a full-length article on Grover's algorithm. For a shorter version, see [Quantum Search Algorithm](/posts/grover).
+> This is a full-length article on Grover's algorithm. For a shorter version, see [Quantum Search Algorithm](/posts/grover).
 > 
 > The contents of this article have been taken from <a title="Link to my Jupyter notebook containing the code and explanations for Grover's Algorithm" target="_blank" href="https://github.com/lynkos/grovers-algorithm/blob/main/src/grovers_algorithm.ipynb">my Jupyter notebook on Grover's Algorithm</a>, which can be found in <a title="Link to my repository for Grover's Algorithm" target="_blank" href="https://github.com/lynkos/grovers-algorithm">my repository</a>.
 > 
 > There's also <a title="Link to my Python script for Grover's Algorithm" target="_blank" href="https://github.com/lynkos/grovers-algorithm/blob/main/src/grovers_algorithm.py">an accompanying Python script</a>, if you prefer.
+{: .prompt-important }
 
 ## Constants
 $n$, `SHOTS` $\in \mathbb{Z^{+}}$

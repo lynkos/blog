@@ -155,8 +155,6 @@ Run the `.pkg` file
 
 Open your terminal, then install Rosetta
 
-![iterm.png](../assets/obsidian/iterm.png)
-
 ```sh
 softwareupdate --install-rosetta
 ```
@@ -169,30 +167,31 @@ softwareupdate --install-rosetta
 > {: .nolineno }
 {: .prompt-tip }
 
-Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
+![iterm.png](../assets/obsidian/iterm.png)
 
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
+Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
 
 ```sh
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-Install x86 version of Homebrew
+![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
-![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
+Install x86 version of Homebrew
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 {: .nolineno }
 
+![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
+
 Set the path, depending on the number of Homebrew versions you have
 
 {% tabs set-brew-path %}
     ---TAB: x86 AND ARM64
         If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
-        ![bashrc1.png](../assets/obsidian/bashrc1.png)
         ```sh
 		if [ "$(arch)" = "arm64" ]; then
 			eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -203,33 +202,34 @@ Set the path, depending on the number of Homebrew versions you have
 		```
 		{: file="$HOME/.bashrc" }
         {: .nolineno }
+        ![bashrc1.png](bashrc1.png)
     ---TAB: x86 ONLY
         If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
-        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
 		```sh
 		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
 		eval "$(/usr/local/bin/brew shellenv)"
 		```
         {: .nolineno }
+        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
 {% endtabs %}
 
 Since your shell config file has been updated, restart the terminal and return to x86_64 shell
-
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
 ```sh
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-Confirm path
+![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
-![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
+Confirm path
 
 ```sh
 which brew
 ```
 {: .nolineno }
+
+![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
 
 > Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
 {: .prompt-info }
@@ -1192,14 +1192,14 @@ This section is taken directly from different Game Porting Toolkit's `README.md`
 > {: .nolineno }
 
 ##### Game won’t boot anymore despite no changes
-> If the game stopped booting without being updated (i.e. you didn't make any changes), try clearing the shader cache:
->
-> ```sh
-> cd $(getconf DARWIN_USER_CACHE_DIR)/d3dm
-> cd «GAME_NAME»
-> rm -r shaders.cache
-> ```
-> {: .nolineno }
+Try clearing the shader cache
+
+```sh
+cd $(getconf DARWIN_USER_CACHE_DIR)/d3dm
+cd «GAME_NAME»
+rm -r shaders.cache
+```
+{: .nolineno }
 
 ##### Enable experimental MetalFX integration
 > This **ONLY** works for **macOS 16 AND Game Porting Toolkit 3.0**!

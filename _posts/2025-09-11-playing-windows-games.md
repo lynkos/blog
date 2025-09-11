@@ -113,31 +113,31 @@ Basic Wine files[^winefiles]
 - **Optional** Game Controller
 
 ## Setup
-1. Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
+Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
 
 ![gptk.png](../assets/obsidian/gptk.png)
 
 > You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
 {: .prompt-info }
 
-2. You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
+You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
 
 ![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
 
-3. Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
+Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
 
 ![download_gptk.png](../assets/obsidian/download_gptk.png)
 
 
-4. Double-click the `.dmg` after it's downloaded to open/mount it
+Double-click the `.dmg` after it's downloaded to open/mount it
 
 ![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
 
-5. Click <kbd>Agree</kbd> to the license agreement
+Click <kbd>Agree</kbd> to the license agreement
 
 ![license_agreement.png](../assets/obsidian/license_agreement.png)
 
-6. Once mounted, it'll open a window that should look similar to this
+Once mounted, it'll open a window that should look similar to this
 
 ![eval_env.png](../assets/obsidian/eval_env.png)
 
@@ -145,15 +145,15 @@ You should also be able to see it in "Finder"
 
 ![eval_env2.png](../assets/obsidian/eval_env2.png)
 
-7. Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
+Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
 
 ![app_store.png](../assets/obsidian/app_store.png)
 
-8. Run the `.pkg` file
+Run the `.pkg` file
 	- **Manually**: Double-click the `.pkg` file
 	- Via command line (where `PKG_PATH` is the path to the `.pkg` file): `installer -pkg PKG_PATH -target <target_path>`
 
-9. Open your terminal, then install Rosetta
+Open your terminal, then install Rosetta
 
 ![iterm.png](../assets/obsidian/iterm.png)
 
@@ -169,7 +169,7 @@ softwareupdate --install-rosetta
 > {: .nolineno }
 {: .prompt-tip }
 
-10. Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
+Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
 
 ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
@@ -178,7 +178,7 @@ arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-11. Install x86 version of Homebrew
+Install x86 version of Homebrew
 
 ![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
 
@@ -187,33 +187,33 @@ arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-12. Set the path, depending on the number of Homebrew versions you have
+Set the path, depending on the number of Homebrew versions you have
 
-If you use <strong>both x86 <em>and</em> ARM64</strong> versions of Homebrew, you can add the following to <code>.bashrc</code> (or your preferred shell config file) so it automatically switches based off architecture type
+{% tabs set-brew-path %}
+    ---TAB: x86 AND ARM64
+        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
+        ![bashrc1.png](../assets/obsidian/bashrc1.png)
+        ```sh
+		if [ "$(arch)" = "arm64" ]; then
+			eval "$(/opt/homebrew/bin/brew shellenv)"
+		else
+			eval "$(/usr/local/bin/brew shellenv)"
+			export PATH="/usr/local/bin:${PATH}"
+		fi
+		```
+		{: file="$HOME/.bashrc" }
+        {: .nolineno }
+    ---TAB: x86 ONLY
+        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
+        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+		```sh
+		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
+		eval "$(/usr/local/bin/brew shellenv)"
+		```
+        {: .nolineno }
+{% endtabs %}
 
-![bashrc1.png](../assets/obsidian/bashrc1.png)
-	
-```sh
-if [ "$(arch)" = "arm64" ]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-	eval "$(/usr/local/bin/brew shellenv)"
-	export PATH="/usr/local/bin:${PATH}"
-fi
-```
-{: file="$HOME/.bashrc" }
-	
-Otherwise, if you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
-
-![eval_iterm.png](../assets/obsidian/eval_iterm.png)
-
-```sh
-(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
-eval "$(/usr/local/bin/brew shellenv)"
-```
-{: .nolineno }
-
-13. Since your shell config file has been updated, restart the terminal and return to x86_64 shell
+Since your shell config file has been updated, restart the terminal and return to x86_64 shell
 
 ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
@@ -222,7 +222,7 @@ arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-14. Confirm path
+Confirm path
 
 ![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
 
@@ -268,23 +268,21 @@ $HOME/
 └── ...
 ```
 
-To set version of Wine depending on type, add to `PATH`. E.g.
+To set version of Wine depending on type, add to `PATH`. This way, `which wine` outputs `$HOME/Wine/10.12/bin/wine`. E.g.
 
 ```sh
 export PATH="$HOME/Wine/DXMT/bin:$PATH"
 ```
 {: .nolineno }
 
-This way, `which wine` outputs `$HOME/Wine/10.12/bin/wine`
-
-1. Create a new Wine prefix called `Games`
+Create a new Wine prefix called `Games`
 
 ```sh
 WINEPREFIX=$HOME/Games wine winecfg
 ```
 {: .nolineno }
 
-2. Once a "Wine configuration" shows up, change the version to **Windows 10**, then click **Apply** and **OK** to save and exit
+Once a "Wine configuration" shows up, change the version to **Windows 10**, then click **Apply** and **OK** to save and exit
 
 ![winecfg.png](../assets/obsidian/winecfg.png)
 
@@ -322,7 +320,7 @@ ln -sf "/Applications/Game Porting Toolkit.app/Contents/Resources/wine" "$HOME/W
 While the Homebrew-wine and Apple's GPTK lib is in `/Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib/external/`
 
 #### Version 3.0
-1. Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
+ Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
 
 ```sh
 brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
@@ -333,14 +331,14 @@ brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
 > Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version as follows.
 {: .prompt-info }
 
-2. Enter GPTk's library directory
+Enter GPTk's library directory
 
 ```sh
 cd /Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib
 ```
 {: .nolineno }
 
-3. Rename current libraries (to keep a copy)
+Rename current libraries (to keep a copy)
 
 `-v3b2` suffix denotes that the copy's version is from GPTk 3.0
 
@@ -349,7 +347,7 @@ mv external external-v3
 ```
 {: .nolineno }
 
-3. Move `external` from drive to directory
+Move `external` from drive to directory
 
 ```sh
 mv "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/external" "/Applications/Game Porting Toolkit.app/Contents/Resources/wine/lib/external"
@@ -384,7 +382,7 @@ d3d10.dll            dxgi.dll
 d3d11.dll            nvapi64.dll
 ```
 
-4. Update GPTk's library directory with new library from `.dmg` 
+Update GPTk's library directory with new library from `.dmg` 
 
 ```sh
 ditto "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/" .
@@ -397,14 +395,14 @@ To enable experimental MetalFX integration, perform the following steps:
 - Copy both `nvngx.dll`{: .filepath} and `nvapi64.dll`{: .filepath} to the `windows\system32` directory your Wine prefix’s virtual C: drive (open `$WINEPREFIX/drive_c/windows/system32`). Rename old versions in `system32` to `nvngx_orig.dll`{: .filepath} and `nvapi64_orig.dll`{: .filepath} **DONE**
 
 #### Version 2.1 (OUTDATED)
-1. Download Apple tap
+Download Apple tap
 
 ```sh
 brew tap apple/apple http://github.com/apple/homebrew-apple
 ```
 {: .nolineno }
 
-2. Install the `game-porting-toolkit` formula
+Install the `game-porting-toolkit` formula
 
 ```sh
 brew install apple/apple/game-porting-toolkit
@@ -418,14 +416,14 @@ brew install apple/apple/game-porting-toolkit
 > {: .nolineno }
 {: .prompt-tip }
 
-3. Copy the Game Porting Toolkit library directory into Wine’s library directory
+Copy the Game Porting Toolkit library directory into Wine’s library directory
 
 ```sh
 ditto /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/redist/lib/ $(brew --prefix game-porting-toolkit)/lib/
 ```
 {: .nolineno }
 
-4. Put the 3 scripts from the Game Porting Toolkit DMG into `/usr/local/bin`
+Put the 3 scripts from the Game Porting Toolkit DMG into `/usr/local/bin`
 
 ```sh
 cp /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/gameportingtoolkit* /usr/local/bin
@@ -435,16 +433,16 @@ cp /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/gameportingtoolkit
 ### Install Wine
 This version of Wine can be used with DXMT and DXVK.
 
-1. [Download the latest macOS Wine build](https://github.com/Gcenx/macOS_Wine_builds/releases)
+[Download the latest macOS Wine build](https://github.com/Gcenx/macOS_Wine_builds/releases)
 
-2. Extract compressed download (v10.13 is named `wine-devel-10.13-osx64.tar.xz`{: .filepath})
+Extract compressed download (v10.13 is named `wine-devel-10.13-osx64.tar.xz`{: .filepath})
 
 ```sh
 tar -xvzf $HOME/Downloads/wine-devel-10.13-osx64.tar.xz
 ```
 {: .nolineno }
 
-3. Copy the `wine` directory into DXMT and DXVK
+Copy the `wine` directory into DXMT and DXVK
 
 ```sh
 cp -r "$HOME/Downloads/Wine Devel.app/Contents/Resources/wine" "$HOME/Wine/dxmt"
@@ -452,7 +450,7 @@ cp -r "$HOME/Downloads/Wine Devel.app/Contents/Resources/wine" "$HOME/Wine/dxvk"
 ```
 {: .nolineno }
 
-4. Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.13` in this case
+Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.13` in this case
 
 ```sh
 mv "$HOME/Wine/dxmt/wine" "$HOME/Wine/dxmt/10.13"
@@ -460,7 +458,7 @@ mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.13"
 ```
 {: .nolineno }
 
-5. Continue to [Install DXMT](2025-09-11-playing-windows-games.md#install-dxmt) and [Install DXVK](2025-09-11-playing-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps
+Continue to [Install DXMT](2025-09-11-playing-windows-games.md#install-dxmt) and [Install DXVK](2025-09-11-playing-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps
 
 // TODO: Instead of creating separate Wine copies for each graphics API, why not just use the same Wine build with all graphics API files (dlls, so, etc.), e.g. `winemetal_dxmt.dll`{: .filepath} vs `winemetal_dxvk.dll`{: .filepath}, `winemetal_orig.dll`{: .filepath}, etc. When setting a specific build (e.g. DXMT, DXVK, etc.), the relevant file(s) will be renamed (e.g. current `winemetal.dll`{: .filepath} is renamed to `winemetal_xyz.dll`{: .filepath}, then `winemetal_dxmt.dll`{: .filepath} is renamed to `winemetal.dll`{: .filepath} in order to enable DXMT).
 
@@ -475,22 +473,22 @@ mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.13"
 > Refer to [DXMT installer](2025-09-11-playing-windows-games.md#dxmt-installer) for a Bash script to automatically install DXMT into your Wine build.
 {: .prompt-tip }
 
-1. Go to [DXMT repository's releases](https://github.com/3Shain/dxmt/releases)
+Go to [DXMT repository's releases](https://github.com/3Shain/dxmt/releases)
 
-2. Find the most recent release (which, as of this writing, is [Version 0.61](https://github.com/3Shain/dxmt/releases/tag/v0.61))
+Find the most recent release (which, as of this writing, is [Version 0.61](https://github.com/3Shain/dxmt/releases/tag/v0.61))
 
-3. Under **Assets**, download the attached GitHub Actions artifact (built with `-Dwine_builtin_dll=true`) named similarly to `dxmt-v0.60-builtin.tar.gz`{: .filepath} (do not download the Source code!)
+Under **Assets**, download the attached GitHub Actions artifact (built with `-Dwine_builtin_dll=true`) named similarly to `dxmt-v0.60-builtin.tar.gz`{: .filepath} (do not download the Source code!)
 
-4. Unzip the downloaded artifact by double-clicking it or running the following command (change path/filename if needed)
+Unzip the downloaded artifact by double-clicking it or running the following command (change path/filename if needed)
 
 ```sh
 tar -xvzf $HOME/Downloads/dxmt-v0.60-builtin.tar.gz
 ```
 {: .nolineno }
 
-5. You should now have a directory containing `i386-windows`, `x86_64-unix`, and `x86_64-windows` subdirectories, each of which contains various files
+You should now have a directory containing `i386-windows`, `x86_64-unix`, and `x86_64-windows` subdirectories, each of which contains various files
 
-6. Before proceeding, make sure you have the right path of the libraries for the version of Wine you're using! We'll set that path to environment variable `WINELIB` to make the following commands easier to follow; be sure to change the actual path if needed. If correctly set, the commands `echo $WINELIB` and `echo $DXMT_PATH` should print their respective specified path.
+Before proceeding, make sure you have the right path of the libraries for the version of Wine you're using! We'll set that path to environment variable `WINELIB` to make the following commands easier to follow; be sure to change the actual path if needed. If correctly set, the commands `echo $WINELIB` and `echo $DXMT_PATH` should print their respective specified path.
 
 ```sh
 export WINEPATH="$HOME/Wine/dxmt/10.13"
@@ -500,14 +498,14 @@ export WINEPREFIX="$HOME/Bottles/DXMT"
 ```
 {: .nolineno }
 
-7. Move `$DXMT_PATH/x86_64-unix/winemetal.so`{: .filepath} into `x86_64-unix` directory in your Wine library
+Move `$DXMT_PATH/x86_64-unix/winemetal.so`{: .filepath} into `x86_64-unix` directory in your Wine library
 
 ```sh
 mv -i $DXMT_PATH/x86_64-unix/winemetal.so $WINELIB/x86_64-unix/
 ```
 {: .nolineno }
 
-8. Copy `$DXMT_PATH/x86_64-windows/winemetal.dll`{: .filepath} into `x86_64-windows` directory in your Wine library **AND** `system32` directory in your `WINEPREFIX`
+Copy `$DXMT_PATH/x86_64-windows/winemetal.dll`{: .filepath} into `x86_64-windows` directory in your Wine library **AND** `system32` directory in your `WINEPREFIX`
 
 ```sh
 cp -i $DXMT_PATH/x86_64-windows/winemetal.dll $WINELIB/x86_64-windows/winemetal.dll
@@ -518,25 +516,25 @@ mv -i $DXMT_PATH/x86_64-windows/winemetal.dll $WINEPREFIX/drive_c/windows/system
 > Using `cp` (copy) command instead of `mv` (move) since `winemetal.dll`{: .filepath} will be used in 2 separate locations. `mv` requires a destination directory, while `cp` should be destination file.
 {: .prompt-info }
 
-9. Move `$DXMT_PATH/x86_64-windows/d3d11.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
+Move `$DXMT_PATH/x86_64-windows/d3d11.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
 ```sh
 mv -i $DXMT_PATH/x86_64-windows/d3d11.dll $WINELIB/x86_64-windows/
 ```
 {: .nolineno }
 
-10. Move `$DXMT_PATH/x86_64-windows/dxgi.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
+Move `$DXMT_PATH/x86_64-windows/dxgi.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
 ```sh
 mv -i $DXMT_PATH/x86_64-windows/dxgi.dll $WINELIB/x86_64-windows/
 ```
 {: .nolineno }
 
-11. Optionally move `$DXMT_PATH/x86_64-windows/d3d10core.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
+Optionally move `$DXMT_PATH/x86_64-windows/d3d10core.dll`{: .filepath} into `x86_64-windows` directory in your Wine library
 ```sh
 mv -i $DXMT_PATH/x86_64-windows/d3d10core.dll $WINELIB/x86_64-windows/
 ```
 {: .nolineno }
 
-12. Ensure **NONE** of these dlls are set overrides `native,builtin`
+Ensure **NONE** of these dlls are set overrides `native,builtin`
 
 > If you use CrossOver 25+, you can replace the files in `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/dxmt/` with files from the Github Actions artifact.
 > 
@@ -579,8 +577,9 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 > (wine doesn't handle `VK_ERROR_DEVICE_LOST` correctly)
 {: .prompt-note }
 
-1. Download and unpack [the latest DXVK package for macOS](https://github.com/Gcenx/DXVK-macOS/releases)
-2. Install the downloaded DXVK package into a given wine prefix (i.e. copy or symlink the DLLs into the following directories as follows)
+Download and unpack [the latest DXVK package for macOS](https://github.com/Gcenx/DXVK-macOS/releases)
+
+Install the downloaded DXVK package into a given wine prefix (i.e. copy or symlink the DLLs into the following directories as follows)
 
 ```sh
 export WINEPREFIX=$HOME/Bottles/DXVK
@@ -590,14 +589,14 @@ mv -i x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
 ```
 {: .nolineno }
 
-3. Open `winecfg` and manually add DLL overrides for `d3d11` and `d3d10core`
+Open `winecfg` and manually add DLL overrides for `d3d11` and `d3d10core`
 
 ```sh
 WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.13/bin/wine winecfg
 ```
 {: .nolineno }
 
-4. Verify that your application uses DXVK instead of wined3d by enabling the HUD
+Verify that your application uses DXVK instead of wined3d by enabling the HUD
 
 ```sh
 DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.13/dxvk.conf DXVK_HUD=full
@@ -609,9 +608,9 @@ In order to remove DXVK from a prefix, remove the DLLs and DLL overrides, and ru
 while for `dxvk` , there shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in its `$WINEPREFIX`
 
 ### Update MoltenVK
-1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
+[Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
 
-2. Open terminal and set variables
+Open terminal and set variables
 
 ```sh
 WINE_LIB="$HOME/Wine/dxmt/10.13/lib"
@@ -619,14 +618,14 @@ MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
 ```
 {: .nolineno }
 
-3. Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
+Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
 
 ```sh
 mv -i "$WINE_LIB/libMoltenVK.dylib" "$WINE_LIB/libMoltenVK_orig.dylib"
 ```
 {: .nolineno }
 
-4. Move new MoltenVK dylib into Wine build's lib
+Move new MoltenVK dylib into Wine build's lib
 
 ```sh
 mv -i "$MVK_DYLIB" "$WINE_LIB"
@@ -648,21 +647,21 @@ mv -i "$MVK_DYLIB" "$WINE_LIB"
 
 You can use the installer script in [Steam Installer](2025-09-11-playing-windows-games.md#steam-installer), or complete the following steps.
 
-1. Install the Windows version of Steam
+Install the Windows version of Steam
 
 ```sh
 WINEPREFIX="$HOME/Games" wine "$HOME/Downloads/SteamSetup.exe"
 ```
 {: .nolineno }
 
-2. Run the Windows version of Steam to make sure it works
+Run the Windows version of Steam to make sure it works
 
 ```sh
 WINEPREFIX="$HOME/Games" wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
-3. If it works, continue to [Usage](2025-09-11-playing-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-09-11-playing-windows-games.md#usage) section.
+If it works, continue to [Usage](2025-09-11-playing-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-09-11-playing-windows-games.md#usage) section.
 
 ### Install CrossOver
 Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
@@ -751,7 +750,7 @@ WINEPREFIX=$HOME/Bottles/GPTk $HOME/Wine/gptk/3.0b3/bin/wine64 winecfg
 ```
 {: .nolineno }
 
-2. Run the Windows version of Steam to make sure it works
+Run the Windows version of Steam to make sure it works
 
 // TODO: Use below for `steam-gptk` alias
 `MTL_HUD_ENABLED=0 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b" WINEDEBUG=-all WINEPREFIX=$HOME/Bottles/GPTk $HOME/Wine/gptk/3.0b3/bin/wine64 "C:\Program Files (x86)\Steam\steam.exe"`
@@ -1220,14 +1219,14 @@ Refer to [MetalFX Integration](2025-09-11-playing-windows-games.md#metalfx-integ
 > If you updated Steam to the latest version and/or get an error along the lines of **steamwebhelper, a critical Steam component, is not responding. The Steam UI will not be usable.** upon relaunch, complete the following steps. This error is common when using an outdated version of Wine with a new version of Steam.
 {: .prompt-info }
 
-1. Run `cmd.exe`
+Run `cmd.exe`
 
 ```sh
 WINEPREFIX=$HOME/Games wine "C:\windows\system32\cmd.exe"
 ```
 {: .nolineno }
 
-2. Enter your Steam directory
+Enter your Steam directory
 
 ```sh
 cd "Games\drive_c\Program Files (x86)\Steam"
@@ -1237,7 +1236,7 @@ cd "Games\drive_c\Program Files (x86)\Steam"
 > Try `"Z:\Users\<YOUR_USERNAME>\Games\drive_c\Program Files (x86)\Steam"`{: .filepath} if the previous command doesn't work, where `<YOUR_USERNAME>` is your Mac username
 {: .prompt-tip }
 
-3. Downgrade your Steam version
+Downgrade your Steam version
 
 > Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
 {: .prompt-warning }
@@ -1266,21 +1265,21 @@ cd "Games\drive_c\Program Files (x86)\Steam"
 > The link will not open in a browser, however, it is still active
 {: .prompt-info }
 
-4. Exit
+Exit
 
 ```sh
 exit
 ```
 {: .nolineno }
 
-5. Create/update `steam.cfg`
+Create/update `steam.cfg`
 
 ```sh
 cat <<EOF > $HOME/Games/drive_c/Program\ Files\ \(x86\)/Steam/steam.cfg
 ```
 {: .nolineno }
 
-6. Enter the following (to disable auto-update)
+Enter the following (to disable auto-update)
 
 ```plaintext
 BootStrapperInhibitAll=enable
@@ -1288,7 +1287,7 @@ BootStrapperForceSelfUpdate=disable
 EOF
 ```
 
-7. Restart Steam
+Restart Steam
 
 ```sh
 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
@@ -1296,6 +1295,7 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 {: .nolineno }
 
 Optional args for `steam.exe` (tho including them caused issues):
+
 ```sh
 -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
 ```
@@ -1313,24 +1313,25 @@ value: value of "SizeOnDisk" specified in the app's appmanifest.vdf
 ###### Solution 1: Steam Console
 Source[^steamconsole]
 
+> Make sure you have the native Steam app for macOS
+{: .prompt-important }
+
 > Use `~` instead of `$HOME` for any paths!
 {: .prompt-warning }
 
-1. Make sure you have the native Steam app for macOS
+Open your web browser (e.g. Firefox, Chrome, Safari, etc.) and enter [`steam://open/console`](steam://open/console) in the URL bar
 
-2. Open your web browser (e.g. Firefox, Chrome, Safari, etc.) and enter [`steam://open/console`](steam://open/console) in the URL bar
+Once Steam (for macOS) opens, click the <kbd>Console</kbd> tab
 
-3. Once Steam (for macOS) opens, click the <kbd>Console</kbd> tab
-
-4. Enter the following in the bottom prompt to enable downloading Windows games via macOS Steam
+Enter the following in the bottom prompt to enable downloading Windows games via macOS Steam
 
 ```plaintext
 @sSteamCmdForcePlatformType windows
 ```
 
-5. Either through SteamDB.info or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
+Either through SteamDB.info or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
 
-6. Enter the following in the console, where `<APP_ID>` is the app ID (e.g. `3164500`) of the game you want to download
+Enter the following in the console, where `<APP_ID>` is the app ID (e.g. `3164500`) of the game you want to download
 
 ```plaintext
 app_install <APP_ID>
@@ -1342,40 +1343,40 @@ app_install <APP_ID>
 > ```
 {: .prompt-tip }
 
-7. Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to <kbd>Manage</kbd> > <kbd>Browse Local Files</kbd> to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
+Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to <kbd>Manage</kbd> > <kbd>Browse Local Files</kbd> to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
 
-8. Move all of the aforementioned game files to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<YOUR_GAMES_NAME>`) inside your Windows Steam installation
+Move all of the aforementioned game files to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<YOUR_GAMES_NAME>`) inside your Windows Steam installation
 
-9. Two folders up (i.e. path `$HOME/Library/Application Support/Steam/steamapps/`), move the file `appmanifest_<APP_ID>.acf`{: .filepath}, where `<APP_ID>` is your game's Steam app ID, to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/`) inside your Windows Steam installation. E.g. `appmanifest_3164500.acf`{: .filepath}
+Two folders up (i.e. path `$HOME/Library/Application Support/Steam/steamapps/`), move the file `appmanifest_<APP_ID>.acf`{: .filepath}, where `<APP_ID>` is your game's Steam app ID, to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/`) inside your Windows Steam installation. E.g. `appmanifest_3164500.acf`{: .filepath}
 
-10. Run your Windows Steam installation as normal and the game should appear as downloaded in your Steam library
+Run your Windows Steam installation as normal and the game should appear as downloaded in your Steam library
 
 ###### Solution 2: SteamCMD
 > If you already have [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) installed, go straight to Step #3.
 {: .prompt-info }
 
-1. Open terminal and create `SteamCMD` directory
+Open terminal and create `SteamCMD` directory
 
 ```sh
 mkdir $HOME/SteamCMD && cd $HOME/SteamCMD
 ```
 {: .nolineno }
 
-2. Download and extract SteamCMD
+Download and extract SteamCMD
 
 ```sh
 curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz" | tar zxvf -
 ```
 {: .nolineno }
 
-3. Run SteamCMD
+Run SteamCMD
 
 ```sh
 ./steamcmd.sh
 ```
 {: .nolineno }
 
-4. Set your app directory, where `<APP_PATH>` is where you want to save the game. In this case, it'll be in your Wine prefix's (`$WINEPREFIX`) `steamapps` directory (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/`)
+Set your app directory, where `<APP_PATH>` is where you want to save the game. In this case, it'll be in your Wine prefix's (`$WINEPREFIX`) `steamapps` directory (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/`)
 
 ```sh
 force_install_dir <APP_PATH>
@@ -1391,7 +1392,7 @@ Downloaded `appmanifest` should be [moved] in `$WINEPREFIX/drive_c/Program Files
 `<APP_PATH>/steamapps/` can be deleted AFTER its `appmanifest` has been moved to `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/` directory.
 `<APP_PATH>/!steamapps/` contains everything [that should be] in the game's source folder (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<GAME_NAME>/`)
 
-5. Login to your Steam account, where `<STEAM_USERNAME>` is your Steam username (or `anonymous` if you don't want to login, though you won't be able to download your purchased games)
+Login to your Steam account, where `<STEAM_USERNAME>` is your Steam username (or `anonymous` if you don't want to login, though you won't be able to download your purchased games)
 
 ```sh
 login <STEAM_USERNAME>
@@ -1401,7 +1402,7 @@ login <STEAM_USERNAME>
 > Valve recommends setting the install directory **BEFORE** logging in
 {: .prompt-tip }
 
-6. Install or update the app using the `app_update` command, where `<APP_ID>` is the app's [Steam Application ID](https://developer.valvesoftware.com/wiki/Steam_Application_IDs "Steam Application IDs"). If you don't know the Steam Application ID for the server, tool, or game you want to download, use [steamdb.info](https://steamdb.info) to locate it.
+Install or update the app using the `app_update` command, where `<APP_ID>` is the app's [Steam Application ID](https://developer.valvesoftware.com/wiki/Steam_Application_IDs "Steam Application IDs"). If you don't know the Steam Application ID for the server, tool, or game you want to download, use [steamdb.info](https://steamdb.info) to locate it.
 
 ```sh
 app_update <APP_ID> [-beta <BETA_NAME>] [-betapassword <BETA_PASSWORD>] [validate]
@@ -1414,7 +1415,7 @@ app_update <APP_ID> [-beta <BETA_NAME>] [-betapassword <BETA_PASSWORD>] [validat
 > - Add `validate` to the command to check all the server files to make sure they match SteamCMD files; this command is useful if you think files may be missing or corrupted. However, this will overwrite any changed files to the server default; any files that aren't part of the default installation will not be affected. Therefore, it is recommended you use this command only on initial installation and if there are server issues.
 {: .prompt-tip }
 
-7. Log off Steam servers once finished
+Log off Steam servers once finished
 
 ```sh
 quit
@@ -1477,14 +1478,14 @@ List of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of t
 > This is particularly useful when using Steam's Big Picture mode
 {: .prompt-tip }
 
-1. Disable "Home" button
+Disable "Home" button
 
 ```sh
 defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
 ```
 {: .nolineno }
 
-2. Restart the Dock process to apply changes
+Restart the Dock process to apply changes
 
 ```sh
 killall Dock
@@ -1495,14 +1496,14 @@ killall Dock
 {: .prompt-tip }
 
 ##### Disable "Share" button
-1. Disable "Share" button
+Disable "Share" button
 
 ```sh
 defaults write com.apple.GameController bluetoothPrefsShareLongPressSystemGestureMode -integer -1
 ```
 {: .nolineno }
 
-2. Restart the Dock process to apply changes
+Restart the Dock process to apply changes
 
 ```sh
 killall Dock
@@ -1542,54 +1543,59 @@ fixme:d3d_texture:texture_init Failed to create surface 0x35c4fc68, hr 0x8876017
 err:d3d:resource_init Out of adapter memory
 ```
 
-1. Click the Apple icon in the upper-left corner
-2. Select <kbd>About This Mac</kbd>
+Click the Apple icon in the upper-left corner and select **About This Mac**
 
 ![mbp_ram.png](../assets/obsidian/mbp_ram.png)
 
-3. Note the value next to `Memory` (e.g. `64 GB`)
-4. Take that value, multiply it by either `2` or `3`, then divide by either `3`  or `4`()
+Note the value next to `Memory` (e.g. `64 GB`), multiply it by either `2` or `3`, then divide by either `3`  or `4`
 
 `64 * 2 / 3 = 128 / 3 ≈ 42`
 
-5. Round the result down if it's not a whole number
-6. Your final answer is the approximate amount of VRAM you have. This is an approximation since MacBook Pro M-series uses unified memory (i.e. memory is shared between CPU and GPU), so there's only RAM, not VRAM. Technically the amount of VRAM you have is equal to the amount of RAM, but in practice it's less since some of that RAM is reserved by the system to prevent instability.
-7. Switch architecture
+Round the result down if it's not a whole number.
+
+Your final answer is the approximate amount of VRAM you have. This is an approximation since MacBook Pro M-series uses unified memory (i.e. memory is shared between CPU and GPU), so there's only RAM, not VRAM. Technically the amount of VRAM you have is equal to the amount of RAM, but in practice it's less since some of that RAM is reserved by the system to prevent instability.
+
+Switch architecture
 
 ```sh
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-8. Open `regedit`
+Open `regedit`
 
 ```sh
 WINEPREFIX=$HOME/Games wine regedit
 ```
 {: .nolineno }
 
-9. Navigate to `HKEY_LOCAL_MACHINE\Software\Wine`
-10. If `Direct3D` isn't already there, right-click `Wine`and navigate to <kbd>New</kbd>
-11. Click <kbd>Key</kbd>
-12. Input `Direct3D`, then press <kbd>Enter</kbd> to save its name
+Navigate to `HKEY_LOCAL_MACHINE\Software\Wine`
 
-> To rename a key, right-click it and click <kbd>Rename</kbd>
+If `Direct3D` isn't already there, right-click `Wine`and navigate to <kbd>New</kbd>
+
+Click **Key**
+
+Input `Direct3D`, then press <kbd>Enter</kbd> to save its name
+
+> To rename a key, right-click it and click **Rename**
 {: .prompt-tip }
 
-13. Double-click `Direct3D` to open
-14. Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space)
-15. Navigate to <kbd>New</kbd> and click <kbd>String Value</kbd>
-16. Input `VideoMemorySize`, then press <kbd>Enter</kbd> to save its name
+Double-click `Direct3D` to open
 
-> To rename a key, right-click it and click <kbd>Rename</kbd>
+Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space)
+
+Navigate to **New** and click **String Value**
+
+Input `VideoMemorySize`, then press <kbd>Enter</kbd> to save its name
+
+> To rename a key, right-click it and click **Rename**
 {: .prompt-tip }
 
-17. Double-click `VideoMemorySize` to set its value
+Double-click `VideoMemorySize` to set its value
 
 ![regedit_videomemorysize.png](../assets/obsidian/regedit_videomemorysize.png)
 
-18. Under `Value data:`, enter `16384` (i.e. 16.384 GB), then click <kbd>OK</kbd>
-19. Close `regedit`
+Under `Value data:`, enter `16384` (i.e. 16.384 GB), click **OK**, then close `regedit`
 
 Experiment with the value (in MB) of `VideoMemorySize`. Some users say `4096` is better, etc. Might need to do some trial and error.
 
@@ -1789,13 +1795,13 @@ You can use the Automator app to create a new Application that will run Steam wh
 
 ![automator.png](../assets/obsidian/automator.png)
 
-1. Open Automator
+Open Automator
 
-2. Select  **Application** and click **Choose**
+Select  **Application** and click **Choose**
 
-3. In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
+In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
 
-4. Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
+Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
 
 // TEMP: ORIGINAL
 ```
@@ -1832,9 +1838,9 @@ export WINEPREFIX="$HOME/Games"
 wine "C:\Program Files (x86)\Steam\steam.exe" > /dev/null 2>&1 &
 ```
 
-5. Once you save this automated application (file format  **Application**, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
+Once you save this automated application (file format  **Application**, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
 
-6. Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
+Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
 
 This is the app icon I use for Steam (Windows); click on the image to download it
 
@@ -1843,11 +1849,11 @@ This is the app icon I use for Steam (Windows); click on the image to download i
 I've also converted it to Apple's `.icns` file format (it isn't displaying due to the file format), so you won't have to manually convert from `.webp` to `.icns`
 ![steam_icon.icns](../assets/obsidian/steam_icon.icns.md)
 
-7. Find the application you saved earlier, right-click it, then click **Get Info**
+Find the application you saved earlier, right-click it, then click **Get Info**
 
-8. Click the default icon at the top (it'll be outlined when you do), right above the **Add Tags...** textbox
+Click the default icon at the top (it'll be outlined when you do), right above the **Add Tags...** textbox
 
-9. Press <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to paste the image you just copied, and you'll see the icon update accordingly
+Press <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to paste the image you just copied, and you'll see the icon update accordingly
 
 You can now run the Windows version of Steam anytime you click the app icon! This is much more user-friendly than running commands in the terminal each time.
 
@@ -1864,9 +1870,9 @@ Many people want to be able to run Windows programs the same way they run other 
 
 In order to launch a Windows program via the Dock, we're going to write an [AppleScript](https://secure.wikimedia.org/wikipedia/en/wiki/AppleScript) that launches the program for us, and then put that AppleScript in the Dock. There is a program on your computer that is designed for helping you write AppleScripts: it's called "Script Editor", and you can find it in the `/Applications/Utilities` directory.
 
-1. Open `Script Editor`
+Open `Script Editor`
 
-2. You should see a window with a large area you can type in near the top: this is where you write your AppleScript. In that area, type the following text:
+You should see a window with a large area you can type in near the top: this is where you write your AppleScript. In that area, type the following text:
 
 ```plaintext
 tell application "Terminal"
@@ -1876,11 +1882,11 @@ end tell
 
 Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable. You can see that you're simply telling the AppleScript to run a line of code in the Terminal: the same line of code that you could run to start your Windows program.
 
-3. Press **Compile** button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
+Press **Compile** button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
 
-4. Save your script; Select **File Format: Application** in the save options, and leave **Startup Screen** unchecked.
+Save your script; Select **File Format: Application** in the save options, and leave **Startup Screen** unchecked.
 
-5. Open up the Finder, go to where you saved your script, and drag that file to your Dock. It should stay there, just like a real application!
+Open up the Finder, go to where you saved your script, and drag that file to your Dock. It should stay there, just like a real application!
 
 #### Folder shortcut
 Continue reading if you want easy, quick, and convenient access to both your Mac **AND** Windows versions of Steam
@@ -1888,16 +1894,16 @@ Continue reading if you want easy, quick, and convenient access to both your Mac
 ![steam_folder.png](../assets/obsidian/steam_folder.png)
 ![steam_folder2.png](../assets/obsidian/steam_folder2.png)
 
-1. Complete all steps in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
+Complete all steps in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
 
-2. Change directory to `Applications`
+Change directory to `Applications`
 
 ```sh
 cd /Applications
 ```
 {: .nolineno }
 
-3. Create a new folder in `Applications` titled `Steam`, either manually (right-click, press **New Folder**, then enter `Steam` as its name) or via terminal
+Create a new folder in `Applications` titled `Steam`, either manually (right-click, press **New Folder**, then enter `Steam` as its name) or via terminal
 
 ```sh
 mkdir -p Steam
@@ -1908,7 +1914,7 @@ mkdir -p Steam
 > This is to avoid accidentally overwriting it, in case you already have a folder titled `Steam` in that location (i.e. `/Applications/Steam`)
 {: .prompt-tip }
 
-4. Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
+Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
  
 ```sh
 mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
@@ -1919,7 +1925,7 @@ mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
 > This is to avoid overwriting in case you already have `Steam.app` and/or `Steam (Windows).app` in that location (i.e. `/Applications/Steam`)
 {: .prompt-tip }
 
-5. Find and download a folder icon you like (preferably `.icns` file format)
+Find and download a folder icon you like (preferably `.icns` file format)
 
 > This is the folder icon I use
 > <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
@@ -1928,33 +1934,31 @@ mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
 > ![steam_folder.icns](../assets/obsidian/steam_folder.icns.md)
 {: .prompt-tip }
 
-6. Once downloaded, select the folder icon and copy it
+Once downloaded, select the folder icon and copy it
 	- <kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>)
 	- Right-click the icon and click **Copy**
 
-7. Back in `/Applications`, right-click `Steam` folder and click **Get Info**
+Back in `/Applications`, right-click `Steam` folder and click **Get Info**
 
 ![steam_get_info.png](../assets/obsidian/steam_get_info.png)
 
-	<p align="center"><img alt="" src="assets/obsidian/gptk/steam_get_info.png"></p>
-
-8. Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
+Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
 
 ![steam_folder_info.png](../assets/obsidian/steam_folder_info.png)
 
-9. Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
+Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
 
-10. Now that you have a custom `Steam` folder with both Mac and Windows versions of Steam (i.e. `Steam.app` and `Steam (Windows).app`), drag the folder into the dock
+Now that you have a custom `Steam` folder with both Mac and Windows versions of Steam (i.e. `Steam.app` and `Steam (Windows).app`), drag the folder into the dock
 
-11. To adjust the appearance, right-click the `Steam` folder icon in the dock (that you just dragged)
+To adjust the appearance, right-click the `Steam` folder icon in the dock (that you just dragged)
 
-12. Make the following selections
+Make the following selections
 	- Under **Display as**, select **Folder**
 	- Under **View content as**, select **Grid**
 
 ![folder_options.png](../assets/obsidian/folder_options.png)
 
-13. You now have a convenient way to access both versions of Steam via your dock! If you open the `Steam` folder and click on either of the `.app`s, it should launch as expected
+You now have a convenient way to access both versions of Steam via your dock! If you open the `Steam` folder and click on either of the `.app`s, it should launch as expected
 
 > `Steam (Windows).app` takes longer to launch than the native Steam app due to the additional processes it has to run in the background
 {: .prompt-info }
@@ -2171,28 +2175,28 @@ Assuming you already have CrossOver, it is possible to add its support for Windo
 > `$(brew --prefix game-porting-toolkit)` is equivalent to `/usr/local/opt/game-porting-toolkit`, which redirects to `/usr/local/Cellar/game-porting-toolkit/1.1`
 {: .prompt-info }
 
-1. Copy `x86_64-windows/vulkan-1.dll`{: .filepath} to GPTk
+Copy `x86_64-windows/vulkan-1.dll`{: .filepath} to GPTk
 
 ```sh
 cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/x86_64-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/x86_64-windows
 ```
 {: .nolineno }
 
-2. Optionally copy `i386-windows/vulkan-1.dll`{: .filepath} to GPTk for 32-bit support
+Optionally copy `i386-windows/vulkan-1.dll`{: .filepath} to GPTk for 32-bit support
 
 ```sh
 cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/i386-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/i386-windows
 ```
 {: .nolineno }
 
-3. Copy `libMoltenVK.dylib`{: .filepath} to GPTk
+Copy `libMoltenVK.dylib`{: .filepath} to GPTk
 
 ```sh
 cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/libMoltenVK.dylib $(brew --prefix game-porting-toolkit)/lib/external
 ```
 {: .nolineno }
 
-4. Set these environment variables
+Set these environment variables
 
 ```sh
 CX_APPLEGPTK_LIBD3DSHARED_PATH="$(brew --prefix game-porting-toolkit)/lib/external/libd3dshared.dylib"
@@ -2869,20 +2873,29 @@ Using Metal Debugger. This subsection is taken directly from Game Porting Toolki
 > Reenable SIP after you finish debugging.
 {: .prompt-info }
 
-1. Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler.
-2. In CrossOver, select a bottle to launch your game from.
-3. Enable **D3DMetal** in the **Advanced Settings** for the bottle.
-4. Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
+Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler.
+
+In CrossOver, select a bottle to launch your game from.
+
+Enable **D3DMetal** in the **Advanced Settings** for the bottle.
+
+Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
+
 ```sh
 MTL_CAPTURE_ENABLED=1
 D3DM_DXIL_PROCESS_DEBUG_INFORMATION=1
 ```
 {: .nolineno }
-5. In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
-6. In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**.
-7. Close Scheme.
-8. Click **Debug** > **Attach to Process** from the menubar and select your launched game process.
-9. After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
+
+In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
+
+In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**.
+
+Close Scheme.
+
+Click **Debug** > **Attach to Process** from the menubar and select your launched game process.
+
+After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
 
 > If `lldb` suspends the process due to handling `SIGUSR1`, you will need to run the following commands to ignore this signal and continue the process:
 > ```sh

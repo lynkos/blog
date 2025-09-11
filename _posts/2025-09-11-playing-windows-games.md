@@ -1,7 +1,7 @@
 ---
 share: true
 title: Technical Guide on Playing Windows Games on macOS
-description: Learn how to play Windows games on your Mac for free with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, etc.
+description: Learn how to play Windows games on your Mac for free with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
 date: 2025-09-11 14:24:14 -0400
 filename: 2025-09-11-playing-windows-games
 categories:
@@ -18,7 +18,9 @@ tags:
   - graphics
   - development
 ---
-> **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
+> **This article/tutorial is still under construction.**
+> 
+> **Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-important }
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!

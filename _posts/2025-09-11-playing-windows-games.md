@@ -133,7 +133,7 @@ Double-click the `.dmg` after it's downloaded to open/mount it
 
 ![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
 
-Click <kbd>Agree</kbd> to the license agreement
+Click **Agree** to the license agreement
 
 ![license_agreement.png](../assets/obsidian/license_agreement.png)
 
@@ -169,7 +169,7 @@ softwareupdate --install-rosetta
 
 ![iterm.png](../assets/obsidian/iterm.png)
 
-Enter x86_64 shell; all subsequent commands <strong>must</strong> be run in this shell
+Enter x86_64 shell; all subsequent commands **must** be run in this shell
 
 ```sh
 arch -x86_64 /bin/bash

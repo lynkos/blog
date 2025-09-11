@@ -1,7 +1,7 @@
 ---
 share: true
-title: Technical Guide on Playing Windows Games on macOS
-description: Learn how to play Windows games on your Mac for free with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
+title: How to Play Windows Games on Mac
+description: Technical guide about running Windows programs + playing Windows games on macOS with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
 date: 2025-09-11 14:24:14 -0400
 filename: 2025-09-11-playing-windows-games
 categories:
@@ -19,7 +19,7 @@ tags:
   - development
 ---
 > **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
-{: .prompt-important }
+{: .prompt-info }
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!
 
@@ -28,7 +28,10 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 - Understands Wine concepts (e.g. `WINEPREFIX`, dll overrides, etc.)
 - Knows how to launch Windows executables through Wine from terminal
 
-If you're not tech savvy I don't recommend following this highly technical tutorial. Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid), [Sikarugir](https://github.com/Sikarugir-App/Sikarugir), or [Whisky](https://getwhisky.app) (free, but no longer maintained).
+> **If you're _not_ tech savvy I _don't_ recommend following this highly technical tutorial.**
+> 
+> Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid), [Sikarugir](https://github.com/Sikarugir-App/Sikarugir), or [Whisky](https://getwhisky.app) (free, but no longer maintained).
+{: .prompt-important }
 
 ## Background
 Key concepts that will continue to show up throughout this writeup.

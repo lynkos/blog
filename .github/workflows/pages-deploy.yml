@@ -64,6 +64,9 @@ jobs:
       - name: Generate CNAME
         run: echo -n 'blog.lynkos.dev' > CNAME
 
+      - name: Generate .nojekyll
+        run: echo -n '' > .nojekyll
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:

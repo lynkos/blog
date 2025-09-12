@@ -28,9 +28,7 @@ module Jekyll
       # Parse the content to extract tab definitions
       content = super
       tabs = parse_tabs(content)
-      
-      Jekyll.logger.info "Tabs plugin:", "Found #{tabs.length} tabs"
-      
+            
       # Generate the HTML structure
       generate_html(@id, tabs)
     end

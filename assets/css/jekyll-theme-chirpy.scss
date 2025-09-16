@@ -9,6 +9,13 @@
 ';
 
 /* append your custom style below */
+:root {
+  --dot-size: 15px;
+  --arrow-padding: 16px;
+  --gallery-padding: 5px;
+  --dot-height: calc(2 * (var(--gallery-padding) + var(--dot-size))); // 40px;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -60,8 +67,154 @@
 #not-ai {
   width: 6.25rem;
   height: auto;
+}
 
-  /* Remove default link `<a>` styling (underline on hover) */
-  border-bottom: none;
-  text-decoration: none;
+/* Remove default link `<a>` styling (underline on hover) */
+#not-ai, .prev, .next {
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Slideshow gallery style */
+img, .content a.popup {
+  width: 100%;
+}
+
+#caption, .prev, .next, .content a.popup {
+  margin: 0;
+}
+
+.slides a.popup img {
+  border-radius: 10px 10px 0 0;
+}
+
+.gallery-container {
+  position: relative;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--sidebar-border-color);
+  color: var(--bs-primary-color);
+  border-radius: 10px;
+}
+
+/* Hide images by default */
+.slides {
+  display: none;
+
+  img {
+    width: 100vw;
+  }
+}
+
+.slide-preview, .prev, .next, .dot {
+  cursor: pointer;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  z-index: 9; // Make sure > #caption z-index
+}
+
+.prev,
+.next {
+  position: absolute;
+  width: auto;
+  padding: var(--arrow-padding);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.slide-index {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: calc(var(--arrow-padding) / 2); //8px;
+  position: absolute;
+  top: 0;
+}
+
+.slideshow {
+  display: flex;
+  border-bottom: 1px solid var(--sidebar-border-color);
+}
+
+#caption, .img-dot, .prev, .next {
+  text-align: center;
+}
+
+.img-dot {
+  padding: var(--gallery-padding) 0;
+  height: var(--dot-height); 
+}
+
+.slide-index, .prev, .next, #caption {
+  text-shadow: 0px 0px 4px #000;
+}
+
+#caption {
+  max-height: calc(100% - var(--dot-height));
+  padding: var(--gallery-padding) var(--dot-height);
+  overflow: auto;
+  color: white;
+  width: 100%;
+  position: absolute;
+  align-self: flex-end;
+}
+
+.gallery {
+  /* Thumbnail images (temporarily hidden while debugging) */
+  &-row {
+    display: none // flex;
+    // justify-content: center;
+  }
+
+  &-column {
+    align-self: center;
+  }
+
+  &-row &-column {
+    height: 100%;
+  }
+}
+
+/* Add a transparency effect for thumnbail images */
+.slide-preview {
+  opacity: 0.6;
+}
+
+.active,
+.slide-preview:hover {
+  opacity: 1;
+}
+
+/* Dot */
+.dot {
+  height: var(--dot-size);
+  width: var(--dot-size);
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active_dot,
+.dot:hover {
+  background-color: #717171;
 }

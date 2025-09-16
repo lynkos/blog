@@ -235,6 +235,8 @@ main {
 
   > table {
     min-width: 100%;
+    width: 100%;
+    table-layout: fixed;
     overflow-x: auto;
     border-spacing: 0;
 

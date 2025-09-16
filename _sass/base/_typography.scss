@@ -252,11 +252,11 @@ main {
       tr {
         border-bottom: 1px solid var(--tb-border-color);
 
-        &:nth-child(2n) {
+        &:nth-child(even) {
           background-color: var(--tb-even-bg);
         }
 
-        &:nth-child(2n + 1) {
+        &:nth-child(odd) {
           background-color: var(--tb-odd-bg);
         }
 

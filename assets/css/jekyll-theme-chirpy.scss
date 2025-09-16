@@ -94,9 +94,9 @@ img, .content a.popup {
 
 .gallery-container {
   position: relative;
-  background: var(--sidebar-bg);
-  border: 1px solid var(--sidebar-border-color);
-  color: var(--bs-primary-color);
+  background: var(--highlight-bg-color);
+  border: 1px solid var(--language-border-color);
+  color: var(--code-color);
   border-radius: v.$radius-lg;
 }
 
@@ -162,7 +162,7 @@ img, .content a.popup {
 
 .slideshow {
   display: flex;
-  border-bottom: 1px solid var(--sidebar-border-color);
+  border-bottom: 1px solid var(--language-border-color);
 }
 
 #caption, .img-dot, .prev, .next {
@@ -175,7 +175,7 @@ img, .content a.popup {
 }
 
 .slide-index, .prev, .next, #caption {
-  text-shadow: 0 0 4px var(--main-bg);
+  text-shadow: 0 0 1px var(--code-header-muted-color);
 }
 
 #caption {

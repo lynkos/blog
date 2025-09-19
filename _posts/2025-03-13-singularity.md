@@ -1,6 +1,7 @@
 ---
 title: The Singularity
 description: This paper discusses the social and global impact of the singularity and its accompanying technologies, among other things.
+pin: true
 date: 2025-03-13 13:29:02 -0400
 math: true
 categories: [ math, computer-science ]

@@ -2,6 +2,7 @@
 share: true
 title: How to Play Windows Games on Mac
 description: Technical guide about running Windows programs + playing Windows games on macOS with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
+pin: true
 date: 2025-09-11 14:24:14 -0400
 filename: 2025-09-11-play-windows-games
 categories:

@@ -2,6 +2,7 @@
 title: Quantum Search Algorithm (Full)
 date: 2025-03-13 13:59:02 -0400
 description: Full-length article on Grover's Algorithm, i.e. Quantum Search Algorithm, which efficiently searches an unsorted database.
+pin: true
 math: true
 categories: [ math, physics, computer-science ]
 tags: [ algorithms, quantum-computing, grovers-algorithm ]

@@ -3,7 +3,7 @@ share: true
 title: How to Play Windows Games on Mac
 description: Technical guide about running Windows programs + playing Windows games on macOS with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
 date: 2025-09-11 14:24:14 -0400
-filename: 2025-09-11-playing-windows-games
+filename: 2025-09-11-play-windows-games
 categories:
   - tutorial
   - guide
@@ -241,14 +241,14 @@ which brew
 I have different versions of Wine on my system which I use for different purposes.
 - **Game Porting Toolkit.app**: I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games. This is possible thanks to Apple's Game Porting Toolkit (GPTk): A translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12).
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.13).
-- **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-09-11-playing-windows-games.md#install-crossover) for more details.
+- **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-09-11-play-windows-games.md#install-crossover) for more details.
 
-| Prefix                    | Build Name       | Version     | Graphics API(s)                | Description                   |
-| :------------------------ | :--------------- | :---------- | :----------------------------- | :---------------------------- |
-| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7    | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12  | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12  | DXVK                           | DirectX to Vulkan             |
-| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1  | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
+| Prefix                    | Build Name       | Version    | Graphics API(s)                | Description                   |
+| :------------------------ | :--------------- | :--------- | :----------------------------- | :---------------------------- |
+| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7   | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
+| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12 | DXMT                           | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12 | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1 | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
 
@@ -461,19 +461,19 @@ mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.13"
 ```
 {: .nolineno }
 
-Continue to [Install DXMT](2025-09-11-playing-windows-games.md#install-dxmt) and [Install DXVK](2025-09-11-playing-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps
+Continue to [Install DXMT](2025-09-11-play-windows-games.md#install-dxmt) and [Install DXVK](2025-09-11-play-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps
 
 // TODO: Instead of creating separate Wine copies for each graphics API, why not just use the same Wine build with all graphics API files (dlls, so, etc.), e.g. `winemetal_dxmt.dll`{: .filepath} vs `winemetal_dxvk.dll`{: .filepath}, `winemetal_orig.dll`{: .filepath}, etc. When setting a specific build (e.g. DXMT, DXVK, etc.), the relevant file(s) will be renamed (e.g. current `winemetal.dll`{: .filepath} is renamed to `winemetal_xyz.dll`{: .filepath}, then `winemetal_dxmt.dll`{: .filepath} is renamed to `winemetal.dll`{: .filepath} in order to enable DXMT).
 
 #### Install DXMT
-> Make sure to download Wine before continuing; see [Install Wine](2025-09-11-playing-windows-games.md#install-wine) for instructions.
+> Make sure to download Wine before continuing; see [Install Wine](2025-09-11-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
 [DXMT](https://github.com/3Shain/dxmt) is a Metal-based translation layer for Direct3D 11 (`d3d11`) and Direct3D 10 (`d3d10`), which allows running 3D applications on macOS using Wine.
 
 > If you want to build DXMT yourself, skip steps 1 – 4 and refer to the ["Build" section in DXMT repository's `README.md`](https://github.com/3Shain/dxmt?tab=readme-ov-file#build).
 > 
-> Refer to [DXMT installer](2025-09-11-playing-windows-games.md#dxmt-installer) for a Bash script to automatically install DXMT into your Wine build.
+> Refer to [DXMT installer](2025-09-11-play-windows-games.md#dxmt-installer) for a Bash script to automatically install DXMT into your Wine build.
 {: .prompt-tip }
 
 Go to [DXMT repository's releases](https://github.com/3Shain/dxmt/releases)
@@ -569,7 +569,7 @@ steam.exe -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles
 {: .nolineno }
 
 #### Install DXVK
-> Make sure to download Wine before continuing; see [Install Wine](2025-09-11-playing-windows-games.md#install-wine) for instructions.
+> Make sure to download Wine before continuing; see [Install Wine](2025-09-11-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
 DXVK is a Vulkan-based translation layer for Direct3D 8/9/10/11 (Linux) // Direct3D 10/11 (macOS), which allows running 3D applications with Wine.
@@ -648,7 +648,7 @@ mv -i "$MVK_DYLIB" "$WINE_LIB"
 > {: .nolineno }
 {: .prompt-info }
 
-You can use the installer script in [Steam Installer](2025-09-11-playing-windows-games.md#steam-installer), or complete the following steps.
+You can use the installer script in [Steam Installer](2025-09-11-play-windows-games.md#steam-installer), or complete the following steps.
 
 Install the Windows version of Steam
 
@@ -664,7 +664,7 @@ WINEPREFIX="$HOME/Games" wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
-If it works, continue to [Usage](2025-09-11-playing-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-09-11-playing-windows-games.md#usage) section.
+If it works, continue to [Usage](2025-09-11-play-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-09-11-play-windows-games.md#usage) section.
 
 ### Install CrossOver
 Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
@@ -715,7 +715,7 @@ See [Programs](https://gitlab.winehq.org/wine/wine/-/wikis/Commands#programs) fo
 - **Game**: `"C:\Program Files (x86)\Steam\steamapps\common\MyGame\MyGame.exe"`{: .filepath}
 
 ### Launch Steam
-If you want to play the game via Steam. This is the basic command; it runs Steam with Wine. You can add additional environment variables. Refer to [Environment Variables](2025-09-11-playing-windows-games.md#environment-variables) section for a list of compatible environment variables.
+If you want to play the game via Steam. This is the basic command; it runs Steam with Wine. You can add additional environment variables. Refer to [Environment Variables](2025-09-11-play-windows-games.md#environment-variables) section for a list of compatible environment variables.
 ```sh
 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
@@ -743,7 +743,7 @@ MTL_HUD_ENABLED=0 WINEESYNC=1 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86
 ```
 {: .nolineno }
 
-Feel free to add and remove environment variables as you like; you're not constrained to the aforementioned ones. Refer to [Environment Variables](2025-09-11-playing-windows-games.md#environment-variables) section for a list of compatible environment variables.
+Feel free to add and remove environment variables as you like; you're not constrained to the aforementioned ones. Refer to [Environment Variables](2025-09-11-play-windows-games.md#environment-variables) section for a list of compatible environment variables.
 
 **GPTk**
 D3DMetal is included in Game Porting Toolkit, so you should be able to use it if you have successfully setup and built Game Porting Toolkit. It supports DirectX 11 (`DX11`) and DirectX 12 (`DX12`) programs.
@@ -1215,7 +1215,7 @@ rm -r shaders.cache
 3. Copy both `nvngx.dll`{: .filepath} and `nvapi64.dll`{: .filepath} to the `windows\system32` directory in your Wine prefix’s virtual C: drive (open `$HOME/Games/drive_c/windows/system32`)
 4. Set `D3DM_ENABLE_METALFX=1` to convert DLSS functions to MetalFX (where possible)
 
-Refer to [MetalFX Integration](2025-09-11-playing-windows-games.md#metalfx-integration) for Bash script.
+Refer to [MetalFX Integration](2025-09-11-play-windows-games.md#metalfx-integration) for Bash script.
 
 #### Steam
 ##### `steamwebhelper` not responding
@@ -1463,7 +1463,7 @@ The aforementioned script is functionally the same as:
 ```
 {: .nolineno }
 
-For the sake of convenience, I've written a bash function to download a Steam app into a given `WINEPREFIX`'s Steam directory. You can find this function at [Automate Steam Downloads](2025-09-11-playing-windows-games.md#automate-steam-downloads).
+For the sake of convenience, I've written a bash function to download a Steam app into a given `WINEPREFIX`'s Steam directory. You can find this function at [Automate Steam Downloads](2025-09-11-play-windows-games.md#automate-steam-downloads).
 
 #### Game Controller
 > Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
@@ -1899,7 +1899,7 @@ Continue reading if you want easy, quick, and convenient access to both your Mac
 ![steam_folder.png](../assets/obsidian/steam_folder.png)
 ![steam_folder2.png](../assets/obsidian/steam_folder2.png)
 
-Complete all steps in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
+Complete all steps in [Method 1 Automator](2025-09-11-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
 
 Change directory to `Applications`
 
@@ -1919,7 +1919,7 @@ mkdir -p Steam
 > This is to avoid accidentally overwriting it, in case you already have a folder titled `Steam` in that location (i.e. `/Applications/Steam`)
 {: .prompt-tip }
 
-Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-09-11-playing-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
+Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-09-11-play-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
  
 ```sh
 mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
@@ -1971,10 +1971,10 @@ You now have a convenient way to access both versions of Steam via your dock! If
 #### Set game mode
 > **THIS NO LONGER WORKS WITH macOS 16!**
 > 
-> See ["Symbol not found" when setting game mode](2025-09-11-playing-windows-games.md#symbol-not-found-when-setting-game-mode) for more details.
+> See ["Symbol not found" when setting game mode](2025-09-11-play-windows-games.md#symbol-not-found-when-setting-game-mode) for more details.
 {: .prompt-important }
 
-This requires XCode, which is one of the [Requirements](2025-09-11-playing-windows-games.md#requirements) (you should already have it by now).
+This requires XCode, which is one of the [Requirements](2025-09-11-play-windows-games.md#requirements) (you should already have it by now).
 
 {% tabs game-mode %}
     ---TAB: Enable
@@ -2695,7 +2695,7 @@ echo "DXMT installation complete!"
 {: file="$HOME/Scripts/dxmt_installer.sh" }
 
 #### Automate Steam Downloads
-If you'd prefer to do this manually, refer to [Solution 2 SteamCMD](2025-09-11-playing-windows-games.md#solution-2-steamcmd). Alternatively, check out [Solution 1 Steam Console](2025-09-11-playing-windows-games.md#solution-1-steam-console) for an alternate method.
+If you'd prefer to do this manually, refer to [Solution 2 SteamCMD](2025-09-11-play-windows-games.md#solution-2-steamcmd). Alternatively, check out [Solution 1 Steam Console](2025-09-11-play-windows-games.md#solution-1-steam-console) for an alternate method.
 
 ```bash
 #!/usr/bin/env bash

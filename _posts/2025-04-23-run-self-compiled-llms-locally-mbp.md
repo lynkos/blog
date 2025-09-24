@@ -1,5 +1,6 @@
 ---
 share: true
+pin: true
 title: How to Efficiently Build and Run Private, Optimized, Self-Compiled LLMs Locally on MacBook Pro Apple Silicon M-series
 date: 2025-04-23 15:36:01 -0400
 filename: 2025-04-23-run-self-compiled-llms-locally-mbp

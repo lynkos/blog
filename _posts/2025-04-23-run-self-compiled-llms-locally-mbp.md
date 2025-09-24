@@ -5,7 +5,7 @@ title: How to Efficiently Build and Run Private, Optimized, Self-Compiled LLMs L
 date: 2025-04-23 15:36:01 -0400
 filename: 2025-04-23-run-self-compiled-llms-locally-mbp
 description: A compendium of the best ways to privately run optimized, self-compiled LLMs locally on MacBook Pro Apple Silicon M-series.
-categories: tutorial, guide
+categories: [ tutorial, guide, computer-science ]
 tags:
   - tutorial
   - computer-science

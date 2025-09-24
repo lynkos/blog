@@ -21,18 +21,23 @@ tags:
   - LLM
 ---
 > **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
-{: .prompt-info }
+{: .prompt-important }
 
 ## Introduction
 We'll be going over 3 separate options, along with the pros and cons of each:
 - MLC LLM
 - llama.cpp
-- MLX
+- MLX (**WIP**)
 
-## Shared Requirements
+## Requirements
 - MacBook Pro Apple Silicon M-series
 - Conda
 - Homebrew
+- Directory for LLMs
+  ```sh
+  mkdir -p $HOME/.llm
+  ```
+  {: .nolineno }
 
 ### Conda
 Update conda
@@ -70,14 +75,14 @@ Output should look similar to (or include)
 solver: libmamba
 ```
 
-> `conda-libmamba-solver` is much faster than classic for [many reasons](https://conda.github.io/conda-libmamba-solver/user-guide/libmamba-vs-classic/), but there are certain tricks you can use to make it even faster!
-> - **Explicit is better**. Instead of letting the solver do all the work, specify target versions for your packages. `conda install python=3.11 numpy` is way better than `conda install python numpy`.
-> - Use `--strict-channel-priority`. Strict channel priority drastically reduces the solver search space when you are mixing channels. Make this decision permanent with `conda config --set channel_priority strict`.
-> - Use `--update-specs`. For existing environments, do not attempt to freeze installed packages by default.
-> - Experimental: `CONDA_LIBMAMBA_SOLVER_MAX_ATTEMPTS=0`. Setting this environment variable will disable the retry loop, making it behave more like `micromamba`.
+> `conda-libmamba-solver` is much faster than classic for [many reasons](https://conda.github.io/conda-libmamba-solver/user-guide/libmamba-vs-classic/), but it's possible to make it faster:
+> - Specify package(s) target versions, e.g. `conda install python=3.11 numpy` instead of `conda install python numpy`
+> - Use strict channel priority, i.e. `--strict-channel-priority`, to reduce solver search space when mixing channels; set permanently with `conda config --set channel_priority strict`
+> - Use `--update-specs`; for existing environments, don't freeze installed packages by default
+> - Disable the retry loop with `CONDA_LIBMAMBA_SOLVER_MAX_ATTEMPTS=0`, making it behave more like `micromamba` (experimental!)
 {: .prompt-tip }
 
-### Homebrew Packages
+### Homebrew
 Install necessary packages: Ninja, git, git LFS, Hugging Face CLI
 
 ```sh
@@ -87,146 +92,10 @@ brew install ninja git git-lfs huggingface-cli
 
 ### Ccache
 Optional C/C++ compiler cache; ideal for repeated builds
-
-### Directory Structure
-Create directory for LLMs in your home directory
-
 ```sh
-mkdir -p $HOME/.llm
+brew install ccache
 ```
 {: .nolineno }
-
-## llama.cpp
-### Background
-
-### Requirements
-
-### Build and Install
-Create Conda environment
-
-```sh
-conda create -n llama-env -c conda-forge cmake python=3.10
-```
-{: .nolineno }
-
-Activate build environment
-
-```sh
-conda activate llama-env
-```
-{: .nolineno }
-
-Create directory structure
-
-```sh
-mkdir -p $HOME/.llm/llama/{build,install}
-```
-{: .nolineno }
-
-Enter newly created `llama` directory
-
-```sh
-cd $HOME/.llm/llama
-```
-{: .nolineno }
-
-Clone and enter `llama.cpp` repo
-
-```sh
-git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
-```
-{: .nolineno }
-
-Configure build system with `CMake`
-
-```sh
-cmake -B ../build -G Ninja \
--DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=$HOME/.llm/llama/install \
--DCMAKE_PREFIX_PATH=$HOME/.llm/llama/install \
--DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
--DCMAKE_C_COMPILER=clang \
--DCMAKE_CXX_COMPILER=clang++ \
--DCMAKE_C_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
--DCMAKE_CXX_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
--DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib:/System/Library/Frameworks/Accelerate.framework:/System/Library/Frameworks/Metal.framework" \
--DCMAKE_EXE_LINKER_FLAGS="-Wl,-S,-framework Accelerate,-framework Metal,-framework Foundation,-framework MetalKit" \
--DCMAKE_OSX_SYSROOT=$(xcrun --sdk macosx --show-sdk-path) \
--DCMAKE_OSX_ARCHITECTURES=arm64 \
--DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
--DHIDE_PRIVATE_SYMBOLS=ON \
--DBUILD_SHARED_LIBS=ON \
--DBUILD_TESTING=OFF \
--DUSE_METAL=ON \
--DUSE_MPS=OFF \
--DUSE_GTEST=OFF \
--DUSE_LIBBACKTRACE=OFF \
--DGGML_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
--DGGML_CUDA_GRAPHS=OFF \
--DGGML_CUDA_FA=OFF \
--DGGML_METAL=ON \
--DGGML_METAL_EMBED_LIBRARY=ON \
--DGGML_METAL_USE_BF16=ON \
--DGGML_METAL_NDEBUG=ON \
--DLLAMA_ALL_WARNINGS=OFF \
--DLLAMA_BUILD_EXAMPLES=OFF \
--DLLAMA_BUILD_TESTS=OFF \
--DLLAMA_BUILD_SERVER=OFF \
--DLLAMA_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
--DLLAMA_LIB_INSTALL_DIR=$HOME/.llm/llama/install/lib \
--DLLAMA_BIN_INSTALL_DIR=$HOME/.llm/llama/install/bin \
--DLLAMA_CURL=ON \
--DLLAMA_METAL=ON \
--DLLAMA_METAL_EMBED_LIBRARY=ON \
--DLLAMA_NATIVE=ON \
--DLLAMA_ACCELERATE=ON \
--DLLAMA_BLAS=ON \
--DLLAMA_BLAS_VENDOR=Apple \
--DLLAMA_AVX=OFF \
--DLLAMA_AVX2=OFF \
--DLLAMA_AVX512=OFF \
--DLLAMA_F16C=OFF \
--DLLAMA_FMA=OFF \
--DLLAMA_LLAMAFILE=OFF
-```
-
-> List valid compiler flags
-> ```sh
-> clang -mcpu=help
-> ```
-> {: .nolineno }
-> 
-> List valid CMake flags with `ccmake`
-> ```sh
-> ccmake .
-> ```
-> {: .nolineno }
->
-> List valid CMake flags with `cmake`
-> ```sh
-> cmake -L
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-> If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
-{: .prompt-tip }
-  
-Build and compile `llama.cpp` with `CMake`
-
-```sh
-cmake --build ../build --config Release -j $(sysctl -n hw.logicalcpu)
-```
-{: .nolineno }
-
-Install
-
-```sh
-cmake --install ../build
-```
-{: .nolineno }
-
-### Usage
 
 ## MLC LLM
 ### Background
@@ -315,7 +184,7 @@ Current installation options:
 3) Cancel installation
 ```
 
-After it's installed, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
+After installation, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
 Cargo's bin directory (`$HOME/.cargo/bin`)
 
 ```sh
@@ -475,7 +344,7 @@ ninja
 > {: .nolineno }
 {: .prompt-tip }
 
-> The last part of a `ninja` build might feel slowest and/or longest, though this is due to:
+> The following text is LLM-generated and explains why the last part of a `ninja` build might feel slow and/or long:
 > - **Front-loading parallel work**: Ninja is extremely parallel — early on, it schedules as many jobs as possible. If you have 16 jobs running (like in your setup), it chews through the easy/independent stuff fast.
 > - **Dependency chains bottleneck**: Near the end, many remaining files depend on the completion of earlier ones. So ninja can’t start them in parallel — it must wait. You end up with fewer and fewer jobs running, sometimes just one.
 > - **Final linking is heavy**: The very last steps — especially linking large binaries like `clang` or `lld` — take a ton of CPU and memory, and they can’t be parallelized much. This slows things down dramatically.
@@ -1369,9 +1238,12 @@ curl -X POST \
 The server will process this request and send back the response
 
 #### IDE Integration
-MLC LLM supports code completion on multiple IDEs, including [VSCode](https://github.com/huggingface/llm-vscode), [IntelliJ](https://github.com/huggingface/llm-intellij) and [Nvim](https://github.com/huggingface/llm.nvim), by integrating a coding LLM into your IDE vs MLC LLM [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api).
+MLC LLM supports code completion on multiple IDEs, such as [VSCode](https://github.com/huggingface/llm-vscode), [IntelliJ](https://github.com/huggingface/llm-intellij) and [Nvim](https://github.com/huggingface/llm.nvim), by integrating a coding LLM into your IDE vs MLC LLM [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api).
 
-After deploying your LLM locally, connect the IDE to your MLC LLM's [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api)
+> Deploy LLM locally before continuing onto the following steps
+{: .prompt-info }
+
+Connect IDE to MLC LLM's [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api)
 
 Install the [Hugging Face code completion extension `llm-ls`](https://github.com/huggingface/llm-ls) in your IDE
 
@@ -1415,6 +1287,137 @@ Refer to [REST API documentation](https://llm.mlc.ai/docs/deploy/rest.html#deplo
 After everything is all set, the extension will be ready to use the responses from the MLC Serve API to provide off-the-shelf code completion on your IDE.
 
 ![Screenshot of code in IDE](https://llm.mlc.ai/docs/_images/code_completion.png)
+
+## llama.cpp
+### Background
+### Requirements
+
+### Build and Install
+Create Conda environment
+
+```sh
+conda create -n llama-env -c conda-forge cmake python=3.10
+```
+{: .nolineno }
+
+Activate build environment
+
+```sh
+conda activate llama-env
+```
+{: .nolineno }
+
+Create directory structure
+
+```sh
+mkdir -p $HOME/.llm/llama/{build,install}
+```
+{: .nolineno }
+
+Enter newly created `llama` directory
+
+```sh
+cd $HOME/.llm/llama
+```
+{: .nolineno }
+
+Clone and enter `llama.cpp` repo
+
+```sh
+git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
+```
+{: .nolineno }
+
+Configure build system with `CMake`
+
+```sh
+cmake -B ../build -G Ninja \
+-DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_INSTALL_PREFIX=$HOME/.llm/llama/install \
+-DCMAKE_PREFIX_PATH=$HOME/.llm/llama/install \
+-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
+-DCMAKE_C_COMPILER=clang \
+-DCMAKE_CXX_COMPILER=clang++ \
+-DCMAKE_C_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
+-DCMAKE_CXX_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
+-DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib:/System/Library/Frameworks/Accelerate.framework:/System/Library/Frameworks/Metal.framework" \
+-DCMAKE_EXE_LINKER_FLAGS="-Wl,-S,-framework Accelerate,-framework Metal,-framework Foundation,-framework MetalKit" \
+-DCMAKE_OSX_SYSROOT=$(xcrun --sdk macosx --show-sdk-path) \
+-DCMAKE_OSX_ARCHITECTURES=arm64 \
+-DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
+-DHIDE_PRIVATE_SYMBOLS=ON \
+-DBUILD_SHARED_LIBS=ON \
+-DBUILD_TESTING=OFF \
+-DUSE_METAL=ON \
+-DUSE_MPS=OFF \
+-DUSE_GTEST=OFF \
+-DUSE_LIBBACKTRACE=OFF \
+-DGGML_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
+-DGGML_CUDA_GRAPHS=OFF \
+-DGGML_CUDA_FA=OFF \
+-DGGML_METAL=ON \
+-DGGML_METAL_EMBED_LIBRARY=ON \
+-DGGML_METAL_USE_BF16=ON \
+-DGGML_METAL_NDEBUG=ON \
+-DLLAMA_ALL_WARNINGS=OFF \
+-DLLAMA_BUILD_EXAMPLES=OFF \
+-DLLAMA_BUILD_TESTS=OFF \
+-DLLAMA_BUILD_SERVER=OFF \
+-DLLAMA_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
+-DLLAMA_LIB_INSTALL_DIR=$HOME/.llm/llama/install/lib \
+-DLLAMA_BIN_INSTALL_DIR=$HOME/.llm/llama/install/bin \
+-DLLAMA_CURL=ON \
+-DLLAMA_METAL=ON \
+-DLLAMA_METAL_EMBED_LIBRARY=ON \
+-DLLAMA_NATIVE=ON \
+-DLLAMA_ACCELERATE=ON \
+-DLLAMA_BLAS=ON \
+-DLLAMA_BLAS_VENDOR=Apple \
+-DLLAMA_AVX=OFF \
+-DLLAMA_AVX2=OFF \
+-DLLAMA_AVX512=OFF \
+-DLLAMA_F16C=OFF \
+-DLLAMA_FMA=OFF \
+-DLLAMA_LLAMAFILE=OFF
+```
+
+> List valid compiler flags
+> ```sh
+> clang -mcpu=help
+> ```
+> {: .nolineno }
+> 
+> List valid CMake flags with `ccmake`
+> ```sh
+> ccmake .
+> ```
+> {: .nolineno }
+>
+> List valid CMake flags with `cmake`
+> ```sh
+> cmake -L
+> ```
+> {: .nolineno }
+{: .prompt-tip }
+
+> Use `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS` if compiling **heavily vectorized code**
+{: .prompt-tip }
+  
+Build and compile `llama.cpp` with `CMake`
+
+```sh
+cmake --build ../build --config Release -j $(sysctl -n hw.logicalcpu)
+```
+{: .nolineno }
+
+Install
+
+```sh
+cmake --install ../build
+```
+{: .nolineno }
+
+### Usage
 
 ## MLX
 // TODO

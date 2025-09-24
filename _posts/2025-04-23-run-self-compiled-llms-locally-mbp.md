@@ -5,7 +5,9 @@ title: How to Efficiently Build and Run Private, Optimized, Self-Compiled LLMs L
 date: 2025-04-23 15:36:01 -0400
 filename: 2025-04-23-run-self-compiled-llms-locally-mbp
 description: A compendium of the best ways to privately run optimized, self-compiled LLMs locally on MacBook Pro Apple Silicon M-series.
-categories: [ tutorial, guide, computer-science ]
+categories:
+  - tutorial
+  - guide
 tags:
   - tutorial
   - computer-science
@@ -21,40 +23,46 @@ tags:
 > **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-info }
 
-# Introduction
+## Introduction
 We'll be going over 3 separate options:
 - MLC LLM
 - llama.cpp
 - MLX
 Along with the pros and cons of each
 
-# Shared Requirements
-## Conda
-Install conda
+## Shared Requirements
+- MacBook Pro Apple Silicon M-series
+- Conda
+- Homebrew
 
-1. Update conda
+### Conda
+Update conda
 
 ```sh
 conda update --yes -n base -c defaults conda
 ```
+{: .nolineno }
 
-2. Install `conda-libmamba-solver`
+Install `conda-libmamba-solver`
 
 ```sh
 conda install --yes -n base conda-libmamba-solver
 ```
+{: .nolineno }
 
-3. Set as default solver
+Set as default solver
 
 ```sh
 conda config --set solver libmamba
 ```
+{: .nolineno }
 
-4. Confirm it's the default
+Confirm it's the default
 
 ```sh
 conda config --show-sources
 ```
+{: .nolineno }
 
 Output should look similar to (or include)
 
@@ -70,60 +78,67 @@ solver: libmamba
 > - Experimental: `CONDA_LIBMAMBA_SOLVER_MAX_ATTEMPTS=0`. Setting this environment variable will disable the retry loop, making it behave more like `micromamba`.
 {: .prompt-tip }
 
-## Homebrew Packages
+### Homebrew Packages
 Install necessary packages: Ninja, git, git LFS, Hugging Face CLI
 
 ```sh
 brew install ninja git git-lfs huggingface-cli
 ```
+{: .nolineno }
 
-## Ccache
+### Ccache
 Optional C/C++ compiler cache; ideal for repeated builds
 
-## Directory Structure
+### Directory Structure
 Create directory for LLMs in your home directory
 
 ```sh
 mkdir -p $HOME/.llm
 ```
+{: .nolineno }
 
-# llama.cpp
-## Background
+## llama.cpp
+### Background
 
-## Requirements
+### Requirements
 
-## Build and Install
-1. Create Conda environment
+### Build and Install
+Create Conda environment
 
 ```sh
 conda create -n llama-env -c conda-forge cmake python=3.10
 ```
+{: .nolineno }
 
-2. Activate build environment
+Activate build environment
 
 ```sh
 conda activate llama-env
 ```
+{: .nolineno }
 
-3. Create directory structure
+Create directory structure
 
 ```sh
 mkdir -p $HOME/.llm/llama/{build,install}
 ```
+{: .nolineno }
 
-4. Enter your newly created `llama` directory
+Enter newly created `llama` directory
 
 ```sh
 cd $HOME/.llm/llama
 ```
+{: .nolineno }
 
-5. Clone and enter `llama.cpp` repo
+Clone and enter `llama.cpp` repo
 
 ```sh
 git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
 ```
+{: .nolineno }
 
-6. Configure build system with `CMake`
+Configure build system with `CMake`
 
 ```sh
 cmake -B ../build -G Ninja \
@@ -180,44 +195,42 @@ cmake -B ../build -G Ninja \
 > ```sh
 > clang -mcpu=help
 > ```
+> {: .nolineno }
 > 
 > List valid CMake flags with `ccmake`
 > ```sh
 > ccmake .
 > ```
+> {: .nolineno }
 >
 > List valid CMake flags with `cmake`
 > ```sh
 > cmake -L
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
 > If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
 {: .prompt-tip }
   
-7. Build and compile `llama.cpp` with `CMake`
+Build and compile `llama.cpp` with `CMake`
 
 ```sh
 cmake --build ../build --config Release -j $(sysctl -n hw.logicalcpu)
 ```
+{: .nolineno }
 
-8. Install
+Install
 
 ```sh
 cmake --install ../build
 ```
+{: .nolineno }
 
-## Usage
+### Usage
 
-# MLX
-## Background
-## Requirements
-## Initial Setup
-## Build and Install
-## Usage
-
-# MLC LLM
-## Background
+## MLC LLM
+### Background
 <figure>
 	<picture>
 		<source srcset="https://llm.mlc.ai/docs/_images/project-workflow.svg">
@@ -226,20 +239,18 @@ cmake --install ../build
 	<figcaption style="text-align: center">MLC LLM Workflow</figcaption>
 </figure>
 
-## Requirements
-- MacBook Pro Apple Silicon M-series
-- Conda
-- Homebrew
+### Requirements
 - Hugging Face Account
 - [Rust and Cargo](https://www.rust-lang.org/tools/install) (required by Hugging Face’s tokenizer)
 
-## Initial Setup
-### Directory Structure
+### Initial Setup
+#### Directory Structure
 Create directories for TVM Unity (used by MLC LLM), MLC LLM, and LLVM (used by TVM Unity compiler) in your `.llm` directory
 
 ```sh
 mkdir -p $HOME/.llm/{tvm-unity,mlc-llm,llvm-tvm}
 ```
+{: .nolineno }
 
 Your directory structure should look similar to this
 
@@ -252,14 +263,15 @@ $HOME/
 └── ...
 ```
 
-### Rust and Cargo
-1. Download `rustup` and install Rust
+#### Rust and Cargo
+Download `rustup` and install Rust
 
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+{: .nolineno }
 
-2. Once you are prompted to specify your installation method, select `2) Customize installation` by entering `2` in the CLI
+Once you are prompted to specify your installation method, select `2) Customize installation` by entering `2` in the CLI
 
 ![install_rustup.png](../assets/obsidian/install_rustup.png)
 
@@ -269,7 +281,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 3) Cancel installation
 ```
 
-3. Choose the following installation options:
+Choose the following installation options:
 	- **Default host triple?**: Press <kbd>Enter</kbd> (i.e. default)
 	- **Default toolchain?**: Press <kbd>Enter</kbd> (i.e. default)
 	- **Profile (which tools and data to install)?**: `complete`
@@ -281,9 +293,7 @@ You may simply press the Enter key to leave unchanged.
 
 Default host triple? [aarch64-apple-darwin]
 
-
 Default toolchain? (stable/beta/nightly/none) [stable]
-
 
 Profile (which tools and data to install)? (minimal/default/complete) [default]
 complete
@@ -292,7 +302,7 @@ Modify PATH variable? (Y/n)
 Y
 ```
 
-4. Once you see something similar to this, enter `1` to proceed with the customized installation options
+Once you see something similar to this, enter `1` to proceed with the customized installation options
 
 ```plaintext
 Current installation options:
@@ -306,34 +316,38 @@ Current installation options:
 3) Cancel installation
 ```
 
-5. After it's installed, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
+After it's installed, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
 Cargo's bin directory (`$HOME/.cargo/bin`)
 
 ```sh
 . "$HOME/.cargo/env"
 ```
+{: .nolineno }
 
-## Build and Install
-### LLVM
-1. Create Conda environment with build dependencies
+### Build and Install
+#### LLVM
+Create Conda environment with build dependencies
 
 ```sh
 conda create -n tvm-build-venv -c conda-forge "cmake>=3.24" git python=3.11 cython
 ```
+{: .nolineno }
 
-2. Activate build environment
+Activate build environment
 
 ```sh
 conda activate tvm-build-venv
 ```
+{: .nolineno }
 
-3. Enter `llvm-tvm`
+Enter `llvm-tvm`
 
 ```sh
 cd $HOME/.llm/llvm-tvm
 ```
+{: .nolineno }
 
-4. Shallowly (saves storage and speed) clone latest stable release (currently `v20.1.3`) from LLVM
+Shallowly (saves storage and speed) clone latest stable release (currently `v20.1.3`) from LLVM
 
 > LLVM version must be at least 15 (i.e. `LLVM >= 15`) in order to work with [TVM Unity](https://llm.mlc.ai/docs/install/tvm.html) compiler
 {: .prompt-info }
@@ -341,40 +355,46 @@ cd $HOME/.llm/llvm-tvm
 ```sh
 git clone --depth 1 --branch llvmorg-20.1.3 https://github.com/llvm/llvm-project.git
 ```
+{: .nolineno }
 
-5. Create `build` and `install` directories for later use
+Create `build` and `install` directories for later use
 
 ```sh
 mkdir build install
 ```
+{: .nolineno }
 
-6. Enter new LLVM directory
+Enter new LLVM directory
 
 ```sh
 cd llvm-project
 ```
+{: .nolineno }
 
-7. Filter user branches from git fetch/pull
+Filter user branches from git fetch/pull
 
 ```sh
 git config --add remote.origin.fetch '^refs/heads/users/*'
 git config --add remote.origin.fetch '^refs/heads/revert-*'
 ```
+{: .nolineno }
 
-8. Export `$PATH` and `$SDKROOT`
+Export `$PATH` and `$SDKROOT`
 
 ```sh
 export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH
 export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 ```
+{: .nolineno }
 
 > Optional: Add environment variables to your `.bashrc` (or other shell startup file)
 > ```sh
 > echo -e 'export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH\nexport SDKROOT=$(xcrun --sdk macosx --show-sdk-path)' >> $HOME/.bashrc
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
-9. Configure and build LLVM, Clang, and LLD (i.e. LLVM linker)
+Configure and build LLVM, Clang, and LLD (i.e. LLVM linker)
 
 ```sh
 cmake -S llvm -B ../build -G Ninja \
@@ -409,43 +429,51 @@ cmake -S llvm -B ../build -G Ninja \
 > ```sh
 > clang -mcpu=help
 > ```
+> {: .nolineno }
 > ![compiler_flags_list.png](../assets/obsidian/compiler_flags_list.png)
 > 
 > List valid CMake flags with `ccmake`
 > ```sh
 > ccmake .
 > ```
+> {: .nolineno }
 > ![ccmake_list.png](../assets/obsidian/ccmake_list.png)
 >
 > List valid CMake flags with `cmake`
 > ```sh
 > cmake -L
 > ```
+> {: .nolineno }
 > ![cmake_list_flags.png](../assets/obsidian/cmake_list_flags.png)
 {: .prompt-tip }
 
 ![cmake_llvm.png](../assets/obsidian/cmake_llvm.png)
 
-10. Go to `build`
+Go to `build`
 
 ```sh
 cd ../build
 ```
+{: .nolineno }
 
-11. Run `ninja`
+Run `ninja`
 
 ```sh
 ninja
 ```
+{: .nolineno }
 
 > Use `-v` flag to see which command is running:
 > ```sh
 > ninja -v
 > ```
+> {: .nolineno }
+> 
 > Specify `ninja` as your default generator:
 > ```sh
 > export CMAKE_GENERATOR=Ninja
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
 > The last part of a `ninja` build might feel slowest and/or longest, though this is due to:
@@ -455,15 +483,16 @@ ninja
 > - **Perceived slowness**: Early on, ninja might do 500 steps in 30 seconds. Near the end, it might do just 10 steps in 30 seconds. So it feels slower, even though it’s just hitting the heavy stuff.
 {: .prompt-info }
 
-12. Install via `ninja`
+Install via `ninja`
 
 ```sh
 ninja install
 ```
+{: .nolineno }
 
 ![build_llvm.png](../assets/obsidian/build_llvm.png)
 
-#### Validate LLVM Installation
+##### Validate LLVM Installation
 Confirm that LLVM was compiled with support for Arm(R)-based targets
 
 ```sh
@@ -471,6 +500,7 @@ $HOME/.llm/llvm-tvm/install/bin/llvm-config --version
 $HOME/.llm/llvm-tvm/install/bin/llvm-config --targets-built
 $HOME/.llm/llvm-tvm/install/bin/llvm-config --host-target
 ```
+{: .nolineno }
 
 Should output something similar to:
 
@@ -480,38 +510,43 @@ AArch64
 arm64-apple-darwin24.4.0
 ```
 
-### TVM Unity Compiler
+#### TVM Unity Compiler
 > Make sure `tvm-build-venv` Conda environment is activated:
 > ```sh
 > conda activate tvm-build-venv
 > ```
+> {: .nolineno }
 {: .prompt-info }
 
-1. Enter `tvm-unity`
+Enter `tvm-unity`
 
 ```sh
 cd $HOME/.llm/tvm-unity
 ```
+{: .nolineno }
 
-2. Clone TVM Unity from GitHub
+Clone TVM Unity from GitHub
 
 ```sh
 git clone --recursive https://github.com/mlc-ai/relax.git tvm-unity
 ```
+{: .nolineno }
 
-3. Create `build` and `install` directories for later use
+Create `build` and `install` directories for later use
 
 ```sh
 mkdir build install
 ```
+{: .nolineno }
 
-4. Enter `build`
+Enter `build`
 
 ```sh
 cd build
 ```
+{: .nolineno }
 
-5. Ensure TVM uses custom LLVM (so it uses the right one when you `import tvm` in Python)
+Ensure TVM uses custom LLVM (so it uses the right one when you `import tvm` in Python)
 
 ```sh
 export LLVM_HOME=$HOME/.llm/llvm-tvm
@@ -522,14 +557,16 @@ export TVM_LIBRARY_PATH=$TVM_HOME/build
 export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
 export TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)
 ```
+{: .nolineno }
 
 > Optional: Add environment variables to your `.bashrc` (or other shell startup file)
 > ```sh
 > echo -e 'export LLVM_HOME=$HOME/.llm/llvm-tvm\nexport LLVM_CONFIG=$LLVM_HOME/install/bin/llvm-config\nexport TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH\nexport TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)' >> $HOME/.bashrc
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
-6. Configure build
+Configure build
   
 ```sh
 cmake ../tvm-unity -G Ninja \
@@ -558,261 +595,321 @@ cmake ../tvm-unity -G Ninja \
 > If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
 {: .prompt-tip }
 
-7. Build
+Build
 
 ```sh
 cmake --build . --parallel $(sysctl -n hw.logicalcpu)
 ```
+{: .nolineno }
 
 > If you don’t need to reuse any previous build data (e.g. `ccache` or incremental builds), include `--clean-first` flag to force clean a build (might help with memory)
 > ```sh
 > cmake --build . --clean-first --parallel $(sysctl -n hw.logicalcpu)
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
 ![cmake_tvm2.png](../assets/obsidian/cmake_tvm2.png)
 
-8. If successful, you should have both `libtvm` and `libtvm_runtime` within `$HOME/.llm/tvm-unity/build` directory
+If successful, you should have both `libtvm` and `libtvm_runtime` within `$HOME/.llm/tvm-unity/build` directory
 
 ![built_tvm_dir.png](../assets/obsidian/built_tvm_dir.png)
 
-9. Install built binaries into `install` directory
+Install built binaries into `install` directory
 
 ```sh
 cmake --build . --target install
 ```
+{: .nolineno }
 
 ![cmake_tvm3.png](../assets/obsidian/cmake_tvm3.png)
 
-10. Set environment variables
+Set environment variables
 
 ```sh
 export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH
 ```
+{: .nolineno }
 
 > Optional: Add environment variables to your `.bashrc` (or other shell startup file)
 > ```sh
 > echo -e 'export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH' >> $HOME/.bashrc
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
-11. Go to `python` directory (fullpath: `$HOME/.llm/tvm-unity/tvm-unity/python`)
+Go to `python` directory (fullpath: `$HOME/.llm/tvm-unity/tvm-unity/python`)
 
 ```sh
 cd ../tvm-unity/python
 ```
+{: .nolineno }
 
-12. Install Python bindings
+Install Python bindings
 
 ```sh
 pip install -e .
 ```
+{: .nolineno }
 
 > Make sure `tvm-build-venv` Conda environment is activated before running `pip install -e .` or doing a CMake build
 > ```sh
 > conda activate tvm-build-venv
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
 ![tvm_python.png](../assets/obsidian/tvm_python.png)
 
-#### Validate TVM Installation
-Using a compiler infrastructure with multiple language bindings could be error-prone. Therefore, it is highly recommended to validate TVM Unity installation before use.
+##### Validate TVM Installation
+> Using a compiler infrastructure with multiple language bindings could be error-prone. Therefore, it is highly recommended to validate TVM Unity installation before use.
+{: .prompt-info }
 
-1. **Locate TVM Python package.** The following command can help confirm that TVM is properly installed as a python package and provide the location of the TVM python package:
+Locate TVM Python package
 
 ```python
->>> python -c "import tvm; print(tvm.__file__)"
+python -c "import tvm; print(tvm.__file__)"
+```
+{: .nolineno }
+
+Example output:
+
+```plaintext
 /some-path/lib/python3.11/site-packages/tvm/__init__.py
 ```
 
-2. **Confirm which TVM library is used.** When maintaining multiple build or installation of TVM, it becomes important to double check if the python package is using the proper `libtvm`:
+Confirm which TVM library is used by confirming python package is using the proper `libtvm`
 
 ```python
->>> python -c "import tvm; print(tvm._ffi.base._LIB)"
+python -c "import tvm; print(tvm._ffi.base._LIB)"
+```
+{: .nolineno }
+
+Example output:
+```plaintext
 <CDLL '/some-path/lib/python3.11/site-packages/tvm/libtvm.dylib', handle 95ada510 at 0x1030e4e50>
 ```
 
-3. **Reflect TVM build option.** Sometimes when downstream application fails, it could likely be some mistakes with a wrong TVM commit, or wrong build flags. To find it out, the following commands will be helpful:
+> Wrong TVM commit or build flags may cause downstream applications.
+> 
+> Troubleshoot with this command:
+> ```python
+> python -c "import tvm; print('\n'.join(f'{k}: {v}' for k, v in tvm.support.libinfo().items()))"
+> ```
+> {: .nolineno }
+> 
+> Example output, where `GIT_COMMIT_HASH` is the exact commit of the TVM build (found at `https://github.com/mlc-ai/relax/commit/$GIT_COMMIT_HASH`):
+> ```plaintext
+> ... # Omitted less relevant options
+> GIT_COMMIT_HASH: 731c671a4f7a4e890011524b440c367ff4d98e14
+> HIDE_PRIVATE_SYMBOLS: ON
+> USE_LLVM: /Users/kiran/.llm/llvm-tvm/install/bin/llvm-config --ignore-libllvm --link-static
+> LLVM_VERSION: 20.1.3
+> USE_VULKAN: OFF
+> USE_CUDA: OFF
+> CUDA_VERSION: NOT-FOUND
+> USE_OPENCL: OFF
+> USE_METAL: ON
+> USE_ROCM: OFF
+> ```
+> 
+> To check if TVM detects your device:
+> ```python
+> python -c "import tvm; print(tvm.metal().exist)"
+> ```
+> {: .nolineno }
+> 
+> Expected output:
+> ```plaintext
+> True
+> ```
+{: .prompt-tip }
 
-```python
->>> python -c "import tvm; print('\n'.join(f'{k}: {v}' for k, v in tvm.support.libinfo().items()))"
-... # Omitted less relevant options
-GIT_COMMIT_HASH: 731c671a4f7a4e890011524b440c367ff4d98e14
-HIDE_PRIVATE_SYMBOLS: ON
-USE_LLVM: /Users/kiran/.llm/llvm-tvm/install/bin/llvm-config --ignore-libllvm --link-static
-LLVM_VERSION: 20.1.3
-USE_VULKAN: OFF
-USE_CUDA: OFF
-CUDA_VERSION: NOT-FOUND
-USE_OPENCL: OFF
-USE_METAL: ON
-USE_ROCM: OFF
-```
-
-> `GIT_COMMIT_HASH` indicates the exact commit of the TVM build, and it can be found on GitHub via `https://github.com/mlc-ai/relax/commit/$GIT_COMMIT_HASH`
+> Please note that the commands above verify the presence of an actual device on the local machine for the TVM runtime (not the compiler) to execute properly. However, TVM compiler can perform compilation tasks without requiring a physical device. As long as the necessary toolchain (e.g. NVCC) is available, TVM supports cross-compilation even in the absence of an actual device.
 {: .prompt-info }
 
-4. **Check device detection.** Sometimes it could be helpful to understand if TVM could detect your device at all:
+#### MLC LLM
+> Frontend for text generation.
+{: .prompt-tip }
 
-```python
->>> python -c "import tvm; print(tvm.metal().exist)"
-True
-```
-
-Please note that the commands above verify the presence of an actual device on the local machine for the TVM runtime (not the compiler) to execute properly. However, TVM compiler can perform compilation tasks without requiring a physical device. As long as the necessary toolchain (e.g. NVCC) is available, TVM supports cross-compilation even in the absence of an actual device.
-
-### MLC LLM
-(Frontend for text generation)
-
-1. Create the conda environment with build dependencies
+Create the conda environment with build dependencies
 
 ```sh
 conda create -n mlc-chat-venv -c conda-forge "cmake>=3.24" rust git python=3.11
 ```
+{: .nolineno }
 
-2. Enter build environment
+Enter build environment
 
 ```sh
 conda activate mlc-chat-venv
 ```
+{: .nolineno }
 
-3. Enter `mlc-llm`
+Enter `mlc-llm`
 
 ```sh
 cd $HOME/.llm/mlc-llm
 ```
+{: .nolineno }
 
-4. Clone and enter MLC LLM
+Clone and enter MLC LLM
 
 ```sh
 git clone --recursive https://github.com/mlc-ai/mlc-llm.git && cd mlc-llm
 ```
+{: .nolineno }
 
-5. Create and enter `build` directory
+Create and enter `build` directory
 
 ```sh
 mkdir build && cd build
 ```
+{: .nolineno }
 
-6. Generate build config
+Generate build config
 
 ```sh
 python ../cmake/gen_cmake_config.py
 ```
+{: .nolineno }
 
-7. Patch `msgpack/CMakeLists.txt` and `sentencepiece/CMakeLists.txt` files by replacing `cmake_minimum_required(VERSION 2.8)` with `cmake_minimum_required(VERSION 3.5...3.28)`
+> Patch `msgpack/CMakeLists.txt` and `sentencepiece/CMakeLists.txt` files by replacing `cmake_minimum_required(VERSION 2.8)` with `cmake_minimum_required(VERSION 3.5...3.28)`
+{: .prompt-info }
 
-8. Build MLC LLM libraries
+Build MLC LLM libraries
 
 ```sh
 cmake .. -DCMAKE_PREFIX_PATH=$HOME/.llm/tvm-unity/install
 cmake --build . --parallel $(sysctl -n hw.logicalcpu)
 ```
+{: .nolineno }
 
-9. Install to Python
+Install to Python
 
 ```sh
 cd ../python && pip install -e .
 ```
+{: .nolineno }
 
-10. Install packages used by TVM Unity that might be missing
+Install potentially missing packages used by TVM Unity
 
 ```sh
 pip install cloudpickle psutil scipy tornado
 ```
+{: .nolineno }
 
-11. Export environment variables
+Export environment variables
 
 ```sh
 export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm
 export PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH
 ```
+{: .nolineno }
 
 > Optional: Add environment variables to your `.bashrc` (or other shell startup file)
 > ```sh
 > echo -e 'export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm\nexport PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH' >> $HOME/.bashrc
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
-12. Make sure to include TVM too
+Make sure to include TVM too
 
 ```sh
 cd $HOME/.llm/tvm-unity/tvm-unity/python
 ```
+{: .nolineno }
 
-13. Set environment variables
+Set environment variables
 
 ```sh
 export TVM_HOME=$HOME/.llm/tvm-unity
 export TVM_LIBRARY_PATH=$TVM_HOME/build
 export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
 ```
+{: .nolineno }
 
 > Optional: Add environment variables to your `.bashrc` (or other shell startup file)
 > ```sh
 > echo -e 'export TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH' >> $HOME/.bashrc
 > ```
+> {: .nolineno }
 {: .prompt-tip }
 
-14. Install `tvm` as Python package to `mlc-chat-venv`
+Install `tvm` as Python package to `mlc-chat-venv`
 
 ```sh
 pip install -e .
 ```
+{: .nolineno }
 
-#### Validate MLC LLM Installation
+##### Validate MLC LLM Installation
+Output should include `libmlc_llm.so` and `libtvm_runtime.so`
+
 ```sh
-# expected to see `libmlc_llm.so` and `libtvm_runtime.so`
 ls -l ../build
+```
+{: .nolineno }
 
-# expected to see help message
+Output should display help message
+
+```sh
 python -m mlc_llm chat -h
+```
+{: .nolineno }
 
-# expected to see something similar to `<module 'mlc_llm' from '$HOME/.llm/mlc-llm/mlc-llm/python/mlc_llm/__init__.py'>`
+ Output should display something similar to `<module 'mlc_llm' from '$HOME/.llm/mlc-llm/mlc-llm/python/mlc_llm/__init__.py'>`
+ 
+```sh
 python -c "import mlc_llm; print(mlc_llm)"
 ```
+{: .nolineno }
 
-### Models
+#### Models
 The following are required in order to run a model with MLC LLM in any platform:
 
 - **Model weights**: Model converted to MLC format (e.g. [RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC](https://huggingface.co/mlc-ai/RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC/tree/main))
 - **Model library**: Contains inference logic
 
-#### Download Weights
-1. Enter directory where models will be saved
+##### Download Weights
+Enter directory where models will be saved
 
 ```sh
 cd $HOME/.llm/models
 ```
+{: .nolineno }
 
-2. Initialize git LFS in order to be able to download large files (in this case, model weights)
+Initialize git LFS in order to be able to download large files (in this case, model weights)
 
 ```sh
 git lfs install
 ```
+{: .nolineno }
 
-3. Download model weights from HF, where `<HF_USER>` and `<HF_MODEL>` are the username and model's name on HuggingFace, respectively
+Download model weights from HF, where `<HF_USER>` and `<HF_MODEL>` are the username and model's name on HuggingFace, respectively
 
 ```sh
 git clone https://huggingface.co/<HF_USER>/<HF_MODEL>
 ```
+{: .nolineno }
 
 E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
 
-#### Model Compilation
+##### Model Compilation
 **Model compilation** optimizes the model inference for a given platform, allowing users bring their own new model architecture, use different quantization modes, and customize the overall model optimization flow. It's split into 3 main steps:
 1. Convert weights
 2. Generate `mlc-chat-config.json`
 3. Compile model
 
-##### Convert Weights
+###### Convert Weights
 Models need to be converted to MLC format before they can be used in MLC LLM.
 
 > Make sure you're in the directory where models will be saved
 > ```sh
 > cd $HOME/.llm/models
 > ```
+> {: .nolineno }
 {: .prompt-info }
 
 The general pattern for the weight conversion command (i.e. `mlc_llm convert_weight`):
@@ -826,6 +923,7 @@ mlc_llm convert_weight CONFIG \
 [--source-format SOURCE_FORMAT] \
 --output OUTPUT
 ```
+{: .nolineno }
 
 > `CONFIG` is a positional argument
 > Arguments wrapped with `[ ]` are optional
@@ -872,8 +970,9 @@ mlc_llm convert_weight RedPajama-INCITE-Chat-3B-v1 \
 --quantization q4f16_1 \
 -o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
 ```
+{: .nolineno }
 
-##### Generate `mlc-chat-config.json`
+###### Generate `mlc-chat-config.json`
 A **model library**, specified in `mlc-chat-config.json` and generated by `gen_config`, contains:
  - The model architecture (e.g. `llama-2`, `gpt-neox`)
  - Quantization (e.g. `q4f16_1`, `q0f32`)
@@ -884,9 +983,10 @@ A **model library**, specified in `mlc-chat-config.json` and generated by `gen_c
 > ```sh
 > cd $HOME/.llm/models
 > ```
+> {: .nolineno }
 {: .prompt-info }
 
-1. Generate `mlc-chat-config.json` and process tokenizers
+Generate `mlc-chat-config.json` and process tokenizers
 
 ```sh
 mlc_llm gen_config <HF_MODEL> \
@@ -894,6 +994,7 @@ mlc_llm gen_config <HF_MODEL> \
 --conv-template redpajama_chat \
 -o <CONVERTED_HF_MODEL>
 ```
+{: .nolineno }
 
 For example:
 
@@ -903,6 +1004,7 @@ mlc_llm gen_config $HOME/.llm/models/pygmalion-2-13b \
 --quantization q4f16_1 \
 --conv-template redpajama_chat
 ```
+{: .nolineno }
 
 ```sh
 mlc_llm gen_config RedPajama-INCITE-Chat-3B-v1 \
@@ -910,6 +1012,7 @@ mlc_llm gen_config RedPajama-INCITE-Chat-3B-v1 \
 --conv-template redpajama_chat \
 -o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
 ```
+{: .nolineno }
 
 > See [Compile Command Specification](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-command-specification) for specification of `gen_config`
 > 
@@ -920,11 +1023,12 @@ mlc_llm gen_config RedPajama-INCITE-Chat-3B-v1 \
 > [conversation_template](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/conversation_template) directory contains a full list of conversation templates that MLC provides. If the model you are adding requires a new conversation template, you would need to add your own. Follow [this PR](https://github.com/mlc-ai/mlc-llm/pull/2163) as an example. However, adding your own template would require you [build mlc_llm from source](https://llm.mlc.ai/docs/install/mlc_llm.html#mlcchat-build-from-source) in order for it to be recognized by the runtime.
 {: .prompt-info }
 
-2. Confirm you have the right files
+Confirm you have the right files
 
 ```sh
 ls $HOME/.llm/models/<HF_MODEL>
 ```
+{: .nolineno }
 
 The output should look similar to
 
@@ -938,26 +1042,28 @@ tokenizer.json               # Tokenizer files
 tokenizer_config.json
 ```
 
-##### Compile Model
+###### Compile Model
 In many cases you do not need to explicitly call compile. If you are using the Python API, you can skip specifying `model_lib` and the system will JIT compile the library.
 
 > Make sure you're in the directory where models will be saved
 > ```sh
 > cd $HOME/.llm/models
 > ```
+> {: .nolineno }
 {: .prompt-info }
 
-1. Complete instructions in [LLVM](2025-04-23-run-self-compiled-llms-locally-mbp.md#llvm), [TVM Unity Compiler](2025-04-23-run-self-compiled-llms-locally-mbp.md#tvm-unity-compiler), and [Usage](2025-04-23-run-self-compiled-llms-locally-mbp.md#usage) before continuing
+Complete instructions in [LLVM](2025-04-23-run-self-compiled-llms-locally-mbp.md#llvm), [TVM Unity Compiler](2025-04-23-run-self-compiled-llms-locally-mbp.md#tvm-unity-compiler), and [Usage](2025-04-23-run-self-compiled-llms-locally-mbp.md#usage) before continuing
 
-2. Convert model weights, generate `mlc-chat-config.json`, and process tokenizers by following instructions in [Download Weights](2025-04-23-run-self-compiled-llms-locally-mbp.md#download-weights), [Convert Weights](2025-04-23-run-self-compiled-llms-locally-mbp.md#convert-weights), and [[#Generate `mlc-chat-config.json`]] respectively
+Convert model weights, generate `mlc-chat-config.json`, and process tokenizers by following instructions in [Download Weights](2025-04-23-run-self-compiled-llms-locally-mbp.md#download-weights), [Convert Weights](2025-04-23-run-self-compiled-llms-locally-mbp.md#convert-weights), and [[#Generate `mlc-chat-config.json`]] respectively
 
-3. Compile model library with specification in `mlc-chat-config.json`
+Compile model library with specification in `mlc-chat-config.json`
 
 ```sh
 mlc_llm compile <CONVERTED_HF_MODEL>/mlc-chat-config.json \
 --device metal \
 -o libs/<CONVERTED_HF_MODEL>-metal.so
 ```
+{: .nolineno }
 
 For example:
 
@@ -966,106 +1072,120 @@ mlc_llm compile RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC/mlc-chat-config.json \
 --device metal \
 -o libs/RedPajama-INCITE-Chat-3B-v1-q4f16_1-metal.so
 ```
+{: .nolineno }
 
-#### Optional: Upload Weights to HuggingFace
-1. Create a repository on Hugging Face
+##### Optional: Upload Weights to HuggingFace
+Create a repository on Hugging Face
 
-2. Enter directory where models will be saved
+Enter directory where models will be saved
 
 ```sh
 cd $HOME/.llm/models
 ```
+{: .nolineno }
 
-3. Initialize git LFS in order to be able to download large files (in this case, model weights)
+Initialize git LFS in order to be able to download large files (in this case, model weights)
 
 ```sh
 git lfs install
 ```
+{: .nolineno }
 
-4. Download model weights from HF, where `<MY_HF_USERNAME>` and `<MY_HF_MODEL_REPO>` are your Hugging Face username and model's repo name on HuggingFace, respectively
+Download model weights from HF, where `<MY_HF_USERNAME>` and `<MY_HF_MODEL_REPO>` are your Hugging Face username and model's repo name on HuggingFace, respectively
 
 ```sh
 git clone https://huggingface.co/<MY_HF_USERNAME>/<MY_HF_MODEL_REPO>
 ```
+{: .nolineno }
 
 E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
 
-5. Enter newly cloned weights directory
+Enter newly cloned weights directory
 
 ```sh
 cd <MY_HF_MODEL_REPO>
 ```
+{: .nolineno }
 
-6. Copy your converted model weights into the Hugging Face repo
+Copy your converted model weights into the Hugging Face repo
 
 ```sh
 cp $HOME/.llm/models/<CONVERTED_HF_MODEL>/* .
 ```
+{: .nolineno }
 
 E.g. `$HOME/.llm/models/RedPajama-INCITE-Instruct-3B-v1-q4f16_1-MLC/*`
 
-7. Stage all changes
+Stage all changes
 
 ```sh
 git add .
 ```
+{: .nolineno }
 
-8. Commit staged changes
+Commit staged changes
 
 ```sh
 git commit -m "Add `<CONVERTED_HF_MODEL>` model weights"
 ```
+{: .nolineno }
 
-9. Push commit(s) to remote repo (i.e. HuggingFace repo)
+Push commit(s) to remote repo (i.e. HuggingFace repo)
 
 ```sh
 git push origin main
 ```
+{: .nolineno }
 
 This would result in something like [RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC](https://huggingface.co/mlc-ai/RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC/tree/main), but for **Instruct** instead of **Chat**
 
-10. You can now use the existing MLC tools such as chat/serve/package with the converted weights
+You can now use the existing MLC tools such as chat/serve/package with the converted weights
 
 ```sh
 mlc_llm chat HF://<MY_HF_USERNAME>/<MY_HF_MODEL_REPO>
 ```
+{: .nolineno }
 
-#### Examples
-##### Llama-2-7B
-1. [Request access to the Llama-2 weights](https://huggingface.co/meta-llama) from Meta
+##### Examples
+###### Llama-2-7B
+[Request access to the Llama-2 weights](https://huggingface.co/meta-llama) from Meta
 
-2. After granted access, create directory `dist/models`
+After granted access, create directory `dist/models`
 
 ```sh
 mkdir -p dist/models && cd dist/models
 ```
+{: .nolineno }
 
-3. Download model to the directory
+Download model to the directory
 
 ```sh
 git lfs install
 git clone https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
 cd ../..
 ```
+{: .nolineno }
 
-4. Convert HF weights into MLC-compatible weights
+Convert HF weights into MLC-compatible weights
 
 ```sh
 mlc_llm convert_weight models/Llama-2-7b-chat-hf \
 --quantization q4f16_1 \
 -o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
 ```
+{: .nolineno }
 
 > All platforms can share the same compiled/quantized weights
 {: .prompt-info }
 
-5. Create output directory for compiled model library
+Create output directory for compiled model library
 
 ```sh
 mkdir -p dist/libs
 ```
+{: .nolineno }
 
-6. Generate `mlc-chat-config.json` and process tokenizers
+Generate `mlc-chat-config.json` and process tokenizers
 
 ```sh
 mlc_llm gen_config ./dist/models/Llama-2-7b-chat-hf \
@@ -1073,38 +1193,41 @@ mlc_llm gen_config ./dist/models/Llama-2-7b-chat-hf \
 --conv-template llama-2 \
 -o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
 ```
+{: .nolineno }
 
-7. Compile model library with specification in `mlc-chat-config.json`
+Compile model library with specification in `mlc-chat-config.json`
 
 ```sh
 mlc_llm compile ./dist/Llama-2-7b-chat-hf-q4f16_1-MLC/mlc-chat-config.json \
 --device metal \
 -o dist/libs/Llama-2-7b-chat-hf-q4f16_1-metal.so
 ```
+{: .nolineno }
 
 > Using 3-bit quantization usually can be overly aggressive and only works for limited settings. If you encounter issues where the compiled model does not perform as expected, consider utilizing a higher number of bits for quantization (e.g., 4-bit quantization).
 {: .prompt-tip }
 
-##### Mistral-7B-Instruct-v0.2
-##### Other Models
+###### Mistral-7B-Instruct-v0.2
+###### Other Models
 
-##### Sample List
+###### Sample List
 - [MythoMax-L2](https://huggingface.co/Gryphe/MythoMax-L2-13b)
 - [Chronos Hermes](https://huggingface.co/Austism/chronos-hermes-13b-v2)
 - [Nous Hermes 2 (uncensored)](https://huggingface.co/NousResearch/Nous-Hermes-2-Mistral-7B-DPO)
 - [Pygmalion 2](https://huggingface.co/PygmalionAI/pygmalion-2-13b)
 - [Llama-2-13B-Unfiltered](https://huggingface.co/cognitivecomputations/WizardLM-1.0-Uncensored-Llama2-13b)
 
-## Usage
+### Usage
 > Make sure `mlc-chat-venv` Conda environment is activated:
 > ```sh
 > conda activate mlc-chat-venv
 > ```
+> {: .nolineno }
 {: .prompt-info }
 
-### MLC Python API
-#### Run `MLCEngine`
-##### Stream Response
+#### MLC Python API
+##### Run `MLCEngine`
+###### Stream Response
 
 ```python
 from mlc_llm import MLCEngine
@@ -1137,14 +1260,8 @@ for response in engine.chat.completions.create(
 engine.terminate()
 ```
 
-Example output
-
-```plaintext
-
-```
-
-##### Optional: Tensor Parallelism
-If you want to enable tensor parallelism to run LLMs on multiple GPUs, please specify argument `model_config_overrides` in MLCEngine constructor. E.g.
+###### Optional: Tensor Parallelism
+Specify arg `model_config_overrides` in `MLCEngine` constructor to enable tensor parallelism to run LLMs on multiple GPUs.
 
 ```python
 from mlc_llm import MLCEngine
@@ -1157,8 +1274,8 @@ engine = MLCEngine(
 )
 ```
 
-#### Run `AsyncMLCEngine`
-##### Stream Response
+##### Run `AsyncMLCEngine`
+###### Stream Response
 ```python
 import asyncio
 from typing import Dict
@@ -1200,7 +1317,7 @@ async def test_completion():
 asyncio.run(test_completion())
 ```
 
-##### Non-Stream Response
+###### Non-Stream Response
 ```python
 response = await engine.chat.completions.create(
   messages=[{"role": "user", "content": "What is the meaning of life?"}],
@@ -1210,8 +1327,8 @@ response = await engine.chat.completions.create(
 print(response)
 ```
 
-##### Optional: Tensor Parallelism
-If you want to enable tensor parallelism to run LLMs on multiple GPUs, please specify argument `model_config_overrides` in AsyncMLCEngine constructor. E.g.:
+###### Optional: Tensor Parallelism
+Specify arg `model_config_overrides` in `AsyncMLCEngine` constructor to enable tensor parallelism to run LLMs on multiple GPUs
 
 ```python
 from mlc_llm import AsyncMLCEngine
@@ -1224,7 +1341,7 @@ engine = AsyncMLCEngine(
 )
 ```
 
-#### Engine Mode
+##### Engine Mode
 To ease the engine configuration, the constructors of [`mlc_llm.MLCEngine`](https://llm.mlc.ai/docs/deploy/python_engine.html#mlc_llm.MLCEngine "mlc_llm.MLCEngine") and [`mlc_llm.AsyncMLCEngine`](https://llm.mlc.ai/docs/deploy/python_engine.html#mlc_llm.AsyncMLCEngine "mlc_llm.AsyncMLCEngine") have an optional argument `mode`, which falls into one of the three options `"local"`, `"interactive"` or `"server"`. The default mode is `"local"`.
 
 Each mode denotes a pre-defined configuration of the engine to satisfy different use cases. The choice of the mode controls the request concurrency of the engine, as well as engine’s KV cache token capacity (or in other words, the maximum number of tokens that the engine’s KV cache can hold), and further affects the GPU memory usage of the engine.
@@ -1235,14 +1352,15 @@ Each mode denotes a pre-defined configuration of the engine to satisfy different
 
 **For system benchmark, please select mode** `"server"`. Please refer to [API Reference](https://llm.mlc.ai/docs/deploy/python_engine.html#python-engine-api-reference) for detailed documentation of the engine mode.
 
-### MLC Chat CLI
+#### MLC Chat CLI
 This is the command line tool to run MLC-compiled LLMs out of the box interactively.
 
-1. Here's the general command pattern, where where `MODEL` is the model folder after compiling with [MLC-LLM build process](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-model-libraries)
+Here's the general command pattern, where where `MODEL` is the model folder after compiling with [MLC-LLM build process](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-model-libraries)
 
 ```sh
 mlc_llm chat MODEL [--model-lib PATH-TO-MODEL-LIB] [--device DEVICE] [--overrides OVERRIDES]
 ```
+{: .nolineno }
 
 `MODEL`
 	This is required. Options:
@@ -1267,7 +1385,7 @@ mlc_llm chat MODEL [--model-lib PATH-TO-MODEL-LIB] [--device DEVICE] [--override
 		- `tensor_parallel_shards`
 	The overrides could be explicitly specified via details knobs, e.g. `-–overrides "context_window_size=1024;prefill_chunk_size=128"`
 
-2. Once chat CLI's ready, use the following special commands to interact with the model:
+Once chat CLI's ready, use the following special commands to interact with the model:
 
 `/help`                                Print special commands
 `/exit`                                Quit CLI
@@ -1283,22 +1401,25 @@ E.g. Command format: `mlc_llm chat HF://<HF_USER>/<HF_MODEL>`. To use the model 
 ```sh
 mlc_llm chat HF://mlc-ai/Llama-3-8B-Instruct-q4f16_1-MLC
 ```
+{: .nolineno }
 
 `mlc_llm chat $HOME/.llm/models/pygmalion-2-13b-q4f16_1`
 
-#### Optional: Tensor Parallelism
+##### Optional: Tensor Parallelism
 If you want to enable tensor parallelism to run LLMs on multiple GPUs, please specify argument `--overrides "tensor_parallel_shards=$NGPU"`. For example:
 
 ```sh
 mlc_llm chat HF://mlc-ai/Llama-3-8B-Instruct-q4f16_1-MLC --overrides "tensor_parallel_shards=2"
 ```
+{: .nolineno }
 
-### REST Server
+#### REST Server
 For the third example, we launch a REST server to serve the 4-bit quantized Llama-3 model for OpenAI chat completion requests. The server can be launched in command line with
 
 ```sh
 mlc_llm serve HF://mlc-ai/Llama-3-8B-Instruct-q4f16_1-MLC
 ```
+{: .nolineno }
 
 The server is hooked at `http://127.0.0.1:8000` by default, and you can use `--host` and `--port` to set a different host and port. When the server is ready (showing `INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)`), we can open a new shell and send a cURL request via the following command:
 
@@ -1313,23 +1434,25 @@ curl -X POST \
   }' \
   http://127.0.0.1:8000/v1/chat/completions
 ```
+{: .nolineno }
 
 The server will process this request and send back the response.
 
-#### Stream Response
+##### Stream Response
 Similar to [Python API](https://llm.mlc.ai/docs/get_started/introduction.html#introduction-to-mlc-llm-python-api), you can pass argument `"stream": true` to request for stream responses.
 
-#### Optional: Tensor Parallelism
+##### Optional: Tensor Parallelism
 If you want to enable tensor parallelism to run LLMs on multiple GPUs, please specify argument `--overrides "tensor_parallel_shards=$NGPU"`. E.g.:
 
 ```sh
 mlc_llm serve HF://mlc-ai/Llama-3-8B-Instruct-q4f16_1-MLC --overrides "tensor_parallel_shards=2"
 ```
+{: .nolineno }
 
-### IDE Integration
+#### IDE Integration
 MLC LLM has now support for code completion on multiple IDEs. This means you can easily integrate an LLM with coding capabilities with your IDE through the MLC LLM [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api). Here we provide a step-by-step guide on how to do this.
 
-#### Convert Weights
+##### Convert Weights
 To run a model with MLC LLM in any platform, you need to convert your model weights to the MLC format (e.g. [CodeLlama-7b-hf-q4f16_1-MLC](https://huggingface.co/mlc-ai/CodeLlama-7b-hf-q4f16_1-MLC)). You can always refer to [Convert Model Weights](https://llm.mlc.ai/docs/compilation/convert_weights.html#convert-weights-via-mlc) for in-depth details on how to convert your model weights. If you are using your own model weights, i.e., you finetuned the model on your personal codebase, it is important to follow these steps to convert the respective weights properly. However, it is also possible to download precompiled weights from the original models, available in the MLC format. See the full list of all precompiled weights [here](https://huggingface.co/mlc-ai).
 
 ```sh
@@ -1337,8 +1460,9 @@ mlc_llm convert_weight ./dist/models/CodeLlama-7b-hf \
 --quantization q4f16_1 \
 -o ./dist/CodeLlama-7b-hf-q4f16_1-MLC
 ```
+{: .nolineno }
 
-#### Compile Model
+##### Compile Model
 Compiling the model architecture is the crucial step to optimize inference for a given platform. However, compilation relies on multiple settings that will impact the runtime. This configuration is specified inside the `mlc-chat-config.json` file, which can be generated by the `gen_config` command. You can learn more about the `gen_config` command [here](https://llm.mlc.ai/docs/compilation/compile_models.html#generate-mlc-chat-config).
 
 ```sh
@@ -1348,6 +1472,7 @@ mlc_llm gen_config ./dist/models/CodeLlama-7b-hf \
 --conv-template LM \
 -o ./dist/CodeLlama-7b-hf-q4f16_1-MLC
 ```
+{: .nolineno }
 
 > Make sure to set the `--conv-template` flag to `LM`. This template is specifically tailored to perform vanilla LLM completion, generally adopted by code completion models.
 {: .prompt-info }
@@ -1360,11 +1485,12 @@ mlc_llm compile ./dist/CodeLlama-7b-hf-q4f16_1-MLC/mlc-chat-config.json \
 --device metal \
 -o ./dist/libs/CodeLlama-7b-hf-q4f16_1-metal.so
 ```
+{: .nolineno }
 
 > The generated model library can be shared across multiple model variants, as long as the architecture and number of parameters does not change, e.g., same architecture, but different weights (your finetuned model).
 {: .prompt-info }
 
-#### Set Up Inference Entrypoint
+##### Set Up Inference Entrypoint
 You can now locally deploy your compiled model with the MLC serve module. To find more details about the MLC LLM API visit our [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api) page.
 
 ```python
@@ -1372,8 +1498,9 @@ python -m mlc_llm.serve.server \
 --model dist/CodeLlama-7b-hf-q4f16_1-MLC \
 --model-lib ./dist/libs/CodeLlama-7b-hf-q4f16_1-cuda.so
 ```
+{: .nolineno }
 
-#### Configure IDE Extension
+##### Configure IDE Extension
 After deploying the LLM we can easily connect the IDE with the MLC Rest API. In this guide, we will be using the Hugging Face Code Completion extension [llm-ls](https://github.com/huggingface/llm-ls) which has support across multiple IDEs (e.g., [vscode](https://github.com/huggingface/llm-vscode), [intellij](https://github.com/huggingface/llm-intellij) and [nvim](https://github.com/huggingface/llm.nvim)) to connect to an external OpenAI compatible API (i.e., our MLC LLM [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api)).
 
 After installing the extension on your IDE, open the `settings.json` extension configuration file:
@@ -1415,7 +1542,10 @@ After everything is all set, the extension will be ready to use the responses fr
 
 ![Screenshot of code in IDE](https://llm.mlc.ai/docs/_images/code_completion.png)
 
-# Resources
+## MLX
+// TODO
+
+## Resources
 - [Performance tips and tricks: `conda-libmamba-solver`](https://conda.github.io/conda-libmamba-solver/user-guide/performance)
 - [Conda 23.10.0: `libmamba` is now the default solver](https://conda.org/blog/2023-11-06-conda-23-10-0-release/#with-this-23100-release-we-are-changing-the-default-solver-of-conda-to-conda-libmamba-solver--)
 - [`llvm-project` (GitHub)](https://github.com/llvm/llvm-project)

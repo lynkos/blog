@@ -2,6 +2,7 @@
 share: true
 title: How to Play Windows Games and Programs on Mac
 description: Technical guide about running Windows programs + playing Windows games on macOS with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
+pin: true
 date: 2025-03-19 20:59:00 -0400
 filename: 2025-03-19-play-windows-games
 categories:
@@ -243,12 +244,12 @@ I have different versions of Wine on my system which I use for different purpose
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.13).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
-| Prefix                    | Build Name       | Version     | Graphics API(s)                | Description                   |
-| :------------------------ | :--------------- | :---------- | :----------------------------- | :---------------------------- |
-| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7    | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12  | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12  | DXVK                           | DirectX to Vulkan             |
-| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1  | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
+| Prefix                    | Build Name       | Version    | Graphics API(s)                | Description                   |
+| :------------------------ | :--------------- | :--------- | :----------------------------- | :---------------------------- |
+| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7   | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
+| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12 | DXMT                           | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12 | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1 | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
 

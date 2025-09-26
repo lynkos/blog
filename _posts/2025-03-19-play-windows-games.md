@@ -34,26 +34,13 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 > Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid), [Sikarugir](https://github.com/Sikarugir-App/Sikarugir), or [Whisky](https://getwhisky.app) (free, but no longer maintained).
 {: .prompt-important }
 
-**Demo**
-{% gallery %}
-	src="https://pbs.twimg.com/media/GzXyWyTXsAQ4frX?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzXym7OWQAASR0z?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzXyvskXsAMhtV8?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYH2T_WoAABG0A?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYHC4dW0AAqGGH?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYHC3fWgAAbpj7?format=jpg&name=large" alt=""
-	src="https://pbs.twimg.com/media/GzPg6r8XAAAc6lk?format=jpg&name=medium" alt=""
-	src="https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium" alt=""
-	src="https://pbs.twimg.com/media/GzPhoZPWAAA4DqG?format=jpg&name=medium" alt=""
-{% endgallery %}
-
 ## Background
 Key concepts that will continue to show up throughout this writeup.
 
 - Wine
 - Wine bottles/prefixes
 - Wine builds
-- Graphics APIs (D3DMetal, DXMT, DXVK, etc.)
+- Graphics APIs (i.e. D3DMetal, DXMT, DXVK, etc.)
 
 Directory structure is as follows:
 
@@ -73,6 +60,19 @@ $HOME/
     └── crossover/
 ```
 {: file="$HOME" }
+
+### Demo / Examples
+{% gallery %}
+	src="https://pbs.twimg.com/media/GzXyWyTXsAQ4frX?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXym7OWQAASR0z?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXyvskXsAMhtV8?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYH2T_WoAABG0A?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC4dW0AAqGGH?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC3fWgAAbpj7?format=jpg&name=large" alt=""
+	src="https://pbs.twimg.com/media/GzPg6r8XAAAc6lk?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoZPWAAA4DqG?format=jpg&name=medium" alt=""
+{% endgallery %}
 
 ### Bottles
 I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtual Windows environment (e.g. Windows 10) with its own C: drive and all its standard folders (e.g. Windows and Program Files), as well as:
@@ -219,7 +219,6 @@ Set the path, depending on the number of Homebrew versions you have
 		```
 		{: file="$HOME/.bashrc" }
         {: .nolineno }
-        ![bashrc1.png](bashrc1.png)
     ---TAB: x86 ONLY
         If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
 		```sh
@@ -236,8 +235,6 @@ Since your shell config file has been updated, restart the terminal and return t
 arch -x86_64 /bin/bash
 ```
 {: .nolineno }
-
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
 Confirm path
 
@@ -285,6 +282,13 @@ $HOME/
 └── ...
 ```
 
+> Ensure you're in an x86_64 shell. If not, run:
+> ```sh
+> arch -x86_64 /bin/bash
+> ```
+> {: .nolineno }
+{: .prompt-info }
+
 To set version of Wine depending on type, add to `PATH`. This way, `which wine` outputs `$HOME/Wine/10.12/bin/wine`. E.g.
 
 ```sh
@@ -313,15 +317,6 @@ Apple's Game Porting Toolkit (GPTk) is a translation layer that combines Wine wi
 
 > Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
 > ![volumes.png](../assets/obsidian/volumes.png)
->
-> Ensure you're in an x86_64 shell
-> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
-> 
-> If not, run the following command:
-> ```sh
-> arch -x86_64 /bin/bash
-> ```
-> {: .nolineno }
 {: .prompt-info }
 
 **`game-porting-toolkit`**
@@ -620,7 +615,7 @@ DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.13/dxvk.conf DXVK_HUD=full
 ```
 {: .nolineno }
 
-In order to remove DXVK from a prefix, remove the DLLs and DLL overrides, and run `wineboot -u` to restore the original DLL files.
+To remove DXVK from a prefix, remove the DLLs and DLL overrides, and run `wineboot -u` to restore the original DLL files.
 
 while for `dxvk` , there shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in its `$WINEPREFIX`
 
@@ -651,15 +646,6 @@ mv -i "$MVK_DYLIB" "$WINE_LIB"
 
 ### Install Steam
 > Make sure the Windows version of Steam is located in your `Downloads` folder before installing
-> 
-> Also, make sure that you're in an x86_64 shell
-> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
-> 
-> If not, run the following command:
-> ```sh
-> arch -x86_64 /bin/bash
-> ```
-> {: .nolineno }
 {: .prompt-info }
 
 You can use the installer script in [Steam Installer](2025-03-19-play-windows-games.md#steam-installer), or complete the following steps.
@@ -715,10 +701,7 @@ Configuring Wine is typically accomplished using:
 See [Programs](https://gitlab.winehq.org/wine/wine/-/wikis/Commands#programs) for the full list.
 
 ## Usage
-> Ensure you're in an x86_64 shell
-> ![x86_iterm.png](../assets/obsidian/x86_iterm.png)
-> 
-> If not, run the following command:
+> Ensure you're in an x86_64 shell. If not, run:
 > ```sh
 > arch -x86_64 /bin/bash
 > ```
@@ -1673,23 +1656,18 @@ wine reg query 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode'
 {: .nolineno }
 
 #### Audio
-##### Some games have messed up audio and/or don't have sound
 TODO: REWRITE THIS SECTION.
+https://www.reddit.com/r/farcry3/comments/2plbu5/can_someone_help_me_with_this_in_game_no_sound
 
-READ: https://www.reddit.com/r/farcry3/comments/2plbu5/can_someone_help_me_with_this_in_game_no_sound.
-
+##### Some games have messed up and/or crackling audio
 **part 1: audio crackling (far cry 3) -- sounds like it's coming out a Geiger counter**
 Press CMD+Space to open Spotlight Search and type in „MIDI“, you should see the app Audio MIDI Setup.
 
 In this app you select your speaker on the left and change the Output with a click on the drop down menu at the right side. Change it to 96,000Hz (default should be set to 44,000hz I think)
-
-And remember to change it for every output device. If you do this for the built-in speakers and want to use AirPods later, you have to to the same again, just select the AirPods then. After you have set it for a device it stays that way
 https://www.reddit.com/r/macgaming/comments/1jcw1w7/comment/mi81abl
 
-**part 2**
-Disclaimer: Do this at your own risk. I am just documenting what worked in my case.
-
-The problem: On my M1 mac mini some games stopped having any sound at some point while others had no issue. Games that I tried that had this problem include Cities Skylines, Starcraft 2 and Heroes of the Storm.
+##### Some games don't have sound
+Some games stopped having any sound at some point while others had no issue. Games that I tried that had this problem include Cities Skylines, Starcraft 2 and Heroes of the Storm.
 
 The solution: It seems that the problem was caused from the extra audio drivers installed as plugin by Microsoft Teams. After removing the MSTeams audio driver folder and restarted the problem disappeared.
 
@@ -1708,8 +1686,8 @@ By the way removing the Teams audio drivers does not prevent Teams from working 
 
 https://www.reddit.com/r/macgaming/comments/vrzuvl/mac_mini_m1_some_games_dont_have_sound_solved
 
-**part 3**
-wine dll override: `export WINEDLLOVERRIDES="xaudio2_7=n,b"`
+**Alternative**
+Wine DLL Override: `export WINEDLLOVERRIDES="xaudio2_7=n,b"`
 
 https://www.reddit.com/r/macgaming/comments/1ltcbcw/far_cry_4_crossover_2501_macbook_pro_m4_pro
 
@@ -1831,25 +1809,6 @@ In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell
 
 Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
 
-// TEMP: ORIGINAL
-```
-#!/bin/bash
-
-arch -x86_64 /bin/bash
-
-export PATH="/usr/local/bin:${PATH}"
-export WINEDEBUG=-all
-export D3DM_SUPPORT_DXR=1
-export ROSETTA_ADVERTISE_AVX=1
-export WINEESYNC=1
-export WINEMSYNC=1
-export WINEFSYNC=1
-export WINEDLLOVERRIDES="dinput8=n,b;d3d9,d3d10,d3d11,d3d12,dxgi=n"
-
-gameportingtoolkit-no-hud ~/Games 'C:\Program Files (x86)\Steam\steam.exe' > /dev/null 2>&1 &
-```
-
-
 ```sh
 #!/bin/bash
 
@@ -1889,26 +1848,20 @@ You can now run the Windows version of Steam anytime you click the app icon! Thi
 // TODO
 
 ##### Method 3: AppleScript
-Taken from [David Baumgold's tutorial on installing Wine on Mac](https://www.davidbaumgold.com/tutorials/wine-mac).
-
-Many people want to be able to run Windows programs the same way they run other programs on the Mac: by clicking an icon in the Dock. Wine isn't specifically designed to support this, but with a little trickery, we can make it do what we want.
-
-> Wine prints out error messages in the Terminal when something goes wrong. By launching Windows programs via a Dock icon, you are sidestepping the Terminal, which means that if something _does_ go wrong and Wine has to quit, _it will not be able to tell you what the problem was_. The first step to solving a problem is knowing what it is, so without running Wine from the Terminal, you won't be able to fix it, and neither will anyone else. Running from the Dock is fine as long as your program seems to be working correctly, but if it crashes, the first thing you should try is running it from the Terminal instead: it won't prevent the program from crashing, but it will give you some clues on how to fix the problem.
+> Taken from [David Baumgold's tutorial on installing Wine on Mac](https://www.davidbaumgold.com/tutorials/wine-mac). I haven't used this tutorial myself (I prefer my Bash scripts and Automator application), but I'm including this in case it's helpful to anyone else.
 {: .prompt-info }
 
-In order to launch a Windows program via the Dock, we're going to write an [AppleScript](https://secure.wikimedia.org/wikipedia/en/wiki/AppleScript) that launches the program for us, and then put that AppleScript in the Dock. There is a program on your computer that is designed for helping you write AppleScripts: it's called "Script Editor", and you can find it in the `/Applications/Utilities` directory.
-
-Open `Script Editor`
+Open `Script Editor` (in the `/Applications/Utilities` directory)
 
 You should see a window with a large area you can type in near the top: this is where you write your AppleScript. In that area, type the following text:
 
 ```plaintext
 tell application "Terminal"
-    do script "wine ~/Games/drive_c/Program\\ Files/$PATH_TO_PROGRAM.exe"
+    do script "WINEPREFIX=~/Games wine $PATH_TO_PROGRAM.exe"
 end tell
 ```
 
-Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable. You can see that you're simply telling the AppleScript to run a line of code in the Terminal: the same line of code that you could run to start your Windows program.
+Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable.
 
 Press **Compile** button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
 

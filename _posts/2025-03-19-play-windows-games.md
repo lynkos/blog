@@ -739,10 +739,10 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 
 ![steam_menubar.png](../assets/obsidian/steam_menubar.png)
 
-![Steam comparison](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPhoZtWUAAK5V7?format=jpg&name=medium)
+![Steam comparison](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPhoZtWUAAK5V7.jpg?format=jpg&name=medium)
 _Comparison between native Steam app for macOS and Windows Steam running on macOS via DXMT_
 
-![Logging output when running Steam via GPTk](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPIiMmWcAAJOlj?format=jpg&name=4096x4096)
+![Logging output when running Steam via GPTk](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPIiMmWcAAJOlj.jpg?format=jpg&name=4096x4096)
 _Logging output when running Windows version of Steam via GPTk_
 
 ### Launch Directly
@@ -765,10 +765,10 @@ MTL_HUD_ENABLED=0 WINEESYNC=1 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86
 
 Feel free to add and remove environment variables as you like; you're not constrained to the aforementioned ones. Refer to [Environment Variables](2025-03-19-play-windows-games.md#environment-variables) section for a list of compatible environment variables.
 
-![Screenshot of Palworld running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzXyRZjXUAAIE59?format=jpg&name=4096x4096)
+![Screenshot of Palworld running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzXyRZjXUAAIE59.jpg?format=jpg&name=4096x4096)
 _Screenshot of Palworld running via DXMT_
 
-![Screenshot of Far Cry 3 running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzYHC4cWoAAEli0?format=jpg&name=4096x4096)
+![Screenshot of Far Cry 3 running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzYHC4cWoAAEli0.jpg?format=jpg&name=4096x4096)
 _Screenshot of Far Cry 3 running via DXMT_
 
 **GPTk**

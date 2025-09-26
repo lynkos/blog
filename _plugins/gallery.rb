@@ -124,7 +124,7 @@ module Jekyll
 
       images.each_with_index do |image, index|
         # Add data attributes to thumbnails too
-        data_attrs = image[:is_proxied] ? ' data-type="image" data-sub-html="' + image[:alt] + '"' : ''
+        data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
         
         html << %(    <div class="gallery-column">)
         html << %(      <img class="slide-preview" src="#{image[:src]}" onclick="currentSlide(#{index + 1})" alt="#{image[:alt]}"#{data_attrs}>)

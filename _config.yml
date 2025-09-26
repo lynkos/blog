@@ -38,8 +38,8 @@ social:
   email: admin@lynkos.dev
   links:
     # The first element serves as the copyright owner's link
+    - https://lynkos.dev
     - https://github.com/lynkos
-    - https://twitter.com/0xLynkos
     - https://www.linkedin.com/in/kiran-brahmatewari
 
 # Site Verification Settings

@@ -120,7 +120,7 @@ div[class^='language-'] {
 
     @include bp.sm {
       @include mx.ml-mr(0);
-
+      // margin-bottom: 1rem;
       border-radius: v.$radius-lg;
     }
   }

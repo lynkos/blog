@@ -3,6 +3,10 @@
 @use '../abstracts/mixins' as mx;
 @use '../abstracts/placeholders';
 
+p {
+  margin: 1rem 0 !important;
+}
+
 @for $i from 1 through 5 {
   h#{$i} {
     @extend %heading;
@@ -18,11 +22,7 @@
         $size-factor: 0.18rem;
 
         main & {
-          @if $i == 2 {
-            margin: 2.5rem 0 1.25rem;
-          } @else {
-            margin: 2rem 0 1rem;
-          }
+          margin: 1rem 0 0 !important;
         }
       }
 
@@ -58,10 +58,10 @@ blockquote {
   border-left: 0.125rem solid var(--blockquote-border-color);
   padding-left: 1rem;
   color: var(--blockquote-text-color);
-  margin-top: 0.5rem;
+  margin: 0 !important;
 
-  > p:last-child {
-    margin-bottom: 0;
+  p {
+    margin: 0 !important;
   }
 
   &[class^='prompt-'] {

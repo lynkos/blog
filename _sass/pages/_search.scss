@@ -118,7 +118,7 @@ search {
 
     > p {
       @extend %text-ellipsis;
-
+      margin: 0 !important;
       white-space: break-spaces;
       display: -webkit-box;
       -webkit-line-clamp: 3;

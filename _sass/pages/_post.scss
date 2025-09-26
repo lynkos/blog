@@ -18,7 +18,7 @@
 header {
   .post-desc {
     @extend %heading;
-
+    margin: 0.5rem 0 !important;
     font-size: 1.125rem;
     line-height: 1.6;
   }

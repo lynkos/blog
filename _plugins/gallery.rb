@@ -30,6 +30,7 @@ module Jekyll
     # Becomes: {src: "/path.jpg", alt: "Alt text"}
     def parse_images(content)
       images = []
+      worker_base_url = "https://img-proxy.lynkos.dev/?url="
       
       # Split content by lines and process each non-empty line
       content.strip.split("\n").each do |line|
@@ -41,7 +42,31 @@ module Jekyll
         
         # Extract src attribute - this is required
         if src_match = line.match(/src=["']([^"']+)["']/)
-          image[:src] = src_match[1]
+          src_val = src_match[1]
+          
+          # Rewrite only pbs.twimg.com links using path-based format
+          if src_val.include?("pbs.twimg.com")            
+            # Add image extension (defaults to .jpg) to help GLightbox recognize it as an image
+            # Extract format parameter if it exists
+            format_match = src_val.match(/format=(\w+)/)
+            extension = format_match ? ".#{format_match[1]}" : ".jpg"
+            
+            # If the URL doesn't already end with an extension, add one
+            unless src_val.match(/\.(jpg|jpeg|png|gif|webp|svg)/i)
+              # Insert extension before query parameters if they exist
+              if src_val.include?('?')
+                src_val = src_val.sub('?', "#{extension}?")
+              else src_val += extension
+              end
+            end
+            
+            image[:src] = worker_base_url + src_val
+            image[:is_proxied] = true
+          
+          else 
+            image[:src] = src_val
+            image[:is_proxied] = false
+          end
         else next # Skip lines without src attribute
         end
         
@@ -72,9 +97,12 @@ module Jekyll
       # Generate main slideshow images
       # Each slide is initially hidden except the first one
       images.each_with_index do |image, index|
+        # Add data attributes to force GLightbox to treat as image
+        data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
+        
         html << %(    <div class="slides">)
         html << %(      <div class="slide-index">#{index + 1} / #{total_images}</div>)
-        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}">)
+        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{data_attrs}>)
         html << %(    </div>)
       end
 
@@ -94,9 +122,12 @@ module Jekyll
       # Thumbnail row
       html << %(  <div class="gallery-row">)
 
-      images.each_with_index do |image, index|        
+      images.each_with_index do |image, index|
+        # Add data attributes to thumbnails too
+        data_attrs = image[:is_proxied] ? ' data-type="image" data-sub-html="' + image[:alt] + '"' : ''
+        
         html << %(    <div class="gallery-column">)
-        html << %(      <img class="slide-preview" src="#{image[:src]}" onclick="currentSlide(#{index + 1})" alt="#{image[:alt]}">)
+        html << %(      <img class="slide-preview" src="#{image[:src]}" onclick="currentSlide(#{index + 1})" alt="#{image[:alt]}"#{data_attrs}>)
         html << %(    </div>)
       end
 
@@ -123,7 +154,7 @@ module Jekyll
       
       css << %(<style type='text/css'>)
       css << %(  .gallery-row .gallery-column { width: #{100 / total_images}%; } )
-      css << %(</style'>)
+      css << %(</style>)
 
       css.join("\n")
     end

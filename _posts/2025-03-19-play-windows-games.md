@@ -1,9 +1,9 @@
 ---
 share: true
-title: How to Play Windows Games and Programs on Mac
+title: How to Run Windows Games and Programs on Mac
 description: Technical guide about running Windows programs + playing Windows games on macOS with Wine + Game Porting Toolkit (GPTk), DXMT, DXVK, MoltenVK, and more.
-pin: true
 date: 2025-03-19 20:59:00 -0400
+pin: true
 filename: 2025-03-19-play-windows-games
 categories:
   - tutorial
@@ -33,6 +33,19 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 > 
 > Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid), [Sikarugir](https://github.com/Sikarugir-App/Sikarugir), or [Whisky](https://getwhisky.app) (free, but no longer maintained).
 {: .prompt-important }
+
+**Demo**
+{% gallery %}
+	src="https://pbs.twimg.com/media/GzXyWyTXsAQ4frX?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXym7OWQAASR0z?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXyvskXsAMhtV8?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYH2T_WoAABG0A?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC4dW0AAqGGH?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC3fWgAAbpj7?format=jpg&name=large" alt=""
+	src="https://pbs.twimg.com/media/GzPg6r8XAAAc6lk?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoZPWAAA4DqG?format=jpg&name=medium" alt=""
+{% endgallery %}
 
 ## Background
 Key concepts that will continue to show up throughout this writeup.
@@ -244,12 +257,12 @@ I have different versions of Wine on my system which I use for different purpose
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.13).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
-| Prefix                    | Build Name       | Version    | Graphics API(s)                | Description                   |
-| :------------------------ | :--------------- | :--------- | :----------------------------- | :---------------------------- |
-| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7   | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12 | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12 | DXVK                           | DirectX to Vulkan             |
-| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1 | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
+| Prefix                    | Build Name       | Version     | Graphics API(s)                | Description                   |
+| :------------------------ | :--------------- | :---------- | :----------------------------- | :---------------------------- |
+| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7    | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
+| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12  | DXMT                           | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12  | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1  | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
 
@@ -726,6 +739,12 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 
 ![steam_menubar.png](../assets/obsidian/steam_menubar.png)
 
+![Steam comparison](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPhoZtWUAAK5V7?format=jpg&name=medium)
+_Comparison between native Steam app for macOS and Windows Steam running on macOS via DXMT_
+
+![Logging output when running Steam via GPTk](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPIiMmWcAAJOlj?format=jpg&name=4096x4096)
+_Logging output when running Windows version of Steam via GPTk_
+
 ### Launch Directly
 You can launch the game directly to avoid Steam's extra processes. This may improve performance, but you won't be able to use certain Steam features (e.g. Steam Cloud, online, etc.).
 
@@ -746,6 +765,12 @@ MTL_HUD_ENABLED=0 WINEESYNC=1 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86
 
 Feel free to add and remove environment variables as you like; you're not constrained to the aforementioned ones. Refer to [Environment Variables](2025-03-19-play-windows-games.md#environment-variables) section for a list of compatible environment variables.
 
+![Screenshot of Palworld running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzXyRZjXUAAIE59?format=jpg&name=4096x4096)
+_Screenshot of Palworld running via DXMT_
+
+![Screenshot of Far Cry 3 running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzYHC4cWoAAEli0?format=jpg&name=4096x4096)
+_Screenshot of Far Cry 3 running via DXMT_
+
 **GPTk**
 D3DMetal is included in Game Porting Toolkit, so you should be able to use it if you have successfully setup and built Game Porting Toolkit. It supports DirectX 11 (`DX11`) and DirectX 12 (`DX12`) programs.
 
@@ -754,10 +779,7 @@ WINEPREFIX=$HOME/Bottles/GPTk $HOME/Wine/gptk/3.0b3/bin/wine64 winecfg
 ```
 {: .nolineno }
 
-Run the Windows version of Steam to make sure it works
-
-// TODO: Use below for `steam-gptk` alias
-`MTL_HUD_ENABLED=0 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b" WINEDEBUG=-all WINEPREFIX=$HOME/Bottles/GPTk $HOME/Wine/gptk/3.0b3/bin/wine64 "C:\Program Files (x86)\Steam\steam.exe"`
+Run the Windows version of Steam to make sure it works.
 
 ### Stop Running Wine
 All running `wine` and `wineconsole` processes are stopped at once using the [`wineserver -k`](https://gitlab.winehq.org/wine/wine/-/wikis/Wine-User's-Guide#-k-n) command.
@@ -2915,6 +2937,8 @@ After the debugger attaches to the process, you can [capture your Metal workload
 Clear terminal:
 - <kbd>CTRL</kbd> + <kbd>L</kbd>
 - `clear`
+
+### Gallery
 
 ### Further Reading
 - [Game Porting Toolkit](https://www.applegamingwiki.com/wiki/Game_Porting_Toolkit) ([AppleGamingWiki](https://www.applegamingwiki.com))

@@ -20,7 +20,7 @@
 * [Obsidian](https://obsidian.md)
 * [Enveloppe](https://enveloppe.ovh)
 * [Giscus](https://giscus.app)
-* [CloudFlare](https://cloudflare.com)
+* [Cloudflare](https://cloudflare.com)
 
 ## Quick Start
 ```sh
@@ -264,7 +264,7 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
 
 ### Setup Image Proxy
-A custom [CloudFlare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it (e.g. Twitter/X). This way I can embed images from Twitter/X (otherwise they don't appear).
+A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it (e.g. Twitter/X). This way I can embed images from Twitter/X (otherwise they don't appear).
 
 1. Sign up and/or login to [Cloudflare](https://cloudflare.com)
 2. Go to [your dashboard](https://dash.cloudflare.com)

@@ -5,7 +5,7 @@
   <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE" title="Link to License"><img alt="License" src="https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0ibTIzLjkgOS43LTMuNTQtNy44OS0uMDA1LS4wMWEuNTQyLjU0MiAwIDAgMC0uMDQxLS4wNzZsLS4wMTQtLjAxOGEuNTMzLjUzMyAwIDAgMC0uMTIyLS4xMjJsLS4wMTUtLjAxMWEuNTI4LjUyOCAwIDAgMC0uMDgtLjA0NGwtLjAyNC0uMDA5YS41MjcuNTI3IDAgMCAwLS4wNjctLjAybC0uMDI4LS4wMDdhLjUyNC41MjQgMCAwIDAtLjA5Ni0uMDFoLTYuODVjLTEuMDItMS41Mi0xLjAyLTEuNTQtMiAwaC02Ljg2YS41NDMuNTQzIDAgMCAwLS4wOTYuMDFsLS4wMjguMDA3YS41MTYuNTE2IDAgMCAwLS4wNjcuMDJsLS4wMjQuMDFhLjUzNy41MzcgMCAwIDAtLjA4LjA0M2wtLjAxNS4wMTFhLjUxLjUxIDAgMCAwLS4wNTcuMDQ3bC0uMDIuMDJhLjU0My41NDMgMCAwIDAtLjA0NS4wNTVsLS4wMTQuMDE4YS41MjIuNTIyIDAgMCAwLS4wNDEuMDc1bC0uMDA1LjAxdi4wMDFMLjExNiA5LjcyYS41MzEuNTMxIDAgMCAwLS4wOTYuMzA0YzAgMi4yOCAxLjg2IDQuMTQgNC4xNCA0LjE0czQuMTQtMS44NiA0LjE0LTQuMTRhLjUzLjUzIDAgMCAwLS4wOTYtLjMwNGwtMy4yNS02LjM3IDYuMDctLjAyM3YxOC4yYy0yLjU1LjI5NC03LjAxLjM4MS03IDIuNWgxNmMwLTIuMDMtNC40OC0yLjI3LTctMi41di0xOC4xbDUuNjktLjAyLTIuOTIgNi40OWMwIC4wMDIgMCAuMDAzLS4wMDIuMDA1bC0uMDA2LjAxOGEuNTQ1LjU0NSAwIDAgMC0uMDIzLjA3NWwtLjAwNS4wMmEuNTI0LjUyNCAwIDAgMC0uMDEuMDkydi4wMDhjMCAyLjI4IDEuODYgNC4xNCA0LjE0IDQuMTQgMi4yOCAwIDQuMTQtMS44NiA0LjE0LTQuMTRhLjUyOC41MjggMCAwIDAtLjEyLS4zMzJ6IiBmaWxsPSIjZmZmZmZmIj48L3BhdGg+PC9zdmc+"></a>
   <a target="_blank" href="https://deepwiki.com/lynkos/blog" title="DeepWiki for lynkos/blog repository"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a><br><br>
   
-  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been modified to include a custom [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), "Important" prompt, auto-generates `CNAME` file during build and deployment (see [pages-deploy.yml](.github/workflows/pages-deploy.yml#L64)), and more.
+  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been modified to include a custom [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), "Important" prompt, auto-generates `CNAME` file during build and deployment (see [pages-deploy.yml](.github/workflows/pages-deploy.yml#L64)), custom image proxy (e.g. for Twitter links), and more.
 </div>
 
 ## Tech Stack
@@ -261,6 +261,80 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 20. Click **Generate token**
 21. Copy the generated GitHub personal access token; it should start with `github_` followed by a long, random string of alphanumeric characters and underscores
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
+
+### Setup Image Proxy
+This is useful for hotlinking images from sites that may restrict it (e.g. Twitter/X).
+
+1. Sign up and/or login to [Cloudflare](https://cloudflare.com)
+2. Go to [your dashboard](https://dash.cloudflare.com)
+3. In the left pane, click **Compute (Workers)**, then **Workers & Pages**
+4. Click the blue **Create application** button in the upper-right corner
+5. In the **Workers** tab, click the blue **Get Started** button to the right of **Start with Hello World!**
+6. Name the worker `img-proxy`
+7. Click **Deploy**
+8. You should be redirected to a page that says **Success! Your project is deployed to Region: ...**
+9. Click the **Edit Code** button; you can also access this page later by going to **Compute (Workers)** > **Workers & Pages**, clicking the worker (i.e. `img-proxy`), then clicking the small icon **</>** in the upper-right corner
+10. This should open the Cloudflare Workers IDE; replace the default code in `worker.js` with the following code:
+    ```js
+    export default {
+      /**
+       * @param {{ url: string | URL; }} request
+       */
+      async fetch(request) {
+        const url = new URL(request.url);
+        const target = url.searchParams.get("url"); // i.e. ?url=https://pbs.twimg.com/media/...
+
+        if (!target) {
+          return new Response("Missing ?url= param", { status: 400 });
+        }
+
+        try {
+          const resp = await fetch(target, {
+            headers: { "User-Agent": "Mozilla/5.0" }
+          });
+
+          const headers = new Headers(resp.headers);
+          headers.set("Access-Control-Allow-Origin", "*");
+
+          return new Response(await resp.arrayBuffer(), {
+            status: resp.status,
+            headers
+          });
+        } catch (err) {
+          return new Response("Fetch error: " + err.message, { status: 502 });
+        }
+      }
+    };
+    ```
+    > [!TIP]
+    > Test the worker in the **Preview** pane by adding `?url=` and the link to an image on Twitter (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`) following AFTER your worker's URL (i.e. `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/`) in the input field
+    > 
+    > So, in this example, the full URL is: `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`
+    >
+    > Click the **Reload** button (circular arrow icon) to the right of the input field to test it; if successful, you should see the image in the **Preview** pane
+11. Click **Deploy** in the upper-right corner
+12. You can now use this worker as an image proxy by using the following URL format:
+    ```html
+    https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=<IMAGE_URL>
+    ```
+    where `<YOUR_DOMAIN_NAME>` is your Cloudflare domain (e.g. `example.com`) and `<IMAGE_URL>` is the full URL of the image you want to hotlink (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
+
+**_OPTIONAL STEPS: USE CUSTOM DOMAIN_** (e.g. `img-proxy.<YOUR_ROOT_DOMAIN>`)
+
+13.  In the left pane, click **DNS**, then **Records**
+14.  Click the blue **+ Add record** button, then add a new record with the following details:
+  * **Type**: `CNAME`
+  * **Name**: `img-proxy` (or whatever subdomain you want to use)
+  * **IPv4 address**: `workers.dev`
+  * **Proxy status**: `Proxied` aka Enabled (orange cloud icon)
+  * **TTL**: `Auto`
+  * **Comment**: `Map img-proxy worker (at img-proxy.<YOUR_DOMAIN_NAME>.workers.dev) to img-proxy.<YOUR_ROOT_DOMAIN>`
+15. Click **Save**
+16. Click **Workers Routes** in the left pane, then click the blue **Add route** button in the **HTTP Routes** section
+17. In the **Route** field, enter `img-proxy.<YOUR_ROOT_DOMAIN>/*`
+18. Under **Worker**, select `img-proxy` worker (or whatever you named it) from the dropdown
+19. Click **Save**
+20. You can now use the custom domain for your image proxy at `https://img-proxy.<YOUR_ROOT_DOMAIN>/?url=<IMAGE_URL>` (e.g. `https://img-proxy.example.com/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
 
 ## Credit
 Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020).

@@ -313,14 +313,13 @@ Once a "Wine configuration" shows up, change the version to **Windows 10**, then
 {: .prompt-tip }
 
 ### Install Game Porting Toolkit
-Apple's Game Porting Toolkit (GPTk) is a translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12).
+Apple's Game Porting Toolkit (GPTk) is a translation layer that combines a patched version of an old version of Wine with D3DMetal (which supports DirectX 11 and 12).
 
 > Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
 > ![volumes.png](../assets/obsidian/volumes.png)
 {: .prompt-info }
 
-**`game-porting-toolkit`**
-Wine: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
+Path: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
 
 Create symlink in Wine dir for GPTk that points to homebrew-installed GPTk cask
 
@@ -587,7 +586,7 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 
 > DXVK/Vulkan use the following env: `export MVK_CONFIG_RESUME_LOST_DEVICE=1`
 > (wine doesn't handle `VK_ERROR_DEVICE_LOST` correctly)
-{: .prompt-note }
+{: .prompt-info }
 
 Download and unpack [the latest DXVK package for macOS](https://github.com/Gcenx/DXVK-macOS/releases)
 
@@ -617,7 +616,7 @@ DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.13/dxvk.conf DXVK_HUD=full
 
 To remove DXVK from a prefix, remove the DLLs and DLL overrides, and run `wineboot -u` to restore the original DLL files.
 
-while for `dxvk` , there shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in its `$WINEPREFIX`
+There shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 
 ### Update MoltenVK
 [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
@@ -718,9 +717,11 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
-![whole_steam.png](../assets/obsidian/whole_steam.png)
+![](../assets/obsidian/whole_steam.png)
+_Steam example_
 
-![steam_menubar.png](../assets/obsidian/steam_menubar.png)
+![](../assets/obsidian/steam_menubar.png)
+_Steam menubar_
 
 ![Steam comparison](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPhoZtWUAAK5V7.jpg?format=jpg&name=medium)
 _Comparison between native Steam app for macOS and Windows Steam running on macOS via DXMT_
@@ -753,16 +754,6 @@ _Screenshot of Palworld running via DXMT_
 
 ![Screenshot of Far Cry 3 running via DXMT](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzYHC4cWoAAEli0.jpg?format=jpg&name=4096x4096)
 _Screenshot of Far Cry 3 running via DXMT_
-
-**GPTk**
-D3DMetal is included in Game Porting Toolkit, so you should be able to use it if you have successfully setup and built Game Porting Toolkit. It supports DirectX 11 (`DX11`) and DirectX 12 (`DX12`) programs.
-
-```sh
-WINEPREFIX=$HOME/Bottles/GPTk $HOME/Wine/gptk/3.0b3/bin/wine64 winecfg
-```
-{: .nolineno }
-
-Run the Windows version of Steam to make sure it works.
 
 ### Stop Running Wine
 All running `wine` and `wineconsole` processes are stopped at once using the [`wineserver -k`](https://gitlab.winehq.org/wine/wine/-/wikis/Wine-User's-Guide#-k-n) command.
@@ -1297,6 +1288,7 @@ BootStrapperInhibitAll=enable
 BootStrapperForceSelfUpdate=disable
 EOF
 ```
+{: file="$HOME/Games/drive_c/Program Files (x86)/Steam/steam.cfg" }
 
 Restart Steam
 
@@ -1305,7 +1297,7 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
-Optional args for `steam.exe` (tho including them caused issues):
+Optional args for `steam.exe` (tho including them caused some issues):
 
 ```sh
 -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl

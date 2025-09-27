@@ -307,12 +307,12 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
       }
     };
     ```
-    > [!TIP]
-    > Test the worker in the **Preview** pane by adding `?url=` and the link to an image on Twitter (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`) following AFTER your worker's URL (i.e. `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/`) in the input field
-    > 
-    > So, in this example, the full URL is: `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`
-    >
-    > Click the **Reload** button (circular arrow icon) to the right of the input field to test it; if successful, you should see the image in the **Preview** pane
+  > [!TIP]
+  > Test the worker in the **Preview** pane by adding `?url=` and the link to an image on Twitter (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`) following AFTER your worker's URL (i.e. `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/`) in the input field
+  > 
+  > So, in this example, the full URL is: `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`
+  >
+  > Click the **Reload** button (circular arrow icon) to the right of the input field to test it; if successful, you should see the image in the **Preview** pane
 11. Click **Deploy** in the upper-right corner
 12. You can now use this worker as an image proxy by using the following URL format:
     ```html

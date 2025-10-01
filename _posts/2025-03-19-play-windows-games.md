@@ -251,7 +251,7 @@ which brew
 ## Installation
 I have different versions of Wine on my system which I use for different purposes.
 - **Game Porting Toolkit.app**: I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games. This is possible thanks to Apple's Game Porting Toolkit (GPTk): A translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12).
-- **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.13).
+- **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.14).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
 | Prefix                    | Build Name       | Version     | Graphics API(s)                | Description                   |
@@ -338,7 +338,6 @@ brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
 ```
 {: .nolineno }
 
-**Version 3.0**
 > Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version as follows.
 {: .prompt-info }
 
@@ -446,10 +445,10 @@ This version of Wine can be used with DXMT and DXVK.
 
 [Download the latest macOS Wine build](https://github.com/Gcenx/macOS_Wine_builds/releases)
 
-Extract compressed download (v10.13 is named `wine-devel-10.13-osx64.tar.xz`{: .filepath})
+Extract compressed download (v10.14 is named `wine-devel-10.14-osx64.tar.xz`{: .filepath})
 
 ```sh
-tar -xvzf $HOME/Downloads/wine-devel-10.13-osx64.tar.xz
+tar -xvzf $HOME/Downloads/wine-devel-10.14-osx64.tar.xz
 ```
 {: .nolineno }
 
@@ -461,11 +460,11 @@ cp -r "$HOME/Downloads/Wine Devel.app/Contents/Resources/wine" "$HOME/Wine/dxvk"
 ```
 {: .nolineno }
 
-Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.13` in this case
+Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.14` in this case
 
 ```sh
-mv "$HOME/Wine/dxmt/wine" "$HOME/Wine/dxmt/10.13"
-mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.13"
+mv "$HOME/Wine/dxmt/wine" "$HOME/Wine/dxmt/10.14"
+mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.14"
 ```
 {: .nolineno }
 
@@ -502,7 +501,7 @@ You should now have a directory containing `i386-windows`, `x86_64-unix`, and `x
 Before proceeding, make sure you have the right path of the libraries for the version of Wine you're using! We'll set that path to environment variable `WINELIB` to make the following commands easier to follow; be sure to change the actual path if needed. If correctly set, the commands `echo $WINELIB` and `echo $DXMT_PATH` should print their respective specified path.
 
 ```sh
-export WINEPATH="$HOME/Wine/dxmt/10.13"
+export WINEPATH="$HOME/Wine/dxmt/10.14"
 export WINELIB="$WINEPATH/lib/wine"
 export DXMT_PATH="$HOME/Downloads/v0.61"
 export WINEPREFIX="$HOME/Bottles/DXMT"
@@ -603,14 +602,14 @@ mv -i x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
 Open `winecfg` and manually add DLL overrides for `d3d11` and `d3d10core`
 
 ```sh
-WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.13/bin/wine winecfg
+WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.14/bin/wine winecfg
 ```
 {: .nolineno }
 
 Verify that your application uses DXVK instead of wined3d by enabling the HUD
 
 ```sh
-DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.13/dxvk.conf DXVK_HUD=full
+DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.14/dxvk.conf DXVK_HUD=full
 ```
 {: .nolineno }
 
@@ -624,7 +623,7 @@ There shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `w
 Open terminal and set variables
 
 ```sh
-WINE_LIB="$HOME/Wine/dxmt/10.13/lib"
+WINE_LIB="$HOME/Wine/dxmt/10.14/lib"
 MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
 ```
 {: .nolineno }
@@ -679,8 +678,6 @@ Create symlink
 ln -s "/Applications/Wine Crossover.app/Contents/Resources/wine" "$HOME/Wine/23.7.1-crossover"
 ```
 {: .nolineno }
-
-Version: Latest (presumably)
 
 Most compatible; has all graphics APIs
 
@@ -2614,7 +2611,7 @@ trap - EXIT ERR
 
 # Constants
 bottle="$HOME/Bottles/DXMT"
-winepath="$HOME/Wine/dxmt/10.13"
+winepath="$HOME/Wine/dxmt/10.14"
 winelib="$winepath/lib/wine"
 winelib_unix="$winelib/x86_64-unix"
 winelib_win="$winelib/x86_64-windows"

@@ -1865,7 +1865,7 @@ Open up the Finder, go to where you saved your script, and drag that file to you
 Continue reading if you want easy, quick, and convenient access to both your Mac **AND** Windows versions of Steam
 
 ![steam_folder.png](../assets/obsidian/steam_folder.png)
-![steam_folder2.png](../assets/obsidian/steam_folder2.png)
+![steam_folder2.jpg](../assets/obsidian/steam_folder2.jpg)
 
 Complete all steps in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
 

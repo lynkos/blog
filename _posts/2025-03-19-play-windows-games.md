@@ -24,6 +24,19 @@ tags:
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!
 
+**Demo / Examples**
+{% gallery %}
+	src="https://pbs.twimg.com/media/GzXyWyTXsAQ4frX?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXym7OWQAASR0z?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzXyvskXsAMhtV8?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYH2T_WoAABG0A?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC4dW0AAqGGH?format=jpg&name=4096x4096" alt=""
+	src="https://pbs.twimg.com/media/GzYHC3fWgAAbpj7?format=jpg&name=large" alt=""
+	src="https://pbs.twimg.com/media/GzPg6r8XAAAc6lk?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium" alt=""
+	src="https://pbs.twimg.com/media/GzPhoZPWAAA4DqG?format=jpg&name=medium" alt=""
+{% endgallery %}
+
 This entire process can be quite daunting and confusing, and it is assumed that the reader:
 - Has good terminal commands skills and is comfortable with using terminal/CLI
 - Understands Wine concepts (e.g. `WINEPREFIX`, dll overrides, etc.)
@@ -35,10 +48,10 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 {: .prompt-important }
 
 ## Background
-Key concepts that will continue to show up throughout this writeup.
+Key concepts that will continue to show up throughout this writeup:
 
 - Wine
-- Wine bottles/prefixes
+- Bottles aka Wine Prefixes (`$WINEPREFIX`)
 - Wine builds
 - Graphics APIs (i.e. D3DMetal, DXMT, DXVK, etc.)
 
@@ -61,19 +74,6 @@ $HOME/
 ```
 {: file="$HOME" }
 
-### Demo / Examples
-{% gallery %}
-	src="https://pbs.twimg.com/media/GzXyWyTXsAQ4frX?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzXym7OWQAASR0z?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzXyvskXsAMhtV8?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYH2T_WoAABG0A?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYHC4dW0AAqGGH?format=jpg&name=4096x4096" alt=""
-	src="https://pbs.twimg.com/media/GzYHC3fWgAAbpj7?format=jpg&name=large" alt=""
-	src="https://pbs.twimg.com/media/GzPg6r8XAAAc6lk?format=jpg&name=medium" alt=""
-	src="https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium" alt=""
-	src="https://pbs.twimg.com/media/GzPhoZPWAAA4DqG?format=jpg&name=medium" alt=""
-{% endgallery %}
-
 ### Bottles
 I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtual Windows environment (e.g. Windows 10) with its own C: drive and all its standard folders (e.g. Windows and Program Files), as well as:
 - Windows registry
@@ -83,9 +83,11 @@ I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtu
 - Fonts
 - And more
 
-You can install multiple programs into a bottle, but it's sometimes better to create a new bottle for each application. Keeping applications in separate bottles prevents them from interacting with or damaging one another. For instance, you could test out a new version of a particular program in one bottle while keeping your original one in another. Multiple bottles are also helpful whenever a specific application requires otherwise undesirable settings.
+You can install multiple programs into a bottle, but it's sometimes better to create a new bottle for each application. Keeping applications in separate bottles prevents them from interacting with or damaging each other. E.g. You can test out a new version of a particular program in one bottle while keeping the original in another. Multiple bottles are also helpful whenever a specific application requires otherwise undesirable settings.
 
 The default Wine bottle, `.wine`, is located in your home directory (i.e. `$HOME/.wine`). However, I never use the default Wine bottle/prefix since I always use a specific Wine prefix (i.e. `$WINEPREFIX`).
+
+I've specifically made bottles for each Graphics API: `DXMT`, `DXVK`, `GPTk`, and `CrossOver` (note: I only use the 1st 3 bottles, i.e. I *don't* use CrossOver for gaming).
 
 ### Builds
 > Wine is **not isolated** from your system: if _you_ can access a file or resource with your user account, programs running in Wine _can too_—see [#Running Wine under a separate user account](https://wiki.archlinux.org/title/Wine#Running_Wine_under_a_separate_user_account) for possible precautions

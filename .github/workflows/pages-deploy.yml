@@ -50,7 +50,7 @@ jobs:
           # cache-version: 0 # Increment if you need to re-download cached gems
 
       - name: Build site
-        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }} --verbose"
+        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}" --verbose
         env:
           JEKYLL_ENV: "production"
 

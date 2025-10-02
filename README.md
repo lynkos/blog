@@ -10,12 +10,12 @@
 
 ## Tech Stack
 * [Jekyll](https://jekyllrb.com)
-  * [Liquid](https://shopify.github.io/liquid)
-  * [Markdown](https://daringfireball.net/projects/markdown)
-  * [Ruby](https://www.ruby-lang.org/en)
-  * HTML
-  * SCSS
-  * JavaScript
+* [Liquid](https://shopify.github.io/liquid)
+* [Markdown](https://daringfireball.net/projects/markdown)
+* [Ruby](https://www.ruby-lang.org/en)
+* [HTML](https://html.spec.whatwg.org)
+* [SCSS](https://sass-lang.com/documentation/syntax/#scss)
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [GitHub Actions](https://github.com/features/actions)
 * [Obsidian](https://obsidian.md)
 * [Enveloppe](https://enveloppe.ovh)

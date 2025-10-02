@@ -298,10 +298,10 @@ export PATH="$HOME/Wine/DXMT/bin:$PATH"
 ```
 {: .nolineno }
 
-Create a new Wine prefix called `Games`
+Create a new Wine prefix; e.g. if you have bottle `$HOME/Games`, set `WINEPREFIX` like so:
 
 ```sh
-WINEPREFIX=$HOME/Games wine winecfg
+WINEPREFIX="$HOME/Games" wine winecfg
 ```
 {: .nolineno }
 
@@ -571,7 +571,7 @@ steam.exe -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles
 I.e.
 
 ```sh
-MTL_HUD_ENABLED=0 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b" WINEPREFIX=$HOME/Games wine "C:\windows\system32\cmd.exe"
+MTL_HUD_ENABLED=0 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b" wine "C:\windows\system32\cmd.exe"
 cd "Games\drive_c\Program Files (x86)\Steam"
 steam.exe -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
 ```
@@ -712,7 +712,7 @@ See [Programs](https://gitlab.winehq.org/wine/wine/-/wikis/Commands#programs) fo
 ### Launch Steam
 If you want to play the game via Steam. This is the basic command; it runs Steam with Wine. You can add additional environment variables. Refer to [Environment Variables](2025-03-19-play-windows-games.md#environment-variables) section for a list of compatible environment variables.
 ```sh
-WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
+wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
@@ -732,7 +732,7 @@ _Logging output when running Windows version of Steam via GPTk_
 You can launch the game directly to avoid Steam's extra processes. This may improve performance, but you won't be able to use certain Steam features (e.g. Steam Cloud, online, etc.).
 
 ```sh
-WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steamapps\common\MyGame\MyGame.exe"
+wine "C:\Program Files (x86)\Steam\steamapps\common\MyGame\MyGame.exe"
 ```
 {: .nolineno }
 
@@ -742,7 +742,7 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steamapps\common\MyGam
 For example, if you want to enable e-sync and disable the Metal Performance HUD when running `MyGame.exe`.
 
 ```sh
-MTL_HUD_ENABLED=0 WINEESYNC=1 WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steamapps\common\MyGame\MyGame.exe"
+MTL_HUD_ENABLED=0 WINEESYNC=1 wine "C:\Program Files (x86)\Steam\steamapps\common\MyGame\MyGame.exe"
 ```
 {: .nolineno }
 
@@ -765,7 +765,7 @@ wineserver -k 15
 This command is `WINEPREFIX`-dependent, so when using a custom Wine prefix, run i.e.
 
 ```sh
-WINEPREFIX=$HOME/Games wineserver -k
+WINEPREFIX="$HOME/Games" wineserver -k
 ```
 {: .nolineno }
 
@@ -1167,9 +1167,9 @@ This section is taken directly from different Game Porting Toolkit's `README.md`
 > If your game checks for a specific minimum or an exact build version, you can alter this value by changing the `CurrentBuild` and `CurrentBuildNumber` values of the `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT` registry key. You must perform this step _after_ selecting a Windows version in `winecfg`. Run the following commands, replacing `«BUILD_NUMBER»` with the specific build number your game checks for; if you're unsure, build `19042` should work for most games:
 >
 > ```sh
-> WINEPREFIX=$HOME/Games /usr/local/bin/wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
-> WINEPREFIX=$HOME/Games /usr/local/bin/wine64 reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
-> WINEPREFIX=$HOME/Games /usr/local/bin/wineserver -k
+> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
+> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
+> /usr/local/bin/wineserver -k
 > ```
 > {: .nolineno }
 >
@@ -1179,14 +1179,14 @@ This section is taken directly from different Game Porting Toolkit's `README.md`
 > The evaluation environment for Windows games does not pre-install these runtime support packages. If your game makes use of one of these packages, consider searching for and downloading appropriate installers (`.exe` or `.msi`) and installing them to your evaluation environment. Additional runtime installers can be run on your environment by just launching the installer and following its installation instructions:
 >
 > ```sh
-> WINEPREFIX=$HOME/Games /usr/local/bin/wine64 <some-installer.exe>
+> wine <some-installer.exe>
 > ```
 > {: .nolineno }
 >
 > `.MSI` packages can be installed by launching the Windows uninstaller application and choosing to install a downloaded `.msi` package:
 >
 > ```sh
-> WINEPREFIX=$HOME/Games /usr/local/bin/wine64 uninstaller
+> wine uninstaller
 > ```
 > {: .nolineno }
 
@@ -1220,21 +1220,35 @@ Refer to [MetalFX Integration](2025-03-19-play-windows-games.md#metalfx-integrat
 > This error is common when using an outdated version of Wine with a new version of Steam.
 {: .prompt-info }
 
+If you haven't already, set your `WINEPREFIX` (aka bottle), otherwise it'll default to `$HOME/.wine`
+
+```sh
+export WINEPREFIX="$HOME/Games"
+```
+{: .nolineno }
+
+Enter your `WINEPREFIX` (aka bottle)
+
+```sh
+cd "$WINEPREFIX"
+```
+{: .nolineno }
+
 Run `cmd.exe`
 
 ```sh
-WINEPREFIX=$HOME/Games wine "C:\windows\system32\cmd.exe"
+wine "C:\windows\system32\cmd.exe"
 ```
 {: .nolineno }
 
 Enter your Steam directory
 
 ```sh
-cd "Games\drive_c\Program Files (x86)\Steam"
+cd "drive_c\Program Files (x86)\Steam"
 ```
 {: .nolineno }
 
-> Try `"Z:\Users\<YOUR_USERNAME>\Games\drive_c\Program Files (x86)\Steam"`{: .filepath} if the previous command doesn't work, where `<YOUR_USERNAME>` is your Mac username
+> Try `"Z:\Users\<YOUR_USERNAME>\<YOUR_BOTTLE_NAME>\drive_c\Program Files (x86)\Steam"`{: .filepath} if the previous command doesn't work, where `<YOUR_USERNAME>` is your Mac username and `<YOUR_BOTTLE_NAME>` is `$WINEPREFIX` without `$HOME`
 {: .prompt-tip }
 
 Downgrade your Steam version
@@ -1276,7 +1290,7 @@ exit
 Create/update `steam.cfg`
 
 ```sh
-cat <<EOF > $HOME/Games/drive_c/Program\ Files\ \(x86\)/Steam/steam.cfg
+cat <<EOF > $WINEPREFIX/drive_c/Program\ Files\ \(x86\)/Steam/steam.cfg
 ```
 {: .nolineno }
 
@@ -1287,12 +1301,12 @@ BootStrapperInhibitAll=enable
 BootStrapperForceSelfUpdate=disable
 EOF
 ```
-{: file="$HOME/Games/drive_c/Program Files (x86)/Steam/steam.cfg" }
+{: file="$WINEPREFIX/drive_c/Program Files (x86)/Steam/steam.cfg" }
 
 Restart Steam
 
 ```sh
-WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
+wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
@@ -1305,12 +1319,6 @@ Optional args for `steam.exe` (tho including them caused some issues):
 
 ##### Steam download freezes
 This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
-
-TODO: 
-`libraryfolders.vdf`
-
-key: APP_ID
-value: value of "SizeOnDisk" specified in the app's appmanifest.vdf
 
 ###### Solution 1: Steam Console
 Source[^steamconsole]
@@ -1331,7 +1339,7 @@ Enter the following in the bottom prompt to enable downloading Windows games via
 @sSteamCmdForcePlatformType windows
 ```
 
-Either through SteamDB.info or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
+Either through [SteamDB.info](https://steamdb.info) or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
 
 Enter the following in the console, where `<APP_ID>` is the app ID (e.g. `3164500`) of the game you want to download
 
@@ -1345,7 +1353,7 @@ app_install <APP_ID>
 > ```
 {: .prompt-tip }
 
-Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to <kbd>Manage</kbd> > <kbd>Browse Local Files</kbd> to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
+Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to **Manage** > **Browse Local Files** to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
 
 Move all of the aforementioned game files to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<YOUR_GAMES_NAME>`) inside your Windows Steam installation
 
@@ -1567,7 +1575,7 @@ arch -x86_64 /bin/bash
 Open `regedit`
 
 ```sh
-WINEPREFIX=$HOME/Games wine regedit
+wine regedit
 ```
 {: .nolineno }
 
@@ -1612,7 +1620,7 @@ export WINE_LARGE_ADDRESS_AWARE=1
 
 ##### Disable vertical sync (vsync)
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'AllowVerticalSync' /t REG_SZ /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'AllowVerticalSync' /t REG_SZ /d 'N' /f
 ```
 {: .nolineno }
 
@@ -1620,7 +1628,7 @@ WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver'
 This method prevents the creation of filetype associations but retains the creation of XDG .desktop files (that you might see e.g. in menus).
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAssociations" /v 'Enable' /d 'N'
+wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAssociations" /v 'Enable' /d 'N'
 ```
 {: .nolineno }
 
@@ -1628,13 +1636,13 @@ WINEPREFIX=$HOME/Games wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAss
 Enable Retina aka High Resolution mode
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
 ```
 {: .nolineno }
 
 > Some games will not run with Retina mode enabled; to disable:
 > ```sh
-> WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'N' /f
+> wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'N' /f
 > ```
 > {: .nolineno }
 {: .prompt-tip }
@@ -1706,7 +1714,7 @@ After running such programs, kill all Wine servers and run `winecfg`. Fonts shou
 If the fonts look somehow smeared, run the following command to change a setting in the Wine registry.
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N'
 ```
 {: .nolineno }
 
@@ -1717,16 +1725,16 @@ Wine by default maps the keys differently than native macOS applications. It's p
 Map <kbd>Option</kbd> as <kbd>Alt</kbd>:
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftOptionIsAlt' /t REG_SZ /d 'Y'
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightOptionIsAlt' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftOptionIsAlt' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightOptionIsAlt' /t REG_SZ /d 'Y'
 ```
 {: .nolineno }
 
 Map <kbd>Command</kbd> as <kbd>CTRL</kbd>:
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftCommandIsCtrl' /t REG_SZ /d 'Y'
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightCommandIsCtrl' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftCommandIsCtrl' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightCommandIsCtrl' /t REG_SZ /d 'Y'
 ```
 {: .nolineno }
 
@@ -1747,7 +1755,7 @@ If that does not work, go to the **Graphics** tab of `winecfg`, disable the **Al
 If the keyboard still does not work after unfocusing the application, try editing the registry
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v 'UseTakeFocus' /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v 'UseTakeFocus' /d 'N' /f
 ```
 {: .nolineno }
 
@@ -1968,7 +1976,7 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 Launch Steam with DPI scaling forced to 100%
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 96 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 96 /f
 ```
 {: .nolineno }
 
@@ -2013,9 +2021,9 @@ winetricks fontsmooth=rgb
 
 ##### Method 2: Regedit
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
 ```
 {: .nolineno }
 
@@ -2039,30 +2047,30 @@ WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver'
 Enable subpixel smoothing/rendering/anti-aliasing (ClearType) RGB[^fontsmooth]:
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
 ```
 {: .nolineno }
 
 Enable standard font smoothing[^improvegui]:
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
 ```
 {: .nolineno }
 
 Disable subpixel smoothing/rendering/anti-aliasing:
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
 ```
 {: .nolineno }
 
@@ -2070,15 +2078,15 @@ WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v
 Disable anti-aliased fonts[^disableantialias]
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
 ```
 {: .nolineno }
 
 #### Set drivers
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /d 'mac,x11' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /d 'mac,x11' /f
 ```
 {: .nolineno }
 
@@ -2090,7 +2098,7 @@ wineboot -u
 
 #### Enable noflicker
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /t REG_SZ /v 'ForceOpenGLBackingStore' /d 'Y' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /t REG_SZ /v 'ForceOpenGLBackingStore' /d 'Y' /f
 ```
 {: .nolineno }
 
@@ -2098,13 +2106,13 @@ WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver'
 The heuristics that Wine uses to decide whether or not to trim off the edges of windows and replace them with the platform-native window decorations are imperfect. The Mac driver, like the X11 driver, has a registry setting to turn off window decorations for situations like this.[^disabledecorations]
 
 ```sh
-WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'Decorated' /t REG_SZ /d 'N' /f
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'Decorated' /t REG_SZ /d 'N' /f
 ```
 {: .nolineno }
 
 > To re-enable window decorations:
 > ```sh
-> WINEPREFIX=$HOME/Games wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'Decorated' /t REG_SZ /d 'Y' /f
+> wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'Decorated' /t REG_SZ /d 'Y' /f
 > ```
 > {: .nolineno }
 {: .prompt-tip }

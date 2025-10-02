@@ -264,7 +264,7 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 22. Back in Enveloppe settings, paste it in the **GitHub token** area
 
 ### Setup Image Proxy
-A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it; this way I can embed images from Twitter/X (otherwise they don't appear). Additional sites will be added as needed. Currently only supports Twitter/X.
+A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it; this way I can embed images from Twitter/X. Custom Ruby plugin `_plugins/gallery.rb`(_plugins/gallery.rb) automatically prepends Twitter/X URLs within a gallery (i.e. `{% gallery %} ... {% endgallery %}`) with the value of [`worker_base_url`](_plugins/gallery.rb#L33). Additional sites will be added as needed. Currently only supports Twitter/X.
 
 1. Sign up and/or login to [Cloudflare](https://cloudflare.com)
 2. Go to [your dashboard](https://dash.cloudflare.com)

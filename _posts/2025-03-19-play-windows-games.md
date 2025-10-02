@@ -132,39 +132,39 @@ Basic Wine files[^winefiles]
 ## Setup
 Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
 
-![gptk.png](../assets/obsidian/gptk.png)
+![gptk.png](/assets/obsidian/gptk.png)
 
 > You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
 {: .prompt-info }
 
 You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
 
-![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
+![apple_sign_in.png](/assets/obsidian/apple_sign_in.png)
 
 Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
 
-![download_gptk.png](../assets/obsidian/download_gptk.png)
+![download_gptk.png](/assets/obsidian/download_gptk.png)
 
 
 Double-click the `.dmg` after it's downloaded to open/mount it
 
-![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
+![gptk_downloads.png](/assets/obsidian/gptk_downloads.png)
 
 Click **Agree** to the license agreement
 
-![license_agreement.png](../assets/obsidian/license_agreement.png)
+![license_agreement.png](/assets/obsidian/license_agreement.png)
 
 Once mounted, it'll open a window that should look similar to this
 
-![eval_env.png](../assets/obsidian/eval_env.png)
+![eval_env.png](/assets/obsidian/eval_env.png)
 
 You should also be able to see it in "Finder"
 
-![eval_env2.png](../assets/obsidian/eval_env2.png)
+![eval_env2.png](/assets/obsidian/eval_env2.png)
 
 Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
 
-![app_store.png](../assets/obsidian/app_store.png)
+![app_store.png](/assets/obsidian/app_store.png)
 
 Run the `.pkg` file
 	- **Manually**: Double-click the `.pkg` file
@@ -184,7 +184,7 @@ softwareupdate --install-rosetta
 > {: .nolineno }
 {: .prompt-tip }
 
-![iterm.png](../assets/obsidian/iterm.png)
+![iterm.png](/assets/obsidian/iterm.png)
 
 Enter x86_64 shell; all subsequent commands **must** be run in this shell
 
@@ -193,7 +193,7 @@ arch -x86_64 /bin/bash
 ```
 {: .nolineno }
 
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
+![x86_iterm.png](/assets/obsidian/x86_iterm.png)
 
 Install x86 version of Homebrew
 
@@ -202,7 +202,7 @@ Install x86 version of Homebrew
 ```
 {: .nolineno }
 
-![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
+![homebrew_iterm.png](/assets/obsidian/homebrew_iterm.png)
 
 Set the path, depending on the number of Homebrew versions you have
 
@@ -226,7 +226,7 @@ Set the path, depending on the number of Homebrew versions you have
 		eval "$(/usr/local/bin/brew shellenv)"
 		```
         {: .nolineno }
-        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+        ![eval_iterm.png](/assets/obsidian/eval_iterm.png)
 {% endtabs %}
 
 Since your shell config file has been updated, restart the terminal and return to x86_64 shell
@@ -243,7 +243,7 @@ which brew
 ```
 {: .nolineno }
 
-![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
+![which_brew_iterm.png](/assets/obsidian/which_brew_iterm.png)
 
 > Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
 {: .prompt-info }
@@ -305,7 +305,7 @@ WINEPREFIX=$HOME/Games wine winecfg
 
 Once a "Wine configuration" shows up, change the version to **Windows 10**, then click **Apply** and **OK** to save and exit
 
-![winecfg.png](../assets/obsidian/winecfg.png)
+![winecfg.png](/assets/obsidian/winecfg.png)
 
 > If the "Wine configuration" window does not appear and no new icon appears in the Dock, make sure you've correctly installed:
 > - `x86_64` version of Homebrew
@@ -316,7 +316,7 @@ Once a "Wine configuration" shows up, change the version to **Windows 10**, then
 Apple's Game Porting Toolkit (GPTk) is a translation layer that combines a patched version of an old version of Wine with D3DMetal (which supports DirectX 11 and 12).
 
 > Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
-> ![volumes.png](../assets/obsidian/volumes.png)
+> ![volumes.png](/assets/obsidian/volumes.png)
 {: .prompt-info }
 
 Path: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
@@ -714,10 +714,10 @@ WINEPREFIX=$HOME/Games wine "C:\Program Files (x86)\Steam\steam.exe"
 ```
 {: .nolineno }
 
-![](../assets/obsidian/whole_steam.png)
+![](/assets/obsidian/whole_steam.png)
 _Steam example_
 
-![](../assets/obsidian/steam_menubar.png)
+![](/assets/obsidian/steam_menubar.png)
 _Steam menubar_
 
 ![Steam comparison](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/GzPhoZtWUAAK5V7.jpg?format=jpg&name=medium)
@@ -1545,7 +1545,7 @@ err:d3d:resource_init Out of adapter memory
 
 Click the Apple icon in the upper-left corner and select **About This Mac**
 
-![mbp_ram.png](../assets/obsidian/mbp_ram.png)
+![mbp_ram.png](/assets/obsidian/mbp_ram.png)
 
 Note the value next to `Memory` (e.g. `64 GB`), multiply it by either `2` or `3`, then divide by either `3`  or `4`
 
@@ -1593,7 +1593,7 @@ Input `VideoMemorySize`, then press <kbd>Enter</kbd> to save its name
 
 Double-click `VideoMemorySize` to set its value
 
-![regedit_videomemorysize.png](../assets/obsidian/regedit_videomemorysize.png)
+![regedit_videomemorysize.png](/assets/obsidian/regedit_videomemorysize.png)
 
 Under `Value data:`, enter `16384` (i.e. 16.384 GB), click **OK**, then close `regedit`
 
@@ -1788,7 +1788,7 @@ TODO: How to make custom Wine as app bundle so that I can set game mode. (since 
 ##### Method 1: Automator
 You can use the Automator app to create a new Application that will run Steam when you click on its icon (similar to how Applications work)
 
-![automator.png](../assets/obsidian/automator.png)
+![automator.png](/assets/obsidian/automator.png)
 
 Open Automator
 
@@ -1820,10 +1820,10 @@ Copy (i.e. right-click, then press **Copy Image**) the image you want to use as 
 
 This is the app icon I use for Steam (Windows); click on the image to download it
 
-![steam_icon.webp](../assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
+![steam_icon.webp](/assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
 
 I've also converted it to Apple's `.icns` file format (it isn't displaying due to the file format), so you won't have to manually convert from `.webp` to `.icns`
-![steam_icon.icns](../assets/obsidian/steam_icon.icns.md)
+![steam_icon.icns](/assets/obsidian/steam_icon.icns.md)
 
 Find the application you saved earlier, right-click it, then click **Get Info**
 
@@ -1861,8 +1861,8 @@ Open up the Finder, go to where you saved your script, and drag that file to you
 #### Folder shortcut
 Continue reading if you want easy, quick, and convenient access to both your Mac **AND** Windows versions of Steam
 
-![steam_folder.png](../assets/obsidian/steam_folder.png)
-![steam_folder2.jpg](../assets/obsidian/steam_folder2.jpg)
+![steam_folder.png](/assets/obsidian/steam_folder.png)
+![steam_folder2.jpg](/assets/obsidian/steam_folder2.jpg)
 
 Complete all steps in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
 
@@ -1901,7 +1901,7 @@ Find and download a folder icon you like (preferably `.icns` file format)
 > <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
 > 
 > Alternatively, you can download it directly here
-> ![steam_folder.icns](../assets/obsidian/steam_folder.icns.md)
+> ![steam_folder.icns](/assets/obsidian/steam_folder.icns.md)
 {: .prompt-tip }
 
 Once downloaded, select the folder icon and copy it
@@ -1910,11 +1910,11 @@ Once downloaded, select the folder icon and copy it
 
 Back in `/Applications`, right-click `Steam` folder and click **Get Info**
 
-![steam_get_info.png](../assets/obsidian/steam_get_info.png)
+![steam_get_info.png](/assets/obsidian/steam_get_info.png)
 
 Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
 
-![steam_folder_info.png](../assets/obsidian/steam_folder_info.png)
+![steam_folder_info.png](/assets/obsidian/steam_folder_info.png)
 
 Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
 
@@ -1926,7 +1926,7 @@ Make the following selections
 	- Under **Display as**, select **Folder**
 	- Under **View content as**, select **Grid**
 
-![folder_options.png](../assets/obsidian/folder_options.png)
+![folder_options.png](/assets/obsidian/folder_options.png)
 
 You now have a convenient way to access both versions of Steam via your dock! If you open the `Steam` folder and click on either of the `.app`s, it should launch as expected
 

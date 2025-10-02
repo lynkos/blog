@@ -6,13 +6,13 @@
 # It hooks into Jekyll's post-render stage to scan HTML content and convert
 # malformed self-referential links back into proper anchor-only links.
 
-puts "Loading fix_anchor_links plugin..."
+puts "Loading fix-anchor-links plugin..."
 
 Jekyll::Hooks.register [:posts, :pages, :documents], :post_render do |doc|
   # Only process HTML content (skip XML, JSON, etc.)
   next unless doc.output_ext == ".html"
   
-  puts "Processing: #{doc.url}"
+  # puts "Processing: #{doc.url}"
   
   # Pattern explanation:
   # This matches anchor links that incorrectly reference the current markdown file
@@ -50,6 +50,6 @@ Jekyll::Hooks.register [:posts, :pages, :documents], :post_render do |doc|
     # \3 = link text
     doc.output = doc.output.gsub(pattern, '<a href="#\1"\2>\3</a>')
     
-    puts "  ✓ Fixed all malformed anchor links"
+    puts "  Fixed all malformed anchor links!"
   end
 end

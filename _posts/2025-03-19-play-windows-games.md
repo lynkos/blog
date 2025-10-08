@@ -765,6 +765,7 @@ killall -9 wineserver && killall -9 wine64-preloader
 ## Appendix
 ### Environment Variables
 #### Wine
+
 <table>
     <thead>
         <tr>

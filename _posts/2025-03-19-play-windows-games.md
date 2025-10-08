@@ -55,25 +55,6 @@ Key concepts that will continue to show up throughout this writeup:
 - Wine builds
 - Graphics APIs (i.e. D3DMetal, DXMT, DXVK, etc.)
 
-Directory structure is as follows:
-
-```plaintext
-$HOME/ 
-├── ... 
-├── Bottles/ 
-│   ├── DXMT/
-│   ├── DXVK/
-│   ├── GPTk/
-│   └── CrossOver/
-├── ...
-└── Wine/
-    ├── dxmt/
-    ├── dxvk/
-    ├── gptk/
-    └── crossover/
-```
-{: file="$HOME" }
-
 ### Bottles
 I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtual Windows environment (e.g. Windows 10) with its own C: drive and all its standard folders (e.g. Windows and Program Files), as well as:
 - Windows registry
@@ -119,7 +100,7 @@ Basic Wine files[^winefiles]
 	<li><code>wineconsole</code>: Wine program loader for CUI (console) applications</li>
 	<li><code>wineserver</code>: Wine server</li>
 	<li><code>winedbg</code>: Wine debugger</li>
-	<li><code>$WINEPREFIX/dosdevices</code>: Directory containing the DOS device mappings. Each file in that directory is a symlink to the Unix device file implementing a given device. For instance, if COM1 is mapped to <code>/dev/ttyS0</code> you'd have a symlink of the form <code>$WINEPREFIX/dosdevices/com1</code> -> <code>/dev/ttyS0</code>.<br>DOS drives are also specified with symlinks; for instance if drive D: corresponds to the CDROM mounted at <code>/mnt/cdrom</code>, you'd have a symlink <code>$WINEPREFIX/dosdevices/d:</code> -> <code>/mnt/cdrom</code>. The Unix device corresponding to a DOS drive can be specified the same way, except with <code>::</code> instead of <code>:</code>. So for the previous example, if the CDROM device is mounted from <code>/dev/hdc</code>, the corresponding symlink would be <code>$WINEPREFIX/dosdevices/d::</code> -> <code>/dev/hdc</code>.</li>
+	<li><code>$WINEPREFIX/dosdevices</code>: Directory containing the DOS device mappings. Each file in that directory is a symlink to the Unix device file implementing a given device. E.g. if <code>COM1</code> is mapped to <code>/dev/ttyS0</code> you'd have a symlink of the form <code>$WINEPREFIX/dosdevices/com1</code> -> <code>/dev/ttyS0</code>.<br>DOS drives are also specified with symlinks; e.g. if drive <code>D:</code> corresponds to the CDROM mounted at <code>/mnt/cdrom</code>, you'd have a symlink <code>$WINEPREFIX/dosdevices/d:</code> -> <code>/mnt/cdrom</code>. The Unix device corresponding to a DOS drive can be specified the same way, except with <code>::</code> instead of <code>:</code>. So for the previous example, if the CDROM device is mounted from <code>/dev/hdc</code>, the corresponding symlink would be <code>$WINEPREFIX/dosdevices/d::</code> -> <code>/dev/hdc</code>.</li>
 </ul>
 
 ## Requirements
@@ -252,16 +233,16 @@ which brew
 
 ## Installation
 I have different versions of Wine on my system which I use for different purposes.
-- **Game Porting Toolkit.app**: I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games. This is possible thanks to Apple's Game Porting Toolkit (GPTk): A translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12).
+- **Game Porting Toolkit.app**: This is a translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12). I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games.
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.14).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
-| Prefix                    | Build Name       | Version     | Graphics API(s)                | Description                   |
-| :------------------------ | :--------------- | :---------- | :----------------------------- | :---------------------------- |
-| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | Wine 7.7    | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.12       | Wine 10.12  | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.12       | Wine 10.12  | DXVK                           | DirectX to Vulkan             |
-| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | Wine 8.0.1  | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
+| Prefix                    | Build Name       | Wine Version | Graphics API(s)                | Description                   |
+| :------------------------ | :--------------- | :----------- | :----------------------------- | :---------------------------- |
+| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | 7.7          | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
+| `$HOME/Bottles/DXMT`      | dxmt/10.12       | 10.14        | DXMT                           | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.12       | 10.14        | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | 8.0.1        | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
 
@@ -274,15 +255,21 @@ mkdir dxmt dxvk gptk crossover
 Your `$HOME` directory should now look similar to this (where `...` denotes all other directories and files, which are currently irrelevant for this tutorial)
 
 ```plaintext
-$HOME/
+$HOME/ 
+├── ... 
+├── Bottles/ 
+│   ├── DXMT/
+│   ├── DXVK/
+│   ├── GPTk/
+│   └── CrossOver/
 ├── ...
-├── Wine/
-│   ├── dxmt/
-│   ├── dxvk/
-│   ├── crossover/
-│   └── gptk/
-└── ...
+└── Wine/
+    ├── dxmt/
+    ├── dxvk/
+    ├── gptk/
+    └── crossover/
 ```
+{: file="$HOME" }
 
 > Ensure you're in an x86_64 shell. If not, run:
 > ```sh
@@ -619,6 +606,27 @@ To remove DXVK from a prefix, remove the DLLs and DLL overrides, and run `winebo
 
 There shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 
+#### Install CrossOver
+Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
+
+```sh
+brew install --cask --no-quarantine gcenx/wine/wine-crossover
+```
+{: .nolineno }
+
+Create symlink
+
+```sh
+ln -s "/Applications/Wine Crossover.app/Contents/Resources/wine" "$HOME/Wine/23.7.1-crossover"
+```
+{: .nolineno }
+
+This is the most compatible option, as it has all the aforementioned graphics APIs.
+
+`WINEPREFIX=$HOME/Bottles/Test "/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine" winecfg`
+
+CrossOver's game porting toolkit lib is in `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`
+
 ### Update MoltenVK
 [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
 
@@ -665,27 +673,6 @@ wine "C:\Program Files (x86)\Steam\steam.exe"
 {: .nolineno }
 
 If it works, continue to [Usage](2025-03-19-play-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-03-19-play-windows-games.md#usage) section.
-
-### Install CrossOver
-Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
-
-```sh
-brew install --cask --no-quarantine gcenx/wine/wine-crossover
-```
-{: .nolineno }
-
-Create symlink
-
-```sh
-ln -s "/Applications/Wine Crossover.app/Contents/Resources/wine" "$HOME/Wine/23.7.1-crossover"
-```
-{: .nolineno }
-
-Most compatible; has all graphics APIs
-
-`WINEPREFIX=$HOME/Bottles/Test "/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine" winecfg`
-
-CrossOver's game porting toolkit lib is in `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`
 
 ### Install Winetricks
 // TODO
@@ -1130,22 +1117,89 @@ Rename `winemetal_i386-windows.dll` in `e` to `winemetal.dll` for 32 bit. 64 bit
 </table>
 
 #### MoltenVK
-// TODO
+> This section is still under construction. Please refer to [MoltenVK's configuration parameters file](https://github.com/KhronosGroup/MoltenVK/blob/main/Docs/MoltenVK_Configuration_Parameters.md) for the full list.
+{: .prompt-info }
 
 <table>
     <thead>
         <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Description</th>
             <th>Options</th>
+            <th>Default</th>
             <th>Example</th>
         </tr>
     </thead>
     <tbody>
           <tr>
+            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE</code></td>
+            <td>Enumeration</td>
+            <td>If the <code>MVK_CONFIG_PERFORMANCE_TRACKING</code> parameter is enabled, this parameter controls when MoltenVK should log activity performance events.</td>
+            <td>
+	            <ul>
+		            <li><code>0</code>: Log repeatedly every number of frames configured by the <code>MVK_CONFIG_PERFORMANCE_LOGGING_FRAME_COUNT</code> parameter.</li>
+		            <li><code>1</code>: Log immediately after each performance measurement.</li>
+		            <li><code>2</code>: Log at the end of the VkDevice lifetime. This is useful for one-shot apps such as testing frameworks.</li>
+		            <li><code>3</code>: Log at the end of the VkDevice lifetime, but continue to accumulate across multiple VkDevices throughout the app process. This is useful for testing frameworks that create many VkDevices serially.</li>
+	            </ul>
+            </td>
+            <td><code>0</code></td>
+            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE=1</code></td>
+        </tr>
+         <tr>
+            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS</code></td>
+            <td>UInt32</td>
+            <td>Controls which extensions MoltenVK should advertise it supports in <code>vkEnumerateInstanceExtensionProperties()</code> and <code>vkEnumerateDeviceExtensionProperties()</code>. This can be useful when testing MoltenVK against specific limited functionality. Any prerequisite extensions are also advertised. If bit <code>1</code> is included, all supported extensions will be advertised. A value of zero means no extensions will be advertised.</td>
+            <td>The value of this parameter is a <code>Bitwise-OR</code> of the following values:
+	            <ul>
+		            <li><code>1</code>: All supported extensions.</li>
+		            <li><code>2</code>: WSI extensions supported on the platform.</li>
+		            <li><code>4</code>: Vulkan Portability Subset extensions.</li>
+	            </ul>
+	        </td>
+            <td><code>1</code></td>
+            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS=2</code></td>
+        </tr>
+          <tr>
+            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE</code></td>
+            <td>UInt32</td>
+            <td>Controls the Vulkan API version that MoltenVK should advertise in <code>vkEnumerateInstanceVersion()</code>, after MoltenVK adds the <code>VK_HEADER_VERSION</code> component.</td>
+            <td>
+            	<ul>
+		            <li><code>4210688</code>: Decimal number for <code>VK_API_VERSION_1_4</code>.</li>
+		            <li><code>4206592</code>: Decimal number for <code>VK_API_VERSION_1_3</code>.</li>
+		            <li><code>4202496</code>: Decimal number for <code>VK_API_VERSION_1_2</code>.</li>
+		            <li><code>4198400</code>: Decimal number for <code>VK_API_VERSION_1_1</code>.</li>
+		            <li><code>4194304</code>: Decimal number for <code>VK_API_VERSION_1_0</code>.</li>
+		            <li><code>14</code>: Shorthand for <code>VK_API_VERSION_1_4</code>.</li>
+		            <li><code>13</code>: Shorthand for <code>VK_API_VERSION_1_3</code>.</li>
+		            <li><code>12</code>: Shorthand for <code>VK_API_VERSION_1_2</code>.</li>
+		            <li><code>11</code>: Shorthand for <code>VK_API_VERSION_1_1</code>.</li>
+		            <li><code>10</code>: Shorthand for <code>VK_API_VERSION_1_0</code>.</li>
+	            </ul>
+	        </td>
+            <td><code>4210688</code> (Decimal number for <code>VK_API_VERSION_1_4</code>)</td>
+            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE=12</code></td>
+        </tr>
+          <tr>
+            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE</code></td>
+            <td>String</td>
+            <td>If <code>MVK_CONFIG_AUTO_GPU_CAPTURE_SCOPE</code> is any value other than <code>0</code>, this is the path to a file where the automatic GPU capture will be saved. If this parameter is an empty string (the default), automatic GPU capture will be handled by the Xcode user interface.<br><br>If this parameter is set to a valid file path, the Xcode scheme need not have Metal GPU capture enabled, and in fact the app need not be run under Xcode's control at all. This is useful in case the app cannot be run under Xcode's control. A path starting with <code>~</code> can be used to place it in a user's home directory.</td>
+            <td>Some string value</td>
+            <td><code>""</code> (i.e. empty string)</td>
+            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE="~/save/path/here"</code></td>
+        </tr>
+          <tr>
             <td><code>NAME</code></td>
+            <td>TYPE</td>
             <td>DESC</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td>
+            	<ul>
+		            <li><code>NUM</code>: DESC.</li>
+	            </ul>
+            </td>
+            <td><code>DEFAULT</code></td>
             <td><code>EXAMPLE</code></td>
         </tr>
 	</tbody>

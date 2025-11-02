@@ -41,10 +41,11 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 - Has good terminal commands skills and is comfortable with using terminal/CLI
 - Understands Wine concepts (e.g. `WINEPREFIX`, dll overrides, etc.)
 - Knows how to launch Windows executables through Wine from terminal
+- Knows how to use Vim
 
 > **If you're _not_ tech savvy I _don't_ recommend following this highly technical tutorial.**
 > 
-> Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid), [Sikarugir](https://github.com/Sikarugir-App/Sikarugir), or [Whisky](https://getwhisky.app) (free, but no longer maintained).
+> Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid) or [Sikarugir](https://github.com/Sikarugir-App/Sikarugir).
 {: .prompt-important }
 
 ## Background
@@ -233,14 +234,14 @@ which brew
 ## Installation
 I have different versions of Wine on my system which I use for different purposes.
 - **Game Porting Toolkit.app**: This is a translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12). I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games.
-- **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.14).
+- **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.18).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
 | Prefix                    | Build Name       | Wine Version | Graphics API(s)                | Description                   |
 | :------------------------ | :--------------- | :----------- | :----------------------------- | :---------------------------- |
 | `$HOME/Bottles/GPTk`      | gptk/3.0b2       | 7.7          | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.12       | 10.14        | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.12       | 10.14        | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/DXMT`      | dxmt/10.18       | 10.18        | DXMT                           | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.18       | 10.18        | DXVK                           | DirectX to Vulkan             |
 | `$HOME/Bottles/CrossOver` | crossover/23.7.1 | 8.0.1        | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
@@ -338,7 +339,7 @@ cd /Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib
 
 Rename current libraries (to keep a copy)
 
-`-v3b2` suffix denotes that the copy's version is from GPTk 3.0
+`-v3` suffix denotes that the copy's version is from GPTk 3.0
 
 ```sh
 mv external external-v3
@@ -387,6 +388,11 @@ ditto "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/"
 ```
 {: .nolineno }
 
+```sh
+ln -s "/Applications/Game Porting Toolkit.app/Contents/Resources/wine" "$HOME/Wine/gptk/3_0b5"
+```
+{: .nolineno }
+
 To enable experimental MetalFX integration, perform the following steps:
 - Rename `wine/x86_64-unix/nvngx-on-metalfx.so`{: .filepath} to `wine/x86_64-unix/nvngx.so`{: .filepath} (if this hasn’t already been done) **DONE**
 - Rename `wine/x86_64-windows/nvngx-on-metalfx.dll`{: .filepath} to `wine/x86_64-windows/nvngx.dll`{: .filepath} (if this hasn’t already been done) **DONE**
@@ -400,7 +406,7 @@ brew tap apple/apple http://github.com/apple/homebrew-apple
 ```
 {: .nolineno }
 
-Install the `game-porting-toolkit` formula
+Install the `game-porting-toolkit` formula. The 1st time you run this command, you'll get an error. We'll fix it in the next step, but we're running this step 1st so we have the formulas (i.e. `game-porting-toolkit` and `game-porting-toolkit-compiler`). We need the formulas since that's what we'll be editing.
 
 ```sh
 brew install apple/apple/game-porting-toolkit
@@ -414,6 +420,35 @@ brew install apple/apple/game-porting-toolkit
 > {: .nolineno }
 {: .prompt-tip }
 
+Edit `game-porting-toolkit` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit.rb`)
+
+```sh
+brew edit game-porting-toolkit
+```
+{: .nolineno }
+
+Rename `"openssl@1.1"` to `"openssl@3"`
+
+Then, edit `game-porting-toolkit-compiler` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit-compiler.rb`)
+
+```sh
+brew edit game-porting-toolkit-compiler
+```
+{: .nolineno }
+
+Add the following after Line 42[^gptk-cmake]
+
+```plaintext
+"-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+```
+
+Reinstall the `game-porting-toolkit` formula
+
+```sh
+brew install apple/apple/game-porting-toolkit
+```
+{: .nolineno }
+
 Copy the Game Porting Toolkit library directory into Wine’s library directory
 
 ```sh
@@ -421,10 +456,10 @@ ditto /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/redist/lib/ $(b
 ```
 {: .nolineno }
 
-Put the 3 scripts from the Game Porting Toolkit DMG into `/usr/local/bin`
+Link directory
 
 ```sh
-cp /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/gameportingtoolkit* /usr/local/bin
+ln -s "$(brew --prefix game-porting-toolkit)" "$HOME/Wine/gptk/2_1"
 ```
 {: .nolineno }
 
@@ -433,10 +468,10 @@ This version of Wine can be used with DXMT and DXVK.
 
 [Download the latest macOS Wine build](https://github.com/Gcenx/macOS_Wine_builds/releases)
 
-Extract compressed download (v10.14 is named `wine-devel-10.14-osx64.tar.xz`{: .filepath})
+Extract compressed download (v10.18 is named `wine-devel-10.18-osx64.tar.xz`{: .filepath})
 
 ```sh
-tar -xvzf $HOME/Downloads/wine-devel-10.14-osx64.tar.xz
+tar -xvzf $HOME/Downloads/wine-devel-10.18-osx64.tar.xz
 ```
 {: .nolineno }
 
@@ -448,15 +483,15 @@ cp -r "$HOME/Downloads/Wine Devel.app/Contents/Resources/wine" "$HOME/Wine/dxvk"
 ```
 {: .nolineno }
 
-Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.14` in this case
+Rename `wine` to its version number (aka [release version of macOS Wine builds](https://github.com/Gcenx/macOS_Wine_builds/releases)), which is `10.18` in this case
 
 ```sh
-mv "$HOME/Wine/dxmt/wine" "$HOME/Wine/dxmt/10.14"
-mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.14"
+mv "$HOME/Wine/dxmt/wine" "$HOME/Wine/dxmt/10.18"
+mv "$HOME/Wine/dxvk/wine" "$HOME/Wine/dxvk/10.18"
 ```
 {: .nolineno }
 
-Continue to [Install DXMT](2025-03-19-play-windows-games.md#install-dxmt) and [Install DXVK](2025-03-19-play-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps
+Continue to [Install DXMT](2025-03-19-play-windows-games.md#install-dxmt) and [Install DXVK](2025-03-19-play-windows-games.md#install-dxvk), since we will need our Wine build(s) for those steps.
 
 // TODO: Instead of creating separate Wine copies for each graphics API, why not just use the same Wine build with all graphics API files (dlls, so, etc.), e.g. `winemetal_dxmt.dll`{: .filepath} vs `winemetal_dxvk.dll`{: .filepath}, `winemetal_orig.dll`{: .filepath}, etc. When setting a specific build (e.g. DXMT, DXVK, etc.), the relevant file(s) will be renamed (e.g. current `winemetal.dll`{: .filepath} is renamed to `winemetal_xyz.dll`{: .filepath}, then `winemetal_dxmt.dll`{: .filepath} is renamed to `winemetal.dll`{: .filepath} in order to enable DXMT).
 
@@ -473,14 +508,14 @@ Continue to [Install DXMT](2025-03-19-play-windows-games.md#install-dxmt) and [I
 
 Go to [DXMT repository's releases](https://github.com/3Shain/dxmt/releases)
 
-Find the most recent release (which, as of this writing, is [Version 0.61](https://github.com/3Shain/dxmt/releases/tag/v0.61))
+Find the most recent release (which, as of this writing, is [Version 0.70](https://github.com/3Shain/dxmt/releases/tag/v0.70))
 
-Under **Assets**, download the attached GitHub Actions artifact (built with `-Dwine_builtin_dll=true`) named similarly to `dxmt-v0.60-builtin.tar.gz`{: .filepath} (do not download the Source code!)
+Under **Assets**, download the attached GitHub Actions artifact (built with `-Dwine_builtin_dll=true`) named similarly to `dxmt-v0.70-builtin.tar.gz`{: .filepath} (do not download the Source code!)
 
 Unzip the downloaded artifact by double-clicking it or running the following command (change path/filename if needed)
 
 ```sh
-tar -xvzf $HOME/Downloads/dxmt-v0.60-builtin.tar.gz
+tar -xvzf $HOME/Downloads/dxmt-v0.70-builtin.tar.gz
 ```
 {: .nolineno }
 
@@ -489,9 +524,9 @@ You should now have a directory containing `i386-windows`, `x86_64-unix`, and `x
 Before proceeding, make sure you have the right path of the libraries for the version of Wine you're using! We'll set that path to environment variable `WINELIB` to make the following commands easier to follow; be sure to change the actual path if needed. If correctly set, the commands `echo $WINELIB` and `echo $DXMT_PATH` should print their respective specified path.
 
 ```sh
-export WINEPATH="$HOME/Wine/dxmt/10.14"
+export WINEPATH="$HOME/Wine/dxmt/10.18"
 export WINELIB="$WINEPATH/lib/wine"
-export DXMT_PATH="$HOME/Downloads/v0.61"
+export DXMT_PATH="$HOME/Downloads/v0.70"
 export WINEPREFIX="$HOME/Bottles/DXMT"
 ```
 {: .nolineno }
@@ -539,10 +574,12 @@ Ensure **NONE** of these dlls are set overrides `native,builtin`
 > However, **DO NOT** open a support ticket to CodeWeavers if you have replaced these files.
 {: .prompt-tip }
 
+Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run), otherwise you'll run into issues when trying to use `wine` command.
+
 If all steps are successfully completed, you should be able to run your Wine commands as normal, e.g.
 
 ```sh
-MTL_HUD_ENABLED=1 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b" DXMT_LOG_LEVEL=error DXMT_LOG_PATH=$HOME/Wine/10.1-dxmt/logs WINEPREFIX=$HOME/Bottles/DXMT $HOME/Wine/10.1-dxmt/bin/wine "C:\Program Files (x86)\Steam\Steam.exe"
+MTL_HUD_ENABLED=1 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b" DXMT_LOG_LEVEL=error DXMT_LOG_PATH=$HOME/Wine/dxmt/10.18/logs WINEPREFIX=$HOME/Bottles/DXMT $HOME/Wine/dxmt/10.18/bin/wine "C:\Program Files (x86)\Steam\Steam.exe"
 ```
 {: .nolineno }
 
@@ -587,21 +624,23 @@ mv -i x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
 ```
 {: .nolineno }
 
+Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run), otherwise you'll run into issues when trying to use `wine` command.
+
 Open `winecfg` and manually add DLL overrides for `d3d11` and `d3d10core`
 
 ```sh
-WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.14/bin/wine winecfg
+WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.18/bin/wine winecfg
 ```
 {: .nolineno }
 
-Verify that your application uses DXVK instead of wined3d by enabling the HUD
+Verify that your application uses DXVK instead of WineD3D by enabling the HUD
 
 ```sh
-DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.14/dxvk.conf DXVK_HUD=full
+DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.18/dxvk.conf DXVK_HUD=full
 ```
 {: .nolineno }
 
-To remove DXVK from a prefix, remove the DLLs and DLL overrides, and run `wineboot -u` to restore the original DLL files.
+To remove DXVK from a prefix, remove the DLLs and DLL overrides, then run the command in [Restore original DLL files](2025-03-19-play-windows-games.md#restore-original-dll-files).
 
 There shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 
@@ -629,10 +668,10 @@ CrossOver's game porting toolkit lib is in `/Applications/CrossOver.app/Contents
 ### Update MoltenVK
 [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
 
-Open terminal and set variables
+Open terminal and set variables. E.g. for DXMT Wine 10.18:
 
 ```sh
-WINE_LIB="$HOME/Wine/dxmt/10.14/lib"
+WINE_LIB="$HOME/Wine/dxmt/10.18/lib"
 MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
 ```
 {: .nolineno }
@@ -650,6 +689,8 @@ Move new MoltenVK dylib into Wine build's lib
 mv -i "$MVK_DYLIB" "$WINE_LIB"
 ```
 {: .nolineno }
+
+Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run) so it runs properly.
 
 ### Install Steam
 > Make sure the Windows version of Steam is located in your `Downloads` folder before installing
@@ -792,7 +833,7 @@ killall -9 wineserver && killall -9 wine64-preloader
             <td><code>WINESERVER</code></td>
             <td>Specifies the path and name of the <strong>wineserver</strong> binary. If not set, Wine will look for a file named "wineserver" in the path and in a few other likely locations.</td>
             <td></td>
-            <td><code>WINESERVER=$HOME/Wine/dxmt/10.12/bin/wineserver</code></td>
+            <td><code>WINESERVER=$HOME/Wine/dxmt/10.18/bin/wineserver</code></td>
         </tr>
         <tr>
             <td><code>WINEDEBUG</code></td>
@@ -1686,6 +1727,29 @@ wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAssociations" /v 'Enable' 
 ```
 {: .nolineno }
 
+##### Allow Wine to run
+After downloading binary files online (e.g. Wine builds, etc.), you won't be able to run it immediately since macOS's blocks it as a safety feature. You need to allow it to run. I'd do this by going to **System Settings** > **Privacy & Security**, then scrolling down to **Security** section, and manually clicking **Allow** for each Wine-related file after running some `wine` command.
+
+This can get pretty tedious since you'd need to manually allow every single file. So, instead, you can run a one-liner, where `PATH_TO_WINE_DIRECTORY` is the path to your Wine directory:
+
+```sh
+xattr -dr com.apple.quarantine PATH_TO_WINE_DIRECTORY
+```
+{: .nolineno }
+
+So, for example, if you want to do it for your DXMT Wine 10.18 build in `"$HOME/Wine/dxmt/10.18"`, it'd look like:
+
+```sh
+xattr -dr com.apple.quarantine "$HOME/Wine/dxmt/10.18"
+```
+{: .nolineno }
+
+##### Restore original DLL files
+```sh
+wineboot -u
+```
+{: .nolineno }
+
 #### Pixelated and limited display resolution
 Enable Retina aka High Resolution mode
 
@@ -2144,12 +2208,6 @@ wine reg add 'HKEY_CURRENT_USER\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /
 ```
 {: .nolineno }
 
-#### Restore original DLL files
-```sh
-wineboot -u
-```
-{: .nolineno }
-
 #### Enable noflicker
 ```sh
 wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /t REG_SZ /v 'ForceOpenGLBackingStore' /d 'Y' /f
@@ -2408,8 +2466,8 @@ set-wine() {
         # DirectX-Metal
         "dxmt")
             local winename="DirectX-Metal"
-            local variant_version="v0.61"
-            local winepath="$WINE_DIR/dxmt/10.14"
+            local variant_version="v0.70"
+            local winepath="$WINE_DIR/dxmt/10.18"
             local wine_executable="wine"
             local wine_preloader="wine"
             local wineprefix="$BOTTLES_DIR/DXMT"
@@ -2432,7 +2490,7 @@ set-wine() {
         "dxvk")
             local winename="DirectX-Vulkan"
             local variant_version="v1.10.3-20230507-repack"
-            local winepath="$WINE_DIR/dxvk/10.14"
+            local winepath="$WINE_DIR/dxvk/10.18"
             local wine_executable="wine"
             local wine_preloader="wine"
             local wineprefix="$BOTTLES_DIR/DXVK"
@@ -3163,11 +3221,11 @@ trap - EXIT ERR
 
 # Constants
 bottle="$HOME/Bottles/DXMT"
-winepath="$HOME/Wine/dxmt/10.14"
+winepath="$HOME/Wine/dxmt/10.18"
 winelib="$winepath/lib/wine"
 winelib_unix="$winelib/x86_64-unix"
 winelib_win="$winelib/x86_64-windows"
-dxmt_url="https://github.com/3Shain/dxmt/releases/download/v0.60/dxmt-v0.60-builtin.tar.gz"
+dxmt_url="https://github.com/3Shain/dxmt/releases/download/v0.70/dxmt-v0.70-builtin.tar.gz"
 
 # Create temporary directory
 temp_dir="$(mktemp -d)"
@@ -3432,8 +3490,6 @@ Clear terminal:
 - <kbd>CTRL</kbd> + <kbd>L</kbd>
 - `clear`
 
-### Gallery
-
 ### Further Reading
 - [Game Porting Toolkit](https://www.applegamingwiki.com/wiki/Game_Porting_Toolkit) ([AppleGamingWiki](https://www.applegamingwiki.com))
 - [Game Porting Toolkit](https://developer.apple.com/games/game-porting-toolkit) ([Apple Developer](https://developer.apple.com))
@@ -3467,6 +3523,7 @@ Clear terminal:
 [^xbox]: [Connect an Xbox wireless game controller to your Apple device](https://support.apple.com/en-us/111101) ([Apple Support](https://support.apple.com))
 [^ps]: [Connect a PlayStation wireless game controller to your Apple device](https://support.apple.com/en-us/111100) ([Apple Support](https://support.apple.com))
 [^vidmem]: [Memory Leak When Using the Game Porting Toolkit](https://www.reddit.com/r/macgaming/comments/18dxhu9/memory_leak_when_using_the_game_porting_toolkit) ([/r/MacGaming](https://www.reddit.com/r/macgaming)) and [Setting your Video Memory Size (CrossOver)](https://www.codeweavers.com/compatibility/crossover/tips/star-wars-the-old-republic/not-valid-2021-setting-your-video-memory-size-not-valid)
+[^gptk-cmake]: [Patch `DCMAKE_POLICY_VERSION_MINIMUM` for `CMake`](https://github.com/apple/homebrew-apple/pull/9/commits/b7fb6ab1c03fb629a4b57ecd98d918bb942c9198)
 [^gptkvulk]: [GPTk-Vulkan](https://www.applegamingwiki.com/wiki/Gptk-Vulkan) ([AppleGamingWiki](https://www.applegamingwiki.com))
 [^vram]: [Allocate macOS VRAM dynamically](https://www.reddit.com/r/macgaming/comments/1k0onrj/comment/mnfq6ly) ([/r/MacGaming](https://www.reddit.com/r/macgaming)), [Increase VRAM allocation](https://www.reddit.com/r/LocalLLaMA/comments/186phti/m1m2m3_increase_vram_allocation_with_sudo_sysctl) ([/r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA)), [Adjust VRAM/RAM split on Apple Silicon (GitHub)](https://github.com/ggml-org/llama.cpp/discussions/2182#discussioncomment-7698315), and [Optimizing VRAM Settings for Using Local LLM on macOS (Fine-tuning: 1)](https://blog.peddals.com/en/fine-tune-vram-size-of-mac-for-llm)
 [^wine]: [Wine](https://gitlab.winehq.org/wine/wine/-/wikis/Man-Pages/wine)

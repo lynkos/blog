@@ -2308,7 +2308,7 @@ WINEDLLOVERRIDES="dxgi,d3d9,d3d10core,d3d11=b;mf,mfplat,mfreadwrite=n"
 #### Shell Shortcut
 
 #### Bash Functions for Gaming
-Save this script (i.e. `gaming_funcs.sh`), then add to your shell startup file. You can also find [this script in my GitHub Gists](https://gist.github.com/lynkos/fc27a9cf827a4d7adf6c2f3a6b7f0f7a).
+Save this script (i.e. `gaming_funcs.sh`), then add to your shell startup file. You can also find [this script in my GitHub Gists](https://gist.github.com/lynkos/fc27a9cf827a4d7adf6c2f3a6b7f0f7a), as this version may or may not be outdated.
 
 > E.g. Here's how I include it in my `.bashrc` file:
 > ```bash
@@ -2373,7 +2373,7 @@ Save this script (i.e. `gaming_funcs.sh`), then add to your shell startup file. 
 #                      https://gist.github.com/lynkos                      #
 ############################################################################
 
-################################# CONSTANTS ################################
+############################### CONSTANTS ##################################
 
 # Print debug messages to console and stderr
 ENABLE_DEBUG=1
@@ -2401,7 +2401,7 @@ readonly DPI=$(printf '%.0f' $(bc -l <<< "scale=2; $FORMULA_DPI * $WIDTH / $FORM
 # Manually calc DPI: https://dpi.lv
 
 # Steam
-readonly STEAM_USER="YOUR_STEAM_USERNAME"
+readonly STEAM_USER="anonymous"
 readonly STEAMCMD_DIR="$HOME/SteamCMD"
 readonly STEAMAPPS_DIR="drive_c/Program Files (x86)/Steam/steamapps"
 readonly STEAMAPPS_DIR_WIN="C:\\Program Files (x86)\\Steam\\steamapps" # Double backslash since this var will only be used for printing (e.g. echo "$STEAMAPPS_DIR_WIN\\common")
@@ -2450,8 +2450,8 @@ set-wine() {
         # Game Porting Toolkit
         "gptk")
             local winename="Game Porting Toolkit"
-            local variant_version="3.0 Beta 4"
-            local winepath="$WINE_DIR/gptk/3.0b4"
+            local variant_version="2.1"
+            local winepath="$WINE_DIR/gptk/2_1"
             local wine_executable="wine64"
             local wine_preloader="wine64-preloader"
             local wineprefix="$BOTTLES_DIR/GPTk"
@@ -2490,7 +2490,7 @@ set-wine() {
         "dxvk")
             local winename="DirectX-Vulkan"
             local variant_version="v1.10.3-20230507-repack"
-            local winepath="$WINE_DIR/dxvk/10.18"
+            local winepath="$WINE_DIR/dxvk/10.14"
             local wine_executable="wine"
             local wine_preloader="wine"
             local wineprefix="$BOTTLES_DIR/DXVK"
@@ -2583,9 +2583,15 @@ dlg() {
       local app_manifest="$temp/steamapps/appmanifest_$app_id.acf"
       _dbug "Appmanifest: '$app_manifest'"
 
-      # Get directory installation name from its appmanifest
+      # Get directory installation name from appmanifest
       local dirname="$(sed -n 's/^[[:space:]]*"installdir"[[:space:]]*"\([^"]*\)".*/\1/p' "$app_manifest")"
       _dbug "Directory name of downloaded game is: $dirname"
+
+      # Get game size from appmanifest (i.e. value for app ID key)
+      local size_on_disk="$(sed -n 's/^[[:space:]]*"SizeOnDisk"[[:space:]]*"\([^"]*\)".*/\1/p' "$app_manifest")"
+      _dbug "Disk size of $dirname is: $size_on_disk"
+
+      # TODO: If directory already exists, overwrite (or delete) it, else it'll exit; same with the upcoming directories
 
       # Move and rename downloaded directory into common
       mv "$temp" "$wineprefix/$STEAMAPPS_DIR/common/$dirname"
@@ -2602,10 +2608,6 @@ dlg() {
 
       # Go into parent steamapps
       cd ../../../
-
-      # Get game size from appmanifest (i.e. value for app ID key)
-      local size_on_disk="$(sed -n 's/^[[:space:]]*"SizeOnDisk"[[:space:]]*"\([^"]*\)".*/\1/p' "$appmanifest")"
-      _dbug "Disk size of downloaded game is: $size_on_disk"
 
       # Register game in libraryfolders.vdf
       _update_library_vdf "$app_id" "$size_on_disk"
@@ -2628,6 +2630,8 @@ dlg() {
 #
 # mvdlg <APP_ID> <SOURCE_WINEPREFIX_NAME> <TARGET_WINEPREFIX_NAME>
 # E.g. `mvdlg 2623190 DXMT GPTk`
+#
+# TODO: Update `libraryfolders.vdf` (in BOTH bottles) after moving game
 mvdlg() {
    if [[ $# -ne 3 ]]; then
       _err "Invalid number of args. Must include:"
@@ -2950,7 +2954,7 @@ steam() {
     anti-alias
 
     # Map 'Option' and 'Command' keys
-    # fix-kbd
+    fix-kbd
 
     # Enable game mode
     # game-mode on # Don't uncomment this line till game-mode func's fixed
@@ -3102,17 +3106,18 @@ _update_library_vdf() {
     if grep -q "\"$app_id\"" "$libraryfolders_temp"; then
         # Delete backup since operation was successful
         rm "$libraryfolders_backup"
-        _dbug "Removing backup for 'libraryfolders.vdf'"
+        _dbug "Removed libraryfolders.vdf backup at '$libraryfolders_backup'"
 
         # Rename edited file to replace original copy
         mv "$libraryfolders_temp" "libraryfolders.vdf"
-        _dbug "Updated 'libraryfolders.vdf'"
+        _dbug "Updated libraryfolders.vdf at '$libraryfolders_temp'"
 
     else
         # Restore backup
-        _err "Failed to update libraryfolders.vdf - restoring backup"
+        _err "Failed to update libraryfolders.vdf. Restoring backup..."
         mv "$libraryfolders_backup" "libraryfolders.vdf"
         rm "$libraryfolders_temp"
+        _dbug "Backup restored!"
     fi
 }
 
@@ -3128,7 +3133,6 @@ _wine_version() {
     local wine_version="$($WINE --version 2>/dev/null || _err 'Unknown'; return 1)"
 
     # Extract version number "xxx" from string formatted "wine-xxx" (e.g. get "2", "5.3", "12.4.1" from "wine-2", "wine-5.3 ...", "... wine-12.4.1", etc.)
-    # TODO: If result is empty (nothing extracted); doesn't contain "wine-", set $version_number to $wine_version
     echo "$wine_version" | sed -n 's/.*wine-\([0-9][0-9.]*\).*/\1/p'
 }
 
@@ -3143,9 +3147,6 @@ _wine_info() {
     echo "       Wine Architecture: $WINEARCH" >&2
     echo "       Wine Prefix: $WINEPREFIX" >&2
     echo "       Executable: $WINE" >&2
-
-    # TODO: Check retina mode via regedit (i.e. key set to Y or N)
-    # Current method unreliable since they don't persist after shell session ends (i.e. not permanent)
 }
 
 # Prepends a blue '[INFO]' to a given string

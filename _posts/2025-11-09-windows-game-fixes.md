@@ -153,10 +153,10 @@ You may encounter some launch issues/bugs with Game Porting Toolkit on Steam Cli
 
 4. Enter the following in <kbd>Launch Options</kbd> (modify path if needed):
 
-```plaintext
-"C:\Program Files (x86)\Steam\steamapps\common\Skyrim Special Edition\SkyrimSE.exe" %command%
-```
-{: .nolineno }
+	```plaintext
+	"C:\Program Files (x86)\Steam\steamapps\common\Skyrim Special Edition\SkyrimSE.exe" %command%
+	```
+	{: .nolineno }
 
 5. Close window
 

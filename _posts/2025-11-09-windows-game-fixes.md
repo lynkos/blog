@@ -28,119 +28,123 @@ I've tested with **DXMT v0.61** (Wine 10.13) and GPTk 3.0 Beta 3 (Wine 7.7), and
 
 This is if you want to convert/transfer a dedicated server to single-player (while keeping the same data, i.e. pals, items, character, etc.).[^palworld]
 
-Create a conda environment with Python 3.9 or higher and `palworld-save-tools`
+1. Create a conda environment with Python 3.9 or higher and `palworld-save-tools`
 
-```sh
-conda create -n "palenv" python=3.12 palworld-save-tools
-```
-{: .nolineno }
+	```sh
+	conda create -n "palenv" python=3.12 palworld-save-tools
+	```
+	{: .nolineno }
 
-Activate new conda environment
+2. Activate new conda environment
 
-```sh
-conda activate palenv
-```
-{: .nolineno }
+	```sh
+	conda activate palenv
+	```
+	{: .nolineno }
 
-Navigate to your server save, usually found in `$HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####`{: .filepath} (`####` is the save filename, which is a random 32-character string of letters and numbers; `YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
+3. Navigate to your server save, usually found in `$HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####`{: .filepath} (`####` is the save filename, which is a random 32-character string of letters and numbers; `YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
 
-```sh
-cd $HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####
-```
-{: .nolineno }
+	```sh
+	cd $HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####
+	```
+	{: .nolineno }
 
-Make sure the aforementioned folder contains `Level.sav`{: .filepath} and `Players`{: .filepath} folder with `.sav` data
+4. Make sure the aforementioned folder contains `Level.sav`{: .filepath} and `Players`{: .filepath} folder with `.sav` data
 
-```sh
-find -f Level.sav || find ./Players -name "*.sav"
-```
-{: .nolineno }
+	```sh
+	find -f Level.sav || find ./Players -name "*.sav"
+	```
+	{: .nolineno }
 
-Back up your save folder and store it in a safe place, just in case
+5. Back up your save folder and store it in a safe place, just in case
 
-Convert `Level.sav`{: .filepath} to `.json`
+6. Convert `Level.sav`{: .filepath} to `.json`
 
-```sh
-palworld-save-tools --to-json Level.sav
-```
-{: .nolineno }
+	```sh
+	palworld-save-tools --to-json Level.sav
+	```
+	{: .nolineno }
 
-Open the newly created `Level.sav.json`{: .filepath} into your preferred text editor with a find and replace function (I use VSCode)
+7. Open the newly created `Level.sav.json`{: .filepath} into your preferred text editor with a find and replace function (I use VSCode)
 
-Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to locate your server characters name; it'll look similar to this:
+8. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to locate your server characters name; it'll look similar to this:
 
-<img alt="" src="https://i.imgur.com/sY3lbLu.png">
+	<img alt="" src="https://i.imgur.com/sY3lbLu.png">
 
-Find where your name is and copy its `player_uid` value
+9. Find where your name is and copy its `player_uid` value
 
-Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) again to find the `player_uid` value you copied earlier and replace it with the following:
+10. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) again to find the `player_uid` value you copied earlier and replace it with the following:
 
-```plaintext
-00000000-0000-0000-0000-000000000001
-```
-{: .nolineno }
+	```plaintext
+	00000000-0000-0000-0000-000000000001
+	```
+	{: .nolineno }
 
-Save the `.json`, then convert it back to `.sav`
+11. Save the `.json`
 
-```sh
-palworld-save-tools --from-json Level.sav.json
-```
-{: .nolineno }
+12. Convert the `.json` back to `.sav`
 
-Go to `Players`{: .filepath} folder 
+	```sh
+	palworld-save-tools --from-json Level.sav.json
+	```
+	{: .nolineno }
 
-```sh
-cd Players
-```
-{: .nolineno }
+13. Go to `Players`{: .filepath} folder 
 
-Convert the `.sav` file that matches the `player_uid` value you copied earlier (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**) to `.json`
+	```sh
+	cd Players
+	```
+	{: .nolineno }
 
-```sh
-palworld-save-tools --to-json PLAYER_UID_NO_HYPHENS.sav
-```
-{: .nolineno }
+14. Convert the `.sav` file that matches the `player_uid` value you copied earlier (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**) to `.json`
 
-Open the newly created `.json` file into your preferred text editor with a find and replace function (I use VSCode)
+	```sh
+	palworld-save-tools --to-json PLAYER_UID_NO_HYPHENS.sav
+	```
+	{: .nolineno }
 
-Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to replace all instances of your `player_uid` value with the following:
+15. Open the newly created `.json` file into your preferred text editor with a find and replace function (I use VSCode)
 
-```plaintext
-00000000-0000-0000-0000-000000000001
-```
-{: .nolineno }
+16. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to replace all instances of your `player_uid` value with the following:
 
-Save the `.json`, then convert it back to `.sav` (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
+	```plaintext
+	00000000-0000-0000-0000-000000000001
+	```
+	{: .nolineno }
 
-```sh
-palworld-save-tools --from-json PLAYER_UID_NO_HYPHENS.sav.json
-```
-{: .nolineno }
+17. Save the `.json`
 
-Rename the converted file to ensure that the game recognizes this `.sav` as the player's (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
+18. Convert the `.json` back to `.sav` (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
 
-```sh
-mv PLAYER_UID_NO_HYPHENS.sav 00000000000000000000000000000001.sav
-```
-{: .nolineno }
+	```sh
+	palworld-save-tools --from-json PLAYER_UID_NO_HYPHENS.sav.json
+	```
+	{: .nolineno }
 
-If it isn't there already, put the server save folder into your actual saves folder (i.e. `$WINEPREFIX/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID`{: .filepath} (`YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
+19. Rename the converted file to ensure that the game recognizes this `.sav` as the player's (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
 
-Deactivate your conda environment
+	```sh
+	mv PLAYER_UID_NO_HYPHENS.sav 00000000000000000000000000000001.sav
+	```
+	{: .nolineno }
 
-```sh
-conda deactivate
-```
-{: .nolineno }
+20. If it isn't there already, put the server save folder into your actual saves folder (i.e. `$WINEPREFIX/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID`{: .filepath} (`YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
 
-**Optional**: Delete your conda environment
+21. Deactivate your conda environment
 
-```sh
-conda env remove -n "palenv" -y && rm -rf "$(conda info --base)/envs/palenv"
-```
-{: .nolineno }
+	```sh
+	conda deactivate
+	```
+	{: .nolineno }
 
-**Optional**: If you've tested Palworld and everything runs fine, delete your backup save folder
+22. **Optional**: Delete your conda environment
+
+	```sh
+	conda env remove -n "palenv" -y && rm -rf "$(conda info --base)/envs/palenv"
+	```
+	{: .nolineno }
+
+23. **Optional**: If you've tested Palworld and everything runs fine, delete your backup save folder
 
 ## The Elder Scrolls V: Skyrim Special Edition
 You may encounter some launch issues/bugs with Game Porting Toolkit on Steam Client relating to window size, full-screen, and/or display resolution.
@@ -164,12 +168,12 @@ You may encounter some launch issues/bugs with Game Porting Toolkit on Steam Cli
 
 7. Set these variables in `SkyrimPrefs.ini`{: .filepath}:
 
-```plaintext
-bBorderless=1
-bFull Screen=0
-iSize H=1080
-iSize W=1920
-```
+	```plaintext
+	bBorderless=1
+	bFull Screen=0
+	iSize H=1080
+	iSize W=1920
+	```
 
 8. Update `iSize H` and `iSize W` (i.e. integer variables representing `1920`x`1080` resolution) with your display's height and width respectively
 
@@ -490,46 +494,46 @@ Sorry, your system does not meet the minimum requirements to play TESIV: Oblivio
 
 1. Switch architecture
 
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
+	```sh
+	arch -x86_64 /bin/bash
+	```
+	{: .nolineno }
 
 2. Open `regedit`
 
-```sh
-WINEPREFIX=$HOME/Games wine regedit
-```
-{: .nolineno }
+	```sh
+	WINEPREFIX=$HOME/Games wine regedit
+	```
+	{: .nolineno }
 
 3. Navigate to `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion`
 
-![regedit.png](../assets/obsidian/regedit.png)
+	![regedit.png](../assets/obsidian/regedit.png)
 
 4. Make sure `ProductName` says `Microsoft Windows 10`
 5. Make sure `CurrentVersion` says `10.0`
 6. Double-click `CurrentBuild` to change its value
 7. Under `Value data:`, enter `19045`, then click <kbd>OK</kbd>
 
-![regedit_currentbuild.png](../assets/obsidian/regedit_currentbuild.png)
+	![regedit_currentbuild.png](../assets/obsidian/regedit_currentbuild.png)
 
 8. Double-click `CurrentBuildNumber` to change its value
 9. Under `Value data:`, enter `19045`, then click <kbd>OK</kbd>
 10. Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space) and navigate to <kbd>New</kbd>
 
-![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
+	![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
 
 11. Click <kbd>String Value</kbd>
 12. Input `ReleaseId`, then press <kbd>Enter</kbd> to save its name
 
-> To rename a key, right-click it and click <kbd>Rename</kbd>
-{: .prompt-tip }
+	> To rename a key, right-click it and click <kbd>Rename</kbd>
+	{: .prompt-tip }
 
 13. Double-click `ReleaseId` key to set its value
 14. Under `Value data:`, enter `22H2`, then click <kbd>OK</kbd>
 15. Right-click and navigate to <kbd>New</kbd>
 
-![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
+	![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
 
 16. Click <kbd>String Value</kbd>
 17. Input `DisplayVersion`, then press <kbd>Enter</kbd> to save its name
@@ -540,7 +544,7 @@ WINEPREFIX=$HOME/Games wine regedit
 22. Input `UBR`, then press <kbd>Enter</kbd> to save its name
 23. Double-click `UBR` key to set its value
 
-![regedit_ubr.png](../assets/obsidian/regedit_ubr.png)
+	![regedit_ubr.png](../assets/obsidian/regedit_ubr.png)
 
 24. Select  <kbd>Decimal</kbd> under `Base`
 25. Under `Value data:`, enter `2965`, then click <kbd>OK</kbd>
@@ -555,10 +559,10 @@ Upon first startup, there's a really common bug where the game will crash during
 
 2. Clear its D3DMetal shader cache
 
-```sh
-rm -r $(getconf DARWIN_USER_CACHE_DIR)/d3dm/OblivionRemastered-Win64-Shipping.exe/shaders.cache
-```
-{: .nolineno }
+	```sh
+	rm -r $(getconf DARWIN_USER_CACHE_DIR)/d3dm/OblivionRemastered-Win64-Shipping.exe/shaders.cache
+	```
+	{: .nolineno }
 
 3. Restart your computer
 
@@ -566,18 +570,18 @@ rm -r $(getconf DARWIN_USER_CACHE_DIR)/d3dm/OblivionRemastered-Win64-Shipping.ex
 
 5. Relaunch Steam with raytracing disabled
 
-```sh
-WINEPREFIX=$HOME/Games WINEDEBUG=-all WINEDLLOVERRIDES="d3d11,dxgi=n,b" MTL_HUD_ENABLED=0 WINE_LARGE_ADDRESS_AWARE=1 D3DM_SUPPORT_DXR=0 WINEESYNC=1 wine "C:\Program Files (x86)\Steam\steam.exe"
-```
-{: .nolineno }
+	```sh
+	WINEPREFIX=$HOME/Games WINEDEBUG=-all WINEDLLOVERRIDES="d3d11,dxgi=n,b" MTL_HUD_ENABLED=0 WINE_LARGE_ADDRESS_AWARE=1 D3DM_SUPPORT_DXR=0 WINEESYNC=1 wine "C:\Program Files (x86)\Steam\steam.exe"
+	```
+	{: .nolineno }
 
 6. Navigate to Oblivion: Remastered
 
 7. Add the following to the launch options
 
-```plaintext
-%command% -safemode -noshaders -windowed -batchmode -nographics
-```
+	```plaintext
+	%command% -safemode -noshaders -windowed -batchmode -nographics
+	```
 
 8. Close launch options and launch game
 

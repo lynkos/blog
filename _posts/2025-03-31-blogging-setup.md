@@ -232,11 +232,12 @@ I've always been a fan of dark mode color scheme, especially solarized dark. I a
 8. Next to **Themes**, select **Minimal** to apply the theme
 9. Go to **Minimal Theme Settings** tab
 10. Modify the settings to your liking
-	> Here are mine, for reference
-	{: .prompt-tip }
-	![color_scheme.png](assetsobsidiancolorscheme.png)
-	![features.png](assetsobsidianfeatures.png)
-	![layout_typography.png](assetsobsidianlayouttypography.png)
+
+> Here are mine, for reference
+{: .prompt-tip }
+![color_scheme.png](assetsobsidiancolorscheme.png)
+![features.png](assetsobsidianfeatures.png)
+![layout_typography.png](assetsobsidianlayouttypography.png)
 
 ## Resources
 This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian).

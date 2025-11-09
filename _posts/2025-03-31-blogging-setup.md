@@ -235,9 +235,9 @@ I've always been a fan of dark mode color scheme, especially solarized dark. I a
 
 > Here are mine, for reference
 {: .prompt-tip }
-![color_scheme.png](assetsobsidiancolorscheme.png)
-![features.png](assetsobsidianfeatures.png)
-![layout_typography.png](assetsobsidianlayouttypography.png)
+![color_scheme.png](../assets/obsidian/color_scheme.png)
+![features.png](../assets/obsidian/features.png)
+![layout_typography.png](../assets/obsidian/layout_typography.png)
 
 ## Resources
 This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian).

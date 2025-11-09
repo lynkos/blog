@@ -28,123 +28,119 @@ I've tested with **DXMT v0.61** (Wine 10.13) and GPTk 3.0 Beta 3 (Wine 7.7), and
 
 This is if you want to convert/transfer a dedicated server to single-player (while keeping the same data, i.e. pals, items, character, etc.).[^palworld]
 
-1. Create a conda environment with Python 3.9 or higher and `palworld-save-tools`
+Create a conda environment with Python 3.9 or higher and `palworld-save-tools`
 
 ```sh
 conda create -n "palenv" python=3.12 palworld-save-tools
 ```
 {: .nolineno }
 
-2. Activate new conda environment
+Activate new conda environment
 
 ```sh
 conda activate palenv
 ```
 {: .nolineno }
 
-3. Navigate to your server save, usually found in `$HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####`{: .filepath} (`####` is the save filename, which is a random 32-character string of letters and numbers; `YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
+Navigate to your server save, usually found in `$HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####`{: .filepath} (`####` is the save filename, which is a random 32-character string of letters and numbers; `YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
 
 ```sh
 cd $HOME/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID/####
 ```
 {: .nolineno }
 
-4. Make sure the aforementioned folder contains `Level.sav`{: .filepath} and `Players`{: .filepath} folder with `.sav` data
+Make sure the aforementioned folder contains `Level.sav`{: .filepath} and `Players`{: .filepath} folder with `.sav` data
 
 ```sh
 find -f Level.sav || find ./Players -name "*.sav"
 ```
 {: .nolineno }
 
-5. Back up your save folder and store it in a safe place, just in case
+Back up your save folder and store it in a safe place, just in case
 
-6. Convert `Level.sav`{: .filepath} to `.json`
+Convert `Level.sav`{: .filepath} to `.json`
 
 ```sh
 palworld-save-tools --to-json Level.sav
 ```
 {: .nolineno }
 
-7. Open the newly created `Level.sav.json`{: .filepath} into your preferred text editor with a find and replace function (I use VSCode)
+Open the newly created `Level.sav.json`{: .filepath} into your preferred text editor with a find and replace function (I use VSCode)
 
-8. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to locate your server characters name; it'll look similar to this:
+Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to locate your server characters name; it'll look similar to this:
 
 <img alt="" src="https://i.imgur.com/sY3lbLu.png">
 
-9. Find where your name is and copy its `player_uid` value
+Find where your name is and copy its `player_uid` value
 
-10. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) again to find the `player_uid` value you copied earlier and replace it with the following:
+Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) again to find the `player_uid` value you copied earlier and replace it with the following:
 
 ```plaintext
 00000000-0000-0000-0000-000000000001
 ```
 {: .nolineno }
 
-11. Save the `.json`
-
-12. Convert the `.json` back to `.sav`
+Save the `.json`, then convert it back to `.sav`
 
 ```sh
 palworld-save-tools --from-json Level.sav.json
 ```
 {: .nolineno }
 
-13. Go to `Players`{: .filepath} folder 
+Go to `Players`{: .filepath} folder 
 
 ```sh
 cd Players
 ```
 {: .nolineno }
 
-14. Convert the `.sav` file that matches the `player_uid` value you copied earlier (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**) to `.json`
+Convert the `.sav` file that matches the `player_uid` value you copied earlier (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**) to `.json`
 
 ```sh
 palworld-save-tools --to-json PLAYER_UID_NO_HYPHENS.sav
 ```
 {: .nolineno }
 
-15. Open the newly created `.json` file into your preferred text editor with a find and replace function (I use VSCode)
+Open the newly created `.json` file into your preferred text editor with a find and replace function (I use VSCode)
 
-16. Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to replace all instances of your `player_uid` value with the following:
+Use <kbd>⌘</kbd> + <kbd>F</kbd> (i.e. <kbd>CMD</kbd> + <kbd>F</kbd>) to replace all instances of your `player_uid` value with the following:
 
 ```plaintext
 00000000-0000-0000-0000-000000000001
 ```
 {: .nolineno }
 
-17. Save the `.json`
-
-18. Convert the `.json` back to `.sav` (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
+Save the `.json`, then convert it back to `.sav` (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
 
 ```sh
 palworld-save-tools --from-json PLAYER_UID_NO_HYPHENS.sav.json
 ```
 {: .nolineno }
 
-19. Rename the converted file to ensure that the game recognizes this `.sav` as the player's (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
+Rename the converted file to ensure that the game recognizes this `.sav` as the player's (`PLAYER_UID_NO_HYPHENS` is the `player_uid` value **without hyphens**)
 
 ```sh
 mv PLAYER_UID_NO_HYPHENS.sav 00000000000000000000000000000001.sav
 ```
 {: .nolineno }
 
-20. If it isn't there already, put the server save folder into your actual saves folder (i.e. `~/Games/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID`{: .filepath} (`YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
+If it isn't there already, put the server save folder into your actual saves folder (i.e. `$WINEPREFIX/drive_c/users/crossover/AppData/Local/Pal/Saved/SaveGames/YOUR_STEAM_ID`{: .filepath} (`YOUR_STEAM_ID` is your 17-digit [Steam ID](https://www.steamidfinder.com))
 
-21. Deactivate your conda environment
+Deactivate your conda environment
 
 ```sh
 conda deactivate
 ```
 {: .nolineno }
 
-22. **Optional**: Delete your conda environment
+**Optional**: Delete your conda environment
 
 ```sh
 conda env remove -n "palenv" -y && rm -rf "$(conda info --base)/envs/palenv"
 ```
 {: .nolineno }
 
-23. **Optional**: If you've tested Palworld and everything runs fine, delete your backup save folder
+**Optional**: If you've tested Palworld and everything runs fine, delete your backup save folder
 
 ## The Elder Scrolls V: Skyrim Special Edition
 You may encounter some launch issues/bugs with Game Porting Toolkit on Steam Client relating to window size, full-screen, and/or display resolution.

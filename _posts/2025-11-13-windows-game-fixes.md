@@ -23,32 +23,6 @@ tags:
 > This article is still a work in progress!
 {: .prompt-important }
 
-## Schedule I
-I've tested with DXMT v0.6 (works well but sometimes -- once you quit the game -- you get a grey screen), **GPTk 3.0 Beta 3** (best option + most stable ime; no crashes or weird glitches/bugs, compared to the others), and DXVK + MoltenVK (works well but I think there's a memory leak somewhere since it crashed. When I checked Activity Monitor, I found out 2 separate wine processes used 404+ GB of memory EACH (i.e. 808+ GB combined), iTerm was taking 404+ GB of memory and increasing to the point where they all paused, which doesn't make sense. There's more than just those 3. Terminal logging/debugging showed messaged `[myk-warn] VK_ERROR_OUT_OF_POOL_MEMORY: VK_ERROR_OUT_OF_POOL_MEMORY: VkDescriptorPool exhausted pool of 6144 VK_DESCRIPTOR_TYPE_UNIFORM BUFFER_DYNAMIC descriptors, Allocating descriptor dynamically.`, so it's presumably a MoltenVK bug).
-
-Enable Retina (high resolution) mode
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
-```
-{: .nolineno }
-
-Adjust DPI scaling level (to offset/adjust high resolution-mode)
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 216 /f
-```
-{: .nolineno }
-
-Use/enable the following environment variables before running Steam
-
-```plaintext
-D3DM_SUPPORT_DXR=1
-ROSETTA_ADVERTISE_AVX=1
-WINEESYNC=1
-WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b"
-```
-
 ## Palworld
 I've tested with **DXMT v0.61** (Wine 10.13) and GPTk 3.0 Beta 3 (Wine 7.7), and out of the two **DXMT** generally performed better than GPTk. The latter crashed on 2 separate occasions (which was annoying + required restarts) while the former played quite smoothly (no stuttering, v v rare lag) with minimal (fan) noise. This was tested without MetalFX tho. For DXMT, disable NVEXT (aka set `DXMT_ENABLE_NVEXT=0`). If enabled, in-world game in Palworld doesn't appear (just a black screen and overlaid HUD, etc.).
 
@@ -204,6 +178,32 @@ iSize W=1920
 8. Update `iSize H` and `iSize W` (i.e. integer variables representing `1920`x`1080` resolution) with your display's height and width respectively
 
 9. Save and close `SkyrimPrefs.ini`{: .filepath}
+
+## Schedule I
+I've tested with DXMT v0.6 (works well but sometimes -- once you quit the game -- you get a grey screen), **GPTk 3.0 Beta 3** (best option + most stable ime; no crashes or weird glitches/bugs, compared to the others), and DXVK + MoltenVK (works well but I think there's a memory leak somewhere since it crashed. When I checked Activity Monitor, I found out 2 separate wine processes used 404+ GB of memory EACH (i.e. 808+ GB combined), iTerm was taking 404+ GB of memory and increasing to the point where they all paused, which doesn't make sense. There's more than just those 3. Terminal logging/debugging showed messaged `[myk-warn] VK_ERROR_OUT_OF_POOL_MEMORY: VK_ERROR_OUT_OF_POOL_MEMORY: VkDescriptorPool exhausted pool of 6144 VK_DESCRIPTOR_TYPE_UNIFORM BUFFER_DYNAMIC descriptors, Allocating descriptor dynamically.`, so it's presumably a MoltenVK bug).
+
+Enable Retina (high resolution) mode
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
+```
+{: .nolineno }
+
+Adjust DPI scaling level (to offset/adjust high resolution-mode)
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 216 /f
+```
+{: .nolineno }
+
+Use/enable the following environment variables before running Steam
+
+```plaintext
+D3DM_SUPPORT_DXR=1
+ROSETTA_ADVERTISE_AVX=1
+WINEESYNC=1
+WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b"
+```
 
 ## Far Cry 3
 **Add to command line arg:**

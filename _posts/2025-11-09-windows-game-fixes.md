@@ -221,7 +221,7 @@ WINE_LARGE_ADDRESS_AWARE=1 -skipintro -RenderProfile_MaxFPS 60 %command%
 Use DXMT v0.61. Audio is messed up. With maxed out settings: Super bad FPS (~5 FPS) + laggy during cutscenes / vids. Gameplay FPS (~20 FPS) is kinda better, but it still sucks.
 
 Trying to fix Audio with this:
-- Check Audio troubleshooting in [2025-03-19-play-windows-games](./2025-03-19-play-windows-games.md)
+- Check Audio troubleshooting in [Play Windows Games](2025-03-19-play-windows-games.md)
 FC3 (App ID: `220240`) now requires Install `mfc100.dll`, which can be installed with protontricks: `protontricks 220240 mfc100`. Might affect other games with Ubisoft Connect.
 
 ### Mods

@@ -1,0 +1,8 @@
+{% comment %} Generate link previews for existing posts {% endcomment %}
+
+{% if page.layout == 'post'
+  or page.layout == 'archives'
+  or page.layout == 'about'
+%}
+  <script src="{{ '/assets/js/data/link-previews.js' | relative_url }}"></script>
+{% endif %}

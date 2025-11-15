@@ -286,3 +286,22 @@ img, .content a.popup {
     margin: 0;
   }
 }
+
+/* Graph */
+.graph-container {
+  width: 100%;
+  height: 70vh;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  position: relative;
+  overflow: hidden;
+}
+
+.node circle:hover {
+  stroke-width: 3px;
+}
+
+.link {
+  transition: stroke-opacity 0.2s;
+}

@@ -5,14 +5,3 @@ layout: page
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="{{ '/assets/js/graph.js' | relative_url }}"></script>
-
-<script>
-function resetGraphView() {
-  const svg = d3.select('#graph-container svg');
-  if (svg.node()) {
-    svg.transition()
-       .duration(750)
-       .call(d3.zoom().transform, d3.zoomIdentity);
-  }
-}
-</script>

@@ -19,7 +19,7 @@ tags:
   - graphics
   - development
 ---
-> **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
+> **This article/tutorial is still under construction (i.e. a rough draft). Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-info }
 
 With a little bit of tinkering, it's possible to run both macOS (i.e. native) AND Windows games on a MacBook Pro (M3 Max, in my case). Playable Windows games include Skyrim, Mass Effect series, Palworld, Schedule I, and many more!
@@ -104,15 +104,18 @@ Basic Wine files[^winefiles]
 </ul>
 
 ## Requirements
-- Apple Silicon Mac (i.e. M series)
-- macOS 15 Sequoia or higher
-- At least 16 GB of RAM or more (recommended since translated games require more resources)
-- [Command Line Tools for Xcode 15+](https://developer.apple.com/xcode/resources) ([downloaded via the App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12))
--  [Game Porting Toolkit](https://developer.apple.com/downloads?q=porting%20toolkit) (from [Apple Developers](https://developer.apple.com/games/game-porting-toolkit))
-- [Steam (Windows Version)](https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe)
-- **Optional** Game Controller
+- [x] Apple Silicon Mac (i.e. M series)
+- [x] macOS 15 Sequoia or higher
+- [x] At least 16 GB of RAM or more (recommended since translated games require more resources)
+- [x] [Command Line Tools for Xcode 15+](https://developer.apple.com/xcode/resources) ([downloaded via the App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12))
+-  [x] [Game Porting Toolkit](https://developer.apple.com/downloads?q=porting%20toolkit) (from [Apple Developers](https://developer.apple.com/games/game-porting-toolkit))
+- [x] [Steam (Windows Version)](https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe)
+- [x] **Optional** Game Controller
 
 ## Setup
+> Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity, but you can just skip to 
+{: .prompt-important }
+
 Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
 
 ![gptk.png](../assets/obsidian/gptk.png)
@@ -233,15 +236,15 @@ which brew
 
 ## Installation
 I have different versions of Wine on my system which I use for different purposes.
-- **Game Porting Toolkit.app**: This is a translation layer that combines Wine with D3DMetal (which supports DirectX 11 and 12). I use this if I want to use D3DMetal graphics API. Only downside is that this build uses an old version of Wine (7.7), so there are some bugs (e.g. window sizing, unable to download games, etc.). Don't use it to install Steam games.
+- **Game Porting Toolkit.app**: This is a translation layer that combines a patched version of an outdated version of Wine (7.7) with D3DMetal (which supports DirectX 11 and 12). I use this if I want to use D3DMetal graphics API. Only downside is that there are some bugs (e.g. window sizing, unable to download games, etc.) since this build uses an old version of Wine. Don't use it to install Steam games.
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.18).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
 | Prefix                    | Build Name       | Wine Version | Graphics API(s)                | Description                   |
 | :------------------------ | :--------------- | :----------- | :----------------------------- | :---------------------------- |
 | `$HOME/Bottles/GPTk`      | gptk/3.0b2       | 7.7          | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.18       | 10.18        | DXMT                           | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.18       | 10.18        | DXVK                           | DirectX to Vulkan             |
+| `$HOME/Bottles/DXMT`      | dxmt/10.18       | 10.18        | DXMT, MoltenVK                 | DirectX to Metal              |
+| `$HOME/Bottles/DXVK`      | dxvk/10.18       | 10.18        | DXVK, MoltenVK                 | DirectX to Vulkan             |
 | `$HOME/Bottles/CrossOver` | crossover/23.7.1 | 8.0.1        | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
@@ -302,22 +305,9 @@ Once a "Wine configuration" shows up, change the version to **Windows 10**, then
 {: .prompt-tip }
 
 ### Install Game Porting Toolkit
-Apple's Game Porting Toolkit (GPTk) is a translation layer that combines a patched version of an old version of Wine with D3DMetal (which supports DirectX 11 and 12).
-
 > Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
 > ![volumes.png](../assets/obsidian/volumes.png)
 {: .prompt-info }
-
-Path: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
-
-Create symlink in Wine dir for GPTk that points to homebrew-installed GPTk cask
-
-```sh
-ln -sf "/Applications/Game Porting Toolkit.app/Contents/Resources/wine" "$HOME/Wine/3.0b2-gptk"
-```
-{: .nolineno }
-
-While the Homebrew-wine and Apple's GPTK lib is in `/Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib/external/`
 
 #### Version 3.0
  Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
@@ -326,6 +316,8 @@ While the Homebrew-wine and Apple's GPTK lib is in `/Applications/Game\ Porting\
 brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
 ```
 {: .nolineno }
+
+Path to `wine` executable: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
 
 > Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version as follows.
 {: .prompt-info }

@@ -286,3 +286,41 @@ img, .content a.popup {
     margin: 0;
   }
 }
+
+/* Style cookie banner */
+#cookie-notice {
+  padding: 0.5rem 1rem;
+  display: none;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  border-radius: 0.5rem;
+  right: 0;
+  width: 20rem;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--sidebar-border-color);
+  color: var(--bs-primary-color);
+
+  &-accept {
+    color: white;
+  }
+
+  a {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+
+  @media (max-width: 767px) {
+    span {
+      display: block;
+      padding-top: 3px;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      position: relative;
+      bottom: 4px;
+    }
+  }
+}

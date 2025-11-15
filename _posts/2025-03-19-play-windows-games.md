@@ -45,7 +45,7 @@ This entire process can be quite daunting and confusing, and it is assumed that 
 
 > **If you're _not_ tech savvy I _don't_ recommend following this highly technical tutorial.**
 > 
-> Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid) or [Sikarugir](https://github.com/Sikarugir-App/Sikarugir).
+> Instead, try GUI wrappers like [Crossover](https://www.codeweavers.com/crossover) (paid) or [Sikarugir](https://github.com/Sikarugir-App/Sikarugir) (free).
 {: .prompt-important }
 
 ## Background
@@ -57,7 +57,7 @@ Key concepts that will continue to show up throughout this writeup:
 - Graphics APIs (i.e. D3DMetal, DXMT, DXVK, etc.)
 
 ### Bottles
-I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtual Windows environment (e.g. Windows 10) with its own C: drive and all its standard folders (e.g. Windows and Program Files), as well as:
+I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`{: .filepath}. Each bottle is virtual Windows environment (e.g. Windows 10) with its own C: drive and all its standard folders (e.g. Windows and Program Files), as well as:
 - Windows registry
 - System settings
 - One or more Windows applications/software
@@ -67,19 +67,19 @@ I store my Wine prefixes, i.e. bottles, in `$HOME/Bottles`. Each bottle is virtu
 
 You can install multiple programs into a bottle, but it's sometimes better to create a new bottle for each application. Keeping applications in separate bottles prevents them from interacting with or damaging each other. E.g. You can test out a new version of a particular program in one bottle while keeping the original in another. Multiple bottles are also helpful whenever a specific application requires otherwise undesirable settings.
 
-The default Wine bottle, `.wine`, is located in your home directory (i.e. `$HOME/.wine`). However, I never use the default Wine bottle/prefix since I always use a specific Wine prefix (i.e. `$WINEPREFIX`).
+The default Wine bottle, `.wine`{: .filepath}, is located in your home directory (i.e. `$HOME/.wine`{: .filepath}). However, I never use the default Wine bottle/prefix since I always use a specific Wine prefix (i.e. `$WINEPREFIX`).
 
 I've specifically made bottles for each Graphics API: `DXMT`, `DXVK`, `GPTk`, and `CrossOver` (note: I only use the 1st 3 bottles, i.e. I *don't* use CrossOver for gaming).
 
 ### Builds
-`wine` command loads and runs the given program, which can be a DOS, Windows 3.x, Win32, or Win64 executable (on 64-bit systems).[^wine]
+`wine`{: .filepath} command loads and runs the given program, which can be a DOS, Windows 3.x, Win32, or Win64 executable (on 64-bit systems).[^wine]
 
 > Wine is **not isolated** from your system: if _you_ can access a file or resource with your user account, programs running in Wine _can too_—see [#Running Wine under a separate user account](https://wiki.archlinux.org/title/Wine#Running_Wine_under_a_separate_user_account) for possible precautions
 > 
 > Wine can also run malware—see [Wine FAQ on Malware compatibility](https://gitlab.winehq.org/wine/wine/-/wikis/FAQ#is-wine-malware-compatible)
 {: .prompt-warning }
 
-The program name may be specified in DOS format (e.g. `C:\\WINDOWS\\SOL.EXE`{: .filepath}) or in Unix format (e.g. `/msdos/windows/sol.exe`{: .filepath}). You may pass arguments to the program being executed by adding them to the end of the command line invoking `wine`. E.g.
+The program name may be specified in DOS format (e.g. `C:\\WINDOWS\\SOL.EXE`{: .filepath}) or in Unix format (e.g. `/msdos/windows/sol.exe`{: .filepath}). You may pass arguments to the program being executed by adding them to the end of the command line invoking `wine`{: .filepath}. E.g.
 
 ```sh
 wine notepad "C:\\Temp\\README.txt"
@@ -715,7 +715,28 @@ wine "C:\Program Files (x86)\Steam\steam.exe"
 If it works, continue to [Usage](2025-03-19-play-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-03-19-play-windows-games.md#usage) section.
 
 ### Install Winetricks
-// TODO
+According to the Winetricks GitHub repository[^winetricksrepo], "Winetricks is an easy way to work around problems in Wine. It has a menu of supported applications for which it can do all the workarounds automatically. It also allows the installation of missing DLLs and tweaking of various Wine settings."
+
+The installation process is straightforward and relatively simple:
+
+{% tabs install-winetricks %}
+    ---TAB: Homebrew
+        ```sh
+        brew install winetricks
+        ```
+        {: .nolineno }
+    ---TAB: MacPorts
+        ```sh
+        sudo port install winetricks
+        ```
+        {: .nolineno }
+{% endtabs %}
+
+I recommend using Homebrew, since the MacPorts version is out-of-date.
+
+Alternatively, you can manually install it by downloading the [latest version directly](https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks). For previous versions, check out [their releases](https://github.com/Winetricks/winetricks/releases).
+
+If you choose to manually install, make sure to uninstall any previous versions of Winetricks (if applicable). Then extract the archive, `cd` into the extracted folder, and run `sudo make install`. There's also an installer script provided by Winetricks that you can find in [Winetricks Installer](2025-03-19-play-windows-games.md#winetricks-installer).
 
 ## Configuration
 Configuring Wine is typically accomplished using:
@@ -2229,6 +2250,42 @@ wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'Decorated' /t REG_
 > {: .nolineno }
 {: .prompt-tip }
 
+#### Shader caching
+You can view and/or delete the shader caches if you run into any issues, like [Game won’t boot anymore despite no changes](2025-03-19-play-windows-games.md#game-wont-boot-anymore-despite-no-changes)
+
+##### D3DM shader caching
+```sh
+$(getconf DARWIN_USER_CACHE_DIR)/d3dm
+```
+{: .nolineno }
+
+Example contents
+
+```plaintext
+CrashReportClient.exe                 MassEffectLauncher.exe
+EADesktop.exe                         MCC-Win64-Shipping.exe
+EALaunchHelper.exe                    OblivionRemastered-Win64-Shipping.exe
+EpicWebHelper.exe                     Palworld-Win64-Shipping.exe
+GhostOfTsushima.exe                   Schedule I.exe
+GoW.exe                               SkyrimSE.exe
+IGOProxy64.exe                        steamwebhelper.exe
+```
+
+The shaders for each game are in the `shaders.cache` subdirectory in each game directory. E.g. cached shaders for *Schedule I* would be in `$(getconf DARWIN_USER_CACHE_DIR)/d3dm/Schedule I.exe/shaders.cache`
+
+##### DXMT shader caching
+```sh
+$(getconf DARWIN_USER_CACHE_DIR)/dxmt
+```
+{: .nolineno }
+
+Example contents
+
+```plaintext
+EpicWebHelper.exe           steamwebhelper.exe
+Palworld-Win64-Shipping.exe
+```
+
 #### Restrict Wine processes to subset of available cores
 Here's a hack that allows you to restrict Wine processes to a subset of the available cores.[^restrictwine]
 
@@ -2308,9 +2365,9 @@ WINEDLLOVERRIDES="dxgi,d3d9,d3d10core,d3d11=b;mf,mfplat,mfreadwrite=n"
 #### Shell Shortcut
 
 #### Bash Functions for Gaming
-Save this script (i.e. `gaming_funcs.sh`), then add to your shell startup file. You can also find [this script in my GitHub Gists](https://gist.github.com/lynkos/fc27a9cf827a4d7adf6c2f3a6b7f0f7a), as this version may or may not be outdated.
+Save this script (i.e. `gaming_funcs.sh`{: .filepath}), then add to your shell startup file. You can also find [this script in my GitHub Gists](https://gist.github.com/lynkos/fc27a9cf827a4d7adf6c2f3a6b7f0f7a), as this version may or may not be outdated.
 
-> E.g. Here's how I include it in my `.bashrc` file:
+> E.g. Here's how I include it in my `.bashrc`{: .filepath} file:
 > ```bash
 > [[ -r "$HOME/Scripts/gaming_funcs.sh" ]] && . "$HOME/Scripts/gaming_funcs.sh"
 > ```
@@ -3270,6 +3327,88 @@ echo "DXMT installation complete!"
 ```
 {: file="$HOME/Scripts/dxmt_installer.sh" }
 
+#### Winetricks Installer
+This script is taken directly from Winetricks GitHub repository[^winetricksrepo].
+
+##### Method 1: `sudo`
+
+```sh
+#!/bin/sh
+
+# Create and switch to a temporary directory writeable by current user. See:
+#   https://www.tldp.org/LDP/abs/html/subshells.html
+cd "$(mktemp -d)" || exit 1
+
+# Use a BASH "here document" to create an updater shell script file.
+# See:
+#   https://www.tldp.org/LDP/abs/html/here-docs.html
+# >  outputs stdout to a file, overwriting any pre-existing file
+# << takes input, directly from the script itself, till the second '_EOF_SCRIPT' marker, as stdin
+# the cat command hooks these 2 streams up (stdin and stdout)
+###### create update_winetricks START ########
+cat > update_winetricks <<_EOF_SCRIPT
+#!/bin/sh
+
+# Create and switch to a temporary directory writeable by current user. See:
+#   https://www.tldp.org/LDP/abs/html/subshells.html
+cd "\$(mktemp -d)"
+
+# Download the latest winetricks script (master="latest version") from Github.
+curl -O https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+
+# Mark the winetricks script (we've just downloaded) as executable. See:
+#   https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/x9543.htm
+chmod +x winetricks
+
+# Move the winetricks script to a location which will be in the standard user PATH. See:
+#   https://www.tldp.org/LDP/abs/html/internalvariables.html
+sudo mv winetricks /usr/bin
+
+# Download the latest winetricks BASH completion script (master="latest version") from Github.
+curl -O https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks.bash-completion
+
+# Move the winetricks BASH completion script to a standard location for BASH completion modules. See:
+#   https://www.tldp.org/LDP/abs/html/tabexpansion.html
+sudo mv winetricks.bash-completion /usr/share/bash-completion/completions/winetricks
+
+# Download the latest winetricks MAN page (master="latest version") from Github.
+curl -O https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks.1
+
+# Move the winetricks MAN page to a standard location for MAN pages. See:
+#   https://www.pathname.com/fhs/pub/fhs-2.3.html#USRSHAREMANMANUALPAGES
+sudo mv winetricks.1 /usr/share/man/man1/winetricks.1
+_EOF_SCRIPT
+###### create update_winetricks FINISH ########
+
+# Mark the update_winetricks script (we've just written out) as executable. See:
+#   https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/x9543.htm
+chmod +x update_winetricks
+
+# We must escalate privileges to root, as regular Linux users do not have write access to '/usr/bin'.
+sudo mv update_winetricks /usr/bin/
+```
+
+##### Method 2: `su`
+The repository also contains an alternative updater script implementation using `su` instead of `sudo`:
+
+```sh
+#!/bin/sh
+
+cd "$(mktemp -d)"
+cat > update_winetricks <<_EOF_SCRIPT
+#!/bin/sh
+
+cd "\$(mktemp -d)"
+curl -O  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+curl -O  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks.bash-completion
+chmod +x winetricks
+su root sh -c 'mv winetricks /usr/bin ; mv winetricks.bash-completion /usr/share/bash-completion/completions/winetricks'
+_EOF_SCRIPT
+
+chmod +x update_winetricks
+su root sh -c 'mv update_winetricks /usr/bin/'
+```
+
 #### Automate Steam Downloads
 If you'd prefer to do this manually, refer to [Solution 2 SteamCMD](2025-03-19-play-windows-games.md#solution-2-steamcmd). Alternatively, check out [Solution 1 Steam Console](2025-03-19-play-windows-games.md#solution-1-steam-console) for an alternate method.
 
@@ -3518,6 +3657,7 @@ Clear terminal:
 - [Steam Console parameters aka command-line options](https://gist.github.com/davispuh/6600880)
 - [DXMT Wiki](https://github.com/3Shain/dxmt/wiki)
 - [CrossOver User Guide](https://www.codeweavers.com/support/docs/crossover-mac/index)
+- [](https://www.how2shout.com/how-to/how-to-install-apple-game-porting-toolkit-gptk-on-macos.html)
 
 ### References
 [^controller]: [Connect a wireless game controller to your Apple device](https://support.apple.com/en-us/111099) ([Apple Support](https://support.apple.com))
@@ -3536,3 +3676,4 @@ Clear terminal:
 [^disableantialias]: [How Can I Turn Off Anti-aliased Fonts](https://support.codeweavers.com/en_US/bottles-associations-fonts/how-can-i-turn-off-anti-aliased-fonts)
 [^disabledecorations]: [Disable Window Decorations in the Mac Driver](https://support.codeweavers.com/disable-window-decorations-in-the-mac-driver)
 [^restrictwine]: [Wine Bugs](https://bugs.winehq.org/show_bug.cgi?id=43277#c48)
+[^winetricksrepo]: [Winetricks GitHub repository](https://github.com/Winetricks/winetricks)

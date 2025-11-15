@@ -2357,7 +2357,7 @@ WINEDLLOVERRIDES="dxgi,d3d9,d3d10core,d3d11=b;mf,mfplat,mfreadwrite=n"
 #### Shell Shortcut
 
 #### Bash Functions for Gaming
-Save this script (i.e. `gaming_funcs.sh`{: .filepath}), then add to your shell startup file. You can also find [this script in my GitHub Gists](https://gist.github.com/lynkos/fc27a9cf827a4d7adf6c2f3a6b7f0f7a), as this version may or may not be outdated.
+Save this script (i.e. `gaming_funcs.sh`{: .filepath}), then add to your shell startup file. You can also find [this script in my GitHub configs repo](https://github.com/lynkos/configs/blob/main/Scripts/gaming_funcs.sh), as this version may or may not be outdated.
 
 > E.g. Here's how I include it in my `.bashrc`{: .filepath} file:
 > ```bash

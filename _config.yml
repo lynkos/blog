@@ -208,8 +208,10 @@ compress_html:
 exclude:
   - "*.gem"
   - "*.gemspec"
-  - docs # includes LICENSE and README.md
+  - docs
   - tools
+  - README.md
+  - LICENSE
   - purgecss.js
   - "*.config.js"
   - "package*.json"

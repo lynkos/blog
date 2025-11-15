@@ -1,26 +1,31 @@
 <div align="center">
   <h1>Chirpy x Lynkos</h1>
-  <img alt="pages-deploy.yml" src="https://img.shields.io/github/actions/workflow/status/lynkos/blog/pages-deploy.yml?logo=github">
-  <img alt="Gem Version" src="https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=white&label=gem&color=orange">
-  <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE" title="Link to License"><img alt="License" src="https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0ibTIzLjkgOS43LTMuNTQtNy44OS0uMDA1LS4wMWEuNTQyLjU0MiAwIDAgMC0uMDQxLS4wNzZsLS4wMTQtLjAxOGEuNTMzLjUzMyAwIDAgMC0uMTIyLS4xMjJsLS4wMTUtLjAxMWEuNTI4LjUyOCAwIDAgMC0uMDgtLjA0NGwtLjAyNC0uMDA5YS41MjcuNTI3IDAgMCAwLS4wNjctLjAybC0uMDI4LS4wMDdhLjUyNC41MjQgMCAwIDAtLjA5Ni0uMDFoLTYuODVjLTEuMDItMS41Mi0xLjAyLTEuNTQtMiAwaC02Ljg2YS41NDMuNTQzIDAgMCAwLS4wOTYuMDFsLS4wMjguMDA3YS41MTYuNTE2IDAgMCAwLS4wNjcuMDJsLS4wMjQuMDFhLjUzNy41MzcgMCAwIDAtLjA4LjA0M2wtLjAxNS4wMTFhLjUxLjUxIDAgMCAwLS4wNTcuMDQ3bC0uMDIuMDJhLjU0My41NDMgMCAwIDAtLjA0NS4wNTVsLS4wMTQuMDE4YS41MjIuNTIyIDAgMCAwLS4wNDEuMDc1bC0uMDA1LjAxdi4wMDFMLjExNiA5LjcyYS41MzEuNTMxIDAgMCAwLS4wOTYuMzA0YzAgMi4yOCAxLjg2IDQuMTQgNC4xNCA0LjE0czQuMTQtMS44NiA0LjE0LTQuMTRhLjUzLjUzIDAgMCAwLS4wOTYtLjMwNGwtMy4yNS02LjM3IDYuMDctLjAyM3YxOC4yYy0yLjU1LjI5NC03LjAxLjM4MS03IDIuNWgxNmMwLTIuMDMtNC40OC0yLjI3LTctMi41di0xOC4xbDUuNjktLjAyLTIuOTIgNi40OWMwIC4wMDIgMCAuMDAzLS4wMDIuMDA1bC0uMDA2LjAxOGEuNTQ1LjU0NSAwIDAgMC0uMDIzLjA3NWwtLjAwNS4wMmEuNTI0LjUyNCAwIDAgMC0uMDEuMDkydi4wMDhjMCAyLjI4IDEuODYgNC4xNCA0LjE0IDQuMTQgMi4yOCAwIDQuMTQtMS44NiA0LjE0LTQuMTRhLjUyOC41MjggMCAwIDAtLjEyLS4zMzJ6IiBmaWxsPSIjZmZmZmZmIj48L3BhdGg+PC9zdmc+"></a>
-  <a target="_blank" href="https://deepwiki.com/lynkos/blog" title="DeepWiki for lynkos/blog repository"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a><br><br>
+  <img alt="Ruby" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Ruby&logo=ruby&color=CC342D&labelColor=393939&logoColor=CC342D">
+  <img alt="HTML" src="https://img.shields.io/static/v1?label=Language&style=flat&message=HTML&logo=html5&color=E34F26&labelColor=393939&logoColor=E34F26">
+  <img alt="JavaScript" src="https://img.shields.io/static/v1?label=Language&style=flat&message=JavaScript&logo=javascript&color=F7DF1E&labelColor=393939&logoColor=F7DF1E">
+  <img alt="SCSS" src="https://img.shields.io/static/v1?label=Language&style=flat&message=SCSS&logo=sass&color=CC6699&labelColor=393939&logoColor=CC6699">
+  <img alt="Liquid" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Liquid&logo=shopify&color=7AB55C&labelColor=393939&logoColor=7AB55C">
+  <img alt="Markdown" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Markdown&logo=markdown&color=000000&labelColor=393939&logoColor=000000">
+  <img alt="CSS" src="https://img.shields.io/static/v1?label=Language&style=flat&message=CSS&logo=css&color=663399&labelColor=393939&logoColor=663399">
+  <img alt="Bash" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Bash&logo=gnubash&color=4EAA25&labelColor=393939&logoColor=4EAA25">
+  <img alt="YAML" src="https://img.shields.io/static/v1?label=Language&style=flat&message=YAML&logo=yaml&color=CB171E&labelColor=393939&logoColor=CB171E">
+  <img alt="JSON" src="https://img.shields.io/static/v1?label=Language&style=flat&message=JSON&logo=json&color=000000&labelColor=393939&logoColor=000000">
+  <img alt="Jekyll" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Jekyll&logo=jekyll&color=CC0000&labelColor=393939&logoColor=CC0000">
+  <img alt="Obsidian" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Obsidian&logo=obsidian&color=7C3AED&labelColor=393939&logoColor=7C3AED">
+  <img alt="Cloudflare" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Cloudflare&logo=cloudflare&color=F38020&labelColor=393939&logoColor=F38020">
+  <img alt="Giscus" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Giscus&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNzFBQkU3IiBkPSJNMTY4LjUgNzJsODcuNSA5MyA4Ny41LTkzLTE3NSAwek0zODMuOSA5OS4xbC03Mi4zIDc2LjkgMTI5IDAtNTYuNi03Ni45em01MCAxMjQuOUw3OC4xIDIyNCAyNTYgNDIwLjMgNDMzLjkgMjI0ek03MS41IDE3NmwxMjkgMC03Mi4zLTc2LjktNTYuNiA3Ni45em00MzQuMyA0MC4xbC0yMzIgMjU2Yy00LjUgNS0xMSA3LjktMTcuOCA3LjlzLTEzLjItMi45LTE3LjgtNy45bC0yMzItMjU2Yy03LjctOC41LTguMy0yMS4yLTEuNS0zMC40bDExMi0xNTJjNC41LTYuMSAxMS43LTkuOCAxOS4zLTkuOGwyNDAgMGM3LjYgMCAxNC44IDMuNiAxOS4zIDkuOGwxMTIgMTUyYzYuOCA5LjIgNi4xIDIxLjktMS41IDMwLjR6Ii8+PC9zdmc+&color=71ABE7&labelColor=393939&logoColor=71ABE7">
+  <img alt="Enveloppe" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Enveloppe&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjRTlDRTk3IiBkPSJNNDggNjRjLTI2LjUgMC00OCAyMS41LTQ4IDQ4IDAgMTUuMSA3LjEgMjkuMyAxOS4yIDM4LjRsMjA4IDE1NmMxNy4xIDEyLjggNDAuNSAxMi44IDU3LjYgMGwyMDgtMTU2YzEyLjEtOS4xIDE5LjItMjMuMyAxOS4yLTM4LjQgMC0yNi41LTIxLjUtNDgtNDgtNDhMNDggNjR6TTAgMTk2TDAgMzg0YzAgMzUuMyAyOC43IDY0IDY0IDY0bDM4NCAwYzM1LjMgMCA2NC0yOC43IDY0LTY0bDAtMTg4LTE5OC40IDE0OC44Yy0zNC4xIDI1LjYtODEuMSAyNS42LTExNS4yIDBMMCAxOTZ6Ii8+PC9zdmc+&color=E9CE97&labelColor=393939&logoColor=E9CE97">
+  <img alt="GitHub Actions" src="https://img.shields.io/static/v1?label=CI/CD&style=flat&message=GitHub+Actions&logo=github+actions&color=2088FF&labelColor=393939&logoColor=2088FF">
+  <br>
+  <img alt="Gem Version" src="https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=white&label=gem&color=E9573F">
+  <img alt="Website status" src="https://img.shields.io/website?url=https%3A%2F%2Fblog.lynkos.dev&up_message=online&up_color=green&down_message=offline&down_color=red&style=flat&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjI0IDI0YzAtMTMuMyAxMC43LTI0IDI0LTI0IDE0NS44IDAgMjY0IDExOC4yIDI2NCAyNjQgMCAxMy4zLTEwLjcgMjQtMjQgMjRzLTI0LTEwLjctMjQtMjRjMC0xMTkuMy05Ni43LTIxNi0yMTYtMjE2LTEzLjMgMC0yNC0xMC43LTI0LTI0ek04MCA5NmMyNi41IDAgNDggMjEuNSA0OCA0OGwwIDIyNGMwIDI2LjUgMjEuNSA0OCA0OCA0OHM0OC0yMS41IDQ4LTQ4LTIxLjUtNDgtNDgtNDhjLTguOCAwLTE2LTcuMi0xNi0xNmwwLTY0YzAtOC44IDcuMi0xNiAxNi0xNiA3OS41IDAgMTQ0IDY0LjUgMTQ0IDE0NFMyNTUuNSA1MTIgMTc2IDUxMiAzMiA0NDcuNSAzMiAzNjhsMC0yMjRjMC0yNi41IDIxLjUtNDggNDgtNDh6bTE2OCAwYzkyLjggMCAxNjggNzUuMiAxNjggMTY4IDAgMTMuMy0xMC43IDI0LTI0IDI0cy0yNC0xMC43LTI0LTI0YzAtNjYuMy01My43LTEyMC0xMjAtMTIwLTEzLjMgMC0yNC0xMC43LTI0LTI0czEwLjctMjQgMjQtMjR6Ii8+PC9zdmc+&logoColor=white">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/lynkos/blog/pages-deploy.yml?logo=github">
+  <a target="_blank" href="LICENSE" title="Link to License"><img alt="License" src="https://img.shields.io/github/license/lynkos/blog?color=goldenrod&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0ibTIzLjkgOS43LTMuNTQtNy44OS0uMDA1LS4wMWEuNTQyLjU0MiAwIDAgMC0uMDQxLS4wNzZsLS4wMTQtLjAxOGEuNTMzLjUzMyAwIDAgMC0uMTIyLS4xMjJsLS4wMTUtLjAxMWEuNTI4LjUyOCAwIDAgMC0uMDgtLjA0NGwtLjAyNC0uMDA5YS41MjcuNTI3IDAgMCAwLS4wNjctLjAybC0uMDI4LS4wMDdhLjUyNC41MjQgMCAwIDAtLjA5Ni0uMDFoLTYuODVjLTEuMDItMS41Mi0xLjAyLTEuNTQtMiAwaC02Ljg2YS41NDMuNTQzIDAgMCAwLS4wOTYuMDFsLS4wMjguMDA3YS41MTYuNTE2IDAgMCAwLS4wNjcuMDJsLS4wMjQuMDFhLjUzNy41MzcgMCAwIDAtLjA4LjA0M2wtLjAxNS4wMTFhLjUxLjUxIDAgMCAwLS4wNTcuMDQ3bC0uMDIuMDJhLjU0My41NDMgMCAwIDAtLjA0NS4wNTVsLS4wMTQuMDE4YS41MjIuNTIyIDAgMCAwLS4wNDEuMDc1bC0uMDA1LjAxdi4wMDFMLjExNiA5LjcyYS41MzEuNTMxIDAgMCAwLS4wOTYuMzA0YzAgMi4yOCAxLjg2IDQuMTQgNC4xNCA0LjE0czQuMTQtMS44NiA0LjE0LTQuMTRhLjUzLjUzIDAgMCAwLS4wOTYtLjMwNGwtMy4yNS02LjM3IDYuMDctLjAyM3YxOC4yYy0yLjU1LjI5NC03LjAxLjM4MS03IDIuNWgxNmMwLTIuMDMtNC40OC0yLjI3LTctMi41di0xOC4xbDUuNjktLjAyLTIuOTIgNi40OWMwIC4wMDIgMCAuMDAzLS4wMDIuMDA1bC0uMDA2LjAxOGEuNTQ1LjU0NSAwIDAgMC0uMDIzLjA3NWwtLjAwNS4wMmEuNTI0LjUyNCAwIDAgMC0uMDEuMDkydi4wMDhjMCAyLjI4IDEuODYgNC4xNCA0LjE0IDQuMTQgMi4yOCAwIDQuMTQtMS44NiA0LjE0LTQuMTRhLjUyOC41MjggMCAwIDAtLjEyLS4zMzJ6IiBmaWxsPSIjZmZmZmZmIj48L3BhdGg+PC9zdmc+"></a>
+  <a target="_blank" href="https://deepwiki.com/lynkos/blog" title="DeepWiki for lynkos/blog repository"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+  <br><br>
   
-  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been modified to include a [custom tabbed container plugin](_plugins/tabs.rb), [custom gallery slideshow plugin](_plugins/gallery.rb), [link preview](assets/js/data/link-previews.js), [custom image proxy](#setup-image-proxy) (e.g. for Twitter links), [custom plugin to fix malformed Markdown links](_plugins/fix-anchor-links.rb) (originally generated by [Enveloppe](#setup-enveloppe)), auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml), custom "Important" prompt, and more.
+  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been **heavily modified** to include a [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), [link preview](assets/js/data/link-previews.js), [image proxy](#setup-image-proxy) (e.g. for Twitter links), [Jekyll plugin to fix malformed Markdown links](_plugins/fix-anchor-links.rb), auto-generates `CNAME` and `.nojekyll` files during [build and deployment](#cicd-workflow), custom "Important" prompt, and more.
 </div>
-
-## Tech Stack
-* [Jekyll](https://jekyllrb.com)
-* [Liquid](https://shopify.github.io/liquid)
-* [Markdown](https://daringfireball.net/projects/markdown)
-* [Ruby](https://www.ruby-lang.org/en)
-* [HTML](https://html.spec.whatwg.org)
-* [SCSS](https://sass-lang.com/documentation/syntax/#scss)
-* [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [GitHub Actions](https://github.com/features/actions)
-* [Obsidian](https://obsidian.md)
-* [Enveloppe](https://enveloppe.ovh)
-* [Giscus](https://giscus.app)
-* [Cloudflare](https://cloudflare.com)
 
 ## Quick Start
 ```sh
@@ -42,11 +47,11 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
    git remote add upstream https://github.com/cotes2020/jekyll-theme-chirpy.git
    ```
 
-> [!TIP]
-> Use this command if you've already linked the upstream repository and want to re-link it
-> ```sh
-> git remote set-url upstream https://github.com/cotes2020/jekyll-theme-chirpy.git
-> ```
+   > [!TIP]
+   > Use this command if you've already linked the upstream repository and want to re-link it
+   > ```sh
+   > git remote set-url upstream https://github.com/cotes2020/jekyll-theme-chirpy.git
+   > ```
 
 2. Confirm the remote URL with either command
   * Command #1
@@ -101,12 +106,12 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
    ```
 
 ### Setup Giscus
-Ensure:
+Install by going to [Giscus](https://giscus.app) and filling out the form. For it to work, these requirements **must** be met:
 - [x] Repository is [public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
 - [x] [Giscus app](https://github.com/apps/giscus) is installed
 - [x] Discussions feature is [enabled for repository](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
 
-Install by going to [Giscus](https://giscus.app) and filling out the form. Example code with my configuration:
+ Example code with my configuration:
 
 ```html
 <script src="https://giscus.app/client.js"
@@ -133,112 +138,112 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 3. Turn off **Restricted mode** to enable community plugins
 4. Click **Browse**, which is next to **Community plugins**
 5. Enter `Enveloppe` in the searchbar
-6. Click on [Enveloppe](obsidian://show-plugin?id=obsidian-mkdocs-publisher), then click **Install**
+6. Click on [Enveloppe](obsidian://show-plugin?id=obsidian-mkdocs-publisher), then click **Install** (note: I'm using **Version `7.6.3`**)
 7. Once Enveloppe's installed, go to its Settings
-8. Copy my Enveloppe settings
-```json
-{
-  "github": {
-    "branch": "main",
-    "automaticallyMergePR": true,
-    "dryRun": {
-      "enable": false,
-      "folderName": "enveloppe"
-    },
-    "api": {
-      "tiersForApi": "Github Free/Pro/Team (default)",
-      "hostname": ""
-    },
-    "workflow": {
-      "commitMessage": "[OBSIDIAN] Merge",
-      "name": ""
-    },
-    "verifiedRepo": true
-  },
-  "upload": {
-    "behavior": "fixed",
-    "defaultName": "_posts",
-    "rootFolder": "",
-    "yamlFolderKey": "",
-    "frontmatterTitle": {
-      "enable": true,
-      "key": "filename"
-    },
-    "replaceTitle": [
-      {
-        "regex": "/\\s+/",
-        "replacement": "-",
-        "type": "title"
-      }
-    ],
-    "replacePath": [],
-    "autoclean": {
-      "includeAttachments": true,
-      "enable": false,
-      "excluded": []
-    },
-    "folderNote": {
-      "enable": false,
-      "rename": "index.md",
-      "addTitle": {
-        "enable": false,
-        "key": "title"
-      }
-    },
-    "metadataExtractorPath": ""
-  },
-  "conversion": {
-    "hardbreak": false,
-    "dataview": true,
-    "censorText": [],
-    "tags": {
-      "inline": false,
-      "exclude": [],
-      "fields": []
-    },
-    "links": {
-      "internal": true,
-      "unshared": true,
-      "wiki": true,
-      "slugify": "strict",
-      "unlink": true,
-      "relativePath": true,
-      "textPrefix": "/"
-    }
-  },
-  "embed": {
-    "attachments": true,
-    "overrideAttachments": [],
-    "keySendFile": [],
-    "notes": false,
-    "folder": "assets/obsidian",
-    "convertEmbedToLinks": "keep",
-    "charConvert": "->",
-    "unHandledObsidianExt": [],
-    "sendSimpleLinks": true,
-    "forcePush": true,
-    "useObsidianFolder": false
-  },
-  "plugin": {
-    "shareKey": "share",
-    "excludedFolder": [
-      "templates"
-    ],
-    "copyLink": {
-      "enable": false,
-      "links": "",
-      "removePart": [],
-      "addCmd": false,
-      "transform": {
-        "toUri": true,
-        "slugify": "lower",
-        "applyRegex": []
-      }
-    },
-    "setFrontmatterKey": "Set"
-  }
-}
-```
+8. Copy my Enveloppe settings:
+   ```json
+   {
+     "github": {
+       "branch": "main",
+       "automaticallyMergePR": true,
+       "dryRun": {
+         "enable": false,
+         "folderName": "enveloppe"
+       },
+       "api": {
+         "tiersForApi": "Github Free/Pro/Team (default)",
+         "hostname": ""
+       },
+       "workflow": {
+         "commitMessage": "[OBSIDIAN] Merge",
+         "name": ""
+       },
+       "verifiedRepo": true
+     },
+     "upload": {
+       "behavior": "fixed",
+       "defaultName": "_posts",
+       "rootFolder": "",
+       "yamlFolderKey": "",
+       "frontmatterTitle": {
+         "enable": true,
+         "key": "filename"
+       },
+       "replaceTitle": [
+         {
+           "regex": "/\\s+/",
+           "replacement": "-",
+           "type": "title"
+         }
+       ],
+       "replacePath": [],
+       "autoclean": {
+         "includeAttachments": true,
+         "enable": false,
+         "excluded": []
+       },
+       "folderNote": {
+         "enable": false,
+         "rename": "index.md",
+         "addTitle": {
+           "enable": false,
+           "key": "title"
+         }
+       },
+       "metadataExtractorPath": ""
+     },
+     "conversion": {
+       "hardbreak": false,
+       "dataview": true,
+       "censorText": [],
+       "tags": {
+         "inline": false,
+         "exclude": [],
+         "fields": []
+       },
+       "links": {
+         "internal": true,
+         "unshared": true,
+         "wiki": true,
+         "slugify": "strict",
+         "unlink": true,
+         "relativePath": true,
+         "textPrefix": "/"
+       }
+     },
+     "embed": {
+       "attachments": true,
+       "overrideAttachments": [],
+       "keySendFile": [],
+       "notes": false,
+       "folder": "assets/obsidian",
+       "convertEmbedToLinks": "keep",
+       "charConvert": "->",
+       "unHandledObsidianExt": [],
+       "sendSimpleLinks": true,
+       "forcePush": true,
+       "useObsidianFolder": false
+     },
+     "plugin": {
+       "shareKey": "share",
+       "excludedFolder": [
+         "templates"
+       ],
+       "copyLink": {
+         "enable": false,
+         "links": "",
+         "removePart": [],
+         "addCmd": false,
+         "transform": {
+           "toUri": true,
+           "slugify": "lower",
+           "applyRegex": []
+         }
+       },
+       "setFrontmatterKey": "Set"
+     }
+   }
+   ```
 
 9. Click **Import settings** and paste the copied `enveloppe.json` (from the previous step) where it says `Paste configuration here...`, then click **Save**
 10.  Under **GitHub config**, enter your **GitHub username**, **Repository name**, and — if your main branch is not named `main` — **Main branch** name
@@ -251,13 +256,12 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. Examp
 17.  Under **Repository access**, click **Only select repositories** then click **Select repositories** and select the GitHub repository for your Jekyll blog (e.g. `lynkos/blog`)
 18. Click **Repository permissions** under **Permissions**
 19. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
-
-| Permission    | Access         | Reason                         |
-| :------------ | :------------- | :----------------------------- |
-| Contents      | Read and write | Create branch                  |
-| Metadata      | Read-only      | Mandatory                      |
-| Pull requests | Read and write | Create and merge pull requests |
-| Workflows     | Read and write | Create/update file             |
+    | Permission    | Access         | Reason                         |
+    | :------------ | :------------- | :----------------------------- |
+    | Contents      | Read and write | Create branch                  |
+    | Metadata      | Read-only      | Mandatory                      |
+    | Pull requests | Read and write | Create and merge pull requests |
+    | Workflows     | Read and write | Create/update file             |
 
 20. Click **Generate token**
 21. Copy the generated GitHub personal access token; it should start with `github_` followed by a long, random string of alphanumeric characters and underscores
@@ -307,12 +311,12 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
       }
     };
     ```
-  > [!TIP]
-  > Test the worker in the **Preview** pane by adding `?url=` and the link to an image on Twitter (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`) following AFTER your worker's URL (i.e. `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/`) in the input field
-  > 
-  > So, in this example, the full URL is: `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`
-  >
-  > Click the **Reload** button (circular arrow icon) to the right of the input field to test it; if successful, you should see the image in the **Preview** pane
+      > [!TIP]
+      > Test the worker in the **Preview** pane by adding `?url=` and the link to an image on Twitter (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`) following AFTER your worker's URL (i.e. `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/`) in the input field
+      > 
+      > So, in this example, the full URL is: `https://img-proxy.<YOUR_DOMAIN_NAME>.workers.dev/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`
+      >
+      > Click the **Reload** button (circular arrow icon) to the right of the input field to test it; if successful, you should see the image in the **Preview** pane
 11. Click **Deploy** in the upper-right corner
 12. You can now use this worker as an image proxy by using the following URL format:
     ```html
@@ -320,24 +324,30 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
     ```
     where `<YOUR_DOMAIN_NAME>` is your Cloudflare domain (e.g. `example.com`) and `<IMAGE_URL>` is the full URL of the image you want to hotlink (e.g. `https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
 
-**_OPTIONAL STEPS: USE CUSTOM DOMAIN_** (e.g. `img-proxy.<YOUR_ROOT_DOMAIN>`)
+**_OPTIONAL: USE CUSTOM DOMAIN_** (e.g. `img-proxy.<YOUR_ROOT_DOMAIN>`)
 
-13.  In the left pane, click **DNS**, then **Records**
-14.  Click the blue **+ Add record** button, then add a new record with the following details:
-  * **Type**: `CNAME`
-  * **Name**: `img-proxy` (or whatever subdomain you want to use)
-  * **IPv4 address**: `workers.dev`
-  * **Proxy status**: `Proxied` aka Enabled (orange cloud icon)
-  * **TTL**: `Auto`
-  * **Comment**: `Map img-proxy worker (at img-proxy.<YOUR_DOMAIN_NAME>.workers.dev) to img-proxy.<YOUR_ROOT_DOMAIN>`
-15. Click **Save**
-16. Click **Workers Routes** in the left pane, then click the blue **Add route** button in the **HTTP Routes** section
-17. In the **Route** field, enter `img-proxy.<YOUR_ROOT_DOMAIN>/*`
-18. Under **Worker**, select `img-proxy` worker (or whatever you named it) from the dropdown
-19. Click **Save**
-20. You can now use the custom domain for your image proxy at `https://img-proxy.<YOUR_ROOT_DOMAIN>/?url=<IMAGE_URL>` (e.g. `https://img-proxy.example.com/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
+13.   In the left pane, click **DNS**, then **Records**
+14.   Click the blue **+ Add record** button, then add a new record with the following details:
+      * **Type**: `CNAME`
+      * **Name**: `img-proxy` (or whatever subdomain you want to use)
+      * **IPv4 address**: `workers.dev`
+      * **Proxy status**: `Proxied` aka Enabled (orange cloud icon)
+      * **TTL**: `Auto`
+      * **Comment**: `Map img-proxy worker (at img-proxy.<YOUR_DOMAIN_NAME>.workers.dev) to img-proxy.<YOUR_ROOT_DOMAIN>`
+15.  Click **Save**
+16.  Click **Workers Routes** in the left pane, then click the blue **Add route** button in the **HTTP Routes** section
+17.  In the **Route** field, enter `img-proxy.<YOUR_ROOT_DOMAIN>/*`
+18.  Under **Worker**, select `img-proxy` worker (or whatever you named it) from the dropdown
+19.  Click **Save**
+20.  You can now use the custom domain for your image proxy at `https://img-proxy.<YOUR_ROOT_DOMAIN>/?url=<IMAGE_URL>` (e.g. `https://img-proxy.example.com/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
+
+## CI/CD Workflow
+> [!NOTE]
+> Refer to [`pages-deploy.yml`](.github/workflows/pages-deploy.yml) for full workflow
+
+<svg xmlns="http://www.w3.org/2000/svg" style="background:0 0;background-color:transparent;color-scheme:light dark" viewBox="0 0 1232 51"><g data-cell-id="0"><g data-cell-id="1"><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-12"><path fill="none" d="M120 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m158.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-1"><rect width="120" height="50" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:118px;height:1px;padding-top:25px;margin-left:1px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font data-font-src="https://fonts.googleapis.com/css?family=Roboto+Mono" face="Roboto Mono">git commit + push to &apos;main&apos;</font></div></div></div></foreignObject><text x="60" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">git commit + push to...</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-13"><path fill="none" d="M270 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m308.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-2"><rect width="110" height="50" x="160" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:108px;height:1px;padding-top:25px;margin-left:161px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font data-font-src="https://fonts.googleapis.com/css?family=Roboto+Mono" face="Roboto Mono">git checkout from &apos;main&apos;</font></div></div></div></foreignObject><text x="215" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">git checkout from...</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-14"><path fill="none" d="M410 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m448.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-4"><rect width="100" height="50" x="310" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:98px;height:1px;padding-top:25px;margin-left:311px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Setup Pages</font></div></div></div></foreignObject><text x="360" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Setup Pages</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-15"><path fill="none" d="M550 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m588.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-5"><rect width="100" height="50" x="450" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:98px;height:1px;padding-top:25px;margin-left:451px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Setup Ruby</font></div></div></div></foreignObject><text x="500" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Setup Ruby</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-16"><path fill="none" d="M650 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m688.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-6"><rect width="60" height="50" x="590" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:58px;height:1px;padding-top:25px;margin-left:591px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Build</font></div></div></div></foreignObject><text x="620" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Build</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-18"><path fill="none" d="M860 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m898.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-7"><rect width="80" height="50" x="780" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:78px;height:1px;padding-top:25px;margin-left:781px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Generate CNAME</font></div></div></div></foreignObject><text x="820" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Generate CNAME</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-19"><path fill="none" d="M980 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m1018.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-8"><rect width="80" height="50" x="900" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:78px;height:1px;padding-top:25px;margin-left:901px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Generate .nojekyll</font></div></div></div></foreignObject><text x="940" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Generate .noj...</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-20"><path fill="none" d="M1120 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m1158.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-9"><rect width="100" height="50" x="1020" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:98px;height:1px;padding-top:25px;margin-left:1021px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Upload site artifact</font></div></div></div></foreignObject><text x="1070" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Upload site arti...</text></switch></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-10"><rect width="70" height="50" x="1160" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:68px;height:1px;padding-top:25px;margin-left:1161px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Deploy</font></div></div></div></foreignObject><text x="1195" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Deploy</text></switch></g><g stroke="#457b9d" stroke-miterlimit="10" data-cell-id="KkBzR6pyPv5GpQIqhHqy-17"><path fill="none" d="M740 25h33.6" pointer-events="stroke" style="stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><path fill="#457b9d" d="m778.9 25-7 3.5 1.7-3.5-1.7-3.5Z" pointer-events="all" style="fill:light-dark(#457b9d,#6493b0);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/></g><g data-cell-id="KkBzR6pyPv5GpQIqhHqy-11"><rect width="50" height="50" x="690" fill="#a8dadc" stroke="#457b9d" pointer-events="all" rx="7.5" ry="7.5" style="fill:light-dark(#a8dadc,#194446);stroke:light-dark(#457b9d,#6493b0)" transform="translate(.5 .5)"/><switch><foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:48px;height:1px;padding-top:25px;margin-left:691px"><div style="box-sizing:border-box;font-size:0;text-align:center;color:#1d3557"><div style="display:inline-block;font-size:12px;font-family:Helvetica;color:light-dark(#1d3557,#b0c4e2);line-height:1.2;pointer-events:all;white-space:normal;word-wrap:normal"><font face="Roboto Mono">Test</font></div></div></div></foreignObject><text x="715" y="29" fill="#1D3557" font-family="Helvetica" font-size="12" text-anchor="middle">Test</text></switch></g></g></g></svg>
 
 ## Credit
-Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020).
+Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020), aka [Cotes Chung](https://cotes.page).
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki) for more information and the [theme's license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE) for the license.
+For more information, check out the [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki) and [original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE).

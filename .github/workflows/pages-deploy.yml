@@ -9,8 +9,7 @@ on:
       - .gitattributes
       - .gitmodules
       - .editorconfig
-      - README.md
-      - LICENSE
+      - 'docs/**' # Includes LICENSE and README.md
       - '.vscode/**'
       - 'tools/**'
 

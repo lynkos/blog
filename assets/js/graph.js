@@ -73,6 +73,8 @@ class InteractiveGraph {
   }
 
   render() {
+    const duration = 300;
+
     // Render edges
     const link = this.graphGroup.selectAll('.link')
       .data(this.edges)
@@ -81,7 +83,7 @@ class InteractiveGraph {
       .attr('class', 'link')
       .attr('stroke', 'var(--main-border-color)')
       //.attr('stroke-opacity', 0.75)
-      .attr('stroke-width', 3);
+      .attr('stroke-width', 2);
 
     // Render nodes
     const node = this.graphGroup.selectAll('.node')
@@ -107,26 +109,51 @@ class InteractiveGraph {
     });
 
     // Add hover effects
-    node.on('mouseover', function(event, d) {      
+    node.on('mouseover', (event, d) => {      
+      // Get connected node IDs
+      const connectedNodeIds = new Set([d.id]);
+      const connectedEdges = new Set();
+      
+      this.edges.forEach((edge, index) => {
+        if (edge.source.id === d.id || edge.target.id === d.id) {
+          connectedNodeIds.add(edge.source.id);
+          connectedNodeIds.add(edge.target.id);
+          connectedEdges.add(index);
+        }
+      });
+      
+      // Dim all nodes except hovered and connected ones
+      node.transition()
+        .duration(duration)
+        .style('opacity', nodeData => 
+        connectedNodeIds.has(nodeData.id) ? 1 : 0.3
+      );
+      
+      // Dim all edges except connected ones
+      link.transition()
+        .duration(duration)
+        .style('opacity', (edgeData, index) => 
+        connectedEdges.has(index) ? 1 : 0.3
+      );
+      
       const tooltip = d3.select('body').append('div')
         .attr('class', 'graph-tooltip')
-        .style('position', 'absolute')
-        .style('background', 'var(--card-bg)')
-        .style('color', 'var(--heading-color)')
-        .style('padding', '8px')
-        .style('border-radius', '4px')
-        .style('border', '1px solid var(--bs-card-border-color)')
-        .style('box-shadow', 'var(--card-shadow)')
-        .style('font-size', '13px')
-        .style('pointer-events', 'none')
-        .style('z-index', '1000')
         .text(d.label);
       
       tooltip.style('left', (event.pageX + 10) + 'px')
              .style('top', (event.pageY - 10) + 'px');
     });
 
-    node.on('mouseout', function(event, d) {
+    node.on('mouseout', (event, d) => {
+      // Reset all opacities
+      node.transition()
+        .duration(duration)
+        .style('opacity', 1);
+      
+      link.transition()
+        .duration(duration)
+        .style('opacity', 1);
+      
       d3.selectAll('.graph-tooltip').remove();
     });
 

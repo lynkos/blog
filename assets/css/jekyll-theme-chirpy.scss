@@ -296,6 +296,21 @@ img, .content a.popup {
   overflow: hidden;
 }
 
+.graph-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: v.$code-dot-gap;
+  font-size: 13px;
+  background: var(--card-bg);
+  border: 1px solid var(--bs-card-border-color);
+  border-radius: v.$radius-sm;
+  box-shadow: var(--card-shadow);
+  pointer-events: none;
+  color: var(--heading-color);
+  max-width: v.$sidebar-width;
+  z-index: 1000;
+}
+
 .node {
   circle {
     cursor: pointer;

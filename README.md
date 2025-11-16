@@ -6,10 +6,13 @@
   <img alt="SCSS" src="https://img.shields.io/static/v1?label=Language&style=flat&message=SCSS&logo=sass&color=CC6699&labelColor=393939&logoColor=CC6699">
   <img alt="Liquid" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Liquid&logo=shopify&color=7AB55C&labelColor=393939&logoColor=7AB55C">
   <img alt="Markdown" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Markdown&logo=markdown&color=000000&labelColor=393939&logoColor=000000">
-  <img alt="CSS" src="https://img.shields.io/static/v1?label=Language&style=flat&message=CSS&logo=css&color=663399&labelColor=393939&logoColor=663399">
   <img alt="Bash" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Bash&logo=gnubash&color=4EAA25&labelColor=393939&logoColor=4EAA25">
   <img alt="YAML" src="https://img.shields.io/static/v1?label=Language&style=flat&message=YAML&logo=yaml&color=CB171E&labelColor=393939&logoColor=CB171E">
   <img alt="JSON" src="https://img.shields.io/static/v1?label=Language&style=flat&message=JSON&logo=json&color=000000&labelColor=393939&logoColor=000000">
+  <img alt="Bootstrap" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Bootstrap&logo=bootstrap&color=7952B3&labelColor=393939&logoColor=7952B3">
+  <img alt="Babel" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Babel&logo=babel&color=F9DC3E&labelColor=393939&logoColor=F9DC3E">
+  <img alt="Rollup" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Rollup&logo=rollupdotjs&color=EC4A3F&labelColor=393939&logoColor=EC4A3F">
+  <img alt="PurgeCSS" src="https://img.shields.io/static/v1?label=Package&style=flat&message=PurgeCSS&logo=purgecss&color=14161A&labelColor=393939&logoColor=14161A">
   <img alt="Jekyll" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Jekyll&logo=jekyll&color=CC0000&labelColor=393939&logoColor=CC0000">
   <img alt="Obsidian" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Obsidian&logo=obsidian&color=7C3AED&labelColor=393939&logoColor=7C3AED">
   <img alt="Cloudflare" src="https://img.shields.io/static/v1?label=Tool&style=flat&message=Cloudflare&logo=cloudflare&color=F38020&labelColor=393939&logoColor=F38020">

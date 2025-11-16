@@ -7,7 +7,7 @@ require 'json'
 require 'fileutils'
 
 Jekyll::Hooks.register :site, :post_write do |site|
-  puts "=== Graph Generator Hook Triggered ==="
+  puts "\n=== Graph Generator Hook Triggered ==="
   
   # Ensure the data directory exists
   data_dir = File.join(site.dest, 'assets', 'js', 'data')
@@ -85,14 +85,14 @@ Jekyll::Hooks.register :site, :post_write do |site|
     content = post.content
     found_links = []
     
-    puts "\nAnalyzing post: #{File.basename(post.path)} (#{post.data['title']})"
+    puts "Analyzing post: #{File.basename(post.path)} (#{post.data['title']})"
     
     # 1. Find standard markdown links [text](url)
     content.scan(/\[([^\]]*)\]\(([^)]+)\)/) do |text, url|
       clean_url = normalize_url(url, site.baseurl, site.config['url'], filename_to_url, slug_to_url, site.posts.docs)
       if clean_url
         found_links << clean_url
-        puts "  Markdown link: #{url} -> #{clean_url}"
+        # puts "  Markdown link: #{url} -> #{clean_url}"
       end
     end
     
@@ -129,7 +129,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       
       if found_url
         found_links << found_url
-        puts "  Wikilink: [[#{page_name}]] -> #{found_url}"
+        # puts "  Wikilink: [[#{page_name}]] -> #{found_url}"
       end
     end
     
@@ -139,7 +139,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       clean_url = normalize_url(url, site.baseurl, site.config['url'], filename_to_url, slug_to_url, site.posts.docs)
       if clean_url
         found_links << clean_url
-        puts "  href link: #{url} -> #{clean_url}"
+        # puts "  href link: #{url} -> #{clean_url}"
       end
     end
     
@@ -155,8 +155,6 @@ Jekyll::Hooks.register :site, :post_write do |site|
       end
     end
   end
-
-  puts "\nGenerated #{edges.length} edges"
 
   # Write edges data
   edges_data = { edges: edges }
@@ -179,21 +177,21 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
   return nil if url.nil? || url.empty?
   
   original_url = url
-  puts "    Normalizing: #{original_url}"
+  # puts "    Normalizing: #{original_url}"
   
   # Handle different URL patterns
   
   # 1. YYYY-MM-DD-*.md filename pattern
   if url.match?(/^\d{4}-\d{2}-\d{2}-.+\.md$/)
     result = filename_to_url[url]
-    puts "      Filename pattern match: #{result}" if result
+    # puts "      Filename pattern match: #{result}" if result
     return result
   end
   
   # 2. YYYY-MM-DD-* filename pattern (without .md)
   if url.match?(/^\d{4}-\d{2}-\d{2}-.+$/) && !url.include?('/')
     result = filename_to_url[url] || filename_to_url["#{url}.md"]
-    puts "      Filename base pattern match: #{result}" if result
+    # puts "      Filename base pattern match: #{result}" if result
     return result
   end
   
@@ -201,7 +199,7 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
   if url.match?(%r{^/?_posts/.+\.md$})
     filename = File.basename(url)
     result = filename_to_url[filename]
-    puts "      _posts pattern match: #{result}" if result
+    # puts "      _posts pattern match: #{result}" if result
     return result
   end
   
@@ -220,7 +218,7 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
     end
     
     unless is_supported
-      puts "      External URL, skipping"
+      # puts "      External URL, skipping"
       return nil
     end
     
@@ -229,24 +227,24 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
     if uri_parts.length >= 4
       path = "/#{uri_parts[3]}"
     else
-      puts "      Invalid URL format"
+      # puts "      Invalid URL format"
       return nil
     end
     
     url = path
-    puts "      Extracted path from full URL: #{url}"
+    # puts "      Extracted path from full URL: #{url}"
   end
   
   # 5. Domain without protocol (blog.lynkos.dev/posts/*)
   if url.match?(%r{^blog\.lynkos\.dev/})
     path = "/#{url.split('/', 2)[1]}"
     url = path
-    puts "      Extracted path from domain URL: #{url}"
+    # puts "      Extracted path from domain URL: #{url}"
   end
   
   # Skip anchors, mailto, etc.
   if url.start_with?('#', 'mailto:', 'tel:', 'javascript:')
-    puts "      Skipping non-post link"
+    # puts "      Skipping non-post link"
     return nil
   end
   
@@ -270,12 +268,12 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
   # 6. Handle /posts/* pattern - convert to Jekyll's date-based URL structure
   if url.match?(%r{^/posts/([^/]+)/?$})
     slug = $1
-    puts "      Found /posts/ pattern with slug: #{slug}"
+    # puts "      Found /posts/ pattern with slug: #{slug}"
     
     # Try to find the post by slug
     result = slug_to_url[slug]
     if result
-      puts "      Slug match found: #{result}"
+      # puts "      Slug match found: #{result}"
       return result
     end
     
@@ -283,12 +281,12 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
     posts.each do |post|
       post_slug = post.url.split('/').last || post.url.split('/')[-2]
       if post_slug == slug
-        puts "      Post search match: #{post.url}"
+        # puts "      Post search match: #{post.url}"
         return post.url
       end
     end
     
-    puts "      No match found for slug: #{slug}"
+    # puts "      No match found for slug: #{slug}"
     return nil
   end
   
@@ -300,11 +298,11 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
   # Final check - see if this URL exists in our posts
   posts.each do |post|
     if post.url == url
-      puts "      Direct URL match: #{url}"
+      # puts "      Direct URL match: #{url}"
       return url
     end
   end
   
-  puts "      No match found for: #{url}"
+  # puts "      No match found for: #{url}"
   nil
 end

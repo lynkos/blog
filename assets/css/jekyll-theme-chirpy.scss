@@ -295,3 +295,22 @@ img, .content a.popup {
   position: relative;
   overflow: hidden;
 }
+
+.node {
+  circle {
+    cursor: pointer;
+    fill: var(--link-color);
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      fill: var(--link-hover-color);
+    }
+  }
+
+  text {
+    pointer-events: none;
+    font-size: 12px;
+    fill: var(--text-color);
+    text-anchor: middle;
+  }
+}

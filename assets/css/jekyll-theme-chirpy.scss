@@ -18,6 +18,7 @@
   --arrow-padding: 16px;
   --gallery-padding: 5px;
   --dot-height: calc(2 * (var(--gallery-padding) + var(--dot-size))); // 40px;
+  --link-hover-color: #d2603a;
 }
 
 /* Style the tab */
@@ -234,7 +235,7 @@ img, .content a.popup {
   z-index: 1000;
   background: var(--card-bg);
   border: 1px solid var(--bs-card-border-color);
-  border-radius: 10px;
+  border-radius: v.$radius-lg;
   max-width: 450px;
   //min-width: 50px;
   //max-height: 300px;
@@ -284,5 +285,47 @@ img, .content a.popup {
     color: var(--text-muted-color);
     font-style: italic;
     margin: 0;
+  }
+}
+
+/* Graph */
+.graph-container {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.graph-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: v.$code-dot-gap;
+  font-size: 13px;
+  background: var(--card-bg);
+  border: 1px solid var(--bs-card-border-color);
+  border-radius: v.$radius-sm;
+  box-shadow: var(--card-shadow);
+  pointer-events: none;
+  color: var(--heading-color);
+  max-width: v.$sidebar-width;
+  z-index: 1000;
+}
+
+.node {
+  circle {
+    cursor: pointer;
+    fill: var(--link-color);
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      fill: var(--link-hover-color);
+    }
+  }
+
+  text {
+    pointer-events: none;
+    font-size: 12px;
+    fill: var(--text-color);
+    text-anchor: middle;
   }
 }

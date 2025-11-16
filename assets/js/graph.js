@@ -1,13 +1,13 @@
 class InteractiveGraph {
   static CONFIG = {
     RADIUS: 15,
-    DURATION: 300,
+    TRANSITION_DURATION: 300,
     MAX_LABEL_LENGTH: 10,
     EDGE_WIDTH: 3,
-    OPACITY: 0.3,
-    COLLISION_RADIUS: 10, // Space around nodes to prevent overlap
-    CHARGE: -350, // Repulsion strength between nodes
-    EDGE_DISTANCE: 200, // Distance between connected nodes
+    DIM_OPACITY: 0.25,
+    COLLISION_RADIUS: 10,
+    CHARGE: -350,
+    EDGE_DISTANCE: 200,
     MIN_ZOOM: 0.25,
     MAX_ZOOM: 5,
     FALLBACK_WIDTH: 800,
@@ -22,14 +22,17 @@ class InteractiveGraph {
     this.edges = [];
     this.simulation = null;
     this.svg = null;
-    this.isDimmed = false;
+    this.nodeSelection = null;
+    this.linkSelection = null;
+    this.highlightedNode = null;
+    this.dragStartTime = 0;
+    this.isDragging = false;
     
     this.init();
   }
 
   async init() {
     try {
-      // Load search data (nodes) and edges data
       const [searchResponse, edgesResponse] = await Promise.all([
         fetch(this.searchDataPath),
         fetch(this.edgesDataPath).catch(() => ({ json: () => ({ edges: [] }) }))
@@ -38,7 +41,7 @@ class InteractiveGraph {
       const searchData = await searchResponse.json();
       const edgesData = await edgesResponse.json();
       
-      // Create nodes from search data with index as ID
+      // Transform search data into nodes
       this.nodes = searchData.map((item, index) => ({
         id: index,
         label: item.title,
@@ -72,8 +75,11 @@ class InteractiveGraph {
       .call(d3.zoom()
         .scaleExtent([InteractiveGraph.CONFIG.MIN_ZOOM, InteractiveGraph.CONFIG.MAX_ZOOM])
         .on('zoom', (event) => {
-        this.svg.select('.graph-group').attr('transform', event.transform);
-      }));
+          this.graphGroup.attr('transform', event.transform);
+        })
+      )
+      // Reset highlighting when clicking background
+      .on('click', () => this.resetHighlight());
     
     this.graphGroup = this.svg.append('g').attr('class', 'graph-group');
   }
@@ -91,146 +97,163 @@ class InteractiveGraph {
   }
 
   render() {
-    // Render edges
-    const link = this.graphGroup.selectAll('.link')
+    // Edges
+    this.linkSelection = this.graphGroup.selectAll('.link')
       .data(this.edges)
       .enter()
       .append('line')
       .attr('class', 'link')
       .attr('stroke', 'var(--main-border-color)')
-      //.attr('stroke-opacity', 0.75)
       .attr('stroke-width', InteractiveGraph.CONFIG.EDGE_WIDTH);
 
-    // Render nodes
+    // Nodes
     const node = this.graphGroup.selectAll('.node')
       .data(this.nodes)
       .enter()
       .append('g')
       .attr('class', 'node')
-      .call(this.drag());
+      .call(this.createDragBehavior());
 
-    // Add circles to nodes
     node.append('circle')
-      .attr('r', InteractiveGraph.CONFIG.RADIUS);
+      .attr('r', InteractiveGraph.CONFIG.RADIUS)
+      .style('cursor', 'pointer');
 
-    // Add labels to nodes
     node.append('text')
-      .text(d => this.truncateText(d.label, InteractiveGraph.CONFIG.MAX_LABEL_LENGTH))
-      .attr('x', 0)
-      .attr('y', InteractiveGraph.CONFIG.RADIUS * 2); // 30
+      .text(d => this.truncateText(d.label))
+      .attr('y', InteractiveGraph.CONFIG.RADIUS * 2);
 
-    // Add click handlers
-    node.on('click', (event, d) => {
-      this.resetDimming();
-      window.location.href = d.url;
-    });
-
-    // Add hover effects (desktop) and touch start (mobile)
-    node.on('mouseover touchstart', (event, d) => {
-      event.preventDefault(); // Prevent default touch behavior
-      this.dimGraph(d);
-    });
-
-    node.on('mouseout', (event, d) => {
-      // Only reset on mouseout for desktop, not on touchend
-      if (event.type === 'mouseout' && !('ontouchstart' in window)) {
-        this.resetDimming();
+    node.on('click', (event, d) => this.handleNodeClick(event, d));
+    node.on('mouseenter', (event, d) => this.handleNodeHover(event, d));
+    node.on('mouseleave', () => {
+      // Only reset on mouse devices (i.e. not touchscreens)
+      if (!('ontouchstart' in window)) {
+        this.resetHighlight();
+        this.hideTooltip();
       }
     });
 
-    // Add background click handler to reset dimming
-    this.svg.on('click touchstart', (event) => {
-      // Only reset if clicking on background (not on a node)
-      if (event.target === this.svg.node() || event.target.closest('.graph-group') === this.graphGroup.node()) {
-        this.resetDimming();
-      }
-    });
-
-    // Update positions on simulation tick
+    // Update positions on each simulation tick
     this.simulation.on('tick', () => {
-      link.attr('x1', d => d.source.x)
-          .attr('y1', d => d.source.y)
-          .attr('x2', d => d.target.x)
-          .attr('y2', d => d.target.y);
+      this.linkSelection
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
 
       node.attr('transform', d => `translate(${d.x}, ${d.y})`);
     });
 
-    // Store references for later use
     this.nodeSelection = node;
-    this.linkSelection = link;
   }
 
-  dimGraph(hoveredNode) {
-    if (this.isDimmed) return; // Prevent multiple dim operations
+  handleNodeClick(event, node) {
+    // Prevent navigation while dragging
+    if (this.isDragging) return;
     
-    this.isDimmed = true;
+    this.resetHighlight();
+    this.hideTooltip();
+    
+    // Navigate to node's respective post
+    const link = document.createElement('a');
+    link.href = node.url;
+    link.click();
+  }
 
-    // Get connected node IDs
-    const connectedNodeIds = new Set([hoveredNode.id]);
-    const connectedEdges = new Set();
+  handleNodeHover(event, node) {
+    // Don't highlight or show tooltip while dragging
+    if (this.isDragging) return;
     
-    this.edges.forEach((edge, index) => {
-      if (edge.source.id === hoveredNode.id || edge.target.id === hoveredNode.id) {
-        connectedNodeIds.add(edge.source.id);
-        connectedNodeIds.add(edge.target.id);
-        connectedEdges.add(index);
-      }
-    });
+    this.highlightNode(node);
+    this.showTooltip(event, node);
+  }
+
+  showTooltip(event, node) {
+    this.hideTooltip();
     
-    // Dim all nodes except hovered and connected ones
-    this.nodeSelection.transition()
-      .duration(InteractiveGraph.CONFIG.DURATION)
-      .style('opacity', nodeData => 
-        connectedNodeIds.has(nodeData.id) ? 1 : InteractiveGraph.CONFIG.OPACITY
-      );
-    
-    // Dim all edges except connected ones
-    this.linkSelection.transition()
-      .duration(InteractiveGraph.CONFIG.DURATION)
-      .style('opacity', (edgeData, index) => 
-        connectedEdges.has(index) ? 1 : InteractiveGraph.CONFIG.OPACITY
-      );
-    
-    const tooltip = d3.select('body').append('div')
+    d3.select('body')
+      .append('div')
       .attr('class', 'graph-tooltip')
-      .text(hoveredNode.label);
-    
-    const event = d3.event || window.event;
-    tooltip.style('left', (event.pageX + 10) + 'px')
-           .style('top', (event.pageY - 10) + 'px');
+      .text(node.label)
+      .style('left', (event.pageX + 10) + 'px')
+      .style('top', (event.pageY - 10) + 'px');
   }
 
-  resetDimming() {
-    if (!this.isDimmed) return; // No need to reset if not dimmed
-    
-    this.isDimmed = false;
-
-    // Reset all opacities
-    if (this.nodeSelection) {
-      this.nodeSelection.transition()
-        .duration(InteractiveGraph.CONFIG.DURATION)
-        .style('opacity', 1);
-    }
-    
-    if (this.linkSelection) {
-      this.linkSelection.transition()
-        .duration(InteractiveGraph.CONFIG.DURATION)
-        .style('opacity', 1);
-    }
-    
+  hideTooltip() {
     d3.selectAll('.graph-tooltip').remove();
   }
 
-  drag() {
+  highlightNode(targetNode) {
+    // Avoid redundant updates
+    if (this.highlightedNode?.id === targetNode.id) return;
+    
+    this.highlightedNode = targetNode;
+
+    const connectedNodeIds = new Set([targetNode.id]);
+    const connectedEdgeIndices = new Set();
+    
+    this.edges.forEach((edge, index) => {
+      if (edge.source.id === targetNode.id || edge.target.id === targetNode.id) {
+        connectedNodeIds.add(edge.source.id);
+        connectedNodeIds.add(edge.target.id);
+        connectedEdgeIndices.add(index);
+      }
+    });
+    
+    // Apply dimming
+    this.nodeSelection
+      .transition()
+      .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .style('opacity', d => connectedNodeIds.has(d.id) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
+    
+    this.linkSelection
+      .transition()
+      .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .style('opacity', (d, i) => connectedEdgeIndices.has(i) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
+  }
+
+  resetHighlight() {
+    if (!this.highlightedNode) return;
+    
+    this.highlightedNode = null;
+
+    this.nodeSelection
+      .transition()
+      .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .style('opacity', 1);
+    
+    this.linkSelection
+      .transition()
+      .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .style('opacity', 1);
+  }
+  
+  createDragBehavior() {
     return d3.drag()
       .on('start', (event, d) => {
-        this.resetDimming(); // Reset dimming when dragging starts
+        this.dragStartTime = Date.now();
+        this.isDragging = false;
+        
         if (!event.active) this.simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
+        
+        this.highlightNode(d);
       })
       .on('drag', (event, d) => {
+        if (!this.isDragging) {
+          this.isDragging = true;
+          this.hideTooltip();
+          
+          const circle = this.nodeSelection.filter(nodeData => nodeData.id === d.id).select('circle');
+          
+          // Change node color + cursor while dragging
+          circle.style('cursor', 'grabbing');
+          circle.style('fill', 'var(--link-hover-color)');
+        }
+        
+        // Keep dragged node highlighted
+        this.highlightNode(d);
+        
         d.fx = event.x;
         d.fy = event.y;
       })
@@ -238,34 +261,58 @@ class InteractiveGraph {
         if (!event.active) this.simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
+        
+        if (this.isDragging) {
+          // Reset all circles
+          this.nodeSelection.selectAll('circle').each(function() {
+            this.style.cursor = 'pointer';
+
+            // Clear inline style
+            this.style.fill = '';
+
+            // Force browser to recalculate based on CSS rules
+            this.setAttribute('fill', '');
+            this.removeAttribute('fill');
+          });
+        }
+        
+        // Reset dragging state after a brief delay to avoid DOMException
+        setTimeout(() => {
+          this.isDragging = false;
+        }, 50);
+        
+        // Reset highlighting after drag on touchscreens
+        if ('ontouchstart' in window) {
+          setTimeout(() => this.resetHighlight(), 100);
+        }
       });
   }
 
-  truncateText(text, maxLength) {
+  truncateText(text) {
+    const maxLength = InteractiveGraph.CONFIG.MAX_LABEL_LENGTH;
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   }
 }
 
-const graphContainer = document.getElementById('graph-container');
-
-// Add page visibility API to handle back button navigation
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    // Page became visible again (user came back from another page)
-    if (graphContainer && graphContainer.graphInstance) {
-      graphContainer.graphInstance.resetDimming();
-    }
-  }
-});
-
-// Initialize graph when DOM is loaded
+// Initialize graph
 document.addEventListener('DOMContentLoaded', () => {
+  const graphContainer = document.getElementById('graph-container');
+  
   if (graphContainer) {
     const graph = new InteractiveGraph(
       'graph-container', 
       '/assets/js/data/search.json',
       '/assets/js/data/graph-edges.json'
     );
-    graphContainer.graphInstance = graph; // Store reference for visibility API
+    
+    graphContainer.graphInstance = graph;
+    
+    // Reset highlighting when returning to page (fixes mobile back button issue)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && graph) {
+        graph.resetHighlight();
+        graph.hideTooltip();
+      }
+    });
   }
 });

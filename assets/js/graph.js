@@ -53,7 +53,9 @@ class InteractiveGraph {
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .call(d3.zoom().on('zoom', (event) => {
+      .call(d3.zoom()
+        .scaleExtent([0.5, 5])
+        .on('zoom', (event) => {
         this.svg.select('.graph-group').attr('transform', event.transform);
       }));
     
@@ -74,6 +76,7 @@ class InteractiveGraph {
 
   render() {
     const duration = 300;
+    const opacity = 0.3;
 
     // Render edges
     const link = this.graphGroup.selectAll('.link')
@@ -126,14 +129,14 @@ class InteractiveGraph {
       node.transition()
         .duration(duration)
         .style('opacity', nodeData => 
-        connectedNodeIds.has(nodeData.id) ? 1 : 0.3
+        connectedNodeIds.has(nodeData.id) ? 1 : opacity
       );
       
       // Dim all edges except connected ones
       link.transition()
         .duration(duration)
         .style('opacity', (edgeData, index) => 
-        connectedEdges.has(index) ? 1 : 0.3
+        connectedEdges.has(index) ? 1 : opacity
       );
       
       const tooltip = d3.select('body').append('div')

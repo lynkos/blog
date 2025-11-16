@@ -65,11 +65,14 @@ class InteractiveGraph {
     const height = this.container.clientHeight || 600;
     
     this.simulation = d3.forceSimulation(this.nodes)
-      .force('link', d3.forceLink(this.edges).id(d => d.id).distance(100))
-      .force('charge', d3.forceManyBody().strength(-100))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(30));
+      .force('link', d3.forceLink(this.edges).id(d => d.id).distance(200))
+      .force('charge', d3.forceManyBody().strength(-350))
+      .force("x", d3.forceX(width / 2))
+      .force("y", d3.forceY(height / 2))
+      .force('collision', d3.forceCollide().radius(10));
   }
+
+
 
   render() {
     // Render edges
@@ -78,9 +81,9 @@ class InteractiveGraph {
       .enter()
       .append('line')
       .attr('class', 'link')
-      .attr('stroke', '#999')
-      .attr('stroke-opacity', 0.8)
-      .attr('stroke-width', 2);
+      .attr('stroke', 'var(--main-border-color)')
+      //.attr('stroke-opacity', 0.75)
+      .attr('stroke-width', 3);
 
     // Render nodes
     const node = this.graphGroup.selectAll('.node')
@@ -92,17 +95,17 @@ class InteractiveGraph {
 
     // Add circles to nodes
     node.append('circle')
-      .attr('r', 20)
+      .attr('r', 17)
       .attr('fill', 'var(--link-color)')
       .style('cursor', 'pointer');
 
     // Add labels to nodes
     node.append('text')
-      .text(d => this.truncateText(d.label, 15))
+      .text(d => this.truncateText(d.label, 10))
       .attr('x', 0)
-      .attr('y', 40)
+      .attr('y', 30)
       .attr('text-anchor', 'middle')
-      .attr('font-size', '20px')
+      .attr('font-size', '12px')
       .attr('fill', 'var(--text-color)')
       .style('pointer-events', 'none');
 
@@ -114,7 +117,6 @@ class InteractiveGraph {
     // Add hover effects
     node.on('mouseover', function(event, d) {
       d3.select(this).select('circle')
-        .attr('r', 25)
         .attr('fill', 'var(--link-hover-color)');
       
       const tooltip = d3.select('body').append('div')
@@ -126,7 +128,7 @@ class InteractiveGraph {
         .style('border-radius', '4px')
         .style('border', '1px solid var(--bs-card-border-color)')
         .style('box-shadow', 'var(--card-shadow)')
-        .style('font-size', '12px')
+        .style('font-size', '13px')
         .style('pointer-events', 'none')
         .style('z-index', '1000')
         .text(d.label);
@@ -137,7 +139,6 @@ class InteractiveGraph {
 
     node.on('mouseout', function(event, d) {
       d3.select(this).select('circle')
-        .attr('r', 20)
         .attr('fill', 'var(--link-color)');
       
       d3.selectAll('.graph-tooltip').remove();

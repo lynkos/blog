@@ -4,6 +4,11 @@
     maxPreviewLength: 200, // chars
     contentSelectors: [ // Target links within post content
       '.content a'
+    ],
+    allowedDomains: [ // External domains to show previews for
+      'blog.lynkos.dev',
+      '127.0.0.1',
+      'localhost'
     ]
   };
 
@@ -101,7 +106,10 @@
     if (contentCache[url]) return contentCache[url];
     
     try {
-      const response = await fetch(url);
+      // Convert relative URLs to absolute URLs
+      const fetchUrl = url.startsWith('/') ? window.location.origin + url : url;
+      
+      const response = await fetch(fetchUrl);
       if (!response.ok) throw new Error('Failed to fetch');
       
       const html = await response.text();
@@ -116,12 +124,27 @@
     }
   }
 
+    function isAllowedUrl(href) {
+    // Internal links (relative paths)
+    if (!href.startsWith('http') && !href.startsWith('https') && !href.startsWith('#')) {
+      return true;
+    }
+    
+    // Check for allowed external domains with posts path
+    try {
+      const url = new URL(href);
+      return CONFIG.allowedDomains.includes(url.hostname) && url.pathname.startsWith('/posts/');
+    } catch (error) {
+      return false;
+    }
+  }
+
   function handleMouseEnter(event) {
     const link = event.currentTarget;
     
-    // Only show previews for internal links
+    // Check if URL is allowed for previews
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('http') || href.startsWith('https') || href.startsWith('#')) return;
+    if (!href || href.startsWith('#') || !isAllowedUrl(href)) return;
     
     clearTimeout(hideTimer);
     currentLink = link;
@@ -151,16 +174,15 @@
   function initializeLinkPreviews() {
     CONFIG.contentSelectors.forEach(selector => {
       document.querySelectorAll(selector).forEach(link => {
-        // Skip external links, anchors, and links with certain classes
+        // Skip anchors and links with certain classes
         const href = link.getAttribute('href');
         if (!href || 
-            href.startsWith('http') ||
-            href.startsWith('https') ||
             href.startsWith('#') ||
             link.classList.contains('popup') ||
             link.classList.contains('img-link') ||
             link.classList.contains('recently-updated') ||
-            link.classList.contains('no-preview')) {
+            link.classList.contains('no-preview') ||
+            !isAllowedUrl(href)) {
           return;
         }
         

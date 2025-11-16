@@ -7,7 +7,7 @@ math: true
 categories: [ math, physics, computer-science ]
 tags: [ algorithms, quantum-computing, grovers-algorithm ]
 ---
-> This is a full-length article on Grover's algorithm. For a shorter version, see [Quantum Search Algorithm](/posts/grover).
+> This is a full-length article on Grover's algorithm. For a shorter version, see [Quantum Search Algorithm](2025-02-05-grover.md).
 > 
 > The contents of this article have been taken from <a title="Link to my Jupyter notebook containing the code and explanations for Grover's Algorithm" target="_blank" href="https://github.com/lynkos/grovers-algorithm/blob/main/src/grovers_algorithm.ipynb">my Jupyter notebook on Grover's Algorithm</a>, which can be found in <a title="Link to my repository for Grover's Algorithm" target="_blank" href="https://github.com/lynkos/grovers-algorithm">my repository</a>.
 > 

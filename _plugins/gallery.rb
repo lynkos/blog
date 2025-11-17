@@ -5,8 +5,8 @@
 # Example usage:
 #
 # {% gallery %}
-#    src="img1.jpg" alt="Image 1 alt"
-#    src="img2.jpg" alt="Image 2 alt"
+#    src="img1.jpg" alt="Image 1 alt" width="400" height="500"
+#    src="img2.jpg" alt="Image 2 alt" height="auto"
 # {% endgallery %}
 
 module Jekyll
@@ -26,8 +26,8 @@ module Jekyll
     private
 
     # Transform the block content into an array of image objects
-    # Each line like: src="/path.jpg" alt="Alt text"
-    # Becomes: {src: "/path.jpg", alt: "Alt text"}
+    # Each line like: src="/path.jpg" alt="Alt text" width="400" height="300"
+    # Becomes: {src: "/path.jpg", alt: "Alt text", width: "400", height: "300"}
     def parse_images(content)
       images = []
       worker_base_url = "https://img-proxy.lynkos.dev/?url="
@@ -75,6 +75,20 @@ module Jekyll
           image[:alt] = alt_match[1]
         else image[:alt] = ""
         end
+        
+        # Extract width attribute - optional, defaults to "auto"
+        if width_match = line.match(/width=["']([^"']+)["']/)
+          image[:width] = width_match[1]
+        else 
+          image[:width] = "auto"
+        end
+        
+        # Extract height attribute - optional, defaults to "auto"
+        if height_match = line.match(/height=["']([^"']+)["']/)
+          image[:height] = height_match[1]
+        else 
+          image[:height] = "auto"
+        end
                 
         images << image
       end
@@ -100,9 +114,13 @@ module Jekyll
         # Add data attributes to force GLightbox to treat as image
         data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
         
+        # Build dimension attributes - include them even if set to "auto"
+        # This ensures consistent behavior and helps prevent layout shifts
+        dimension_attrs = %( width="#{image[:width]}" height="#{image[:height]}")
+        
         html << %(    <div class="slides">)
         html << %(      <div class="slide-index">#{index + 1} / #{total_images}</div>)
-        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{data_attrs}>)
+        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{dimension_attrs}#{data_attrs}>)
         html << %(    </div>)
       end
 
@@ -115,7 +133,7 @@ module Jekyll
       html << %(    </div>)
 
       # Caption container
-      html << %(    <p id="caption"></p>)
+      html << %(    <div id="caption"></div>)
 
       html << %(  </div>) # Close slideshow
             
@@ -132,31 +150,11 @@ module Jekyll
       end
 
       html << %(  </div>) # Close gallery-row
-
-      # Dots for slide indication and navigation
-      html << %(  <div class='img-dot'>)
-      images.each_with_index do |image, index|        
-        html << %(    <span class='dot' onclick='currentSlide(#{index + 1})'></span>)
-      end
-
-      html << %(  </div>)
       html << %(</div>) # Close gallery-container
 
       # Join all HTML parts and return as a single string
       html << generate_javascript(total_images)
-      html << generate_css(total_images)
       html.join("\n")
-    end
-
-    # Set thumbnail width based on total # of images
-    def generate_css(total_images)
-      css = [ ]
-      
-      css << %(<style type='text/css'>)
-      css << %(  .gallery-row .gallery-column { width: #{100 / total_images}%; } )
-      css << %(</style>)
-
-      css.join("\n")
     end
 
     # Generate the JavaScript code for slideshow functionality
@@ -187,7 +185,6 @@ module Jekyll
       js << %(    let i;)
       js << %(    let slides = document.getElementsByClassName('slides');)
       js << %(    let preview = document.getElementsByClassName('slide-preview');)
-      js << %(    let dot = document.getElementsByClassName('dot');)
       js << %(    let captionText = document.getElementById('caption');)
       js << %()
       
@@ -206,14 +203,12 @@ module Jekyll
       # Remove 'active' class from all thumbnails
       js << %(    for (i = 0; i < preview.length; i++) {)
       js << %(      preview[i].className = preview[i].className.replace(' active', '');)
-      js << %(      dot[i].className = dot[i].className.replace(' active_dot', '');)
       js << %(    })
       js << %()
       
       # Show the current slide and mark its thumbnail as active
       js << %(    slides[slideIndex - 1].style.display = 'flex';)
       js << %(    preview[slideIndex - 1].className += ' active';)
-      js << %(    dot[slideIndex - 1].className += ' active_dot';)
 
       # Update the caption with the current image's alt text
       js << %(    captionText.innerHTML = preview[slideIndex - 1].alt;)

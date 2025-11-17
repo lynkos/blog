@@ -1,5 +1,8 @@
 @mixin styles {
-  /* */
+  /* Gallery caption background color */
+  --gallery-caption-bg: rgba(256, 256, 256, 0.75);
+
+  /* 'Not by AI' badge color */
   --badge-fill: #000000;
   --badge-background: #ffffff;
   --badge-stroke: #000000;

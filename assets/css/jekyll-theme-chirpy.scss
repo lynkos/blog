@@ -14,10 +14,7 @@
 @use '../../_sass/abstracts/variables' as v;
 
 :root {
-  --dot-size: 15px;
   --arrow-padding: 16px;
-  --gallery-padding: 5px;
-  --dot-height: calc(2 * (var(--gallery-padding) + var(--dot-size))); // 40px;
   --link-hover-color: #d2603a;
 }
 
@@ -81,16 +78,15 @@
 }
 
 /* Slideshow gallery style */
-img, .content a.popup {
-  width: 100%;
-}
-
 #caption, .prev, .next, .content a.popup {
   margin: 0;
 }
 
-.slides a.popup img {
-  border-radius: v.$radius-lg v.$radius-lg 0 0;
+.slides a.popup img {  
+  // Only apply if image completely fills gallery
+  &[width="100%"][height="100%"], &[width="auto"][height="auto"] {
+    border-radius: v.$radius-lg v.$radius-lg 0 0;
+  }
 }
 
 .gallery-container {
@@ -104,13 +100,9 @@ img, .content a.popup {
 /* Hide images by default */
 .slides {
   display: none;
-
-  img {
-    width: 100vw;
-  }
 }
 
-.slide-preview, .prev, .next, .dot {
+.slide-preview, .prev, .next {
   cursor: pointer;
 }
 
@@ -118,10 +110,6 @@ img, .content a.popup {
   display: flex;
   align-items: center;
   z-index: 9; // Make sure > #caption z-index
-}
-
-#caption, .slide-index {
-  color: var(--text-color);
 }
 
 .prev,
@@ -135,6 +123,7 @@ img, .content a.popup {
   user-select: none;
   transition: all .35s ease-in-out;
   -webkit-user-select: none;
+  text-shadow: 0 0 1px var(--code-header-muted-color);
 
   &:hover {
     transition: all .35s ease-in-out;
@@ -155,44 +144,42 @@ img, .content a.popup {
 }
 
 .slide-index {
-  @extend %text-xs;
-  padding: calc(var(--arrow-padding) / 2); //8px;
-  position: absolute;
-  top: 0;
+  @extend %text-sm;
+  top: calc(var(--arrow-padding) / 2);
+  left: calc(var(--arrow-padding) / 2);
 }
 
 .slideshow {
   display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px solid var(--language-border-color);
 }
 
-#caption, .img-dot, .prev, .next {
+.slide-index, #caption, .prev, .next {
   text-align: center;
 }
 
-.img-dot {
-  padding: var(--gallery-padding) 0;
-  height: var(--dot-height); 
-}
-
-.slide-index, .prev, .next, #caption {
-  text-shadow: 0 0 1px var(--code-header-muted-color);
+.slide-index, #caption {
+  position: absolute;
+  color: var(--text-color);
+  background: var(--gallery-caption-bg);
+  border-radius: v.$radius-sm;
+  padding: 0 calc(var(--arrow-padding) / 2);
+  box-shadow: 0 0 calc(var(--arrow-padding) / 2) var(--gallery-caption-bg);
 }
 
 #caption {
-  max-height: calc(100% - var(--dot-height));
-  padding: var(--gallery-padding) var(--dot-height);
-  overflow: auto;
-  width: 100%;
-  position: absolute;
+  overflow: auto;  
   align-self: flex-end;
+  margin-bottom: calc(var(--arrow-padding) / 2);
 }
 
+/* Thumbnail images */
 .gallery {
-  /* Thumbnail images (temporarily hidden while debugging) */
   &-row {
-    display: none // flex;
-    // justify-content: center;
+    display: flex;
+    justify-content: center;
   }
 
   &-column {
@@ -201,6 +188,14 @@ img, .content a.popup {
 
   &-row &-column {
     height: 100%;
+
+    &:first-child img {
+      border-radius: 0 0 0 v.$radius-lg;
+    }
+
+    &:last-child img {
+      border-radius: 0 0 v.$radius-lg 0;
+    }
   }
 }
 
@@ -212,21 +207,6 @@ img, .content a.popup {
 .active,
 .slide-preview:hover {
   opacity: 1;
-}
-
-.dot {
-  height: var(--dot-size);
-  width: var(--dot-size);
-  margin: 0 2px;
-  background-color: var(--link-color);
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active_dot,
-.dot:hover {
-  background-color: var(--bs-link-color);
 }
 
 /* Link preview on hover */

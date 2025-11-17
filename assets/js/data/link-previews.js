@@ -64,24 +64,21 @@
   }
 
   function extractContent(html) {
-    // Create a temporary DOM element to parse the HTML
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     
-    // Try to extract the main content
+    // Extract main content
     let content = doc.querySelector('article') || doc.querySelector('main');
     
     if (!content) return '<p>Preview not available</p>';
     
-    // Get post title
-    const title = doc.querySelector('header h1');
-    const titleText = title ? title.textContent.trim() : '';
+    const postTitle = doc.querySelector('header h1');
+    const titleText = postTitle ? postTitle.textContent.trim() : '';
     
-    // Get post description
     const postDescription = content.querySelector('.post-desc');
     const description = postDescription ? postDescription.textContent.trim() : '';
 
-    // Get excerpt from first paragraph
+    // Excerpt from 1st paragraph
     const postExcerpt = content.querySelector('.content p');
     const excerpt = postExcerpt ? postExcerpt.textContent.trim() : '';
 

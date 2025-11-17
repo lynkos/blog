@@ -4,7 +4,7 @@
 
 prod=false
 command="bundle exec jekyll s -l" # "bundle exec jekyll serve --incremental"
-host="127.0.0.1"
+host="localhost" #"127.0.0.1"
 
 help() {
   echo "Usage:"

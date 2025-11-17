@@ -185,10 +185,16 @@
         {% assign _wrapper_start = _final_src
           | default: _src
           | prepend: '<a href="'
-          | append: '" class="popup img-link'
-          | append: _wrapper_class
-          | append: '">'
         %}
+        
+        <!-- Check if this is a gallery image -->
+        {% if _class contains 'slide-preview' or _left contains 'onclick="currentSlide' %}
+          {% assign _wrapper_start = _wrapper_start | append: '#" onclick="return false;" class="img-link' %}
+        {% else %}
+          {% assign _wrapper_start = _wrapper_start | append: '" class="popup img-link' %}
+        {% endif %}
+        
+        {% assign _wrapper_start = _wrapper_start | append: _wrapper_class | append: '">' %}
 
         {% assign _img_content = _img_content | append: _wrapper_start %}
         {% assign _right = '></a' | append: _right %}

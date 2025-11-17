@@ -150,24 +150,11 @@ module Jekyll
       end
 
       html << %(  </div>) # Close gallery-row
-
       html << %(</div>) # Close gallery-container
 
       # Join all HTML parts and return as a single string
       html << generate_javascript(total_images)
-      html << generate_css(total_images)
       html.join("\n")
-    end
-
-    # Set thumbnail width based on total # of images
-    def generate_css(total_images)
-      css = [ ]
-      
-      css << %(<style type='text/css'>)
-      css << %(  .gallery-row .gallery-column { width: #{100 / total_images}%; } )
-      css << %(</style>)
-
-      css.join("\n")
     end
 
     # Generate the JavaScript code for slideshow functionality

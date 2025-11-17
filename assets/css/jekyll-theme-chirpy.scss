@@ -188,6 +188,14 @@
 
   &-row &-column {
     height: 100%;
+
+    &:first-child img {
+      border-radius: 0 0 0 v.$radius-lg;
+    }
+
+    &:last-child img {
+      border-radius: 0 0 v.$radius-lg 0;
+    }
   }
 }
 

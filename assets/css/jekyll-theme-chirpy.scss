@@ -81,10 +81,6 @@
 }
 
 /* Slideshow gallery style */
-img, .content a.popup {
-  width: 100%;
-}
-
 #caption, .prev, .next, .content a.popup {
   margin: 0;
 }
@@ -159,6 +155,8 @@ img, .content a.popup {
 
 .slideshow {
   display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px solid var(--language-border-color);
 }
 
@@ -187,8 +185,8 @@ img, .content a.popup {
 .gallery {
   /* Thumbnail images (temporarily hidden while debugging) */
   &-row {
-    display: none // flex;
-    // justify-content: center;
+    display: flex;
+    justify-content: center;
   }
 
   &-column {

@@ -14,10 +14,7 @@
 @use '../../_sass/abstracts/variables' as v;
 
 :root {
-  --dot-size: 15px;
   --arrow-padding: 16px;
-  --gallery-padding: 5px;
-  --dot-height: calc(2 * (var(--gallery-padding) + var(--dot-size))); // 40px;
   --link-hover-color: #d2603a;
 }
 
@@ -105,7 +102,7 @@
   display: none;
 }
 
-.slide-preview, .prev, .next, .dot {
+.slide-preview, .prev, .next {
   cursor: pointer;
 }
 
@@ -163,13 +160,8 @@
   border-bottom: 1px solid var(--language-border-color);
 }
 
-#caption, .img-dot, .prev, .next {
+#caption, .prev, .next {
   text-align: center;
-}
-
-.img-dot {
-  padding: var(--gallery-padding) 0;
-  height: var(--dot-height); 
 }
 
 .slide-index, .prev, .next, #caption {
@@ -177,8 +169,6 @@
 }
 
 #caption {
-  max-height: calc(100% - var(--dot-height));
-  padding: var(--gallery-padding) var(--dot-height);
   overflow: auto;
   width: 100%;
   position: absolute;
@@ -209,21 +199,6 @@
 .active,
 .slide-preview:hover {
   opacity: 1;
-}
-
-.dot {
-  height: var(--dot-size);
-  width: var(--dot-size);
-  margin: 0 2px;
-  background-color: var(--link-color);
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active_dot,
-.dot:hover {
-  background-color: var(--bs-link-color);
 }
 
 /* Link preview on hover */

@@ -151,13 +151,6 @@ module Jekyll
 
       html << %(  </div>) # Close gallery-row
 
-      # Dots for slide indication and navigation
-      html << %(  <div class='img-dot'>)
-      images.each_with_index do |image, index|        
-        html << %(    <span class='dot' onclick='currentSlide(#{index + 1})'></span>)
-      end
-
-      html << %(  </div>)
       html << %(</div>) # Close gallery-container
 
       # Join all HTML parts and return as a single string
@@ -205,7 +198,6 @@ module Jekyll
       js << %(    let i;)
       js << %(    let slides = document.getElementsByClassName('slides');)
       js << %(    let preview = document.getElementsByClassName('slide-preview');)
-      js << %(    let dot = document.getElementsByClassName('dot');)
       js << %(    let captionText = document.getElementById('caption');)
       js << %()
       
@@ -224,14 +216,12 @@ module Jekyll
       # Remove 'active' class from all thumbnails
       js << %(    for (i = 0; i < preview.length; i++) {)
       js << %(      preview[i].className = preview[i].className.replace(' active', '');)
-      js << %(      dot[i].className = dot[i].className.replace(' active_dot', '');)
       js << %(    })
       js << %()
       
       # Show the current slide and mark its thumbnail as active
       js << %(    slides[slideIndex - 1].style.display = 'flex';)
       js << %(    preview[slideIndex - 1].className += ' active';)
-      js << %(    dot[slideIndex - 1].className += ' active_dot';)
 
       # Update the caption with the current image's alt text
       js << %(    captionText.innerHTML = preview[slideIndex - 1].alt;)

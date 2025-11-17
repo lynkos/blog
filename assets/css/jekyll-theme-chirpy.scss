@@ -144,7 +144,7 @@
 }
 
 .slide-index {
-  @extend %text-xs;
+  @extend %text-sm;
   top: calc(var(--arrow-padding) / 2);
   left: calc(var(--arrow-padding) / 2);
 }

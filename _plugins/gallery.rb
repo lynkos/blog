@@ -5,8 +5,8 @@
 # Example usage:
 #
 # {% gallery %}
-#    src="img1.jpg" alt="Image 1 alt"
-#    src="img2.jpg" alt="Image 2 alt"
+#    src="img1.jpg" alt="Image 1 alt" width="400" height="500"
+#    src="img2.jpg" alt="Image 2 alt" height="auto"
 # {% endgallery %}
 
 module Jekyll
@@ -26,8 +26,8 @@ module Jekyll
     private
 
     # Transform the block content into an array of image objects
-    # Each line like: src="/path.jpg" alt="Alt text"
-    # Becomes: {src: "/path.jpg", alt: "Alt text"}
+    # Each line like: src="/path.jpg" alt="Alt text" width="400" height="300"
+    # Becomes: {src: "/path.jpg", alt: "Alt text", width: "400", height: "300"}
     def parse_images(content)
       images = []
       worker_base_url = "https://img-proxy.lynkos.dev/?url="
@@ -75,6 +75,20 @@ module Jekyll
           image[:alt] = alt_match[1]
         else image[:alt] = ""
         end
+        
+        # Extract width attribute - optional, defaults to "auto"
+        if width_match = line.match(/width=["']([^"']+)["']/)
+          image[:width] = width_match[1]
+        else 
+          image[:width] = "auto"
+        end
+        
+        # Extract height attribute - optional, defaults to "auto"
+        if height_match = line.match(/height=["']([^"']+)["']/)
+          image[:height] = height_match[1]
+        else 
+          image[:height] = "auto"
+        end
                 
         images << image
       end
@@ -100,9 +114,13 @@ module Jekyll
         # Add data attributes to force GLightbox to treat as image
         data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
         
+        # Build dimension attributes - include them even if set to "auto"
+        # This ensures consistent behavior and helps prevent layout shifts
+        dimension_attrs = %( width="#{image[:width]}" height="#{image[:height]}")
+        
         html << %(    <div class="slides">)
         html << %(      <div class="slide-index">#{index + 1} / #{total_images}</div>)
-        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{data_attrs}>)
+        html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{dimension_attrs}#{data_attrs}>)
         html << %(    </div>)
       end
 

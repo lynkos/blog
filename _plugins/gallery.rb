@@ -133,7 +133,7 @@ module Jekyll
       html << %(    </div>)
 
       # Caption container
-      html << %(    <p id="caption"></p>)
+      html << %(    <div id="caption"></div>)
 
       html << %(  </div>) # Close slideshow
             

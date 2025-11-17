@@ -3,8 +3,7 @@
 @use '../abstracts/mixins' as mx;
 @use '../abstracts/placeholders';
 
-// For all paragraphs except image gallery caption
-p:not(#caption) {
+p {
   margin: 1rem 0 !important;
 }
 

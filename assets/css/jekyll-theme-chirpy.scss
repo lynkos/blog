@@ -145,8 +145,8 @@
 
 .slide-index {
   @extend %text-xs;
-  top: 0;
-  margin: calc(var(--arrow-padding) / 2) 0 0 calc(var(--arrow-padding) / 2);
+  top: calc(var(--arrow-padding) / 2);
+  left: calc(var(--arrow-padding) / 2);
 }
 
 .slideshow {

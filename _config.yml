@@ -106,7 +106,7 @@ social_preview_image: https://lynkos.dev/assets/img/misc/profile.webp # string, 
 toc:
   enabled: true # boolean type, the global switch for TOC in posts.
   min_heading_level: 2  # Start with heading 2 (i.e. h2)
-  max_heading_level: 6  # End with heading 6 (i.e. h6)
+  max_heading_level: 7  # End with heading 7 (i.e. h7)
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.

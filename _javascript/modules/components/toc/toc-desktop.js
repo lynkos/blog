@@ -1,5 +1,4 @@
-//import { tocConfig } from './assets/js/data/toc-config';
-import { tocConfig } from '../../../../assets/js/data/toc-config.js';
+import { heading } from '../../../../assets/js/data/toc-config.js';
 
 export class TocDesktop {
   /* Tocbot options Ref: https://github.com/tscanlin/tocbot#usage */
@@ -7,7 +6,7 @@ export class TocDesktop {
     tocSelector: '#toc',
     contentSelector: '.content',
     ignoreSelector: '[data-toc-skip]',
-    headingSelector: tocConfig,
+    headingSelector: heading,
     orderedList: false,
     scrollSmooth: false,
     headingsOffset: 16 * 2 // 2rem
@@ -18,6 +17,8 @@ export class TocDesktop {
   }
 
   static init() {
+    console.log('TOC-desktop headingSelector:', tocConfig);
+    console.log('TOC-desktop options:', this.options);
     tocbot.init(this.options);
   }
 }

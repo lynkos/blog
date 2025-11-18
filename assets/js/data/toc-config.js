@@ -15,4 +15,4 @@ Generate heading selector string for table of contents.
   {% endif %}
 {% endfor %}
 
-export const tocConfig = '{{ heading_levels }}';
+export const heading = '{{ heading_levels }}';

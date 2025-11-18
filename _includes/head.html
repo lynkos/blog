@@ -84,7 +84,7 @@
 
   <!-- 3rd-party Dependencies -->
 
-  {% if site.toc and page.toc %}
+  {% if site.toc.enabled and page.toc %}
     <link rel="stylesheet" href="{{ site.data.origin[type].toc.css | relative_url }}">
   {% endif %}
 

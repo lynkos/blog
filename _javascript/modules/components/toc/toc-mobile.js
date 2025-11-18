@@ -1,3 +1,6 @@
+//import { tocConfig } from './assets/js/data/toc-config';
+import { tocConfig } from '../../../../assets/js/data/toc-config.js';
+
 /**
  * TOC button, topbar and popup for mobile devices
  */
@@ -19,7 +22,7 @@ export class TocMobile {
     tocSelector: '#toc-popup-content',
     contentSelector: '.content',
     ignoreSelector: '[data-toc-skip]',
-    headingSelector: 'h2, h3, h4',
+    headingSelector: tocConfig,
     orderedList: false,
     scrollSmooth: false,
     collapseDepth: 4,

@@ -24,5 +24,4 @@ package-lock.json
 
 # Misc
 .husky
-.devcontainer
 _posts/*test*.md

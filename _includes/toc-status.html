@@ -3,8 +3,12 @@
 {% endcomment %}
 
 {% assign enable_toc = false %}
-{% if site.toc and page.toc %}
-  {% if page.content contains '<h2' or page.content contains '<h3' %}
-    {% assign enable_toc = true %}
-  {% endif %}
+{% if site.toc.enabled and page.toc %}
+  {% for i in (site.toc.min_heading_level..site.toc.max_heading_level) %}
+    {% assign heading_tag = '<h' | append: i %}
+    {% if page.content contains heading_tag %}
+      {% assign enable_toc = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
 {% endif %}

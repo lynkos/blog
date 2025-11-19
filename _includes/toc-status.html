@@ -4,8 +4,8 @@
 
 {% assign enable_toc = false %}
 {% if site.toc.enabled and page.toc %}
-  {% for i in (site.toc.min_heading_level..site.toc.max_heading_level) %}
-    {% assign heading_tag = '<h' | append: i %}
+  {% for level in (site.toc.min_heading_level..site.toc.max_heading_level) %}
+    {% assign heading_tag = '<h' | append: level %}
     {% if page.content contains heading_tag %}
       {% assign enable_toc = true %}
       {% break %}
@@ -17,16 +17,18 @@
   Generate heading selector string (e.g. "h2, h3, h4, h5, h6, h7") with config values
 {% endcomment %}
 
-{% assign toc_heading_selector = '' %}
-{% for i in (site.toc.min_heading_level..site.toc.max_heading_level) %}
-  {% if forloop.first %}
-    {% assign toc_heading_selector = 'h' | append: i %}
-  {% else %}
-    {% assign toc_heading_selector = toc_heading_selector | append: ', h' | append: i %}
-  {% endif %}
-{% endfor %}
+{% if enable_toc %}
+  {% assign toc_heading_selector = '' %}
+  {% for level in (site.toc.min_heading_level..site.toc.max_heading_level) %}
+    {% if forloop.first %}
+      {% assign toc_heading_selector = 'h' | append: level %}
+    {% else %}
+      {% assign toc_heading_selector = toc_heading_selector | append: ', h' | append: level %}
+    {% endif %}
+  {% endfor %}
 
-<script>
-  window.SITE_CONFIG = window.SITE_CONFIG || {};
-  window.SITE_CONFIG.tocHeadingSelector = '{{ toc_heading_selector }}';
-</script>
+  <script>
+    window.SITE_CONFIG = window.SITE_CONFIG || {};
+    window.SITE_CONFIG.tocHeadingSelector = '{{ toc_heading_selector }}';
+  </script>
+{% endif %}

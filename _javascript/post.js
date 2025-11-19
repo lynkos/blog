@@ -7,7 +7,8 @@ import {
   initClipboard,
   initToc,
   loadMermaid,
-  initLinkPreview
+  initLinkPreview,
+  initTabs
 } from './modules/components';
 
 loadImg();
@@ -19,4 +20,5 @@ initClipboard();
 initTopbar();
 loadMermaid();
 initLinkPreview();
+initTabs();
 basic();

@@ -40,33 +40,33 @@ We'll be going over 3 separate options, along with the pros and cons of each:
   {: .nolineno }
 
 ### Conda
-Update conda
+1. Update conda
 
-```sh
-conda update --yes -n base -c defaults conda
-```
-{: .nolineno }
+	```sh
+	conda update --yes -n base -c defaults conda
+	```
+	{: .nolineno }
 
-Install `conda-libmamba-solver`
+2. Install `conda-libmamba-solver`
 
-```sh
-conda install --yes -n base conda-libmamba-solver
-```
-{: .nolineno }
+	```sh
+	conda install --yes -n base conda-libmamba-solver
+	```
+	{: .nolineno }
 
-Set as default solver
+3. Set as default solver
 
-```sh
-conda config --set solver libmamba
-```
-{: .nolineno }
+	```sh
+	conda config --set solver libmamba
+	```
+	{: .nolineno }
 
-Confirm it's the default
+4. Confirm it's the default
 
-```sh
-conda config --show-sources
-```
-{: .nolineno }
+	```sh
+	conda config --show-sources
+	```
+	{: .nolineno }
 
 Output should look similar to (or include)
 
@@ -132,242 +132,242 @@ $HOME/
 ```
 
 #### Rust and Cargo
-Download `rustup` and install Rust
+1. Download `rustup` and install Rust
 
-```sh
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-{: .nolineno }
+	```sh
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	```
+	{: .nolineno }
 
-Once you are prompted to specify your installation method, select `2) Customize installation` by entering `2` in the CLI
+2. Once you are prompted to specify your installation method, select `2) Customize installation` by entering `2` in the CLI
 
-![install_rustup.png](../assets/obsidian/install_rustup.png)
+	![install_rustup.png](../assets/obsidian/install_rustup.png)
+	
+	```plaintext
+	1) Proceed with standard installation (default - just press enter)
+	2) Customize installation
+	3) Cancel installation
+	```
 
-```plaintext
-1) Proceed with standard installation (default - just press enter)
-2) Customize installation
-3) Cancel installation
-```
+3. Choose the following installation options:
+	- **Default host triple?**: Press <kbd>Enter</kbd> (i.e. default)
+	- **Default toolchain?**: Press <kbd>Enter</kbd> (i.e. default)
+	- **Profile (which tools and data to install)?**: `complete`
+	- **Modify PATH variable? (Y/n)**: `Y`
 
-Choose the following installation options:
-- **Default host triple?**: Press <kbd>Enter</kbd> (i.e. default)
-- **Default toolchain?**: Press <kbd>Enter</kbd> (i.e. default)
-- **Profile (which tools and data to install)?**: `complete`
-- **Modify PATH variable? (Y/n)**: `Y`
+	```plaintext
+	I'm going to ask you the value of each of these installation options.
+	You may simply press the Enter key to leave unchanged.
+	
+	Default host triple? [aarch64-apple-darwin]
+	
+	Default toolchain? (stable/beta/nightly/none) [stable]
+	
+	Profile (which tools and data to install)? (minimal/default/complete) [default]
+	complete
+	
+	Modify PATH variable? (Y/n)
+	Y
+	```
 
-```plaintext
-I'm going to ask you the value of each of these installation options.
-You may simply press the Enter key to leave unchanged.
+4. Once you see something similar to this, enter `1` to proceed with the customized installation options
 
-Default host triple? [aarch64-apple-darwin]
+	```plaintext
+	Current installation options:
+	   default host triple: aarch64-apple-darwin
+	     default toolchain: stable
+	               profile: complete
+	  modify PATH variable: yes
+	
+	1) Proceed with selected options (default - just press enter)
+	2) Customize installation
+	3) Cancel installation
+	```
 
-Default toolchain? (stable/beta/nightly/none) [stable]
-
-Profile (which tools and data to install)? (minimal/default/complete) [default]
-complete
-
-Modify PATH variable? (Y/n)
-Y
-```
-
-Once you see something similar to this, enter `1` to proceed with the customized installation options
-
-```plaintext
-Current installation options:
-   default host triple: aarch64-apple-darwin
-     default toolchain: stable
-               profile: complete
-  modify PATH variable: yes
-
-1) Proceed with selected options (default - just press enter)
-2) Customize installation
-3) Cancel installation
-```
-
-After installation, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
+5. After installation, configure your shell (i.e. `.bashrc`, `.zsh`, `.profile`, `.bash_profile`, etc.) to reload your `PATH` environment variable to include
 Cargo's bin directory (`$HOME/.cargo/bin`)
 
-```sh
-. "$HOME/.cargo/env"
-```
-{: .nolineno }
+	```sh
+	. "$HOME/.cargo/env"
+	```
+	{: .nolineno }
 
 ### Build and Install
 #### Part 1: LLVM
-Create Conda environment with build dependencies
+1. Create Conda environment with build dependencies
 
-```sh
-conda create -n tvm-build-venv -c conda-forge "cmake>=3.24" git python=3.11 cython
-```
-{: .nolineno }
+	```sh
+	conda create -n tvm-build-venv -c conda-forge "cmake>=3.24" git python=3.11 cython
+	```
+	{: .nolineno }
 
-Activate build environment
+2. Activate build environment
 
-```sh
-conda activate tvm-build-venv
-```
-{: .nolineno }
+	```sh
+	conda activate tvm-build-venv
+	```
+	{: .nolineno }
 
-Enter `llvm-tvm`
+3. Enter `llvm-tvm`
 
-```sh
-cd $HOME/.llm/llvm-tvm
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/llvm-tvm
+	```
+	{: .nolineno }
 
-Shallowly (saves storage and speed) clone latest stable release (currently `v20.1.3`) from LLVM
+4. Shallowly (saves storage and speed) clone latest stable release (currently `v20.1.3`) from LLVM
 
-> LLVM version must be at least 15 (i.e. `LLVM >= 15`) in order to work with [TVM Unity](https://llm.mlc.ai/docs/install/tvm.html) compiler
-{: .prompt-info }
+	> LLVM version must be at least 15 (i.e. `LLVM >= 15`) in order to work with [TVM Unity](https://llm.mlc.ai/docs/install/tvm.html) compiler
+	{: .prompt-info }
+	
+	```sh
+	git clone --depth 1 --branch llvmorg-20.1.3 https://github.com/llvm/llvm-project.git
+	```
+	{: .nolineno }
 
-```sh
-git clone --depth 1 --branch llvmorg-20.1.3 https://github.com/llvm/llvm-project.git
-```
-{: .nolineno }
+5. Create `build` and `install` directories for later use
 
-Create `build` and `install` directories for later use
+	```sh
+	mkdir build install
+	```
+	{: .nolineno }
 
-```sh
-mkdir build install
-```
-{: .nolineno }
+6. Enter new LLVM directory
 
-Enter new LLVM directory
+	```sh
+	cd llvm-project
+	```
+	{: .nolineno }
 
-```sh
-cd llvm-project
-```
-{: .nolineno }
+7. Filter user branches from git fetch/pull
 
-Filter user branches from git fetch/pull
+	```sh
+	git config --add remote.origin.fetch '^refs/heads/users/*'
+	git config --add remote.origin.fetch '^refs/heads/revert-*'
+	```
+	{: .nolineno }
 
-```sh
-git config --add remote.origin.fetch '^refs/heads/users/*'
-git config --add remote.origin.fetch '^refs/heads/revert-*'
-```
-{: .nolineno }
+8. Export `$PATH` and `$SDKROOT`
 
-Export `$PATH` and `$SDKROOT`
+	```sh
+	export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH
+	export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+	```
+	{: .nolineno }
+	
+	> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
+	> ```sh
+	> echo -e 'export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH\nexport SDKROOT=$(xcrun --sdk macosx --show-sdk-path)' >> $HOME/.bashrc
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-```sh
-export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH
-export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
-```
-{: .nolineno }
+9. Configure and build LLVM, Clang, and LLD (i.e. LLVM linker)
 
-> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
-> ```sh
-> echo -e 'export PATH=$HOME/.llm/llvm-tvm/install/bin:$PATH\nexport SDKROOT=$(xcrun --sdk macosx --show-sdk-path)' >> $HOME/.bashrc
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+	```sh
+	cmake -S llvm -B ../build -G Ninja \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=$HOME/.llm/llvm-tvm/install \
+	-DCMAKE_OSX_SYSROOT=$SDKROOT \
+	-DCMAKE_C_COMPILER=$HOME/.llm/llvm-tvm/install/bin/clang \
+	-DCMAKE_CXX_COMPILER=$HOME/.llm/llvm-tvm/install/bin/clang++ \
+	-DCMAKE_CXX_FLAGS="-O3 -march=native -mtune=native -fno-stack-protector" \
+	-DCMAKE_C_FLAGS="-O3 -march=native -mtune=native -fno-stack-protector" \
+	-DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib" \
+	-DCMAKE_OSX_ARCHITECTURES=arm64 \
+	-DLLVM_ENABLE_FFI=ON \
+	-DLLVM_ENABLE_LTO=Thin \
+	-DLLVM_USE_LINKER=lld \
+	-DLLVM_ENABLE_PROJECTS="clang;lld;llvm" \
+	-DLLVM_ENABLE_RTTI=ON \
+	-DLLVM_TARGET_ARCH=arm64 \
+	-DLLVM_TARGETS_TO_BUILD="AArch64;host" \
+	-DLLVM_ENABLE_ASSERTIONS=OFF \
+	-DLLVM_ENABLE_BACKTRACES=OFF \
+	-DLLVM_PARALLEL_COMPILE_JOBS=$(sysctl -n hw.logicalcpu) \
+	-DLLVM_PARALLEL_LINK_JOBS=$(($(sysctl -n hw.logicalcpu) / 2)) \
+	-DLLVM_PARALLEL_TABLEGEN_JOBS=$(($(sysctl -n hw.logicalcpu) / 2)) \
+	-DLLVM_INCLUDE_TESTS=OFF \
+	-DLLVM_INCLUDE_DOCS=OFF \
+	-DLLVM_INCLUDE_EXAMPLES=OFF \
+	-DLLVM_OPTIMIZED_TABLEGEN=ON
+	```
 
-Configure and build LLVM, Clang, and LLD (i.e. LLVM linker)
+	> List valid compiler flags
+	> ```sh
+	> clang -mcpu=help
+	> ```
+	> {: .nolineno }
+	> ![compiler_flags_list.png](../assets/obsidian/compiler_flags_list.png)
+	> 
+	> List valid CMake flags with `ccmake`
+	> ```sh
+	> ccmake .
+	> ```
+	> {: .nolineno }
+	> ![ccmake_list.png](../assets/obsidian/ccmake_list.png)
+	>
+	> List valid CMake flags with `cmake`
+	> ```sh
+	> cmake -L
+	> ```
+	> {: .nolineno }
+	> ![cmake_list_flags.png](../assets/obsidian/cmake_list_flags.png)
+	{: .prompt-tip }
+	
+	![cmake_llvm.png](../assets/obsidian/cmake_llvm.png)
 
-```sh
-cmake -S llvm -B ../build -G Ninja \
--DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=$HOME/.llm/llvm-tvm/install \
--DCMAKE_OSX_SYSROOT=$SDKROOT \
--DCMAKE_C_COMPILER=$HOME/.llm/llvm-tvm/install/bin/clang \
--DCMAKE_CXX_COMPILER=$HOME/.llm/llvm-tvm/install/bin/clang++ \
--DCMAKE_CXX_FLAGS="-O3 -march=native -mtune=native -fno-stack-protector" \
--DCMAKE_C_FLAGS="-O3 -march=native -mtune=native -fno-stack-protector" \
--DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib" \
--DCMAKE_OSX_ARCHITECTURES=arm64 \
--DLLVM_ENABLE_FFI=ON \
--DLLVM_ENABLE_LTO=Thin \
--DLLVM_USE_LINKER=lld \
--DLLVM_ENABLE_PROJECTS="clang;lld;llvm" \
--DLLVM_ENABLE_RTTI=ON \
--DLLVM_TARGET_ARCH=arm64 \
--DLLVM_TARGETS_TO_BUILD="AArch64;host" \
--DLLVM_ENABLE_ASSERTIONS=OFF \
--DLLVM_ENABLE_BACKTRACES=OFF \
--DLLVM_PARALLEL_COMPILE_JOBS=$(sysctl -n hw.logicalcpu) \
--DLLVM_PARALLEL_LINK_JOBS=$(($(sysctl -n hw.logicalcpu) / 2)) \
--DLLVM_PARALLEL_TABLEGEN_JOBS=$(($(sysctl -n hw.logicalcpu) / 2)) \
--DLLVM_INCLUDE_TESTS=OFF \
--DLLVM_INCLUDE_DOCS=OFF \
--DLLVM_INCLUDE_EXAMPLES=OFF \
--DLLVM_OPTIMIZED_TABLEGEN=ON
-```
+10. Go to `build`
 
-> List valid compiler flags
-> ```sh
-> clang -mcpu=help
-> ```
-> {: .nolineno }
-> ![compiler_flags_list.png](../assets/obsidian/compiler_flags_list.png)
-> 
-> List valid CMake flags with `ccmake`
-> ```sh
-> ccmake .
-> ```
-> {: .nolineno }
-> ![ccmake_list.png](../assets/obsidian/ccmake_list.png)
->
-> List valid CMake flags with `cmake`
-> ```sh
-> cmake -L
-> ```
-> {: .nolineno }
-> ![cmake_list_flags.png](../assets/obsidian/cmake_list_flags.png)
-{: .prompt-tip }
+	```sh
+	cd ../build
+	```
+	{: .nolineno }
 
-![cmake_llvm.png](../assets/obsidian/cmake_llvm.png)
+11. Run `ninja`
 
-Go to `build`
+	```sh
+	ninja
+	```
+	{: .nolineno }
+	
+	> Use `-v` flag to see which command is running:
+	> ```sh
+	> ninja -v
+	> ```
+	> {: .nolineno }
+	> 
+	> Specify `ninja` as your default generator:
+	> ```sh
+	> export CMAKE_GENERATOR=Ninja
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-```sh
-cd ../build
-```
-{: .nolineno }
+	> The following text is LLM-generated and explains why the last part of a `ninja` build might feel slow and/or long:
+	> - **Front-loading parallel work**: Ninja is extremely parallel — early on, it schedules as many jobs as possible. If you have 16 jobs running (like in your setup), it chews through the easy/independent stuff fast.
+	> - **Dependency chains bottleneck**: Near the end, many remaining files depend on the completion of earlier ones. So ninja can’t start them in parallel — it must wait. You end up with fewer and fewer jobs running, sometimes just one.
+	> - **Final linking is heavy**: The very last steps — especially linking large binaries like `clang` or `lld` — take a ton of CPU and memory, and they can’t be parallelized much. This slows things down dramatically.
+	> - **Perceived slowness**: Early on, ninja might do 500 steps in 30 seconds. Near the end, it might do just 10 steps in 30 seconds. So it feels slower, even though it’s just hitting the heavy stuff.
+	{: .prompt-info }
 
-Run `ninja`
+12. Install via `ninja`
 
-```sh
-ninja
-```
-{: .nolineno }
+	```sh
+	ninja install
+	```
+	{: .nolineno }
+	
+	![build_llvm.png](../assets/obsidian/build_llvm.png)
 
-> Use `-v` flag to see which command is running:
-> ```sh
-> ninja -v
-> ```
-> {: .nolineno }
-> 
-> Specify `ninja` as your default generator:
-> ```sh
-> export CMAKE_GENERATOR=Ninja
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+13. Confirm that LLVM was compiled with support for Arm(R)-based targets
 
-> The following text is LLM-generated and explains why the last part of a `ninja` build might feel slow and/or long:
-> - **Front-loading parallel work**: Ninja is extremely parallel — early on, it schedules as many jobs as possible. If you have 16 jobs running (like in your setup), it chews through the easy/independent stuff fast.
-> - **Dependency chains bottleneck**: Near the end, many remaining files depend on the completion of earlier ones. So ninja can’t start them in parallel — it must wait. You end up with fewer and fewer jobs running, sometimes just one.
-> - **Final linking is heavy**: The very last steps — especially linking large binaries like `clang` or `lld` — take a ton of CPU and memory, and they can’t be parallelized much. This slows things down dramatically.
-> - **Perceived slowness**: Early on, ninja might do 500 steps in 30 seconds. Near the end, it might do just 10 steps in 30 seconds. So it feels slower, even though it’s just hitting the heavy stuff.
-{: .prompt-info }
-
-Install via `ninja`
-
-```sh
-ninja install
-```
-{: .nolineno }
-
-![build_llvm.png](../assets/obsidian/build_llvm.png)
-
-Confirm that LLVM was compiled with support for Arm(R)-based targets
-
-```sh
-$HOME/.llm/llvm-tvm/install/bin/llvm-config --version
-$HOME/.llm/llvm-tvm/install/bin/llvm-config --targets-built
-$HOME/.llm/llvm-tvm/install/bin/llvm-config --host-target
-```
-{: .nolineno }
+	```sh
+	$HOME/.llm/llvm-tvm/install/bin/llvm-config --version
+	$HOME/.llm/llvm-tvm/install/bin/llvm-config --targets-built
+	$HOME/.llm/llvm-tvm/install/bin/llvm-config --host-target
+	```
+	{: .nolineno }
 
 Should output something similar to:
 
@@ -385,173 +385,173 @@ arm64-apple-darwin24.4.0
 > {: .nolineno }
 {: .prompt-info }
 
-Enter `tvm-unity`
+1. Enter `tvm-unity`
 
-```sh
-cd $HOME/.llm/tvm-unity
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/tvm-unity
+	```
+	{: .nolineno }
 
-Clone TVM Unity from GitHub
+2. Clone TVM Unity from GitHub
 
-```sh
-git clone --recursive https://github.com/mlc-ai/relax.git tvm-unity
-```
-{: .nolineno }
+	```sh
+	git clone --recursive https://github.com/mlc-ai/relax.git tvm-unity
+	```
+	{: .nolineno }
 
-Create `build` and `install` directories for later use
+3. Create `build` and `install` directories for later use
 
-```sh
-mkdir build install
-```
-{: .nolineno }
+	```sh
+	mkdir build install
+	```
+	{: .nolineno }
 
-Enter `build`
+4. Enter `build`
 
-```sh
-cd build
-```
-{: .nolineno }
+	```sh
+	cd build
+	```
+	{: .nolineno }
 
-Ensure TVM uses custom LLVM (so it uses the right one when you `import tvm` in Python)
+5. Ensure TVM uses custom LLVM (so it uses the right one when you `import tvm` in Python)
 
-```sh
-export LLVM_HOME=$HOME/.llm/llvm-tvm
-export LLVM_CONFIG=$LLVM_HOME/install/bin/llvm-config
+	```sh
+	export LLVM_HOME=$HOME/.llm/llvm-tvm
+	export LLVM_CONFIG=$LLVM_HOME/install/bin/llvm-config
+	
+	export TVM_HOME=$HOME/.llm/tvm-unity
+	export TVM_LIBRARY_PATH=$TVM_HOME/build
+	export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
+	export TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)
+	```
+	{: .nolineno }
+	
+	> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
+	> ```sh
+	> echo -e 'export LLVM_HOME=$HOME/.llm/llvm-tvm\nexport LLVM_CONFIG=$LLVM_HOME/install/bin/llvm-config\nexport TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH\nexport TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)' >> $HOME/.bashrc
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-export TVM_HOME=$HOME/.llm/tvm-unity
-export TVM_LIBRARY_PATH=$TVM_HOME/build
-export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
-export TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)
-```
-{: .nolineno }
-
-> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
-> ```sh
-> echo -e 'export LLVM_HOME=$HOME/.llm/llvm-tvm\nexport LLVM_CONFIG=$LLVM_HOME/install/bin/llvm-config\nexport TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH\nexport TVM_LLVM_VERSION=$(LLVM_CONFIG=$LLVM_CONFIG $LLVM_CONFIG --version | cut -d. -f1)' >> $HOME/.bashrc
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-Configure build
+6. Configure build
   
-```sh
-cmake ../tvm-unity -G Ninja \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=$TVM_HOME/install \
-  -DCMAKE_OSX_SYSROOT=$SDKROOT \
-  -DUSE_LLVM="$LLVM_CONFIG --ignore-libllvm --link-static" \
-  -DCMAKE_OSX_ARCHITECTURES=arm64 \
-  -DCMAKE_PREFIX_PATH=$LLVM_HOME/install \
-  -DBUILD_STATIC_RUNTIME=ON \
-  -DHIDE_PRIVATE_SYMBOLS=ON \
-  -DUSE_METAL=ON \
-  -DUSE_MPS=OFF \
-  -DUSE_GTEST=OFF \
-  -DUSE_LIBBACKTRACE=OFF \
-  -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
-  -DCMAKE_C_COMPILER=$LLVM_HOME/install/bin/clang \
-  -DCMAKE_CXX_COMPILER=$LLVM_HOME/install/bin/clang++ \
-  -DCMAKE_C_FLAGS="-O3 -mcpu=native -march=native -funroll-loops" \
-  -DCMAKE_CXX_FLAGS="-O3 -mcpu=native -march=native -funroll-loops" \
-  -DCMAKE_EXE_LINKER_FLAGS="-Wl,-S"
-```
+	```sh
+	cmake ../tvm-unity -G Ninja \
+	  -DCMAKE_BUILD_TYPE=Release \
+	  -DCMAKE_INSTALL_PREFIX=$TVM_HOME/install \
+	  -DCMAKE_OSX_SYSROOT=$SDKROOT \
+	  -DUSE_LLVM="$LLVM_CONFIG --ignore-libllvm --link-static" \
+	  -DCMAKE_OSX_ARCHITECTURES=arm64 \
+	  -DCMAKE_PREFIX_PATH=$LLVM_HOME/install \
+	  -DBUILD_STATIC_RUNTIME=ON \
+	  -DHIDE_PRIVATE_SYMBOLS=ON \
+	  -DUSE_METAL=ON \
+	  -DUSE_MPS=OFF \
+	  -DUSE_GTEST=OFF \
+	  -DUSE_LIBBACKTRACE=OFF \
+	  -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
+	  -DCMAKE_C_COMPILER=$LLVM_HOME/install/bin/clang \
+	  -DCMAKE_CXX_COMPILER=$LLVM_HOME/install/bin/clang++ \
+	  -DCMAKE_C_FLAGS="-O3 -mcpu=native -march=native -funroll-loops" \
+	  -DCMAKE_CXX_FLAGS="-O3 -mcpu=native -march=native -funroll-loops" \
+	  -DCMAKE_EXE_LINKER_FLAGS="-Wl,-S"
+	```
+	
+	![cmake_tvm.png](../assets/obsidian/cmake_tvm.png)
+	
+	> If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
+	{: .prompt-tip }
 
-![cmake_tvm.png](../assets/obsidian/cmake_tvm.png)
+7. Build
 
-> If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
-{: .prompt-tip }
+	```sh
+	cmake --build . --parallel $(sysctl -n hw.logicalcpu)
+	```
+	{: .nolineno }
+	
+	> If you don’t need to reuse any previous build data (e.g. `ccache` or incremental builds), include `--clean-first` flag to force clean a build (might help with memory)
+	> ```sh
+	> cmake --build . --clean-first --parallel $(sysctl -n hw.logicalcpu)
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
+	
+	![cmake_tvm2.png](../assets/obsidian/cmake_tvm2.png)
 
-Build
+8. If successful, you should have both `libtvm` and `libtvm_runtime` within `$HOME/.llm/tvm-unity/build` directory
 
-```sh
-cmake --build . --parallel $(sysctl -n hw.logicalcpu)
-```
-{: .nolineno }
+	![built_tvm_dir.png](../assets/obsidian/built_tvm_dir.png)
 
-> If you don’t need to reuse any previous build data (e.g. `ccache` or incremental builds), include `--clean-first` flag to force clean a build (might help with memory)
-> ```sh
-> cmake --build . --clean-first --parallel $(sysctl -n hw.logicalcpu)
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+9. Install built binaries into `install` directory
 
-![cmake_tvm2.png](../assets/obsidian/cmake_tvm2.png)
+	```sh
+	cmake --build . --target install
+	```
+	{: .nolineno }
+	
+	![cmake_tvm3.png](../assets/obsidian/cmake_tvm3.png)
 
-If successful, you should have both `libtvm` and `libtvm_runtime` within `$HOME/.llm/tvm-unity/build` directory
+10. Set environment variables
 
-![built_tvm_dir.png](../assets/obsidian/built_tvm_dir.png)
+	```sh
+	export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH
+	```
+	{: .nolineno }
+	
+	> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
+	> ```sh
+	> echo -e 'export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH' >> $HOME/.bashrc
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-Install built binaries into `install` directory
+11. Go to `python` directory (fullpath: `$HOME/.llm/tvm-unity/tvm-unity/python`)
 
-```sh
-cmake --build . --target install
-```
-{: .nolineno }
+	```sh
+	cd ../tvm-unity/python
+	```
+	{: .nolineno }
 
-![cmake_tvm3.png](../assets/obsidian/cmake_tvm3.png)
+12. Install Python bindings
 
-Set environment variables
+	```sh
+	pip install -e .
+	```
+	{: .nolineno }
+	
+	> Make sure `tvm-build-venv` Conda environment is activated before running `pip install -e .` or doing a CMake build
+	> ```sh
+	> conda activate tvm-build-venv
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
+	
+	![tvm_python.png](../assets/obsidian/tvm_python.png)
 
-```sh
-export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH
-```
-{: .nolineno }
+13. Validate TVM installation by locating TVM Python package
 
-> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
-> ```sh
-> echo -e 'export PYTHONPATH=$TVM_HOME/tvm-unity/python:$PYTHONPATH' >> $HOME/.bashrc
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+	```python
+	python -c "import tvm; print(tvm.__file__)"
+	```
+	{: .nolineno }
+	
+	Example output:
+	
+	```plaintext
+	/some-path/lib/python3.11/site-packages/tvm/__init__.py
+	```
 
-Go to `python` directory (fullpath: `$HOME/.llm/tvm-unity/tvm-unity/python`)
+14. Check which TVM library is used by confirming python package is using the proper `libtvm`
 
-```sh
-cd ../tvm-unity/python
-```
-{: .nolineno }
-
-Install Python bindings
-
-```sh
-pip install -e .
-```
-{: .nolineno }
-
-> Make sure `tvm-build-venv` Conda environment is activated before running `pip install -e .` or doing a CMake build
-> ```sh
-> conda activate tvm-build-venv
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-![tvm_python.png](../assets/obsidian/tvm_python.png)
-
-Validate TVM installation by locating TVM Python package
-
-```python
-python -c "import tvm; print(tvm.__file__)"
-```
-{: .nolineno }
-
-Example output:
-
-```plaintext
-/some-path/lib/python3.11/site-packages/tvm/__init__.py
-```
-
-Check which TVM library is used by confirming python package is using the proper `libtvm`
-
-```python
-python -c "import tvm; print(tvm._ffi.base._LIB)"
-```
-{: .nolineno }
-
-Example output:
-```plaintext
-<CDLL '/some-path/lib/python3.11/site-packages/tvm/libtvm.dylib', handle 95ada510 at 0x1030e4e50>
-```
+	```python
+	python -c "import tvm; print(tvm._ffi.base._LIB)"
+	```
+	{: .nolineno }
+	
+	Example output:
+	```plaintext
+	<CDLL '/some-path/lib/python3.11/site-packages/tvm/libtvm.dylib', handle 95ada510 at 0x1030e4e50>
+	```
 
 > Wrong TVM commit or build flags may cause downstream applications.
 > 
@@ -595,124 +595,124 @@ Example output:
 > Frontend for text generation.
 {: .prompt-info }
 
-Create the conda environment with build dependencies
+1. Create the conda environment with build dependencies
 
-```sh
-conda create -n mlc-chat-venv -c conda-forge "cmake>=3.24" rust git python=3.11
-```
-{: .nolineno }
+	```sh
+	conda create -n mlc-chat-venv -c conda-forge "cmake>=3.24" rust git python=3.11
+	```
+	{: .nolineno }
 
-Enter build environment
+2. Enter build environment
 
-```sh
-conda activate mlc-chat-venv
-```
-{: .nolineno }
+	```sh
+	conda activate mlc-chat-venv
+	```
+	{: .nolineno }
 
-Enter `mlc-llm`
+3. Enter `mlc-llm`
 
-```sh
-cd $HOME/.llm/mlc-llm
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/mlc-llm
+	```
+	{: .nolineno }
 
-Clone and enter MLC LLM
+4. Clone and enter MLC LLM
 
-```sh
-git clone --recursive https://github.com/mlc-ai/mlc-llm.git && cd mlc-llm
-```
-{: .nolineno }
+	```sh
+	git clone --recursive https://github.com/mlc-ai/mlc-llm.git && cd mlc-llm
+	```
+	{: .nolineno }
 
-Create and enter `build` directory
+5. Create and enter `build` directory
 
-```sh
-mkdir build && cd build
-```
-{: .nolineno }
+	```sh
+	mkdir build && cd build
+	```
+	{: .nolineno }
 
-Generate build config
+6. Generate build config
 
-```sh
-python ../cmake/gen_cmake_config.py
-```
-{: .nolineno }
+	```sh
+	python ../cmake/gen_cmake_config.py
+	```
+	{: .nolineno }
+	
+	> Patch `msgpack/CMakeLists.txt` and `sentencepiece/CMakeLists.txt` files by replacing `cmake_minimum_required(VERSION 2.8)` with `cmake_minimum_required(VERSION 3.5...3.28)`
+	{: .prompt-info }
 
-> Patch `msgpack/CMakeLists.txt` and `sentencepiece/CMakeLists.txt` files by replacing `cmake_minimum_required(VERSION 2.8)` with `cmake_minimum_required(VERSION 3.5...3.28)`
-{: .prompt-info }
+7. Build MLC LLM libraries
 
-Build MLC LLM libraries
+	```sh
+	cmake .. -DCMAKE_PREFIX_PATH=$HOME/.llm/tvm-unity/install
+	cmake --build . --parallel $(sysctl -n hw.logicalcpu)
+	```
+	{: .nolineno }
 
-```sh
-cmake .. -DCMAKE_PREFIX_PATH=$HOME/.llm/tvm-unity/install
-cmake --build . --parallel $(sysctl -n hw.logicalcpu)
-```
-{: .nolineno }
+8. Install to Python
 
-Install to Python
+	```sh
+	cd ../python && pip install -e .
+	```
+	{: .nolineno }
 
-```sh
-cd ../python && pip install -e .
-```
-{: .nolineno }
+9. Install potentially missing packages used by TVM Unity
 
-Install potentially missing packages used by TVM Unity
+	```sh
+	pip install cloudpickle psutil scipy tornado
+	```
+	{: .nolineno }
 
-```sh
-pip install cloudpickle psutil scipy tornado
-```
-{: .nolineno }
+10. Export environment variables
 
-Export environment variables
+	```sh
+	export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm
+	export PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH
+	```
+	{: .nolineno }
+	
+	> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
+	> ```sh
+	> echo -e 'export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm\nexport PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH' >> $HOME/.bashrc
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-```sh
-export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm
-export PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH
-```
-{: .nolineno }
+11. Make sure to include TVM too
 
-> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
-> ```sh
-> echo -e 'export MLC_LLM_SOURCE_DIR=$HOME/.llm/mlc-llm/mlc-llm\nexport PYTHONPATH=$MLC_LLM_SOURCE_DIR/python:$PYTHONPATH' >> $HOME/.bashrc
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+	```sh
+	cd $HOME/.llm/tvm-unity/tvm-unity/python
+	```
+	{: .nolineno }
 
-Make sure to include TVM too
+12. Set environment variables
 
-```sh
-cd $HOME/.llm/tvm-unity/tvm-unity/python
-```
-{: .nolineno }
+	```sh
+	export TVM_HOME=$HOME/.llm/tvm-unity
+	export TVM_LIBRARY_PATH=$TVM_HOME/build
+	export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
+	```
+	{: .nolineno }
+	
+	> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
+	> ```sh
+	> echo -e 'export TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH' >> $HOME/.bashrc
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-Set environment variables
+13. Install `tvm` as Python package to `mlc-chat-venv`
 
-```sh
-export TVM_HOME=$HOME/.llm/tvm-unity
-export TVM_LIBRARY_PATH=$TVM_HOME/build
-export DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH
-```
-{: .nolineno }
+	```sh
+	pip install -e .
+	```
+	{: .nolineno }
 
-> Optional: Add environment variables to your `.bashrc` (or other shell startup file)
-> ```sh
-> echo -e 'export TVM_HOME=$HOME/.llm/tvm-unity\nexport TVM_LIBRARY_PATH=$TVM_HOME/build\nexport DYLD_LIBRARY_PATH=$TVM_LIBRARY_PATH:$DYLD_LIBRARY_PATH' >> $HOME/.bashrc
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+14. Validate MLC LLM Installation with the following commands:
 
-Install `tvm` as Python package to `mlc-chat-venv`
-
-```sh
-pip install -e .
-```
-{: .nolineno }
-
-Validate MLC LLM Installation with the following commands:
-
-```sh
-ls -l ../build
-```
-{: .nolineno }
+	```sh
+	ls -l ../build
+	```
+	{: .nolineno }
 
 Output should include `libmlc_llm.so` and `libtvm_runtime.so`
 
@@ -747,264 +747,264 @@ python -c "import mlc_llm; print(mlc_llm)"
 > Optimizes the model inference for a given platform, allowing users bring their own new model architecture, use different quantization modes, and customize the overall model optimization flow.
 {: .prompt-info }
 
-Enter directory where models will be saved
+1. Enter directory where models will be saved
 
-```sh
-cd $HOME/.llm/models
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/models
+	```
+	{: .nolineno }
 
-Initialize git LFS in order to be able to download large files (in this case, model weights)
+2. Initialize git LFS in order to be able to download large files (in this case, model weights)
 
-```sh
-git lfs install
-```
-{: .nolineno }
+	```sh
+	git lfs install
+	```
+	{: .nolineno }
 
-Download model weights from HF, where `<HF_USER>` and `<HF_MODEL>` are the username and model's name on HuggingFace, respectively
+3. Download model weights from HF, where `<HF_USER>` and `<HF_MODEL>` are the username and model's name on HuggingFace, respectively
 
-```sh
-git clone https://huggingface.co/<HF_USER>/<HF_MODEL>
-```
-{: .nolineno }
+	```sh
+	git clone https://huggingface.co/<HF_USER>/<HF_MODEL>
+	```
+	{: .nolineno }
+	
+	E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
 
-E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
+4. Convert weight to MLC format to use in MLC LLM. General pattern for the weight conversion command (i.e. `mlc_llm convert_weight`); optional args are wrapped with `[ ]`:
 
-Convert weight to MLC format to use in MLC LLM. General pattern for the weight conversion command (i.e. `mlc_llm convert_weight`); optional args are wrapped with `[ ]`:
+	```sh
+	mlc_llm convert_weight <CONFIG> \
+	--quantization <QUANTIZATION_MODE> \
+	[--model-type <MODEL_TYPE>] \
+	[--device <DEVICE>] \
+	[--source <SOURCE>] \
+	[--source-format <SOURCE_FORMAT>] \
+	--output <OUTPUT>
+	```
+	{: .nolineno }
+	
+	| Argument                             | Description                                                                                                                                | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Default                     |
+	|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+	| `<CONFIG>`                           | Defines model architecture, including vocabulary size, number of layers, hidden size, number of attention heads, etc.                      | - Path to HuggingFace model directory with `config.json`; includes non-quantized model weights in PyTorch or SafeTensor format, tokenizer configurations, and `generation_config.json` for more default configuration for text generation ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/tree/main))<br> - Path to `config.json` ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/blob/main/config.json))<br> - Pre-defined model name ([see `MODEL_PRESETS`](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/compiler/model/model.py)) |                             |
+	| `--quantization <QUANTIZATION_MODE>` | ([Quantization mode](https://llm.mlc.ai/docs/compilation/configure_quantization.html#quantization-mode) used during compilation            | - `q0f16`<br> - `q0f32`<br> - `q3f16_1`<br> - `q4f16_1`<br> - `q4f32_1`<br> - `q4f16_awq`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                             |
+	| `--model-type <MODEL_TYPE>`          | Model architecture                                                                                                                         | `"llama"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inferred from `config.json` |
+	| `--device <DEVICE>`                  | Device used for quantization                                                                                                               | `"cuda"`, `"cuda:0"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Auto-detected GPU           |
+	| `--source <SOURCE>`                  | Path to original model weight                                                                                                              | Path to model                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Inferred from `config`      |
+	| `--source-format <SOURCE_FORMAT>`    | Source model weight's format                                                                                                               | Format type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Inferred from `config`      |
+	| `--output, -o <OUTPUT>`              | Output directory for quantized weights (i.e. where to save quantized model weight); contains `params_shard_*.bin` and `ndarray-cache.json` | Path to directory                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                             |
+	
+	E.g.:
+	
+	```sh
+	mlc_llm convert_weight RedPajama-INCITE-Chat-3B-v1 \
+	--quantization q4f16_1 \
+	-o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
+	```
+	{: .nolineno }
+	
+	> Using 4-bit quantization is recommended, as the text generated by 3-bit quantized models may have bad quality depending on the model.
+	{: .prompt-tip }
 
-```sh
-mlc_llm convert_weight <CONFIG> \
---quantization <QUANTIZATION_MODE> \
-[--model-type <MODEL_TYPE>] \
-[--device <DEVICE>] \
-[--source <SOURCE>] \
-[--source-format <SOURCE_FORMAT>] \
---output <OUTPUT>
-```
-{: .nolineno }
+5. [Generate `mlc-chat-config.json`](https://llm.mlc.ai/docs/compilation/compile_models.html#generate-mlc-chat-config) and process tokenizers
 
-| Argument                             | Description                                                                                                                                | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Default                     |
-|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `<CONFIG>`                           | Defines model architecture, including vocabulary size, number of layers, hidden size, number of attention heads, etc.                      | - Path to HuggingFace model directory with `config.json`; includes non-quantized model weights in PyTorch or SafeTensor format, tokenizer configurations, and `generation_config.json` for more default configuration for text generation ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/tree/main))<br> - Path to `config.json` ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/blob/main/config.json))<br> - Pre-defined model name ([see `MODEL_PRESETS`](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/compiler/model/model.py)) |                             |
-| `--quantization <QUANTIZATION_MODE>` | ([Quantization mode](https://llm.mlc.ai/docs/compilation/configure_quantization.html#quantization-mode) used during compilation            | - `q0f16`<br> - `q0f32`<br> - `q3f16_1`<br> - `q4f16_1`<br> - `q4f32_1`<br> - `q4f16_awq`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                             |
-| `--model-type <MODEL_TYPE>`          | Model architecture                                                                                                                         | `"llama"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inferred from `config.json` |
-| `--device <DEVICE>`                  | Device used for quantization                                                                                                               | `"cuda"`, `"cuda:0"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Auto-detected GPU           |
-| `--source <SOURCE>`                  | Path to original model weight                                                                                                              | Path to model                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Inferred from `config`      |
-| `--source-format <SOURCE_FORMAT>`    | Source model weight's format                                                                                                               | Format type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Inferred from `config`      |
-| `--output, -o <OUTPUT>`              | Output directory for quantized weights (i.e. where to save quantized model weight); contains `params_shard_*.bin` and `ndarray-cache.json` | Path to directory                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                             |
+	```sh
+	mlc_llm gen_config <HF_MODEL> \
+	--quantization <QUANTIZATION_MODE> \
+	--conv-template <TEMPLATE> \
+	-o <CONVERTED_HF_MODEL>
+	```
+	{: .nolineno }
+	
+	E.g. Local path
+	
+	```sh
+	mlc_llm gen_config $HOME/.llm/models/pygmalion-2-13b \
+	--quantization q4f16_1 \
+	--conv-template LM \
+	-o $HOME/.llm/models/pygmalion-2-13b-q4f16_1
+	```
+	{: .nolineno }
+	
+	> `--conv-template LM` uses a template tailored to perform vanilla LLM completion (generally adopted by code completion models)
+	{: .prompt-info }
+	
+	E.g. HuggingFace model
+	
+	```sh
+	mlc_llm gen_config RedPajama-INCITE-Chat-3B-v1 \
+	--quantization q4f16_1 \
+	--conv-template redpajama_chat \
+	-o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
+	```
+	{: .nolineno }
+	
+	> - See [Compile Command Specification](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-command-specification) for specification of `gen_config`
+	> - Optional: [Customize MLC chat config](https://llm.mlc.ai/docs/deploy/mlc_chat_config.html#configure-mlc-chat-json)
+	> - [conversation_template](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/conversation_template) directory contains a full list of conversation templates that MLC provides. If the model you are adding requires a new conversation template, you would need to add your own. Follow [this PR](https://github.com/mlc-ai/mlc-llm/pull/2163) as an example. However, adding your own template would require you [build mlc_llm from source](https://llm.mlc.ai/docs/install/mlc_llm.html#mlcchat-build-from-source) in order for it to be recognized by the runtime.
+	{: .prompt-info }
 
-E.g.:
+6. Confirm you have the right files
 
-```sh
-mlc_llm convert_weight RedPajama-INCITE-Chat-3B-v1 \
---quantization q4f16_1 \
--o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
-```
-{: .nolineno }
+	```sh
+	ls $HOME/.llm/models/<HF_MODEL>
+	```
+	{: .nolineno }
+	
+	The output should look similar to
+	
+	```plaintext
+	mlc-chat-config.json         # Chat config
+	ndarray-cache.json           # Model weight info
+	params_shard_0.bin           # Model weights
+	params_shard_1.bin
+	...
+	tokenizer.json               # Tokenizer files
+	tokenizer_config.json
+	```
 
-> Using 4-bit quantization is recommended, as the text generated by 3-bit quantized models may have bad quality depending on the model.
-{: .prompt-tip }
+7. [Compile and create model library](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-model-library) with specification in `mlc-chat-config.json`
 
-[Generate `mlc-chat-config.json`](https://llm.mlc.ai/docs/compilation/compile_models.html#generate-mlc-chat-config) and process tokenizers
-
-```sh
-mlc_llm gen_config <HF_MODEL> \
---quantization <QUANTIZATION_MODE> \
---conv-template <TEMPLATE> \
--o <CONVERTED_HF_MODEL>
-```
-{: .nolineno }
-
-E.g. Local path
-
-```sh
-mlc_llm gen_config $HOME/.llm/models/pygmalion-2-13b \
---quantization q4f16_1 \
---conv-template LM \
--o $HOME/.llm/models/pygmalion-2-13b-q4f16_1
-```
-{: .nolineno }
-
-> `--conv-template LM` uses a template tailored to perform vanilla LLM completion (generally adopted by code completion models)
-{: .prompt-info }
-
-E.g. HuggingFace model
-
-```sh
-mlc_llm gen_config RedPajama-INCITE-Chat-3B-v1 \
---quantization q4f16_1 \
---conv-template redpajama_chat \
--o RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
-```
-{: .nolineno }
-
-> - See [Compile Command Specification](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-command-specification) for specification of `gen_config`
-> - Optional: [Customize MLC chat config](https://llm.mlc.ai/docs/deploy/mlc_chat_config.html#configure-mlc-chat-json)
-> - [conversation_template](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/conversation_template) directory contains a full list of conversation templates that MLC provides. If the model you are adding requires a new conversation template, you would need to add your own. Follow [this PR](https://github.com/mlc-ai/mlc-llm/pull/2163) as an example. However, adding your own template would require you [build mlc_llm from source](https://llm.mlc.ai/docs/install/mlc_llm.html#mlcchat-build-from-source) in order for it to be recognized by the runtime.
-{: .prompt-info }
-
-Confirm you have the right files
-
-```sh
-ls $HOME/.llm/models/<HF_MODEL>
-```
-{: .nolineno }
-
-The output should look similar to
-
-```plaintext
-mlc-chat-config.json         # Chat config
-ndarray-cache.json           # Model weight info
-params_shard_0.bin           # Model weights
-params_shard_1.bin
-...
-tokenizer.json               # Tokenizer files
-tokenizer_config.json
-```
-
-[Compile and create model library](https://llm.mlc.ai/docs/compilation/compile_models.html#compile-model-library) with specification in `mlc-chat-config.json`
-
-```sh
-mlc_llm compile <CONVERTED_HF_MODEL>/mlc-chat-config.json \
---device metal \
--o libs/<CONVERTED_HF_MODEL>-metal.so
-```
-{: .nolineno }
-
-E.g.:
-
-```sh
-mlc_llm compile RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC/mlc-chat-config.json \
---device metal \
--o libs/RedPajama-INCITE-Chat-3B-v1-q4f16_1-metal.so
-```
-{: .nolineno }
+	```sh
+	mlc_llm compile <CONVERTED_HF_MODEL>/mlc-chat-config.json \
+	--device metal \
+	-o libs/<CONVERTED_HF_MODEL>-metal.so
+	```
+	{: .nolineno }
+	
+	E.g.:
+	
+	```sh
+	mlc_llm compile RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC/mlc-chat-config.json \
+	--device metal \
+	-o libs/RedPajama-INCITE-Chat-3B-v1-q4f16_1-metal.so
+	```
+	{: .nolineno }
 
 > Generated model library can be shared across multiple model variants, as long as the architecture and number of parameters does not change, e.g. same architecture, but different weights (your finetuned model)
 {: .prompt-info }
 
 ##### Upload Weights
-Create a repository on Hugging Face
+1. Create a repository on Hugging Face
 
-Enter directory where models will be saved
+2. Enter directory where models will be saved
 
-```sh
-cd $HOME/.llm/models
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/models
+	```
+	{: .nolineno }
 
-Initialize git LFS in order to be able to download large files (in this case, model weights)
+3. Initialize git LFS in order to be able to download large files (in this case, model weights)
 
-```sh
-git lfs install
-```
-{: .nolineno }
+	```sh
+	git lfs install
+	```
+	{: .nolineno }
 
-Download model weights from HF, where `<HF_USERNAME>` and `<HF_MODEL_REPO>` are your Hugging Face username and model's repo name on HuggingFace, respectively
+4. Download model weights from HF, where `<HF_USERNAME>` and `<HF_MODEL_REPO>` are your Hugging Face username and model's repo name on HuggingFace, respectively
 
-```sh
-git clone https://huggingface.co/<HF_USERNAME>/<HF_MODEL_REPO>
-```
-{: .nolineno }
+	```sh
+	git clone https://huggingface.co/<HF_USERNAME>/<HF_MODEL_REPO>
+	```
+	{: .nolineno }
+	
+	E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
 
-E.g. `https://huggingface.co/togethercomputer/RedPajama-INCITE-Instruct-3B-v1`
+5. Enter newly cloned weights directory
 
-Enter newly cloned weights directory
+	```sh
+	cd <MY_HF_MODEL_REPO>
+	```
+	{: .nolineno }
 
-```sh
-cd <MY_HF_MODEL_REPO>
-```
-{: .nolineno }
+6. Copy converted model weights into the Hugging Face repo
 
-Copy converted model weights into the Hugging Face repo
+	```sh
+	cp $HOME/.llm/models/<CONVERTED_HF_MODEL>/* .
+	```
+	{: .nolineno }
+	
+	E.g. `$HOME/.llm/models/RedPajama-INCITE-Instruct-3B-v1-q4f16_1-MLC/*`
 
-```sh
-cp $HOME/.llm/models/<CONVERTED_HF_MODEL>/* .
-```
-{: .nolineno }
+7. Stage all changes
 
-E.g. `$HOME/.llm/models/RedPajama-INCITE-Instruct-3B-v1-q4f16_1-MLC/*`
+	```sh
+	git add .
+	```
+	{: .nolineno }
 
-Stage all changes
+8. Commit staged changes
 
-```sh
-git add .
-```
-{: .nolineno }
+	```sh
+	git commit -m "Add `<CONVERTED_HF_MODEL>` model weights"
+	```
+	{: .nolineno }
 
-Commit staged changes
+9. Push commit(s) to remote repo (i.e. HuggingFace repo)
 
-```sh
-git commit -m "Add `<CONVERTED_HF_MODEL>` model weights"
-```
-{: .nolineno }
-
-Push commit(s) to remote repo (i.e. HuggingFace repo)
-
-```sh
-git push origin main
-```
-{: .nolineno }
+	```sh
+	git push origin main
+	```
+	{: .nolineno }
 
 ##### Example
-[Request Llama-2 weights from Meta](https://huggingface.co/meta-llama)
+1. [Request Llama-2 weights from Meta](https://huggingface.co/meta-llama)
 
-Once you have access, create directory `dist/models`
+2. Once you have access, create directory `dist/models`
 
-```sh
-mkdir -p dist/models && cd dist/models
-```
-{: .nolineno }
+	```sh
+	mkdir -p dist/models && cd dist/models
+	```
+	{: .nolineno }
 
-Download model to the directory
+3. Download model to the directory
 
-```sh
-git lfs install
-git clone https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
-cd ../..
-```
-{: .nolineno }
+	```sh
+	git lfs install
+	git clone https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
+	cd ../..
+	```
+	{: .nolineno }
 
-Convert HF weights into MLC-compatible weights
+4. Convert HF weights into MLC-compatible weights
 
-```sh
-mlc_llm convert_weight models/Llama-2-7b-chat-hf \
---quantization q4f16_1 \
--o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
-```
-{: .nolineno }
+	```sh
+	mlc_llm convert_weight models/Llama-2-7b-chat-hf \
+	--quantization q4f16_1 \
+	-o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
+	```
+	{: .nolineno }
+	
+	> All platforms can share the same compiled/quantized weights
+	{: .prompt-info }
 
-> All platforms can share the same compiled/quantized weights
-{: .prompt-info }
+5. Create output directory for compiled model library
 
-Create output directory for compiled model library
+	```sh
+	mkdir -p dist/libs
+	```
+	{: .nolineno }
 
-```sh
-mkdir -p dist/libs
-```
-{: .nolineno }
+6. Generate `mlc-chat-config.json` and process tokenizers
 
-Generate `mlc-chat-config.json` and process tokenizers
+	```sh
+	mlc_llm gen_config ./dist/models/Llama-2-7b-chat-hf \
+	--quantization q4f16_1 \
+	--conv-template llama-2 \
+	-o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
+	```
+	{: .nolineno }
 
-```sh
-mlc_llm gen_config ./dist/models/Llama-2-7b-chat-hf \
---quantization q4f16_1 \
---conv-template llama-2 \
--o dist/Llama-2-7b-chat-hf-q4f16_1-MLC
-```
-{: .nolineno }
+7. Compile model library with specification in `mlc-chat-config.json`
 
-Compile model library with specification in `mlc-chat-config.json`
-
-```sh
-mlc_llm compile ./dist/Llama-2-7b-chat-hf-q4f16_1-MLC/mlc-chat-config.json \
---device metal \
--o dist/libs/Llama-2-7b-chat-hf-q4f16_1-metal.so
-```
-{: .nolineno }
-
-> Using 3-bit quantization usually can be overly aggressive and only works for limited settings. If you encounter issues where the compiled model does not perform as expected, consider utilizing a higher number of bits for quantization (e.g., 4-bit quantization).
-{: .prompt-tip }
+	```sh
+	mlc_llm compile ./dist/Llama-2-7b-chat-hf-q4f16_1-MLC/mlc-chat-config.json \
+	--device metal \
+	-o dist/libs/Llama-2-7b-chat-hf-q4f16_1-metal.so
+	```
+	{: .nolineno }
+	
+	> Using 3-bit quantization usually can be overly aggressive and only works for limited settings. If you encounter issues where the compiled model does not perform as expected, consider utilizing a higher number of bits for quantization (e.g., 4-bit quantization).
+	{: .prompt-tip }
 
 ### Usage
 > Make sure `mlc-chat-venv` Conda environment is activated:
@@ -1243,48 +1243,44 @@ MLC LLM supports code completion on multiple IDEs, such as [VSCode](https://gith
 > Deploy LLM locally before continuing onto the following steps
 {: .prompt-info }
 
-Connect IDE to MLC LLM's [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api)
+1. Connect IDE to MLC LLM's [REST API](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api)
+2. Install the [Hugging Face code completion extension `llm-ls`](https://github.com/huggingface/llm-ls) in your IDE
+3. Open the `settings.json` extension config file
+	![Screenshot of an IDE setting](https://llm.mlc.ai/docs/_images/ide_code_settings.png)
+4. Replace the following settings with the respective values to allow `llm-ls` to send OpenAI compatible requests to the MLC Serve API
 
-Install the [Hugging Face code completion extension `llm-ls`](https://github.com/huggingface/llm-ls) in your IDE
+	```json
+	"llm.modelId": "dist/CodeLlama-7b-hf-q4f16_1-MLC"
+	"llm.url": "http://127.0.0.1:8000/v1/completions"
+	"llm.backend": "openai"
+	```
+	{: .nolineno }
 
-Open the `settings.json` extension config file
+5. Refer to [REST API documentation](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api) for more details about tunable API parameters.
 
-![Screenshot of an IDE setting](https://llm.mlc.ai/docs/_images/ide_code_settings.png)
+	```json
+	"llm.requestBody": {
+	   "best_of": 1,
+	   "frequency_penalty": 0.0,
+	   "presence_penalty": 0.0,
+	   "logprobs": false,
+	   "top_logprobs": 0,
+	   "logit_bias": null,
+	   "max_tokens": 128,
+	   "seed": null,
+	   "stop": null,
+	   "suffix": null,
+	   "temperature": 1.0,
+	   "top_p": 1.0
+	}
+	```
+	{: .nolineno }
 
-Replace the following settings with the respective values to allow `llm-ls` to send OpenAI compatible requests to the MLC Serve API
+6. `llm-ls` supports various [code completion] templates. Choose the one that best matches your model (i.e. template with the correct tokenizer) and Fill in the Middle tokens.
 
-```json
-"llm.modelId": "dist/CodeLlama-7b-hf-q4f16_1-MLC"
-"llm.url": "http://127.0.0.1:8000/v1/completions"
-"llm.backend": "openai"
-```
-{: .nolineno }
+	![Screenshot of IDE code templates](https://llm.mlc.ai/docs/_images/ide_code_templates.png)
 
-Refer to [REST API documentation](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api) for more details about tunable API parameters.
-
-```json
-"llm.requestBody": {
-   "best_of": 1,
-   "frequency_penalty": 0.0,
-   "presence_penalty": 0.0,
-   "logprobs": false,
-   "top_logprobs": 0,
-   "logit_bias": null,
-   "max_tokens": 128,
-   "seed": null,
-   "stop": null,
-   "suffix": null,
-   "temperature": 1.0,
-   "top_p": 1.0
-}
-```
-{: .nolineno }
-
-`llm-ls` supports various [code completion] templates. Choose the one that best matches your model (i.e. template with the correct tokenizer) and Fill in the Middle tokens.
-
-![Screenshot of IDE code templates](https://llm.mlc.ai/docs/_images/ide_code_templates.png)
-
-After everything is all set, the extension will be ready to use the responses from the MLC Serve API to provide off-the-shelf code completion on your IDE.
+7. After everything is all set, the extension will be ready to use the responses from the MLC Serve API to provide off-the-shelf code completion on your IDE.
 
 ![Screenshot of code in IDE](https://llm.mlc.ai/docs/_images/code_completion.png)
 
@@ -1293,129 +1289,129 @@ After everything is all set, the extension will be ready to use the responses fr
 ### Requirements
 
 ### Build and Install
-Create Conda environment
+1. Create Conda environment
 
-```sh
-conda create -n llama-env -c conda-forge cmake python=3.10
-```
-{: .nolineno }
+	```sh
+	conda create -n llama-env -c conda-forge cmake python=3.10
+	```
+	{: .nolineno }
 
-Activate build environment
+2. Activate build environment
 
-```sh
-conda activate llama-env
-```
-{: .nolineno }
+	```sh
+	conda activate llama-env
+	```
+	{: .nolineno }
 
-Create directory structure
+3. Create directory structure
 
-```sh
-mkdir -p $HOME/.llm/llama/{build,install}
-```
-{: .nolineno }
+	```sh
+	mkdir -p $HOME/.llm/llama/{build,install}
+	```
+	{: .nolineno }
 
-Enter newly created `llama` directory
+4. Enter newly created `llama` directory
 
-```sh
-cd $HOME/.llm/llama
-```
-{: .nolineno }
+	```sh
+	cd $HOME/.llm/llama
+	```
+	{: .nolineno }
 
-Clone and enter `llama.cpp` repo
+5. Clone and enter `llama.cpp` repo
 
-```sh
-git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
-```
-{: .nolineno }
+	```sh
+	git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
+	```
+	{: .nolineno }
 
-Configure build system with `CMake`
+6. Configure build system with `CMake`
 
-```sh
-cmake -B ../build -G Ninja \
--DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=$HOME/.llm/llama/install \
--DCMAKE_PREFIX_PATH=$HOME/.llm/llama/install \
--DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
--DCMAKE_C_COMPILER=clang \
--DCMAKE_CXX_COMPILER=clang++ \
--DCMAKE_C_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
--DCMAKE_CXX_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
--DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib:/System/Library/Frameworks/Accelerate.framework:/System/Library/Frameworks/Metal.framework" \
--DCMAKE_EXE_LINKER_FLAGS="-Wl,-S,-framework Accelerate,-framework Metal,-framework Foundation,-framework MetalKit" \
--DCMAKE_OSX_SYSROOT=$(xcrun --sdk macosx --show-sdk-path) \
--DCMAKE_OSX_ARCHITECTURES=arm64 \
--DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
--DHIDE_PRIVATE_SYMBOLS=ON \
--DBUILD_SHARED_LIBS=ON \
--DBUILD_TESTING=OFF \
--DUSE_METAL=ON \
--DUSE_MPS=OFF \
--DUSE_GTEST=OFF \
--DUSE_LIBBACKTRACE=OFF \
--DGGML_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
--DGGML_CUDA_GRAPHS=OFF \
--DGGML_CUDA_FA=OFF \
--DGGML_METAL=ON \
--DGGML_METAL_EMBED_LIBRARY=ON \
--DGGML_METAL_USE_BF16=ON \
--DGGML_METAL_NDEBUG=ON \
--DLLAMA_ALL_WARNINGS=OFF \
--DLLAMA_BUILD_EXAMPLES=OFF \
--DLLAMA_BUILD_TESTS=OFF \
--DLLAMA_BUILD_SERVER=OFF \
--DLLAMA_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
--DLLAMA_LIB_INSTALL_DIR=$HOME/.llm/llama/install/lib \
--DLLAMA_BIN_INSTALL_DIR=$HOME/.llm/llama/install/bin \
--DLLAMA_CURL=ON \
--DLLAMA_METAL=ON \
--DLLAMA_METAL_EMBED_LIBRARY=ON \
--DLLAMA_NATIVE=ON \
--DLLAMA_ACCELERATE=ON \
--DLLAMA_BLAS=ON \
--DLLAMA_BLAS_VENDOR=Apple \
--DLLAMA_AVX=OFF \
--DLLAMA_AVX2=OFF \
--DLLAMA_AVX512=OFF \
--DLLAMA_F16C=OFF \
--DLLAMA_FMA=OFF \
--DLLAMA_LLAMAFILE=OFF
-```
-
-> List valid compiler flags
-> ```sh
-> clang -mcpu=help
-> ```
-> {: .nolineno }
-> 
-> List valid CMake flags with `ccmake`
-> ```sh
-> ccmake .
-> ```
-> {: .nolineno }
->
-> List valid CMake flags with `cmake`
-> ```sh
-> cmake -L
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-> Use `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS` if compiling **heavily vectorized code**
-{: .prompt-tip }
+	```sh
+	cmake -B ../build -G Ninja \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=$HOME/.llm/llama/install \
+	-DCMAKE_PREFIX_PATH=$HOME/.llm/llama/install \
+	-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=TRUE \
+	-DCMAKE_C_COMPILER=clang \
+	-DCMAKE_CXX_COMPILER=clang++ \
+	-DCMAKE_C_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
+	-DCMAKE_CXX_FLAGS="-O3 -mcpu=native -fomit-frame-pointer -fvectorize -fslp-vectorize -ftree-vectorize -ffp-contract=fast -funroll-loops -fno-stack-protector -dead_strip" \
+	-DCMAKE_LIBRARY_PATH="/usr/lib:/usr/local/lib:/Library/Developer/CommandLineTools/usr/lib:/System/Library/Frameworks/Accelerate.framework:/System/Library/Frameworks/Metal.framework" \
+	-DCMAKE_EXE_LINKER_FLAGS="-Wl,-S,-framework Accelerate,-framework Metal,-framework Foundation,-framework MetalKit" \
+	-DCMAKE_OSX_SYSROOT=$(xcrun --sdk macosx --show-sdk-path) \
+	-DCMAKE_OSX_ARCHITECTURES=arm64 \
+	-DCMAKE_POLICY_DEFAULT_CMP0077=NEW \
+	-DHIDE_PRIVATE_SYMBOLS=ON \
+	-DBUILD_SHARED_LIBS=ON \
+	-DBUILD_TESTING=OFF \
+	-DUSE_METAL=ON \
+	-DUSE_MPS=OFF \
+	-DUSE_GTEST=OFF \
+	-DUSE_LIBBACKTRACE=OFF \
+	-DGGML_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
+	-DGGML_CUDA_GRAPHS=OFF \
+	-DGGML_CUDA_FA=OFF \
+	-DGGML_METAL=ON \
+	-DGGML_METAL_EMBED_LIBRARY=ON \
+	-DGGML_METAL_USE_BF16=ON \
+	-DGGML_METAL_NDEBUG=ON \
+	-DLLAMA_ALL_WARNINGS=OFF \
+	-DLLAMA_BUILD_EXAMPLES=OFF \
+	-DLLAMA_BUILD_TESTS=OFF \
+	-DLLAMA_BUILD_SERVER=OFF \
+	-DLLAMA_INCLUDE_INSTALL_DIR=$HOME/.llm/llama/install/include \
+	-DLLAMA_LIB_INSTALL_DIR=$HOME/.llm/llama/install/lib \
+	-DLLAMA_BIN_INSTALL_DIR=$HOME/.llm/llama/install/bin \
+	-DLLAMA_CURL=ON \
+	-DLLAMA_METAL=ON \
+	-DLLAMA_METAL_EMBED_LIBRARY=ON \
+	-DLLAMA_NATIVE=ON \
+	-DLLAMA_ACCELERATE=ON \
+	-DLLAMA_BLAS=ON \
+	-DLLAMA_BLAS_VENDOR=Apple \
+	-DLLAMA_AVX=OFF \
+	-DLLAMA_AVX2=OFF \
+	-DLLAMA_AVX512=OFF \
+	-DLLAMA_F16C=OFF \
+	-DLLAMA_FMA=OFF \
+	-DLLAMA_LLAMAFILE=OFF
+	```
+	
+	> List valid compiler flags
+	> ```sh
+	> clang -mcpu=help
+	> ```
+	> {: .nolineno }
+	> 
+	> List valid CMake flags with `ccmake`
+	> ```sh
+	> ccmake .
+	> ```
+	> {: .nolineno }
+	>
+	> List valid CMake flags with `cmake`
+	> ```sh
+	> cmake -L
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
+	
+	> Use `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS` if compiling **heavily vectorized code**
+	{: .prompt-tip }
   
-Build and compile `llama.cpp` with `CMake`
+7. Build and compile `llama.cpp` with `CMake`
 
-```sh
-cmake --build ../build --config Release -j $(sysctl -n hw.logicalcpu)
-```
-{: .nolineno }
+	```sh
+	cmake --build ../build --config Release -j $(sysctl -n hw.logicalcpu)
+	```
+	{: .nolineno }
 
-Install
+8. Install
 
-```sh
-cmake --install ../build
-```
-{: .nolineno }
+	```sh
+	cmake --install ../build
+	```
+	{: .nolineno }
 
 ### Usage
 

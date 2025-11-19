@@ -1,5 +1,4 @@
-//import { tocConfig } from './assets/js/data/toc-config';
-import { heading } from '../../../../assets/js/data/toc-config.js';
+import { headings } from './toc-config.js';
 
 /**
  * TOC button, topbar and popup for mobile devices
@@ -22,7 +21,7 @@ export class TocMobile {
     tocSelector: '#toc-popup-content',
     contentSelector: '.content',
     ignoreSelector: '[data-toc-skip]',
-    headingSelector: heading,
+    headingSelector: headings,
     orderedList: false,
     scrollSmooth: false,
     collapseDepth: 4,
@@ -121,9 +120,6 @@ export class TocMobile {
   }
 
   static init() {
-    console.log('TOC-mobile headingSelector:', tocConfig);
-    console.log('TOC-mobile options:', this.options);
-
     tocbot.init(this.options);
     this.listenAnchors();
     this.initComponents();

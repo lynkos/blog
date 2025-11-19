@@ -12,3 +12,21 @@
     {% endif %}
   {% endfor %}
 {% endif %}
+
+{% comment %}
+  Generate heading selector string (e.g. "h2, h3, h4, h5, h6, h7") with config values
+{% endcomment %}
+
+{% assign toc_heading_selector = '' %}
+{% for i in (site.toc.min_heading_level..site.toc.max_heading_level) %}
+  {% if forloop.first %}
+    {% assign toc_heading_selector = 'h' | append: i %}
+  {% else %}
+    {% assign toc_heading_selector = toc_heading_selector | append: ', h' | append: i %}
+  {% endif %}
+{% endfor %}
+
+<script>
+  window.SITE_CONFIG = window.SITE_CONFIG || {};
+  window.SITE_CONFIG.tocHeadingSelector = '{{ toc_heading_selector }}';
+</script>

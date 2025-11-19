@@ -31,17 +31,30 @@
 </div>
 
 ## Quick Start
-```sh
-sh tools/run.sh
-```
-
 > [!TIP]
-> Use this command if the previous one doesn't work
+> Use this command if the shell script doesn't work
 > ```sh
 > bundle exec jekyll serve --incremental
 > ```
 
+Start dev environment (aka run local server)
+```sh
+sh tools/run.sh
+```
+
+> [!IMPORTANT]
+> Run this command after making any changes to files in `_javascript/` directory to update (i.e. rebuild JavaScript bundle)
+> ```sh
+> npm run build:js
+> ```
+> See [`package.json`](package.json#L16) for more scripts and details
+
 ## Initial Setup
+### Initialize Environment
+```sh
+sh tools/init.sh
+```
+
 ### Sync Fork with Upstream
 To keep fork up-to-date with original repository (i.e. Chirpy)
 

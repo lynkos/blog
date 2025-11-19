@@ -128,10 +128,14 @@ async function fetchPreview(url) {
 }
 
 function isAllowedUrl(href) {
-  // Internal links (relative paths)
-  if (!href.startsWith('http') && !href.startsWith('https') && !href.startsWith('#')) {
-    return true;
-  }
+  // Skip anchor links
+  if (href.startsWith('#')) return false;
+  
+  // Internal links (relative paths starting with /)
+  if (href.startsWith('/')) return true;
+  
+  // Skip non-HTTP protocols (steam://, mailto:, tel:, etc.)
+  if (!href.startsWith('http://') && !href.startsWith('https://')) return false;
   
   // Check for allowed external domains with posts path
   try {
@@ -147,7 +151,7 @@ function handleMouseEnter(event) {
   
   // Check if URL is allowed for previews
   const href = link.getAttribute('href');
-  if (!href || href.startsWith('#') || !isAllowedUrl(href)) return;
+  if (!href || !isAllowedUrl(href)) return;
   
   clearTimeout(hideTimer);
   currentLink = link;
@@ -190,7 +194,6 @@ export function initLinkPreview() {
       // Skip anchors and links with certain classes
       const href = link.getAttribute('href');
       if (!href || 
-          href.startsWith('#') ||
           link.classList.contains('popup') ||
           link.classList.contains('img-link') ||
           link.classList.contains('recently-updated') ||

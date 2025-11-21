@@ -643,14 +643,14 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 
 5. Verify that your application uses DXVK instead of WineD3D by enabling the HUD
 
-```sh
-DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.18/dxvk.conf DXVK_HUD=full
-```
-{: .nolineno }
+	```sh
+	DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.18/dxvk.conf DXVK_HUD=full
+	```
+	{: .nolineno }
 
 6. To remove DXVK from a prefix, remove the DLLs and DLL overrides, then run the command in [Restore original DLL files](2025-03-19-play-windows-games.md#restore-original-dll-files).
 
-> There shouldn't be (i.e. I shouldn't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
+> There shouldn't be (i.e. don't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 {: .prompt-info }
 
 #### Install CrossOver
@@ -703,7 +703,7 @@ This is the most compatible option, as it has all the aforementioned graphics AP
 	```
 	{: .nolineno }
 
-6. Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run) so it runs properly.
+6. Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run) so it runs properly
 
 ### Install Steam
 > Make sure the Windows version of Steam is located in your `Downloads` folder before installing

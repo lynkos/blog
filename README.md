@@ -42,13 +42,6 @@ Start dev environment (aka run local server)
 sh tools/run.sh
 ```
 
-> [!IMPORTANT]
-> Run this command after making any changes to files in `_javascript/` directory to update (i.e. rebuild JavaScript bundle)
-> ```sh
-> npm run build:js
-> ```
-> See [`package.json`](package.json#L16) for more scripts and details
-
 ## Initial Setup
 ### Initialize Environment
 ```sh
@@ -356,6 +349,52 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
 18.  Under **Worker**, select `img-proxy` worker (or whatever you named it) from the dropdown
 19.  Click **Save**
 20.  You can now use the custom domain for your image proxy at `https://img-proxy.<YOUR_ROOT_DOMAIN>/?url=<IMAGE_URL>` (e.g. `https://img-proxy.example.com/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
+
+## Appendix
+### JavaScript Development
+Run this command after making any changes to files in `_javascript/` directory to update (i.e. rebuild JavaScript bundle):
+```sh
+npm run build:js
+```
+
+See [`package.json`](package.json#L16) for more scripts and details.
+
+### Contribute Upstream
+Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) with only a subset of your commits. This is useful if you want to add a feature to upstream without committing all your changes.
+
+1. If you haven't already, complete the steps in [Sync Fork with Upstream](#sync-fork-with-upstream) section
+2. Create a new branch, e.g. `BRANCH_NAME`
+   ```sh
+   git checkout -b BRANCH_NAME upstream/master
+   ```
+3. Cherry pick the commit(s) you want to include in the PR
+   ```sh
+   git cherry-pick COMMIT_HASH
+   ```
+4. Push your branch
+   ```sh
+   git push origin BRANCH_NAME
+   ```
+5. If successful, the terminal should output something similar to this:
+   ```
+   Enumerating objects: 111, done.
+   Counting objects: 100% (83/83), done.
+   Delta compression using up to 16 threads
+   Compressing objects: 100% (50/50), done.
+   Writing objects: 100% (51/51), 8.50 KiB | 1.70 MiB/s, done.
+   Total 51 (delta 36), reused 0 (delta 0), pack-reused 0 (from 0)
+   remote: Resolving deltas: 100% (36/36), completed with 26 local objects.
+   remote: 
+   remote: Create a pull request for 'BRANCH_NAME' on GitHub by visiting:
+   remote:      https://github.com/GITHUB_USERNAME/REPOSITORY_NAME/pull/new/BRANCH_NAME
+   remote: 
+   To https://github.com/GITHUB_USERNAME/REPOSITORY_NAME.git
+    * [new branch]      BRANCH_NAME -> BRANCH_NAME
+   ```
+6. Go to the originally forked repository, i.e. [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy)
+7. Click the <kbd>New pull request</kbd> button
+8. Complete the pull request template accordingly
+9. Click the <kbd>Create pull request</kbd> button
 
 ## Credit
 Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020), aka [Cotes Chung](https://cotes.page).

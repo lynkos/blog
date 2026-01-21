@@ -91,33 +91,33 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 
 1. Open **Disk Utility**
    ![Disk Utility app](https://help.apple.com/assets/63FD50B6B945CD5D3F3A2AD3/63FD50B7B945CD5D3F3A2ADA/en_US/f606b0483c6a446b0ea4554b02fca0cc.png)
-2. Click on **View**, then **Show All Devices**
+2. Click on <kbd>View</kbd>, then <kbd>Show All Devices</kbd>
    ![disk_utility_view.png](../assets/obsidian/disk_utility_view.png)
 3. In the sidebar, select your SSD under **External**; in this example, it's named "WD_BLACK SN850X 4000GB Media"
    ![disk_utility_ssd.png](../assets/obsidian/disk_utility_ssd.png)
-4. Click the **Erase** button
+4. Click the <kbd>Erase</kbd> button
    ![disk_utility_erase.png](../assets/obsidian/disk_utility_erase.png)
-5. Click the **Scheme** pop-up menu, then choose **GUID Partition Map**
-6. Click the **Format** pop-up menu, then choose the **Apple File System (APFS)** format
+5. Click the <kbd>Scheme</kbd> pop-up menu, then choose <kbd>GUID Partition Map</kbd>
+6. Click the <kbd>Format</kbd> pop-up menu, then choose the <kbd>Apple File System (APFS)</kbd> format
 7. Enter a name
-8. Click **Erase**, then click **Done**
+8. Click <kbd>Erase</kbd>, then click <kbd>Done</kbd>
 
 ### Create Volumes
 > Make sure to complete **ALL** the steps in [Format SSD](2025-01-20-custom-storage.md#format-ssd) before proceeding
 {: .prompt-important }
 
 1. Click on your SSD in **Disk Utility**
-2. Click on the **+** symbol above **Volume** to add a volume
+2. Click on the <kbd>+</kbd> symbol above **Volume** to add a volume
 	![disk_utility_volume.png](../assets/obsidian/disk_utility_volume.png)
-3. Enter a name for the volume, then click **Size Options...** button
+3. Enter a name for the volume, then click <kbd>Size Options...</kbd> button
 	![disk_utility_add_apfs.png](../assets/obsidian/disk_utility_add_apfs.png)
 4. If you plan on having more than 1 volume on your SSD, enter your **Reserve Size** and/or **Quota Size** (both values are optional)
 	![disk_utility_size_options.png](../assets/obsidian/disk_utility_size_options.png)
 	- **Reserve Size**: Ensures that the amount of storage remains available for this volume
 	- **Quota Size**: Limits how much storage the volume can allocate
-5. Click **Add**, then **Done**
+5. Click <kbd>Add</kbd>, then <kbd>Done</kbd>
 6. Repeat Steps 1 – 5 for each volume you want to create; in my case, I created 2 volumes: 1 for _Backups_ and 1 for _Games_
-7. To view your newly created volumes, click on **View**, then **Show Only Volumes**
+7. To view your newly created volumes, click on <kbd>View</kbd>, then <kbd>Show Only Volumes</kbd>
 
 ![Games volume setup](../assets/obsidian/disk_utility_games.png)
 _**Games** volume setup in **Disk Utility**_
@@ -131,21 +131,21 @@ _**Backups** volume setup in **Disk Utility**_
 
 ### Backups: Time Machine
 1. Open **System Settings**
-2. Click **General**, then **Time Machine**
+2. Click <kbd>General</kbd>, then <kbd>Time Machine</kbd>
    ![settings_general_time_machine.png](../assets/obsidian/settings_general_time_machine.png)
-3. Click the **+** symbol
+3. Click the <kbd>+</kbd> symbol
    ![settings_add_backup.png](../assets/obsidian/settings_add_backup.png)
-4. Select the volume you want to use as your backup device, then click **Set Up Disk...**
+4. Select the volume you want to use as your backup device, then click <kbd>Set Up Disk...</kbd>
    ![settings_select_backup.png](../assets/obsidian/settings_select_backup.png)
-5. Customize it to your liking, then click **Done**
+5. Customize it to your liking, then click <kbd>Done</kbd>
    ![settings_setup_disk.png](../assets/obsidian/settings_setup_disk.png)
 6. It should now appear as one of the listed backup devices
-7. Click **Options...** for further customization, then click **Done**
+7. Click <kbd>Options...</kbd> for further customization, then click <kbd>Done</kbd>
    ![settings_time_machine_options.png](../assets/obsidian/settings_time_machine_options.png)
 
-Now that it's setup, you can use your device as backup. If you're still in the **Time Machine** settings and want to immediately backup: right-click your backup device, then click **Back Up to "<YOUR_DEVICE_NAME>" Now**
+Now that it's setup, you can use your device as backup. If you're still in the **Time Machine** settings and want to immediately backup: right-click your backup device, then click <kbd>Back Up to "&lt;YOUR_DEVICE_NAME&gt;" Now</kbd>
 
-Anytime you want to create a backup, click the **Time Machine** icon in your menubar, then click **Back Up Now** in the dropdown
+Anytime you want to create a backup, click the **Time Machine** icon in your menubar, then click <kbd>Back Up Now</kbd> in the dropdown
 ![time_machine_menubar.png](../assets/obsidian/time_machine_menubar.png)
 
 ### Games: Steam
@@ -153,22 +153,22 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 > 
 > If this doesn't apply to you, there's no need to create 2 separate folders or follow the steps in this section. All you'd need to do is:
 > 1. Open **Steam**
-> 2. Navigate to **Preferences** (or **Settings**) > **Storage**
-> 3. Click **+ Add Drive**
+> 2. Navigate to <kbd>Preferences</kbd> (or <kbd>Settings</kbd>) > <kbd>Storage</kbd>
+> 3. Click <kbd>+ Add Drive</kbd>
 > 4. Select your drive from the dropdown
 {: .prompt-info }
 
 1. Open **Finder**
 2. Click on the volume you want to save your games to, then create 2 folders: `WindowsGames` and `MacGames`
    ![finder_games.png](../assets/obsidian/finder_games.png)
-3. Open the Mac **Steam** client, then open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking **Steam** > **Preferences** in the menubar)
-4. Click **Storage**
+3. Open the Mac **Steam** client, then open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking <kbd>Steam</kbd> > <kbd>Preferences</kbd> in the menubar)
+4. Click <kbd>Storage</kbd>
    ![steam_storage.png](../assets/obsidian/steam_storage.png)
 5. Navigate to your backup
    ![steam_storage_games.png](../assets/obsidian/steam_storage_games.png)
-6. Click the **...** icon, then click **Remove Library**
+6. Click the <kbd>...</kbd> icon, then click <kbd>Remove Library</kbd>
    ![steam_storage_remove.png](../assets/obsidian/steam_storage_remove.png)
-7. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking **Steam** > **Quit Steam** in the menubar, or right-click the Steam icon in the dock and click **Quit**)
+7. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking <kbd>Steam</kbd> > <kbd>Quit Steam</kbd> in the menubar, or right-click the Steam icon in the dock and click <kbd>Quit</kbd>)
 8. Reopen **Finder** and navigate to your drive
 9. Create a new `steamapps` folder inside **BOTH** `MacGames` **AND** `WindowsGames`
    ```plaintext
@@ -179,19 +179,19 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 	    └── steamapps
    ```
    {: file="/Volumes/<YOUR_DEVICE_NAME>" }
-10. Relaunch the Mac **Steam** client, open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking **Steam** > **Preferences** in the menubar), then click **Storage**
-11. Click **+ Add Drive**
+10. Relaunch the Mac **Steam** client, open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking <kbd>Steam</kbd> > <kbd>Preferences</kbd> in the menubar), then click <kbd>Storage</kbd>
+11. Click <kbd>+ Add Drive</kbd>
     ![steam_add_drive.png](../assets/obsidian/steam_add_drive.png)
-12. Select **Let me choose another location** from the dropdown, then click **Add**
-13. Navigate to your drive, select `MacGames`, then click **Open**
+12. Select <kbd>Let me choose another location</kbd> from the dropdown, then click <kbd>Add</kbd>
+13. Navigate to your drive, select `MacGames`, then click <kbd>Open</kbd>
     ![steam_add_drive_select.png](../assets/obsidian/steam_add_drive_select.png)
-14. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking **Steam** > **Quit Steam** in the menubar, or right-click the Steam icon in the dock and click **Quit**)
+14. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking <kbd>Steam</kbd> > <kbd>Quit Steam</kbd> in the menubar, or right-click the Steam icon in the dock and click <kbd>Quit</kbd>)
 15. Open your Windows **Steam** client (e.g. via CrossOver, your own WINE setup, etc.)
-16. Click **Steam** > **Settings**
+16. Click <kbd>Steam</kbd> > <kbd>Settings</kbd>
     ![win_steam_settings.png](../assets/obsidian/win_steam_settings.png)
-17. Navigate to **Storage**, then click **+ Add Drive**
-18. Select **Let me choose another location** from the dropdown, then click **Add**
-19. Navigate to your drive, select `WindowsGames`, then click **Open**
+17. Navigate to <kbd>Storage</kbd>, then click <kbd>+ Add Drive</kbd>
+18. Select <kbd>Let me choose another location</kbd> from the dropdown, then click <kbd>Add</kbd>
+19. Navigate to your drive, select `WindowsGames`, then click <kbd>Open</kbd>
     ![win_steam_select_drive.png](../assets/obsidian/win_steam_select_drive.png)
 
 If everything's setup properly, you should be able to install games into their respective drives!

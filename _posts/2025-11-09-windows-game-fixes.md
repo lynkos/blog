@@ -174,6 +174,7 @@ You may encounter some launch issues/bugs with Game Porting Toolkit on Steam Cli
 	iSize H=1080
 	iSize W=1920
 	```
+	{: file="SkyrimPrefs.ini" }
 
 8. Update `iSize H` and `iSize W` (i.e. integer variables representing `1920`x`1080` resolution) with your display's height and width respectively
 
@@ -213,7 +214,7 @@ WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b"
 - Performance gain?: `WINECPUMASK=0xff`
 - Possible audio fix: `export WINEDLLOVERRIDES="xaudio2_7=n,b"`
 
-```
+```plaintext
 WINE_LARGE_ADDRESS_AWARE=1 -skipintro -RenderProfile_MaxFPS 60 %command%
 ```
 
@@ -221,7 +222,7 @@ WINE_LARGE_ADDRESS_AWARE=1 -skipintro -RenderProfile_MaxFPS 60 %command%
 Use DXMT v0.61. Audio is messed up. With maxed out settings: Super bad FPS (~5 FPS) + laggy during cutscenes / vids. Gameplay FPS (~20 FPS) is kinda better, but it still sucks.
 
 Trying to fix Audio with this:
-- Check Audio troubleshooting in [Play Windows Games](2025-03-19-play-windows-games.md)
+- Check Audio troubleshooting in [2025-03-19-play-windows-games](./2025-03-19-play-windows-games.md)
 FC3 (App ID: `220240`) now requires Install `mfc100.dll`, which can be installed with protontricks: `protontricks 220240 mfc100`. Might affect other games with Ubisoft Connect.
 
 ### Mods
@@ -594,6 +595,7 @@ r.Lumen.DiffuseIndirect.Allow=0
 r.Nanite.MaxPixelsPerEdge=0
 ```
  {: .nolineno }
+ {: file="Engine.ini" }
 
 ## Ghost of Tsushima
 > **IMPORTANT**: As of macOS Sequoia 15.4+, Apple added support for F16C and BMI instructions in Rosetta 2. As such, this patch may no longer be necessary (for those with this update). Before running the original (i.e. non-patched) version, include `ROSETTA_ADVERTISE_AVX=1` in the launch parameters to activate the instructions.

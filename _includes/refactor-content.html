@@ -67,6 +67,7 @@
     {% assign _src = null %}
     {% assign _lqip = null %}
     {% assign _class = null %}
+    {% assign _data_type = null %}
 
     {% for _attr in _attrs %}
       {% unless _attr contains '=' %}
@@ -84,6 +85,8 @@
           {% assign _lqip = _value %}
         {% when 'class' %}
           {% assign _class = _value %}
+        {% when 'data-type' %}
+          {% assign _data_type = _value %}
       {% endcase %}
     {% endfor %}
 
@@ -186,15 +189,22 @@
           | default: _src
           | prepend: '<a href="'
         %}
-        
+
         <!-- Check if this is a gallery image -->
         {% if _class contains 'slide-preview' or _left contains 'onclick="currentSlide' %}
           {% assign _wrapper_start = _wrapper_start | append: '#" onclick="return false;" class="img-link' %}
         {% else %}
           {% assign _wrapper_start = _wrapper_start | append: '" class="popup img-link' %}
         {% endif %}
-        
-        {% assign _wrapper_start = _wrapper_start | append: _wrapper_class | append: '">' %}
+
+        {% assign _wrapper_start = _wrapper_start | append: _wrapper_class | append: '"' %}
+
+        <!-- Add data-type to the wrapper to help GLightbox correctly identify media type -->
+        {% if _data_type %}
+          {% assign _wrapper_start = _wrapper_start | append: ' data-type="' | append: _data_type | append: '"' %}
+        {% endif %}
+
+        {% assign _wrapper_start = _wrapper_start | append: '>' %}
 
         {% assign _img_content = _img_content | append: _wrapper_start %}
         {% assign _right = '></a' | append: _right %}

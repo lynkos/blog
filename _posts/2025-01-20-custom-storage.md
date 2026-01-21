@@ -3,8 +3,10 @@ share: true
 title: Custom Storage
 date: 2026-01-20 20:15:03 -0400
 filename: 2025-01-20-custom-storage
-description: A DIY guide on building your own storage with a WD_BLACK SN850X NVMe SSD and an OWC Express 1M2 Enclosure.
-categories: tutorial, guide
+description: DIY guide on building your own storage with a WD_BLACK SN850X NVMe SSD and an OWC Express 1M2 Enclosure.
+categories:
+  - tutorial
+  - guide
 tags:
   - tutorial
   - computer-science
@@ -147,7 +149,7 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 ![time_machine_menubar.png](../assets/obsidian/time_machine_menubar.png)
 
 ### Games: Steam
-> If you're like me and want to save both Windows (played via WINE) **AND** Mac games to the SSD, you'll want to create 2 separate folders in your volume. This is to avoid installation conflicts and other issues^[steam-forum].
+> If you're like me and want to save both Windows (played via WINE) **AND** Mac games to the SSD, you'll want to create 2 separate folders in your volume. This is to avoid [installation conflicts and other issues](https://steamcommunity.com/discussions/forum/2/4202490864584630436).
 > 
 > If this doesn't apply to you, there's no need to create 2 separate folders or follow the steps in this section. All you'd need to do is:
 > 1. Open **Steam**
@@ -225,4 +227,3 @@ Here are the takeaways[^owc-perf]:
 ## References
 [^nvme-mac]: [Choosing a Compatible NVMe SSD for your macOS Boot Drive](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)
 [^owc-perf]: [Apple Silicon iPad Pro (Thunderbolt Enabled): External Drive Performance](https://eshop.macsales.com/manuals/apple-silicon-ipad-pro-external-drive-performance-support-article)
-[^steam-forum]: [Is there a way to have the Windows and Mac versions of the same game coexisting on the same SSD? (Steam Forum)](https://steamcommunity.com/discussions/forum/2/4202490864584630436)

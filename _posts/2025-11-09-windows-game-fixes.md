@@ -18,7 +18,7 @@ tags:
   - graphics
   - development
 ---
-> This is a companion to my article [How to Run Windows Games and Programs on macOS](2025-03-19-play-windows-games.md).
+> This is a companion to my article [How to Run Windows Games and Programs on Mac](2025-03-19-play-windows-games.md).
 > 
 > This article is still a work in progress!
 {: .prompt-important }

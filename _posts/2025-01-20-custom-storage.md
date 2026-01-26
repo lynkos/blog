@@ -24,11 +24,11 @@ Buying storage for your new MacBook is expensive and can be inconvenient. Custom
 This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] should provide some context:
 > An SSD controller, also referred to as a processor, includes the electronics that bridge the NAND Flash memory components to the SSD input/output interfaces. The controller is an embedded processor that executes firmware-level software. The SSD firmware is device specific, and in most cases can be updated.
 > 
-> ![SSD example](https://www.tonymacx86.com/attachments/1669990729630-png.559131)
+> ![ssd.png](../assets/obsidian/ssd.png)
 > 
 >  Since November 2020, Apple has placed their SSD (NAND flash) Controller on the SoC and kept the NAND Flash separate for security reasons. This makes it nearly impossible to remove the SSD from a stolen M1/M2 Mac and view the data on another Mac. Even if you have the exact same model of Apple Silicon Mac to install it in. The Secure Enclave (also on the SoC) is isolated from the main processor to provide an extra layer of security and is designed to keep sensitive user data secure even when the Application Processor kernel becomes compromised.
 >  
->  ![Chart](https://www.tonymacx86.com/attachments/9302f62027e1966222080ef2731e45de-jpg.565831)
+>  ![ssd_chart.jpg](../assets/obsidian/ssd_chart.jpg)
 
 There's a bunch of SSDs and enclosures to choose from. How did I narrow it down, and why did I choose the WD_BLACK SN850X and the OWC Express 1M2 Enclosure?
 
@@ -38,11 +38,11 @@ I was torn between the Samsung 990 PRO and WD_BLACK SN850X, but chose the latter
 
 > Prior to macOS Monterey, Samsung drives worked seemingly without issue. We don't know what changed in macOS 12 but we do know that Samsung's proprietary NVMe SSD controllers do not work well with macOS Monterey or Ventura. It doesn't look like a firmware fix from Samsung is ever going to be released. Here's a few examples of their drives that will potentially lead to ultra long macOS boot times. Some have reported six to seven minutes.
 > 
-> ![Screenshot performance](https://www.tonymacx86.com/attachments/1669893247146-png.559053)
+> ![ssd_csv.png](../assets/obsidian/ssd_csv.png)
 > 
 > This is TRIM and APFS related. Disabling TRIM is not recommended... Acasis, who makes Mac compatible NVMe enclosures, warns their customers about using Samsung 970 EVO (Plus) drives with their product. Note that the WD SN570, SN770 and SN850(X) perform the very best of any drives
 > 
-> ![Performance screenshot](https://www.tonymacx86.com/attachments/screen-shot-jpg.569977)
+> ![ssd_compat.jpg](../assets/obsidian/ssd_compat.jpg)
 
 This has been documented several times, such as with [Acidanthera's research on the Samsung "TRIM Bug"](https://github.com/dortania/bugtracker/issues/192) and [this thread on tonymacx86.com that shows how write speeds are reduced to extremely slow levels when using a Samsung NVMe with an APFS formatted drive](https://www.tonymacx86.com/threads/slow-random-writes-on-nvme-ssd.327436).
 

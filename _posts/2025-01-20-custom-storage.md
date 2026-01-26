@@ -3,7 +3,7 @@ share: true
 title: Custom Storage
 date: 2026-01-20 20:15:03 -0400
 filename: 2025-01-20-custom-storage
-description: DIY guide on building your own storage with a WD_BLACK SN850X NVMe SSD and an OWC Express 1M2 Enclosure.
+description: DIY guide on building your own storage solution with a WD_BLACK SN850X NVMe SSD (or any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor) and an OWC Express 1M2 Enclosure.
 categories:
   - tutorial
   - guide
@@ -55,6 +55,7 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 - [x] [OWC Express 1M2 Enclosure](https://www.owc.com/solutions/express-1m2) (**0TB**, i.e. just the enclosure **ONLY**)
 - [x] macOS 10.13 or later
 - [x] [Pelican 1040 Micro Case](https://www.pelican.com/us/en/product/cases/micro/1040?sku=1040-025-100) (**OPTIONAL**)
+- [x] [USB-C Dust Plug](https://a.co/d/emuCPyw) (**OPTIONAL**)
 
 ## Initial Setup
 ### Device Assembly
@@ -115,7 +116,7 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 	- **Reserve Size**: Ensures that the amount of storage remains available for this volume
 	- **Quota Size**: Limits how much storage the volume can allocate
 5. Click <kbd>Add</kbd>, then <kbd>Done</kbd>
-6. Repeat Steps 1 – 5 for each volume you want to create; in my case, I created 2 volumes: 1 for _Backups_ and 1 for _Games_
+6. Repeat Steps 1 – 5 for each volume you want to create; in my case, I created 2 volumes: 1 for **Backups** and 1 for **Games**
 7. To view your newly created volumes, click on <kbd>View</kbd>, then <kbd>Show Only Volumes</kbd>
 
 ![Games volume setup](../assets/obsidian/disk_utility_games.png)
@@ -127,6 +128,8 @@ _**Backups** volume setup in **Disk Utility**_
 ## Usage
 > Make sure to complete **ALL** the steps in [Initial Setup](2025-01-20-custom-storage.md#initial-setup) before proceeding
 {: .prompt-important }
+
+Connect the OWC Express 1M2 Enclosure to your computer. You can use the included 40Gb/s USB-C cable, or your own cable (must be USB4, Thunderbolt, or USB-C).
 
 ### Backups: Time Machine
 1. Open **System Settings**

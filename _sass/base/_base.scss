@@ -72,9 +72,11 @@ main {
 
   @extend %rounded;
 
-  &:not(.no-bg) {
-    background: var(--img-bg);
-  }
+  // FIXME: Setting no-bg in front-matter doesn't do anything
+  // Remove background from preview image, for now
+  // &:not(.no-bg) {
+  //   background: var(--img-bg);
+  // }
 
   img {
     height: 100%;

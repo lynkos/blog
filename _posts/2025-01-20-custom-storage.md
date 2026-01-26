@@ -156,7 +156,7 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 > 3. Click <kbd>+ Add Drive</kbd>
 > 4. Select your drive from the dropdown
 > 
-> If you're interested in reading more about my WINE setup, check out [How to Run Windows Games and Programs on Mac](2025-03-19-play-windows-games.md)
+> If you're interested in reading more about my WINE setup, check out [How to Run Windows Games and Programs on Mac](2025-03-19-play-windows-games.md).
 {: .prompt-info }
 
 1. Open **Finder**

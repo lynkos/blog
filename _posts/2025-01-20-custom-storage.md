@@ -59,7 +59,6 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 ## Initial Setup
 ### Device Assembly
 1. Place OWC Express 1M2 upside down on a flat static free surface
-   ![Upside down OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-06_Lid_Slid_On_bkid0c)
 2. Remove the screws by using the included screwdriver
    ![Unscrewed OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-07_Lid_Slid_Off_bkxlr9)
 3. Slide back then lift away the bottom tray

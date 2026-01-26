@@ -28,19 +28,22 @@ share: false
 title: {{title}}
 date: {{date}} {{time}}
 filename: "{{date}}-{{title}}"
-description: >-
-  
+description:
 math: false
 pin: false
 toc: true
 comments: true
 categories:
 tags:
+image:
+  path:
+  lqip:
+  alt:
 ---
 ```
-{: file="default.txt" }
+{: file="templates/default.txt" }
 
-|      Key      | Description                                    |
+|    **Key**    | **Description**                                |
 | :------------ | :--------------------------------------------- |
 | `share`       | When `true`, it will push to Github            |
 | `title`       | Post title                                     |
@@ -183,7 +186,7 @@ tags:
 19. Click **Repository permissions** under **Permissions**
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
-	| Permission      | Access         | Reason                          |
+	| **Permission** | **Access**     | **Reason**                      |
 	| :-------------- | :------------- | :------------------------------ |
 	| Contents        | Read and write | Create branch                   |
 	| Metadata        | Read-only      | Mandatory                       |

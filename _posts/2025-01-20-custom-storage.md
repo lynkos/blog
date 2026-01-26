@@ -15,7 +15,7 @@ tags:
   - mac
   - unix
 image:
-  path: /assets/obsidian/custom-storage-preview.png
+  path: /assets/img/previews/custom-storage-preview.png
   lqip: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAABXElEQVQoU6WSwUvCcBTHv79NcTDEIAx20cNOE7122H8QBf0LXTsFXUWkwAixVYQQlCAUdPFWdAmKoiI86MX0INuwLTwIEoRrJO3XNshLqYce/ODxe+/zfV8ej+CfQcbxmqbRcDiMaDQ6tsdjfxV1Xac8z8N+mwUNmSCEIBaLjRUZFUzT9MH33gwIQ9FUr5BKpeA4DrLZLEqlEqnX63R1bR1Pdzcjzk/6/T61LAtflgDCvYJhGAQCAeTzeSiKQmq1Gt0unuD0cAeLS8tofs7BvD5mXXeOL9BqteRIJPIwHA7BcRxUVYUsy6RarVIpkUDmoILm7RkGHza0noP78zJEUfTZkZVOp0NZloX3BEHw/9vtNs0cXeDlsQI2xKO4W0AwGIQkSSSZTNJGo+FuaEJ0u90F27YvC3v72NrcgOuS5HK5lXQ6Xf7BJgp4TYZhDNxFPsfj8fm/Zk0VmHZn32sufwtDDaUHAAAAAElFTkSuQmCC
   alt: Opened OWC Express 1M2 Enclosure containing an M.2 2280 NVMe SSD
 ---
@@ -211,7 +211,7 @@ _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/u
 For your convenience, OWC has tested how the OWC Express 1M2 Enclosure performs on Apple Silicon devices.[^owc-perf] Although they only tested it on iPad Pros, this should still give you a rough idea of its performance.
 
 | **Tested Host**        | **Transfer Direction** | **Performance** |
-|------------------------|------------------------|-----------------|
+| ---------------------- | ---------------------- | --------------- |
 | iPad Pro 12.9" 5th gen | Express → iPad         | 588 MB/s        |
 | iPad Pro 12.9" 5th gen | iPad → Express         | 1,970 MB/s      |
 | iPad Pro 12.9" 4th gen | Express → iPad         | 221 MB/s        |

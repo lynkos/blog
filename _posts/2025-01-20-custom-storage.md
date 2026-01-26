@@ -14,6 +14,10 @@ tags:
   - gaming
   - mac
   - unix
+image:
+  path: /assets/obsidian/custom-storage-preview.png
+  lqip: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAABXElEQVQoU6WSwUvCcBTHv79NcTDEIAx20cNOE7122H8QBf0LXTsFXUWkwAixVYQQlCAUdPFWdAmKoiI86MX0INuwLTwIEoRrJO3XNshLqYce/ODxe+/zfV8ej+CfQcbxmqbRcDiMaDQ6tsdjfxV1Xac8z8N+mwUNmSCEIBaLjRUZFUzT9MH33gwIQ9FUr5BKpeA4DrLZLEqlEqnX63R1bR1Pdzcjzk/6/T61LAtflgDCvYJhGAQCAeTzeSiKQmq1Gt0unuD0cAeLS8tofs7BvD5mXXeOL9BqteRIJPIwHA7BcRxUVYUsy6RarVIpkUDmoILm7RkGHza0noP78zJEUfTZkZVOp0NZloX3BEHw/9vtNs0cXeDlsQI2xKO4W0AwGIQkSSSZTNJGo+FuaEJ0u90F27YvC3v72NrcgOuS5HK5lXQ6Xf7BJgp4TYZhDNxFPsfj8fm/Zk0VmHZn32sufwtDDaUHAAAAAElFTkSuQmCC
+  alt: Opened OWC Express 1M2 Enclosure containing an M.2 2280 NVMe SSD
 ---
 > **Note**: I started writing this before SSD prices skyrocketed, so I'm aware that some of the following (namely SSDs being an affordable option to adding additional storage to your Mac) may no longer be applicable...
 {: .prompt-important }

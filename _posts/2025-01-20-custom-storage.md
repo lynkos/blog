@@ -126,7 +126,7 @@ _**Games** volume setup in **Disk Utility**_
 _**Backups** volume setup in **Disk Utility**_
 
 ## Usage
-> Make sure to complete **ALL** the steps in [Setup](2025-01-20-custom-storage.md#setup) before proceeding
+> Make sure to complete **ALL** the steps in [Initial Setup](2025-01-20-custom-storage.md#initial-setup) before proceeding
 {: .prompt-important }
 
 ### Backups: Time Machine

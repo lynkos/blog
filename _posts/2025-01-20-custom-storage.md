@@ -125,13 +125,11 @@ _**Games** volume setup in **Disk Utility**_
 ![Backups volume setup](../assets/obsidian/disk_utility_backups.png)
 _**Backups** volume setup in **Disk Utility**_
 
-## Usage
-> Make sure to complete **ALL** the steps in [Initial Setup](2025-01-20-custom-storage.md#initial-setup) before proceeding
+### Setup Volumes
+> Make sure to complete **ALL** the steps in [Create Volumes](2025-01-20-custom-storage.md#create-volumes) before proceeding
 {: .prompt-important }
 
-Connect the OWC Express 1M2 Enclosure to your computer. You can use the included 40Gb/s USB-C cable, or your own cable (must be USB4, Thunderbolt, or USB-C).
-
-### Backups: Time Machine
+#### Backups: Time Machine
 1. Open **System Settings**
 2. Click <kbd>General</kbd>, then <kbd>Time Machine</kbd>
    ![settings_general_time_machine.png](../assets/obsidian/settings_general_time_machine.png)
@@ -150,7 +148,7 @@ Now that it's setup, you can use your device as backup. If you're still in the *
 Anytime you want to create a backup, click the **Time Machine** icon in your menubar, then click <kbd>Back Up Now</kbd> in the dropdown
 ![time_machine_menubar.png](../assets/obsidian/time_machine_menubar.png)
 
-### Games: Steam
+#### Games: Steam
 > If you're like me and want to save both Windows (played via WINE) **AND** Mac games to the SSD, you'll want to create 2 separate folders in your volume. This is to avoid [installation conflicts and other issues](https://steamcommunity.com/discussions/forum/2/4202490864584630436).
 > 
 > If this doesn't apply to you, there's no need to create 2 separate folders or follow the steps in this section. All you'd need to do is:
@@ -202,9 +200,8 @@ If everything's setup properly, you should be able to install games into their r
 
 ## Performance
 ### WD_BLACK SN850X
-I used [Blackmagic Disk Speed Test](https://apps.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12) to perform the following speed test:
-
 ![Disk speed test](../assets/obsidian/disk_speed_test.png)
+_Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12)_
 
 ### OWC Express 1M2
 For your convenience, OWC has tested how the OWC Express 1M2 Enclosure performs on Apple Silicon devices.[^owc-perf] Although they only tested it on iPad Pros, this should still give you a rough idea of its performance.

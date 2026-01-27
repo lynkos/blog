@@ -1,5 +1,5 @@
 const CONFIG = {
-  previewDelay: 100, // ms
+  previewDelay: 0, // ms
   maxPreviewLength: 200, // chars
   contentSelectors: [ // Target links within post content
     '.content a'

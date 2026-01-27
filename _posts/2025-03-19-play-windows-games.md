@@ -226,7 +226,7 @@ This version of Wine can be used with DXMT and DXVK.
 
 // TODO: Instead of creating separate Wine copies for each graphics API, why not just use the same Wine build with all graphics API files (dlls, so, etc.), e.g. `winemetal_dxmt.dll`{: .filepath} vs `winemetal_dxvk.dll`{: .filepath}, `winemetal_orig.dll`{: .filepath}, etc. When setting a specific build (e.g. DXMT, DXVK, etc.), the relevant file(s) will be renamed (e.g. current `winemetal.dll`{: .filepath} is renamed to `winemetal_xyz.dll`{: .filepath}, then `winemetal_dxmt.dll`{: .filepath} is renamed to `winemetal.dll`{: .filepath} in order to enable DXMT).
 
-#### Install DXMT
+### Install DXMT
 > Make sure to download Wine before continuing; see [Install Wine](2025-03-19-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
@@ -337,7 +337,7 @@ This version of Wine can be used with DXMT and DXVK.
 	```
 	{: .nolineno }
 
-#### Install DXVK
+### Install DXVK
 > Make sure to download Wine before continuing; see [Install Wine](2025-03-19-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
@@ -391,10 +391,8 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 > There shouldn't be (i.e. don't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 {: .prompt-info }
 
-#### Install CrossOver
-// TODO: This section is still under construction
-
-This is the most compatible option (compared to the others), as it has all the aforementioned graphics APIs.
+### Install CrossOver
+This is the most compatible option (compared to the others), as it has all the aforementioned graphics APIs. You can either [purchase it from CodeWeavers](https://www.codeweavers.com/crossover/download), or install it via Homebrew:
 
 1. Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
 

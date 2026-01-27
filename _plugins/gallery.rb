@@ -111,13 +111,14 @@ module Jekyll
       # Generate main slideshow images
       # Each slide is initially hidden except the first one
       images.each_with_index do |image, index|
-        # Add data attributes to force GLightbox to treat as image
-        data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
-        
+        # Add data-type="image" for all external images to prevent GLightbox from
+        # misdetecting URLs without file extensions as video (e.g., Vimeo)
+        data_attrs = image[:src].include?('://') ? ' data-type="image"' : ''
+
         # Build dimension attributes - include them even if set to "auto"
         # This ensures consistent behavior and helps prevent layout shifts
         dimension_attrs = %( width="#{image[:width]}" height="#{image[:height]}")
-        
+
         html << %(    <div class="slides">)
         html << %(      <div class="slide-index">#{index + 1} / #{total_images}</div>)
         html << %(      <img src="#{image[:src]}" alt="#{image[:alt]}"#{dimension_attrs}#{data_attrs}>)
@@ -141,9 +142,9 @@ module Jekyll
       html << %(  <div class="gallery-row">)
 
       images.each_with_index do |image, index|
-        # Add data attributes to thumbnails too
-        data_attrs = image[:is_proxied] ? ' data-type="image"' : ''
-        
+        # Add data-type="image" for all external images to prevent GLightbox misdetection
+        data_attrs = image[:src].include?('://') ? ' data-type="image"' : ''
+
         html << %(    <div class="gallery-column">)
         html << %(      <img class="slide-preview" src="#{image[:src]}" onclick="currentSlide(#{index + 1})" alt="#{image[:alt]}"#{data_attrs}>)
         html << %(    </div>)

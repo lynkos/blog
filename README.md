@@ -396,6 +396,35 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 8. Complete the pull request template accordingly
 9. Click the <kbd>Create pull request</kbd> button
 
+### Preview Image
+To add a preview image to a post, add the following front matter to the top of the post's Markdown file:
+```yaml
+image:
+  path: /path/to/image.png
+  lqip: base64-encoded-lqip
+  alt: Image caption and alt text
+```
+
+To generate a base64-encoded LQIP for the `lqip` field:
+1. Visit [lqip generator](https://chrisleverseo.com/tools/lqip-generator-tool)
+2. Input your preview image
+3. Customize the options as needed; here are my recommendations:
+  * Placeholder Size: `Small`
+  * Quality: `60`
+  * Blur Amount: `5px`
+4. Click <kbd>Generate LQIP</kbd>
+5. Click <kbd>Download</kbd> to save the generated image
+6. Visit [Image to Base64](https://base64.guru/converter/encode/image) (alternatively, you can use another base64 encoder)
+7. Under **Datatype**, select <kbd>Local File</kbd>
+8. Under **Local File**, click <kbd>Browse...</kbd> and select the downloaded LQIP
+9. Under **Output Format**, select <kbd>Data URI -- data:content/type;base64</kbd>
+10. Click <kbd>Encode image to Base64</kbd> and copy the generated base64 string
+11. Paste the base64 string in the `lqip` field of the front matter
+
+If you want to confirm that the base64 string works, you can either:
+* Paste it in your browser's address bar, then click <kbd>Enter</kbd>
+* Visit [Base64 Image Viewer](https://jaredwinick.github.io/base64-image-viewer) and paste the base64 string in the input field below **Base64 Image String**
+
 ## Credit
 Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020), aka [Cotes Chung](https://cotes.page).
 

@@ -104,135 +104,12 @@ Basic Wine files[^winefiles]
 </ul>
 
 ## Requirements
-- [x] Apple Silicon Mac (i.e. M series)
+- [x] Apple Silicon Mac (i.e. M series) with at least 16 GB of RAM or more (recommended since translated games require more resources)
 - [x] macOS 15 Sequoia or higher
-- [x] At least 16 GB of RAM or more (recommended since translated games require more resources)
 - [x] [Command Line Tools for Xcode 15+](https://developer.apple.com/xcode/resources) ([downloaded via the App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12))
-- [x] [Game Porting Toolkit](https://developer.apple.com/downloads?q=porting%20toolkit) (from [Apple Developers](https://developer.apple.com/games/game-porting-toolkit))
+- [x] [Game Porting Toolkit](https://developer.apple.com/downloads?q=porting%20toolkit) from [Apple Developers](https://developer.apple.com/games/game-porting-toolkit) (**OPTIONAL**)
 - [x] [Steam (Windows Version)](https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe)
-- [x] **Optional** Game Controller
-
-## Setup
-> Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity, but you can just skip to 
-{: .prompt-important }
-
-Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
-
-![gptk.png](../assets/obsidian/gptk.png)
-
-> You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
-{: .prompt-info }
-
-You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
-
-![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
-
-Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
-
-![download_gptk.png](../assets/obsidian/download_gptk.png)
-
-
-Double-click the `.dmg` after it's downloaded to open/mount it
-
-![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
-
-Click **Agree** to the license agreement
-
-![license_agreement.png](../assets/obsidian/license_agreement.png)
-
-Once mounted, it'll open a window that should look similar to this
-
-![eval_env.png](../assets/obsidian/eval_env.png)
-
-You should also be able to see it in "Finder"
-
-![eval_env2.png](../assets/obsidian/eval_env2.png)
-
-Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
-
-![app_store.png](../assets/obsidian/app_store.png)
-
-Run the `.pkg` file
-	- **Manually**: Double-click the `.pkg` file
-	- Via command line (where `PKG_PATH` is the path to the `.pkg` file): `installer -pkg PKG_PATH -target <target_path>`
-
-Open your terminal, then install Rosetta
-
-```sh
-softwareupdate --install-rosetta
-```
-{: .nolineno }
-
-> If you want to automatically agree to license, add `--agree-to-license` to command
-> ```sh
-> softwareupdate --install-rosetta --agree-to-license
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-![iterm.png](../assets/obsidian/iterm.png)
-
-Enter x86_64 shell; all subsequent commands **must** be run in this shell
-
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
-
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
-
-Install x86 version of Homebrew
-
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-{: .nolineno }
-
-![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
-
-Set the path, depending on the number of Homebrew versions you have
-
-{% tabs set-brew-path %}
-    ---TAB: x86 AND ARM64
-        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
-        ```sh
-		if [ "$(arch)" = "arm64" ]; then
-			eval "$(/opt/homebrew/bin/brew shellenv)"
-		else
-			eval "$(/usr/local/bin/brew shellenv)"
-			export PATH="/usr/local/bin:${PATH}"
-		fi
-		```
-		{: file="$HOME/.bashrc" }
-        {: .nolineno }
-    ---TAB: x86 ONLY
-        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
-		```sh
-		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
-		eval "$(/usr/local/bin/brew shellenv)"
-		```
-        {: .nolineno }
-        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
-{% endtabs %}
-
-Since your shell config file has been updated, restart the terminal and return to x86_64 shell
-
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
-
-Confirm path
-
-```sh
-which brew
-```
-{: .nolineno }
-
-![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
-
-> Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
-{: .prompt-info }
+- [x] Game Controller (**OPTIONAL**)
 
 ## Installation
 I have different versions of Wine on my system which I use for different purposes.
@@ -304,7 +181,7 @@ Once a "Wine configuration" shows up, change the version to **Windows 10**, then
 > - `game-porting-toolkit` formula
 {: .prompt-tip }
 
-======
+// TODO: Rewrite these instructions
 1. download latest wine build
    https://github.com/Gcenx/macOS_Wine_builds/releases
 2. get wine folder (path: `$HOME/Downloads/Wine Devel.app/Contents/Resources/wine`) and move into `$HOME/Wine/dxmt` (or some other dir in `Wine`)
@@ -316,158 +193,6 @@ Once a "Wine configuration" shows up, change the version to **Windows 10**, then
 6. download and unzip  (`MoltenVK-macos.tar` only)
    https://github.com/KhronosGroup/MoltenVK/releases
 7. move `libMoltenVK.dylib` from `$HOME/Downloads/MoltenVK/MoltenVK/dynamic/dylib/macOS` to `$HOME/Wine/dxmt/10.19/lib`
-======
-
-### Install Game Porting Toolkit
-> Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
-> ![volumes.png](../assets/obsidian/volumes.png)
-{: .prompt-info }
-
-#### Version 3.0
- Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
-
-```sh
-brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
-```
-{: .nolineno }
-
-Path to `wine` executable: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
-
-> Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version as follows.
-{: .prompt-info }
-
-Enter GPTk's library directory
-
-```sh
-cd /Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib
-```
-{: .nolineno }
-
-Rename current libraries (to keep a copy)
-
-`-v3` suffix denotes that the copy's version is from GPTk 3.0
-
-```sh
-mv external external-v3
-```
-{: .nolineno }
-
-Move `external` from drive to directory
-
-```sh
-mv "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/external" "/Applications/Game Porting Toolkit.app/Contents/Resources/wine/lib/external"
-```
-{: .nolineno }
-
-`nvngx-on-metalfx.so`{: .filepath} alias missing in wine (old); only see `nvngx.so`{: .filepath}
-
-```sh
-mv wine wine-old
-```
-{: .nolineno }
-
-```sh
-/bin/ls "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/wine/x86_64-unix"
-```
-{: .nolineno }
-
-```plaintext
-atidxx64.so         d3d11.so            dxgi.so             nvngx-on-metalfx.so
-d3d10.so            d3d12.so            nvapi64.so
-```
-
-```sh
-/bin/ls "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/wine/x86_64-windows"
-```
-{: .nolineno }
-
-```plaintext
-atidxx64.dll         d3d12.dll            nvngx-on-metalfx.dll
-d3d10.dll            dxgi.dll
-d3d11.dll            nvapi64.dll
-```
-
-Update GPTk's library directory with new library from `.dmg` 
-
-```sh
-ditto "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/" .
-```
-{: .nolineno }
-
-```sh
-ln -s "/Applications/Game Porting Toolkit.app/Contents/Resources/wine" "$HOME/Wine/gptk/3_0b5"
-```
-{: .nolineno }
-
-To enable experimental MetalFX integration, perform the following steps:
-- Rename `wine/x86_64-unix/nvngx-on-metalfx.so`{: .filepath} to `wine/x86_64-unix/nvngx.so`{: .filepath} (if this hasn’t already been done) **DONE**
-- Rename `wine/x86_64-windows/nvngx-on-metalfx.dll`{: .filepath} to `wine/x86_64-windows/nvngx.dll`{: .filepath} (if this hasn’t already been done) **DONE**
-- Copy both `nvngx.dll`{: .filepath} and `nvapi64.dll`{: .filepath} to the `windows\system32` directory your Wine prefix’s virtual C: drive (open `$WINEPREFIX/drive_c/windows/system32`). Rename old versions in `system32` to `nvngx_orig.dll`{: .filepath} and `nvapi64_orig.dll`{: .filepath} **DONE**
-
-#### Version 2.1 (OUTDATED)
-1. Download Apple tap
-
-	```sh
-	brew tap apple/apple http://github.com/apple/homebrew-apple
-	```
-	{: .nolineno }
-
-2. Install the `game-porting-toolkit` formula. The 1st time you run this command, you'll get an error. We'll fix it in the next step, but we're running this step 1st so we have the formulas (i.e. `game-porting-toolkit` and `game-porting-toolkit-compiler`). We need the formulas since that's what we'll be editing.
-
-	```sh
-	brew install apple/apple/game-porting-toolkit
-	```
-	{: .nolineno }
-
-	> If during installation you see an error such as “Error: game-porting-toolkit: unknown or unsupported macOS version: :dunno”, your version of Homebrew doesn’t have macOS Sonoma support. Update to the latest version of Homebrew and try again.
-	> ```sh
-	> brew update ; brew install apple/apple/game-porting-toolkit
-	> ```
-	> {: .nolineno }
-	{: .prompt-tip }
-
-3. Edit `game-porting-toolkit` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit.rb`)
-
-	```sh
-	brew edit game-porting-toolkit
-	```
-	{: .nolineno }
-
-4. Rename `"openssl@1.1"` to `"openssl@3"`
-
-5. Then, edit `game-porting-toolkit-compiler` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit-compiler.rb`)
-
-	```sh
-	brew edit game-porting-toolkit-compiler
-	```
-	{: .nolineno }
-
-6. Add the following after Line 42[^gptk-cmake]
-
-	```plaintext
-	"-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
-	```
-
-7. Reinstall the `game-porting-toolkit` formula
-
-	```sh
-	brew install apple/apple/game-porting-toolkit
-	```
-	{: .nolineno }
-
-8. Copy the Game Porting Toolkit library directory into Wine’s library directory
-
-	```sh
-	ditto /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/redist/lib/ $(brew --prefix game-porting-toolkit)/lib/
-	```
-	{: .nolineno }
-
-9. Link directory
-
-	```sh
-	ln -s "$(brew --prefix game-porting-toolkit)" "$HOME/Wine/gptk/2_1"
-	```
-	{: .nolineno }
 
 ### Install Wine
 This version of Wine can be used with DXMT and DXVK.
@@ -583,7 +308,12 @@ This version of Wine can be used with DXMT and DXVK.
 	> However, **DO NOT** open a support ticket to CodeWeavers if you have replaced these files.
 	{: .prompt-tip }
 
-15. Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run), otherwise you'll run into issues when trying to use `wine` command.
+15. Execute this command to avoid running into issues when trying to use `wine` command
+
+	```sh
+	xattr -dr com.apple.quarantine "$WINEPATH"
+	```
+	{: .nolineno }
 
 16. If all steps are successfully completed, you should be able to run your Wine commands as normal, e.g.
 
@@ -599,8 +329,7 @@ This version of Wine can be used with DXMT and DXVK.
 	```
 	{: .nolineno }
 
-The full command would be:
-
+	The full command would be:
 	```sh
 	MTL_HUD_ENABLED=0 D3DM_SUPPORT_DXR=1 ROSETTA_ADVERTISE_AVX=1 WINEESYNC=1 WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b" wine "C:\windows\system32\cmd.exe"
 	cd "Games\drive_c\Program Files (x86)\Steam"
@@ -625,35 +354,48 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 2. Install the downloaded DXVK package into a given wine prefix (i.e. copy or symlink the DLLs into the following directories as follows)
 
 	```sh
-	export WINEPREFIX=$HOME/Bottles/DXVK
-	cd $HOME/Downloads/dxvk-macOS-async
-	mv -i x64/*.dll $WINEPREFIX/drive_c/windows/system32
-	mv -i x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
+	export WINEPREFIX="$HOME/Bottles/DXVK"
+	cd "$HOME/Downloads/dxvk-macOS-async"
+	mv -i x64/*.dll "$WINEPREFIX/drive_c/windows/system32"
+	mv -i x32/*.dll "$WINEPREFIX/drive_c/windows/syswow64"
 	```
 	{: .nolineno }
 
-3. Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run), otherwise you'll run into issues when trying to use `wine` command.
+3. Execute this command to avoid running into issues when trying to use `wine` command
+
+	```sh
+	xattr -dr com.apple.quarantine "$HOME/Wine/dxvk/10.18"
+	```
+	{: .nolineno }
 
 4. Open `winecfg` and manually add DLL overrides for `d3d11` and `d3d10core`
 
 	```sh
-	WINEPREFIX=$HOME/Bottles/DXVK $HOME/Wine/dxvk/10.18/bin/wine winecfg
+	WINEPREFIX="$HOME/Bottles/DXVK" "$HOME/Wine/dxvk/10.18/bin/wine" winecfg
 	```
 	{: .nolineno }
 
 5. Verify that your application uses DXVK instead of WineD3D by enabling the HUD
 
 	```sh
-	DXVK_CONFIG_FILE=$HOME/Wine/dxvk/10.18/dxvk.conf DXVK_HUD=full
+	DXVK_CONFIG_FILE="$HOME/Wine/dxvk/10.18/dxvk.conf" DXVK_HUD=full
 	```
 	{: .nolineno }
 
-6. To remove DXVK from a prefix, remove the DLLs and DLL overrides, then run the command in [Restore original DLL files](2025-03-19-play-windows-games.md#restore-original-dll-files).
+6. To remove DXVK from a prefix, remove the DLLs and DLL overrides, then restore original DLL files
+	```sh
+	wineboot -u
+	```
+	{: .nolineno }
 
 > There shouldn't be (i.e. don't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 {: .prompt-info }
 
 #### Install CrossOver
+// TODO: This section is still under construction
+
+This is the most compatible option (compared to the others), as it has all the aforementioned graphics APIs.
+
 1. Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
 
 	```sh
@@ -668,42 +410,229 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 	```
 	{: .nolineno }
 
-This is the most compatible option, as it has all the aforementioned graphics APIs.
-
-`WINEPREFIX=$HOME/Bottles/Test "/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine" winecfg`
-
-
 > CrossOver's game porting toolkit lib path:
 > 
-> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`
+> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`{: .filepath}
+> 
+> CrossOver's wine path:
+> 
+> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine`{: .filepath}
 {: .prompt-info }
 
-### Update MoltenVK
-1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
+### Install Game Porting Toolkit
+> Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
+> ![volumes.png](../assets/obsidian/volumes.png)
+{: .prompt-info }
 
-2. Open terminal and set variables. E.g. for DXMT Wine 10.18:
+#### Setup Game Porting Toolkit
+> Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity, but you can just skip to 
+{: .prompt-important }
+
+Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
+
+![gptk.png](../assets/obsidian/gptk.png)
+
+> You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
+{: .prompt-info }
+
+You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
+
+![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
+
+Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
+
+![download_gptk.png](../assets/obsidian/download_gptk.png)
+
+
+Double-click the `.dmg` after it's downloaded to open/mount it
+
+![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
+
+Click **Agree** to the license agreement
+
+![license_agreement.png](../assets/obsidian/license_agreement.png)
+
+Once mounted, it'll open a window that should look similar to this
+
+![eval_env.png](../assets/obsidian/eval_env.png)
+
+You should also be able to see it in "Finder"
+
+![eval_env2.png](../assets/obsidian/eval_env2.png)
+
+Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
+
+![app_store.png](../assets/obsidian/app_store.png)
+
+Run the `.pkg` file
+	- **Manually**: Double-click the `.pkg` file
+	- Via command line (where `PKG_PATH` is the path to the `.pkg` file): `installer -pkg PKG_PATH -target <target_path>`
+
+Open your terminal, then install Rosetta
+
+```sh
+softwareupdate --install-rosetta
+```
+{: .nolineno }
+
+> If you want to automatically agree to license, add `--agree-to-license` to command
+> ```sh
+> softwareupdate --install-rosetta --agree-to-license
+> ```
+> {: .nolineno }
+{: .prompt-tip }
+
+![iterm.png](../assets/obsidian/iterm.png)
+
+Enter x86_64 shell; all subsequent commands **must** be run in this shell
+
+```sh
+arch -x86_64 /bin/bash
+```
+{: .nolineno }
+
+![x86_iterm.png](../assets/obsidian/x86_iterm.png)
+
+Install x86 version of Homebrew
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+{: .nolineno }
+
+![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
+
+Set the path, depending on the number of Homebrew versions you have
+
+{% tabs set-brew-path %}
+    ---TAB: x86 AND ARM64
+        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
+        ```sh
+		if [ "$(arch)" = "arm64" ]; then
+		  eval "$(/opt/homebrew/bin/brew shellenv)"
+		else
+		  eval "$(/usr/local/bin/brew shellenv)"
+		  export PATH="/usr/local/bin:${PATH}"
+		fi
+		```
+		{: file="$HOME/.bashrc" }
+        {: .nolineno }
+    ---TAB: x86 ONLY
+        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
+		```sh
+		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
+		eval "$(/usr/local/bin/brew shellenv)"
+		```
+        {: .nolineno }
+        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+{% endtabs %}
+
+Since your shell config file has been updated, restart the terminal and return to x86_64 shell
+
+```sh
+arch -x86_64 /bin/bash
+```
+{: .nolineno }
+
+Confirm path
+
+```sh
+which brew
+```
+{: .nolineno }
+
+![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
+
+> Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
+{: .prompt-tip }
+
+#### Version 3.0
+Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
+
+```sh
+brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
+```
+{: .nolineno }
+
+> Path to `wine` executable: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
+{: .prompt-info }
+
+> Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version:
+> 
+> ```sh
+> cd /Applications/Game\ Porting\ Toolkit.app/Contents/Resources/wine/lib
+> mv external external-v3
+> mv "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/external" "/Applications/Game Porting Toolkit.app/Contents/Resources/wine/lib/external"
+> ditto "/Volumes/Evaluation environment for Windows games 3.0 beta 3/redist/lib/" .
+> ln -s "/Applications/Game Porting Toolkit.app/Contents/Resources/wine" "$HOME/Wine/gptk/3_0b5"
+> ```
+> {: .nolineno }
+{: .prompt-tip }
+
+#### Version 2.1 (OUTDATED)
+1. Download Apple tap
 
 	```sh
-	WINE_LIB="$HOME/Wine/dxmt/10.18/lib"
-	MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
+	brew tap apple/apple http://github.com/apple/homebrew-apple
 	```
 	{: .nolineno }
 
-3. Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
+2. Install the `game-porting-toolkit` formula. The 1st time you run this command, you'll get an error. We'll fix it in the next step, but we're running this step 1st so we have the formulas (i.e. `game-porting-toolkit` and `game-porting-toolkit-compiler`). We need the formulas since that's what we'll be editing.
 
 	```sh
-	mv -i "$WINE_LIB/libMoltenVK.dylib" "$WINE_LIB/libMoltenVK_orig.dylib"
+	brew install apple/apple/game-porting-toolkit
 	```
 	{: .nolineno }
 
-4. Move new MoltenVK dylib into Wine build's lib
+	> If during installation you see an error such as “Error: game-porting-toolkit: unknown or unsupported macOS version: :dunno”, your version of Homebrew doesn’t have macOS Sonoma support. Update to the latest version of Homebrew and try again.
+	> ```sh
+	> brew update ; brew install apple/apple/game-porting-toolkit
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
+
+3. Edit `game-porting-toolkit` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit.rb`)
 
 	```sh
-	mv -i "$MVK_DYLIB" "$WINE_LIB"
+	brew edit game-porting-toolkit
 	```
 	{: .nolineno }
 
-6. Execute the command in [Allow Wine to run](2025-03-19-play-windows-games.md#allow-wine-to-run) so it runs properly
+4. Rename `"openssl@1.1"` to `"openssl@3"`
+
+5. Then, edit `game-porting-toolkit-compiler` formula (location `/usr/local/Homebrew/Library/Taps/apple/homebrew-apple/Formula/game-porting-toolkit-compiler.rb`)
+
+	```sh
+	brew edit game-porting-toolkit-compiler
+	```
+	{: .nolineno }
+
+6. Add the following after Line 42[^gptk-cmake]
+
+	```plaintext
+	"-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+	```
+
+7. Reinstall the `game-porting-toolkit` formula
+
+	```sh
+	brew install apple/apple/game-porting-toolkit
+	```
+	{: .nolineno }
+
+8. Copy the Game Porting Toolkit library directory into Wine’s library directory
+
+	```sh
+	ditto /Volumes/Evaluation\ environment\ for\ Windows\ games\ 2.1/redist/lib/ $(brew --prefix game-porting-toolkit)/lib/
+	```
+	{: .nolineno }
+
+9. Link directory
+
+	```sh
+	ln -s "$(brew --prefix game-porting-toolkit)" "$HOME/Wine/gptk/2_1"
+	```
+	{: .nolineno }
 
 ### Install Steam
 > Make sure the Windows version of Steam is located in your `Downloads` folder before installing
@@ -840,1198 +769,102 @@ killall -9 wineserver && killall -9 wine64-preloader
 
 #### Solution 2: Activity Monitor
 1. Open **Activity Monitor**
+
 2. In the search bar, type **wine** and hit <kbd>Enter</kbd>
+
 3. Select all Wine processes with <kbd>⌘</kbd> + <kbd>A</kbd>
+
 4. Once all Wine-related processes are selected, click the **Stop** icon
    ![wine_process_activity_monitor.png](../assets/obsidian/wine_process_activity_monitor.png)
+
 5. Click <kbd>Quit</kbd>
    ![quit_wine_activity_monitor.png](../assets/obsidian/quit_wine_activity_monitor.png)
+
 6. If not all of the processes end, you can try again with <kbd>Force Quit</kbd> 
 
 ## Appendix
-### Environment Variables
-#### Wine
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Options</th>
-            <th>Example</th>
-        </tr>
-    </thead>
-    <tbody>
-         <tr>
-            <td><code>WINE</code></td>
-            <td>Specify which version of Wine to use, if you have multiple different versions.</td>
-            <td>Wine path (i.e. <code>/path/to/your/wine</code>)</td>
-            <td><code>WINE="/usr/local/bin/wine64"</code></td>
-        </tr>
-        <tr>
-            <td><code>WINEPREFIX</code></td>
-            <td>Directory where Wine stores its data (default is <code>$HOME/.wine</code>). This directory is also used to identify the socket which is used to communicate with the <strong>wineserver</strong>. All <strong>wine</strong> processes using the same <strong>wineserver</strong> (i.e. same user) share certain things like registry, shared memory, and config file. By setting <code>WINEPREFIX</code> to different values for different <strong>wine</strong> processes, it is possible to run a number of truly independent <strong>wine</strong> processes.</td>
-            <td></td>
-            <td><code>WINEPREFIX="$HOME/Bottles/DXMT"</code></td>
-        </tr>
-        <tr>
-            <td><code>WINESERVER</code></td>
-            <td>Specifies the path and name of the <strong>wineserver</strong> binary. If not set, Wine will look for a file named "wineserver" in the path and in a few other likely locations.</td>
-            <td></td>
-            <td><code>WINESERVER=$HOME/Wine/dxmt/10.18/bin/wineserver</code></td>
-        </tr>
-        <tr>
-            <td><code>WINEDEBUG</code></td>
-            <td>Turns debugging messages on or off; can be used to silence logs, enable detailed logging for components, or filter specific messages. The syntax of the variable is of the form <code>[<em>class</em>][<strong>+</strong>|<strong>-</strong>]<em>channel</em>[,[<em>class2</em>][<strong>+</strong>|<strong>-</strong>]<em>channel2</em>]</code><br><br><em>class</em> is optional and can be one of the following: <strong>err</strong>, <strong>warn</strong>, <strong>fixme</strong>, or <strong>trace</strong>. If <em>class</em> is not specified, all debugging messages for the specified channel are turned on. Each channel will print messages about a particular component of Wine. The following character can be either <strong>+</strong> or <strong>-</strong> to switch the specified channel on or off respectively. If there is no <em>class</em> part before it, a leading <strong>+</strong> can be omitted. Note that spaces are not allowed anywhere in the string.</td>
-            <td></td>
-            <td>
-	            <ul>
-		            <li><code>WINEDEBUG=warn+all</code><br>will turn on all warning messages (recommended for debugging).</li>
-		            <li><code>WINEDEBUG=warn+dll,+heap</code><br>will turn on DLL warning messages and all heap messages.</li>
-		            <li><code>WINEDEBUG=fixme-all,warn+cursor,+relay</code><br>will turn off all FIXME messages, turn on cursor warning messages, and turn on all relay messages (API calls).</li>
-		    		<li><code>WINEDEBUG=relay</code><br>will turn on all relay messages. For more control on including or excluding functions and dlls from the relay trace, look into the <code>HKEY_CURRENT_USER\Software\Wine\Debug</code> registry key.</li>
-	            </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>WINEDLLPATH</code></td>
-            <td>Specifies the path(s) in which to search for builtin dlls and Winelib applications. This is a list of directories separated by <code>:</code>. In addition to any directory specified in <code>WINEDLLPATH</code>, Wine will also look in the installation directory.</td>
-            <td></td>
-            <td><code>WINEDLLPATH=</code></td>
-        </tr>
-        <tr>
-            <td><code>WINEDLLOVERRIDES</code></td>
-            <td>Defines the override type and load order of dlls used in the loading process for any dll. There are currently two types of libraries that can be loaded into a process address space: native windows dlls (<code>native</code>) and Wine internal dlls (<code>builtin</code>). The type may be abbreviated with the first letter of the type (<code>n</code> or <code>b</code>). The library may also be disabled (<code>''</code>). Each sequence of orders must be separated by commas.<br><br>Each dll may have its own specific load order. The load order determines which version of the dll is attempted to be loaded into the address space. If the first fails, then the next is tried and so on. Multiple libraries with the same load order can be separated with commas. It is also possible to use specify different loadorders for different libraries by separating the entries by <code>;</code>.<br><br>The load order for a 16-bit dll is always defined by the load order of the 32-bit dll that contains it (which can be identified by looking at the symbolic link of the 16-bit <code>.dll.so</code> file). For instance if <code>ole32.dll</code> is configured as <code>builtin</code>, <code>storage.dll</code> will be loaded as <code>builtin</code> too, since the 32-bit <code>ole32.dll</code> contains the 16-bit <code>storage.dll</code>.</td>
-            <td></td>
-            <td>
-            	<ul>
-		            <li><code>WINEDLLOVERRIDES="comdlg32,shell32=n,b"</code><br>Try to load <code>comdlg32</code> and <code>shell32</code> as <code>native</code> windows dll first and try the <code>builtin</code> version if the <code>native</code> load fails.</li>
-		            <li><code>WINEDLLOVERRIDES="comdlg32,shell32=n;c:\\foo\\bar\\baz=b"</code><br>Try to load the libraries <code>comdlg32</code> and <code>shell32</code> as <code>native</code> windows dlls. Furthermore, if an application request to load <code>c:\foo\bar\baz.dll</code> load the <code>builtin</code> library <code>baz</code>.</li>
-		            <li><code>WINEDLLOVERRIDES="comdlg32=b,n;shell32=b;comctl32=n;oleaut32="</code><br>Try to load <code>comdlg32</code> as <code>builtin</code> first and try the <code>native</code> version if the <code>builtin</code> load fails; load <code>shell32</code> always as <code>builtin</code> and <code>comctl32</code> always as <code>native</code>; <code>oleaut32</code> will be disabled.</li>
-		            <li><code>WINEDLLOVERRIDES="mscoree=d;mshtml=d"</code><br>Disable dialog prompting you to download Gecko and/or Mono.</li>
-	            </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>WINEPATH</code></td>
-            <td>Specifies additional path(s) to be prepended to the default Windows <code>PATH</code> environment variable. This is a list of Windows-style directories separated by <code>;</code>.<br><br>For a permanent alternative, edit (create if needed) the <code>PATH</code> value under the <code>HKEY_CURRENT_USER\Environment</code> registry key.</td>
-            <td></td>
-            <td><code>WINEPATH=</code></td>
-        </tr>
-        <tr>
-            <td><code>WINEARCH</code></td>
-            <td>Specifies the Windows architecture to support. The architecture supported by a given Wine prefix is set at prefix creation time and cannot be changed afterwards. When running with an existing prefix, Wine will refuse to start if <code>WINEARCH</code> doesn't match the prefix architecture. It is possible however to switch freely between <code>win64</code> and <code>wow64</code> with an existing 64-bit prefix.</td>
-            <td>
-	            <ul>
-		            <li><code>win32</code><br>Support only 32-bit applications</li>
-		            <li><code>win64</code><br>Support both 64-bit applications and 32-bit ones.</li>
-		            <li><code>wow64</code><br>Support 64-bit applications and 32-bit ones, using a 64-bit host process in all cases.</li>
-	            </ul>
-            </td>
-            <td><code>WINEARCH=win64</code></td>
-        </tr>
-        <tr>
-            <td><code>WINE_LARGE_ADDRESS_AWARE</code></td>
-            <td>Prevents 32bit games from crashing after reaching 4GB of RAM.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>WINE_LARGE_ADDRESS_AWARE=1</code></td>
-        </tr>
-        <tr>
-            <td><code>WINE_D3D_CONFIG</code></td>
-            <td>Specifies Direct3D configuration options. It can be used instead of modifying the <code>HKEY_CURRENT_USER\Software\Wine\Direct3D</code> registry key. The value is a comma- or semicolon-separated list of key-value pairs. If an individual setting is specified in both the environment variable and the registry, the former takes precedence.</td>
-            <td></td>
-            <td><code>WINE_D3D_CONFIG="renderer=vulkan;VideoPciVendorID=0xc0de"</code></td>
-        </tr>
-         <tr>
-            <td><code>WINEESYNC</code></td>
-            <td>Enables <em>Eventfd Synchronization (ESync)</em>, which reduces overhead from thread synchronization by replacing Windows synchronization objects with <code>eventfd</code> objects. Improves multithreaded application and game performance. Available on Linux and macOS.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>WINEESYNC=1</code></td>
-        </tr>
-        <tr>
-            <td><code>WINEMSYNC</code></td>
-            <td>Intended for <em>Mac Synchronization (MSync)</em>, adapting synchronization improvements like ESync/FSync for macOS systems using Mach ports. Aims to reduce overhead on macOS similarly to how FSync helps Linux. Experimental, still relatively new, and less mature than ESync/FSync.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>WINEMSYNC=0</code></td>
-        </tr>
-        <tr>
-            <td><code>WINE_FULLSCREEN_FSR</code></td>
-            <td>Enables FidelityFX Super Resolution (FSR) upscaling when Wine runs fullscreen apps. Good for boosting low-res games on Mac displays.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>WINE_FULLSCREEN_FSR=1</code></td>
-        </tr>
-        <tr>
-            <td><code>WINE_FULLSCREEN_FSR_STRENGTH</code></td>
-            <td>Controls image sharpness when FidelityFX Super Resolution (FSR) upscaling (i.e. <code>WINE_FULLSCREEN_FSR</code>) is enabled. Defaults to <code>5</code>.</td>
-            <td>A number from <code>5</code> (minimum) to <code>0</code> (maximum)</td>
-            <td><code>WINE_FULLSCREEN_FSR_STRENGTH=3</code></td>
-        </tr>
-        <tr>
-            <td><code>WINE_NO_FULLSCREEN</code></td>
-            <td>Forces Wine apps to run in a window even if they want fullscreen. Useful for compatibility.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>WINE_NO_FULLSCREEN=0</code></td>
-        </tr>
-        export =
-        <tr>
-            <td><code>VKD3D_FEATURE_LEVEL</code></td>
-            <td></td>
-            <td><code>12_2</code>, <code>4</code>, etc.</td>
-            <td><code>VKD3D_FEATURE_LEVEL=12_2</code></td>
-        </tr>
-        <tr>
-            <td><code>GST_DEBUG</code></td>
-            <td>Controls logging level for GStreamer (used by Wine for media playback). Useful if games/apps involve video/audio playback issues.</td>
-            <td><code>3</code> (info level), <code>4</code> (debug level)</td>
-            <td>Example</td>
-        </tr>
-        <tr>
-            <td><code>LC_ALL</code></td>
-            <td>Sets the system-wide locale for Wine and its programs. Important for avoiding weird character encoding issues (especially in older games).</td>
-            <td><code>en_US</code> or <code>en_US.UTF-8</code> (forces US English encoding</td>
-            <td><code>LC_ALL=en_US.UTF-8</code></td>
-        </tr>
-        <tr>
-            <td><code>DISPLAY</code></td>
-            <td>Specifies the X11 display to use.</td>
-            <td></td>
-            <td><code>DISPLAY=</code></td>
-        </tr>
-          <tr>
-            <td><code>AUDIODEV</code></td>
-            <td>Set the device for audio input / output. Default <code>/dev/dsp</code>.</td>
-            <td></td>
-            <td><code>AUDIODEV=/dev/dsp</code></td>
-        </tr>
-         <tr>
-            <td><code>MIXERDEV</code></td>
-            <td>Set the device for mixer controls. Default <code>/dev/mixer</code>.</td>
-            <td></td>
-            <td><code>MIXERDEV=/dev/mixer</code></td>
-        </tr>
-        <tr>
-            <td><code>MIDIDEV</code></td>
-            <td>Set the MIDI (sequencer) device. Default <code>/dev/sequencer</code>.</td>
-            <td></td>
-            <td><code>MIDIDEV=/dev/sequencer</code></td>
-        </tr>
-    </tbody>
-</table>
-
-#### D3DMetal
-Environment variables can be used to control some aspects of translation and emulation in the evaluation environment.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Options</th>
-            <th>Example</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>D3DM_SUPPORT_DXR</code></td>
-            <td>Defaults to <code>0</code> (OFF) on M1 & M2 Macs, and to <code>1</code> (ON) for M3 & later Macs. Setting this environment variable to <code>1</code> (ON) enables DirectX Raytracing (aka DXR) features in D3DMetal’s DirectX 12 translation layer, so games querying for DXR support will find the support level and expected interfaces of DXR.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>D3DM_SUPPORT_DXR=1</code></td>
-        </tr>
-        <tr>
-            <td><code>ROSETTA_ADVERTISE_AVX</code></td>
-            <td>Defaults to <code>0</code> (OFF). On macOS 15 Sequoia, setting this environment variable to <code>1</code> (ON) causes the CPU instruction translation layer to publish cpuid information to translated applications when running in the evaluation environment, so games querying instruction set extension capabilities before utilizing them can conditionally control their use of instruction extensions. This setting does not modify the availability of the instruction set in Rosetta; it only controls whether the processor advertises its support for these extensions.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>ROSETTA_ADVERTISE_AVX=1</code></td>
-        </tr>
-        <tr>
-            <td><code>D3DM_ENABLE_METALFX</code></td>
-            <td>On macOS 16, setting this environment variable to <code>1</code> (ON) causes DLSS functions to be converted to MetalFX where possible. Setting this environment variable to <code>0</code> (OFF) causes DLSS functions to be not be available.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>D3DM_ENABLE_METALFX=1</code></td>
-        </tr>
-    </tbody>
-</table>
-
-#### DXMT
-Rename `winemetal_i386-windows.dll` in `e` to `winemetal.dll` for 32 bit. 64 bit is default; so if switching to 32bit, rename current `winemetal.dll` to `winemetal_x86_64-windows.dll` before renaming the 32bit one.
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Options</th>
-            <th>Example</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>DXMT_ENABLE_NVEXT</code></td>
-            <td>Enable [implemented subset of] NVIDIA vendor extensions and load <code>nvapi64.dll</code> and <code>nvngx.dll</code>. It is <strong>NOT</strong> recommended to always enable this extension, because the game may use certain techniques that is only fast on NVIDIA hardware but extremely slow on others. Use it when it's actually beneficial.<br><br>Current implemented features: HDR *, DLSS SuperResolution (translated to MetalFX Temporal Scaler)<br><br>*: NOT ALL GAMES REQUIRE vendor extension to enable HDR, especially if it's released recently and/or targets Windows 11.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>DXMT_ENABLE_NVEXT=1</code></td>
-        </tr>
-        <tr>
-            <td><code>MTL_SHADER_VALIDATION</code></td>
-            <td>Enable Metal shader validation layer for DXMT.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>MTL_SHADER_VALIDATION=0</code></td>
-        </tr>
-        <tr>
-            <td><code>MTL_DEBUG_LAYER</code></td>
-            <td>Enable Metal API validation layer for DXMT.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>MTL_DEBUG_LAYER=0</code></td>
-        </tr>
-        <tr>
-            <td><code>MTL_CAPTURE_ENABLED</code></td>
-            <td>Enable Metal frame capture for DXMT.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>MTL_CAPTURE_ENABLED=0</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_LOG_LEVEL</code></td>
-            <td>Controls message logging for DXMT.</td>
-            <td><code>none</code>, <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code></td>
-            <td><code>DXMT_LOG_LEVEL=warn</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_LOG_PATH</code></td>
-            <td>Changes path where DXMT log files are stored. Log files in the given directory will be called <code>app_d3d11.log</code>, <code>app_dxgi.log</code>, etc., where <code>app</code> is the name of the game executable. Set to <code>none</code> to disable log file creation entirely without disabling logging (i.e. log messages will still be printed to <code>stderr</code>).</td>
-            <td><code>/some/directory</code>, <code>none</code></td>
-            <td><code>DXMT_LOG_PATH=$HOME/dxmt/logs</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_CAPTURE_FRAME</code></td>
-            <td>Automatically captures n-th frame. Useful for debugging a replay.</td>
-            <td><code>n</code> (i.e. any positive integer)</td>
-            <td><code>DXMT_CAPTURE_FRAME=3</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_CAPTURE_EXECUTABLE</code></td>
-            <td>Must be set to enable Metal frame capture. Press <kbd>F10</kbd> to generate a capture. The captured result will be stored in the same directory as the executable.</td>
-            <td><code>"executable name without extension"</code></td>
-            <td><code>DXMT_CAPTURE_EXECUTABLE="Palworld"</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_METALFX_SPATIAL_SWAPCHAIN</code></td>
-            <td>Enable MetalFX spatial upscaler on output swapchain. By default it will double the output resolution. Set <code>d3d11.metalSpatialUpscaleFactor</code> to a value between <code>1.0</code> and <code>2.0</code> to change the scale factor.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>DXMT_METALFX_SPATIAL_SWAPCHAIN=1</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_CONFIG_FILE</code></td>
-            <td>Sets path to the DXMT configuration file. Check <a target="_blank" href="https://github.com/3Shain/dxmt/blob/main/dxmt.conf" title="Example DXMT configuration file"><code>dxmt.conf</code></a> in <a target="_blank" href="https://github.com/3Shain/dxmt" title="Link to DXMT GitHub repository">DXMT GitHub repository</a> for reference.</td>
-            <td><code>/path/to/dxmt.conf</code></td>
-            <td><code>DXMT_CONFIG_FILE=/Users/lynkos/dxmt/dxmt.conf</code></td>
-        </tr>
-        <tr>
-            <td><code>DXMT_CONFIG</code></td>
-            <td>Can be used to set config variables through the environment instead of a configuration file using the same syntax. <code>;</code> is used as a separator. Set <code>d3d11.preferredMaxFrameRate</code> to enforce the application's frame pacing being controlled by Metal. The value must be a factor of your display's refresh rate (e.g. <code>15</code>, <code>30</code>, <code>40</code>, <code>60</code>, <code>120</code> are valid for a 120hz display).</td>
-            <td><code>"DXMT config variables separated with ;"</code></td>
-            <td><code>DXMT_CONFIG="d3d11.preferredMaxFrameRate=30;d3d11.metalSpatialUpscaleFactor=1.5;"</code></td>
-        </tr>
-    </tbody>
-</table>
-
-#### DXVK
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Options</th>
-            <th>Example</th>
-        </tr>
-    </thead>
-    <tbody>
-          <tr>
-            <td><code>DXVK_ASYNC</code></td>
-            <td>Enables async shader compilation in DXVK. Reduces stutter by allowing shaders to compile in the background, but may cause visual glitches. Needs a patched version of DXVK to work.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>DXVK_ASYNC=1</code></td>
-        </tr>
-        <tr>
-            <td><code>DXVK_HUD</code></td>
-            <td>Controls a HUD which can display FPS and some stat counters.</td>
-            <td>
-		        <ul>
-			        <li><code>1</code> (has the same effect as <code>devinfo,fps</code>)</li>
-			        <li><code>full</code> (enables all available HUD elements)</li>
-			        <li><code>devinfo</code> (displays the name of the GPU and the driver version)</li>
-			        <li><code>fps</code> (shows the current frame rate)</li>
-			        <li><code>frametimes</code> (shows a frame time graph)</li>
-			        <li><code>submissions</code> (shows the number of command buffers submitted per frame)</li>
-			        <li><code>drawcalls</code> (shows the number of draw calls and render passes per frame)</li>
-			        <li><code>pipelines</code> (shows the total number of graphics and compute pipelines)</li>
-			        <li><code>memory</code> (shows the amount of device memory allocated and used)</li>
-			        <li><code>gpuload</code> (shows estimated GPU load; may be inaccurate)</li>
-			        <li><code>version</code> (shows DXVK version)</li>
-			        <li><code>api</code> (shows the D3D feature level used by the application)</li>
-			        <li><code>compiler</code> (shows shader compiler activity)</li>
-			        <li><code>samplers</code> (shows the current number of sampler pairs used; <em>D3D9 Only</em>)</li>
-			        <li><code>scale=x</code> (scales the HUD by a factor of <code>x</code>)</li>
-		        </ul>
-            </td>
-            <td><code>DXVK_HUD=1</code></td>
-        </tr>
-          <tr>
-            <td><code>DXVK_FRAME_RATE</code></td>
-            <td>Can be used to limit the frame rate. Alternatively, the configuration file can be used.</td>
-            <td><code>0</code> uncaps the frame rate, while any positive value will limit rendering to the given number of frames per second</td>
-            <td><code>DXVK_FRAME_RATE=15</code></td>
-        </tr>
-          <tr>
-            <td><code>DXVK_FILTER_DEVICE_NAME</code></td>
-            <td>Some applications do not provide a method to select a different GPU. In that case, DXVK can be forced to use a given device. Selects devices with a matching Vulkan device name, which can be retrieved with tools such as <code>vulkaninfo</code>. Matches on substrings, so "VEGA" or "AMD RADV VEGA10" is supported if the full device name is "AMD RADV VEGA10 (LLVM 9.0.0)", for example. If the substring matches more than one device, the first device matched will be used. <strong>Note</strong>: If the device filter is configured incorrectly, it may filter out all devices and applications will be unable to create a D3D device.</td>
-            <td></td>
-            <td><code>DXVK_FILTER_DEVICE_NAME="Device Name"</code></td>
-        </tr>
-          <tr>
-            <td><code>DXVK_STATE_CACHE</code></td>
-            <td>Enables state cache in DXVK.</td>
-            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
-            <td><code>DXVK_STATE_CACHE=0</code></td>
-        </tr>
-        <tr>
-            <td><code>DXVK_STATE_CACHE_PATH</code></td>
-            <td>Specifies a directory where to put the cache files. Defaults to the current working directory of the application.</td>
-            <td></td>
-            <td><code>DXVK_STATE_CACHE_PATH=/some/directory</code></td>
-        </tr>
-    </tbody>
-</table>
-
-#### MoltenVK
-> This section is still under construction. Please refer to [MoltenVK's configuration parameters file](https://github.com/KhronosGroup/MoltenVK/blob/main/Docs/MoltenVK_Configuration_Parameters.md) for the full list.
-{: .prompt-info }
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Options</th>
-            <th>Default</th>
-            <th>Example</th>
-        </tr>
-    </thead>
-    <tbody>
-          <tr>
-            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE</code></td>
-            <td>Enumeration</td>
-            <td>If the <code>MVK_CONFIG_PERFORMANCE_TRACKING</code> parameter is enabled, this parameter controls when MoltenVK should log activity performance events.</td>
-            <td>
-	            <ul>
-		            <li><code>0</code>: Log repeatedly every number of frames configured by the <code>MVK_CONFIG_PERFORMANCE_LOGGING_FRAME_COUNT</code> parameter.</li>
-		            <li><code>1</code>: Log immediately after each performance measurement.</li>
-		            <li><code>2</code>: Log at the end of the VkDevice lifetime. This is useful for one-shot apps such as testing frameworks.</li>
-		            <li><code>3</code>: Log at the end of the VkDevice lifetime, but continue to accumulate across multiple VkDevices throughout the app process. This is useful for testing frameworks that create many VkDevices serially.</li>
-	            </ul>
-            </td>
-            <td><code>0</code></td>
-            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE=1</code></td>
-        </tr>
-         <tr>
-            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS</code></td>
-            <td>UInt32</td>
-            <td>Controls which extensions MoltenVK should advertise it supports in <code>vkEnumerateInstanceExtensionProperties()</code> and <code>vkEnumerateDeviceExtensionProperties()</code>. This can be useful when testing MoltenVK against specific limited functionality. Any prerequisite extensions are also advertised. If bit <code>1</code> is included, all supported extensions will be advertised. A value of zero means no extensions will be advertised.</td>
-            <td>The value of this parameter is a <code>Bitwise-OR</code> of the following values:
-	            <ul>
-		            <li><code>1</code>: All supported extensions.</li>
-		            <li><code>2</code>: WSI extensions supported on the platform.</li>
-		            <li><code>4</code>: Vulkan Portability Subset extensions.</li>
-	            </ul>
-	        </td>
-            <td><code>1</code></td>
-            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS=2</code></td>
-        </tr>
-          <tr>
-            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE</code></td>
-            <td>UInt32</td>
-            <td>Controls the Vulkan API version that MoltenVK should advertise in <code>vkEnumerateInstanceVersion()</code>, after MoltenVK adds the <code>VK_HEADER_VERSION</code> component.</td>
-            <td>
-            	<ul>
-		            <li><code>4210688</code>: Decimal number for <code>VK_API_VERSION_1_4</code>.</li>
-		            <li><code>4206592</code>: Decimal number for <code>VK_API_VERSION_1_3</code>.</li>
-		            <li><code>4202496</code>: Decimal number for <code>VK_API_VERSION_1_2</code>.</li>
-		            <li><code>4198400</code>: Decimal number for <code>VK_API_VERSION_1_1</code>.</li>
-		            <li><code>4194304</code>: Decimal number for <code>VK_API_VERSION_1_0</code>.</li>
-		            <li><code>14</code>: Shorthand for <code>VK_API_VERSION_1_4</code>.</li>
-		            <li><code>13</code>: Shorthand for <code>VK_API_VERSION_1_3</code>.</li>
-		            <li><code>12</code>: Shorthand for <code>VK_API_VERSION_1_2</code>.</li>
-		            <li><code>11</code>: Shorthand for <code>VK_API_VERSION_1_1</code>.</li>
-		            <li><code>10</code>: Shorthand for <code>VK_API_VERSION_1_0</code>.</li>
-	            </ul>
-	        </td>
-            <td><code>4210688</code> (Decimal number for <code>VK_API_VERSION_1_4</code>)</td>
-            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE=12</code></td>
-        </tr>
-          <tr>
-            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE</code></td>
-            <td>String</td>
-            <td>If <code>MVK_CONFIG_AUTO_GPU_CAPTURE_SCOPE</code> is any value other than <code>0</code>, this is the path to a file where the automatic GPU capture will be saved. If this parameter is an empty string (the default), automatic GPU capture will be handled by the Xcode user interface.<br><br>If this parameter is set to a valid file path, the Xcode scheme need not have Metal GPU capture enabled, and in fact the app need not be run under Xcode's control at all. This is useful in case the app cannot be run under Xcode's control. A path starting with <code>~</code> can be used to place it in a user's home directory.</td>
-            <td>Some string value</td>
-            <td><code>""</code> (i.e. empty string)</td>
-            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE="~/save/path/here"</code></td>
-        </tr>
-          <tr>
-            <td><code>NAME</code></td>
-            <td>TYPE</td>
-            <td>DESC</td>
-            <td>
-            	<ul>
-		            <li><code>NUM</code>: DESC.</li>
-	            </ul>
-            </td>
-            <td><code>DEFAULT</code></td>
-            <td><code>EXAMPLE</code></td>
-        </tr>
-	</tbody>
-</table>
-
-### Troubleshooting
-#### Game Porting Toolkit
-This section is taken directly from different Game Porting Toolkit's `README.md` files, hence the blockquotes.
-
-##### Game won't run and crashes with an invalid instruction or complains about lack of certain instruction extensions
-> Invalid instruction crashes are sometimes caused when the Rosetta 2 instruction translation layer is unable to translate CPU instructions. You may be able to recompile a version of your game without certain instructions in order to evaluate its potential on Apple Silicon with the Game Porting Toolkit when you hit this error. You may also be able to use the `ROSETTA_ADVERTISE_AVX` environment variable to ensure your game recognizes available translation instruction extensions. When porting your code natively to Apple Silicon there are a variety or NEON and ARM instructions which offer high-performance replacements for AVX / AVX2, BMI, F16c and other less common instruction set extensions.
-
-##### Game won't run because its anti-cheat or DRM software is incompatible with Wine translation
-> You may be able to rebuild a custom version of your game in your Windows development environment with anti-cheat or DRM disabled for your own evaluation purposes. When porting your code natively to Apple Silicon and macOS, contact your anti-cheat or DRM provider—most have native Apple Silicon solutions for your native build, or you may find that existing macOS solutions like Hardened Runtime, Application Sandbox, and Application Attestation prevent forms of cheating or tampering that concern you.
-
-##### Game won’t run because it thinks the version of Windows is too old
-> First, make sure you have selected an appropriate Windows version in `winecfg`. This affects the major and minor Windows versions that are reported to your game.
->
-> If your game checks for a specific minimum or an exact build version, you can alter this value by changing the `CurrentBuild` and `CurrentBuildNumber` values of the `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT` registry key. You must perform this step _after_ selecting a Windows version in `winecfg`. Run the following commands, replacing `«BUILD_NUMBER»` with the specific build number your game checks for; if you're unsure, build `19042` should work for most games:
->
-> ```sh
-> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
-> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
-> /usr/local/bin/wineserver -k
-> ```
-> {: .nolineno }
->
-> The last command will shut down the virtual Windows environment to ensure that all components agree on the Windows version the next time you launch your game.
-
-##### Game won’t run because it requires Mono, .NET, or the MSVCRT runtime
-> The evaluation environment for Windows games does not pre-install these runtime support packages. If your game makes use of one of these packages, consider searching for and downloading appropriate installers (`.exe` or `.msi`) and installing them to your evaluation environment. Additional runtime installers can be run on your environment by just launching the installer and following its installation instructions:
->
-> ```sh
-> wine <some-installer.exe>
-> ```
-> {: .nolineno }
->
-> `.MSI` packages can be installed by launching the Windows uninstaller application and choosing to install a downloaded `.msi` package:
->
-> ```sh
-> wine uninstaller
-> ```
-> {: .nolineno }
-
-##### Game won’t boot anymore despite no changes
-Try clearing the shader cache
-
-```sh
-cd $(getconf DARWIN_USER_CACHE_DIR)/d3dm
-cd «GAME_NAME»
-rm -r shaders.cache
-```
-{: .nolineno }
-
-##### Enable experimental MetalFX integration
-> This **ONLY** works for **macOS 16 AND Game Porting Toolkit 3.0**!
-> 
-> See [Boost performance with MetalFX Upscaling](https://developer.apple.com/videos/play/wwdc2022/10103) video from [Apple Developer](https://developer.apple.com) for more information.
-{: .prompt-info }
-
-1. Rename `wine/x86_64-unix/nvngx-on-metalfx.so`{: .filepath} to `wine/x86_64-unix/nvngx.so`{: .filepath} if this hasn’t already been done
-2. Rename `wine/x86_64-windows/nvngx-on-metalfx.dll`{: .filepath} to `wine/x86_64-windows/nvngx.dll`{: .filepath} if this hasn’t already been done
-3. Copy both `nvngx.dll`{: .filepath} and `nvapi64.dll`{: .filepath} to the `windows\system32` directory in your Wine prefix’s virtual C: drive (open `$HOME/Games/drive_c/windows/system32`)
-4. Set `D3DM_ENABLE_METALFX=1` to convert DLSS functions to MetalFX (where possible)
-
-Refer to [MetalFX Integration](2025-03-19-play-windows-games.md#metalfx-integration) for Bash script.
-
-#### Steam
-##### `steamwebhelper` not responding
-> Complete the following steps if you updated Steam to the latest version and/or get an error along the lines of **steamwebhelper, a critical Steam component, is not responding. The Steam UI will not be usable.**
->
-> This error is common when using an outdated version of Wine with a new version of Steam.
-{: .prompt-info }
-
-If you haven't already, set your `WINEPREFIX` (aka bottle), otherwise it'll default to `$HOME/.wine`
-
-```sh
-export WINEPREFIX="$HOME/Games"
-```
-{: .nolineno }
-
-Enter your `WINEPREFIX` (aka bottle)
-
-```sh
-cd "$WINEPREFIX"
-```
-{: .nolineno }
-
-Run `cmd.exe`
-
-```sh
-wine "C:\windows\system32\cmd.exe"
-```
-{: .nolineno }
-
-Enter your Steam directory
-
-```sh
-cd "drive_c\Program Files (x86)\Steam"
-```
-{: .nolineno }
-
-> Try `"Z:\Users\<YOUR_USERNAME>\<YOUR_BOTTLE_NAME>\drive_c\Program Files (x86)\Steam"`{: .filepath} if the previous command doesn't work, where `<YOUR_USERNAME>` is your Mac username and `<YOUR_BOTTLE_NAME>` is `$WINEPREFIX` without `$HOME`
-{: .prompt-tip }
-
-Downgrade your Steam version
-
-> Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
-{: .prompt-warning }
-
-{% tabs downgrade-steam %}
-    ---TAB: 3/6/2025
-        This will restore an older Steam version from 3/6/2025
-        ```sh
-        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
-        ```
-        {: .nolineno }
-    ---TAB: 1/28/2025
-        If that doesn't work, try this Steam version from 1/28/2025
-        ```sh
-        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
-        ```
-        {: .nolineno }
-    ---TAB: 5/20/2024
-        If that doesn't work, try this Steam version from 5/20/2024
-        ```sh
-        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
-        ```
-        {: .nolineno }
-{% endtabs %}
-
-> The link will not open in a browser, however, it is still active
-{: .prompt-info }
-
-Exit
-
-```sh
-exit
-```
-{: .nolineno }
-
-Create/update `steam.cfg`
-
-```sh
-cat <<EOF > $WINEPREFIX/drive_c/Program\ Files\ \(x86\)/Steam/steam.cfg
-```
-{: .nolineno }
-
-Enter the following (to disable auto-update)
-
-```plaintext
-BootStrapperInhibitAll=enable
-BootStrapperForceSelfUpdate=disable
-EOF
-```
-{: file="$WINEPREFIX/drive_c/Program Files (x86)/Steam/steam.cfg" }
-
-Restart Steam
-
-```sh
-wine "C:\Program Files (x86)\Steam\steam.exe"
-```
-{: .nolineno }
-
-Optional args for `steam.exe` (tho including them caused some issues):
-
-```sh
--noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
-```
-{: .nolineno }
-
-##### Steam download freezes
-This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
-
-###### Solution 1: Steam Console
-Source[^steamconsole]
-
-> Make sure you have the native Steam app for macOS
-{: .prompt-important }
-
-> Use `~` instead of `$HOME` for any paths!
-{: .prompt-warning }
-
-Open your web browser (e.g. Firefox, Chrome, Safari, etc.) and enter [`steam://open/console`](steam://open/console) in the URL bar
-
-Once Steam (for macOS) opens, click the <kbd>Console</kbd> tab
-
-Enter the following in the bottom prompt to enable downloading Windows games via macOS Steam
-
-```plaintext
-@sSteamCmdForcePlatformType windows
-```
-
-Either through [SteamDB.info](https://steamdb.info) or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
-
-Enter the following in the console, where `<APP_ID>` is the app ID (e.g. `3164500`) of the game you want to download
-
-```plaintext
-app_install <APP_ID>
-```
-
-> If you need a beta access, include the following flag, where `<CHANNEL_NAME>` is the channel name
-> ```plaintext
-> -beta <CHANNEL_NAME>
-> ```
-{: .prompt-tip }
-
-Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to **Manage** > **Browse Local Files** to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
-
-Move all of the aforementioned game files to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<YOUR_GAMES_NAME>`) inside your Windows Steam installation
-
-Two folders up (i.e. path `$HOME/Library/Application Support/Steam/steamapps/`), move the file `appmanifest_<APP_ID>.acf`{: .filepath}, where `<APP_ID>` is your game's Steam app ID, to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/`) inside your Windows Steam installation. E.g. `appmanifest_3164500.acf`{: .filepath}
-
-Run your Windows Steam installation as normal and the game should appear as downloaded in your Steam library
-
-###### Solution 2: SteamCMD
-> If you already have [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) installed, go straight to Step #3.
-{: .prompt-info }
-
-Open terminal and create `SteamCMD` directory
-
-```sh
-mkdir $HOME/SteamCMD && cd $HOME/SteamCMD
-```
-{: .nolineno }
-
-Download and extract SteamCMD
-
-```sh
-curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz" | tar zxvf -
-```
-{: .nolineno }
-
-Run SteamCMD
-
-```sh
-./steamcmd.sh
-```
-{: .nolineno }
-
-Set your app directory, where `<APP_PATH>` is where you want to save the game. In this case, it'll be in your Wine prefix's (`$WINEPREFIX`) `steamapps` directory (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/`)
-
-```sh
-force_install_dir <APP_PATH>
-```
-{: .nolineno }
-
-> If you are running SteamCMD from your path env or installed it as a package, it will return an error if you try to use `.` as a directory. A workaround for this is to use the absolute path to the current directory.
-{: .prompt-warning }
-
-When downloading/downloaded via SteamCMD:
-Downloaded `appmanifest` is in `<APP_PATH>/steamapps/` directory.
-Downloaded `appmanifest` should be [moved] in `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/` directory.
-`<APP_PATH>/steamapps/` can be deleted AFTER its `appmanifest` has been moved to `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/` directory.
-`<APP_PATH>/!steamapps/` contains everything [that should be] in the game's source folder (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<GAME_NAME>/`)
-
-Login to your Steam account, where `<STEAM_USERNAME>` is your Steam username (or `anonymous` if you don't want to login, though you won't be able to download your purchased games)
-
-```sh
-login <STEAM_USERNAME>
-```
-{: .nolineno }
-
-> Valve recommends setting the install directory **BEFORE** logging in
-{: .prompt-tip }
-
-Install or update the app using the `app_update` command, where `<APP_ID>` is the app's [Steam Application ID](https://developer.valvesoftware.com/wiki/Steam_Application_IDs "Steam Application IDs"). If you don't know the Steam Application ID for the server, tool, or game you want to download, use [steamdb.info](https://steamdb.info) to locate it.
-
-```sh
-app_update <APP_ID> [-beta <BETA_NAME>] [-betapassword <BETA_PASSWORD>] [validate]
-```
-{: .nolineno }
-
-> - [Dedicated server list](https://developer.valvesoftware.com/wiki/Dedicated_Servers_List "Dedicated Servers List")
-> - Use the `-beta <BETA_NAME>` option to download a beta branch
-> - For beta branches protected by a password, include the `-betapassword <BETA_PASSWORD>` option to be able to download from them
-> - Add `validate` to the command to check all the server files to make sure they match SteamCMD files; this command is useful if you think files may be missing or corrupted. However, this will overwrite any changed files to the server default; any files that aren't part of the default installation will not be affected. Therefore, it is recommended you use this command only on initial installation and if there are server issues.
-{: .prompt-tip }
-
-Log off Steam servers once finished
-
-```sh
-quit
-```
-{: .nolineno }
-
-If you want to use a script
-
-```plaintext
-@ShutdownOnFailedCommand 1
-@NoPromptForPassword 1
-@sSteamCmdForcePlatformType windows
-
-force_install_dir <APP_PATH>
-login <STEAM_USERNAME> <STEAM_PASSWORD>
-
-// Use this instead if you don't want to login
-// login anonymous
-
-app_update <APP_ID> validate
-quit
-```
-{: file="install_game.txt" }
-
-Run script with the `+runscript` option, where `<SCRIPT_NAME>` is your script's filename (e.g. `install_game.txt`)
-
-```sh
-./steamcmd.sh +runscript <SCRIPT_NAME>
-```
-{: .nolineno }
-
-> - If you get an error like `Failed to load script file '<SCRIPT_NAME>'`, try providing an absolute path, e.g. `/absolute/path/to/<SCRIPT_NAME>`
-> - If you get an error like `Failed to install app '<APP_ID>' (No subscription)`, the game/server you are trying to download either requires a login or that you have purchased the game. You will therefore have to log in with a Steam username and password (i.e. use `login <STEAM_USERNAME> <STEAM_PASSWORD>` instead of `login anonymous`).
-{: .prompt-info }
-
-The aforementioned script is functionally the same as:
-
-```sh
-./steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir <APP_PATH> +login <STEAM_USERNAME> +app_update <APP_ID> validate +quit
-```
-{: .nolineno }
-
-For the sake of convenience, I've written a bash function to download a Steam app into a given `WINEPREFIX`'s Steam directory. You can find this function at [Automate Steam Downloads](2025-03-19-play-windows-games.md#automate-steam-downloads).
-
-#### Game Controller
-> Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
-{: .prompt-info }
-
-List of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
-- Xbox Wireless Controller with Bluetooth (Model 1708)
-- Xbox Wireless Controller Series S
-- Xbox Wireless Controller Series X
-- Xbox Elite Wireless Controller Series 2
-- Xbox Adaptive Controller
-- PlayStation DualShock 4 Wireless Controller
-- PlayStation 5 DualSense Wireless Controller
-- PlayStation 5 DualSense Edge Wireless Controller
-
-##### Prevent "Home" button from opening Launchpad
-> This is particularly useful when using Steam's Big Picture mode
-{: .prompt-tip }
-
-Disable "Home" button
-
-```sh
-defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
-```
-{: .nolineno }
-
-Restart the Dock process to apply changes
-
-```sh
-killall Dock
-```
-{: .nolineno }
-
-> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
-{: .prompt-tip }
-
-##### Disable "Share" button
-Disable "Share" button
-
-```sh
-defaults write com.apple.GameController bluetoothPrefsShareLongPressSystemGestureMode -integer -1
-```
-{: .nolineno }
-
-Restart the Dock process to apply changes
-
-```sh
-killall Dock
-```
-{: .nolineno }
-
-> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
-{: .prompt-tip }
-
-#### Memory
-##### Dynamically allocate VRAM
-Allocate memory for VRAM, where `DESIRED_VRAM_MB` is an integer number of how many MB of VRAM you want to allocate.[^vram]
-
-```sh
-sudo sysctl iogpu.wired_limit_mb=DESIRED_VRAM_MB
-```
-{: .nolineno }
-
-To set it permanently:
-
-```sh
-sudo touch /etc/sysctl.conf
-sudo chown root:wheel /etc/sysctl.conf
-sudo chmod 0644 /etc/sysctl.conf
-echo "iogpu.wired_limit_mb=DESIRED_VRAM_MB" >> /etc/sysctl.conf
-```
-
-##### Set video memory size
-Sometimes Game Porting Toolkit and your game not properly communicating with each other about how much Video RAM your system has (more than likely, GPTk is not getting the correct value from your system).[^vidmem]
-
-You may need this setting if you have the following symptoms:
-- Strange rendering
-- Crash/Freeze on launch
-- A log file that says something like:  
-```plaintext
-fixme:d3d_texture:texture_init Failed to create surface 0x35c4fc68, hr 0x8876017c
-err:d3d:resource_init Out of adapter memory
-```
-
-Click the Apple icon in the upper-left corner and select **About This Mac**
-
-![mbp_ram.png](../assets/obsidian/mbp_ram.png)
-
-Note the value next to `Memory` (e.g. `64 GB`), multiply it by either `2` or `3`, then divide by either `3`  or `4`
-
-`64 * 2 / 3 = 128 / 3 ≈ 42`
-
-Round the result down if it's not a whole number.
-
-Your final answer is the approximate amount of VRAM you have. This is an approximation since MacBook Pro M-series uses unified memory (i.e. memory is shared between CPU and GPU), so there's only RAM, not VRAM. Technically the amount of VRAM you have is equal to the amount of RAM, but in practice it's less since some of that RAM is reserved by the system to prevent instability.
-
-Switch architecture
-
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
-
-Open `regedit`
-
-```sh
-wine regedit
-```
-{: .nolineno }
-
-Navigate to `HKEY_LOCAL_MACHINE\Software\Wine`
-
-If `Direct3D` isn't already there, right-click `Wine`and navigate to <kbd>New</kbd>
-
-Click **Key**
-
-Input `Direct3D`, then press <kbd>Enter</kbd> to save its name
-
-> To rename a key, right-click it and click **Rename**
-{: .prompt-tip }
-
-Double-click `Direct3D` to open
-
-Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space)
-
-Navigate to **New** and click **String Value**
-
-Input `VideoMemorySize`, then press <kbd>Enter</kbd> to save its name
-
-> To rename a key, right-click it and click **Rename**
-{: .prompt-tip }
-
-Double-click `VideoMemorySize` to set its value
-
-![regedit_videomemorysize.png](../assets/obsidian/regedit_videomemorysize.png)
-
-Under `Value data:`, enter `16384` (i.e. 16.384 GB), click **OK**, then close `regedit`
-
-Experiment with the value (in MB) of `VideoMemorySize`. Some users say `4096` is better, etc. Might need to do some trial and error.
-
-##### 32bit games crash after 4GB RAM
-```sh
-export WINE_LARGE_ADDRESS_AWARE=1
-```
-{: .nolineno }
-
-#### Wine
-`HKEY_CURRENT_USER\Software\Wine\Mac Driver`[^wine2]
-
-##### Disable vertical sync (vsync)
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'AllowVerticalSync' /t REG_SZ /d 'N' /f
-```
-{: .nolineno }
-
-##### Prevent Wine from creating filetype associations
-This method prevents the creation of filetype associations but retains the creation of XDG .desktop files (that you might see e.g. in menus).
-
-```sh
-wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAssociations" /v 'Enable' /d 'N'
-```
-{: .nolineno }
-
-##### Allow Wine to run
-After downloading binary files online (e.g. Wine builds, etc.), you won't be able to run it immediately since macOS's blocks it as a safety feature. You need to allow it to run. I'd do this by going to **System Settings** > **Privacy & Security**, then scrolling down to **Security** section, and manually clicking **Allow** for each Wine-related file after running some `wine` command.
-
-This can get pretty tedious since you'd need to manually allow every single file. So, instead, you can run a one-liner, where `PATH_TO_WINE_DIRECTORY` is the path to your Wine directory:
-
-```sh
-xattr -dr com.apple.quarantine PATH_TO_WINE_DIRECTORY
-```
-{: .nolineno }
-
-So, for example, if you want to do it for your DXMT Wine 10.19 build in `"$HOME/Wine/dxmt/10.19"`, it'd look like:
-
-```sh
-xattr -dr com.apple.quarantine "$HOME/Wine/dxmt/10.19"
-```
-{: .nolineno }
-
-##### Restore original DLL files
-```sh
-wineboot -u
-```
-{: .nolineno }
-
-#### Pixelated and limited display resolution
-Enable Retina aka High Resolution mode
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
-```
-{: .nolineno }
-
-> Some games will not run with Retina mode enabled; to disable:
-> ```sh
-> wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'N' /f
-> ```
-> {: .nolineno }
-{: .prompt-tip }
-
-Check setting
-
-```sh
-wine reg query 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode'
-```
-{: .nolineno }
-
-#### Audio
-TODO: REWRITE THIS SECTION.
-https://www.reddit.com/r/farcry3/comments/2plbu5/can_someone_help_me_with_this_in_game_no_sound
-
-##### Some games have messed up and/or crackling audio
-**part 1: audio crackling (far cry 3) -- sounds like it's coming out a Geiger counter**
-Press <kbd>CMD</kbd> + <kbd>Space</kbd> to open Spotlight Search and type in "MIDI", you should see the app Audio MIDI Setup.
-
-In this app you select your speaker on the left and change the Output with a click on the drop down menu at the right side. Change it to 96,000Hz (default should be set to 44,000hz I think)
-https://www.reddit.com/r/macgaming/comments/1jcw1w7/comment/mi81abl
-
-##### Some games don't have sound
-Some games stopped having any sound at some point while others had no issue. Games that I tried that had this problem include Cities Skylines, Starcraft 2 and Heroes of the Storm.
-
-The solution: It seems that the problem was caused from the extra audio drivers installed as plugin by Microsoft Teams. After removing the MSTeams audio driver folder and restarted the problem disappeared.
-
-macOS often restricts Terminal access to certain system-related directories, which can cause the "Operation not permitted" error when trying to delete certain files (like this driver). To grant Terminal full disk access:
-
-Go to **System Preferences** > **Privacy & Security** > **Full Disk Access**
-
-Enable iTerm/Terminal (if it's not already listed, click the Plus (**+**) button to add an application and choose Terminal / iTerm).
-
-```sh
-sudo rm -rf /Library/Audio/Plug-Ins/HAL/MSTeamsAudioDevice.driver
-```
-{: .nolineno }
-
-I've seen similar reports for other games that also had sound problems and after users removed any extra audio drivers, sound started working again. Looking into this problem I saw similar reports about Zoom audio drivers as well.
-
-By the way removing the Teams audio drivers does not prevent Teams from working normally, So I have no idea what these drivers do. They are an optional module during Teams setup. 
-
-https://www.reddit.com/r/macgaming/comments/vrzuvl/mac_mini_m1_some_games_dont_have_sound_solved
-
-**Alternative**
-Wine DLL Override: `export WINEDLLOVERRIDES="xaudio2_7=n,b"`
-
-https://www.reddit.com/r/macgaming/comments/1ltcbcw/far_cry_4_crossover_2501_macbook_pro_m4_pro
-
-#### Fonts
-##### Unreadable or missing fonts
-You may not have any fonts installed. To easily link all of the system fonts so they are accessible from wine:
-
-```sh
-cd "$WINEPREFIX/drive_c/windows/Fonts" && for i in /usr/share/fonts/**/*.{ttf,otf}; do ln -s "$i"; done
-```
-{: .nolineno }
-
-Wine uses FreeType to render fonts, and FreeType's defaults changed a few releases ago. Try using the following environment variable when running programs in Wine:
-
-```sh
-FREETYPE_PROPERTIES="truetype:interpreter-version=35"
-```
-{: .nolineno }
-
-Another possibility is to [install Microsoft's TrueType fonts](https://wiki.archlinux.org/title/Microsoft_fonts#Installation "Microsoft fonts") into your wine prefix. If this does not help, try running `winetricks corefonts` first, then `winetricks allfonts` as a last resort.
-
-After running such programs, kill all Wine servers and run `winecfg`. Fonts should be legible now.
-
-##### Smeared fonts
-If the fonts look somehow smeared, run the following command to change a setting in the Wine registry.
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N'
-```
-{: .nolineno }
-
-#### Keyboard
-##### Fix keyboard shortcuts
-Wine by default maps the keys differently than native macOS applications. It's possible to change some of the keyboard mappings.
-
-Map <kbd>Option</kbd> as <kbd>Alt</kbd>:
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftOptionIsAlt' /t REG_SZ /d 'Y'
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightOptionIsAlt' /t REG_SZ /d 'Y'
-```
-{: .nolineno }
-
-Map <kbd>Command</kbd> as <kbd>CTRL</kbd>:
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftCommandIsCtrl' /t REG_SZ /d 'Y'
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightCommandIsCtrl' /t REG_SZ /d 'Y'
-```
-{: .nolineno }
-
-##### Keyboard input not working
-This could be caused by the window manager not switching focus.
-
-###### Solution 1: Winetricks
-```sh
-winetricks usetakefocus=n
-```
-{: .nolineno }
-
-###### Solution 2: Regedit
-Toggle all the **Window settings**, click **Apply**, then change them back.
-
-If that does not work, go to the **Graphics** tab of `winecfg`, disable the **Allow the window manager...** options, or set windowed mode with **Emulate a virtual desktop**.
-
-If the keyboard still does not work after unfocusing the application, try editing the registry
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v 'UseTakeFocus' /d 'N' /f
-```
-{: .nolineno }
-
-#### Miscellaneous
-##### "Symbol not found" when setting game mode
-You may get this error if setting `game-mode` (e.g. `/Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl game-mode set auto`)
-
-```plaintext
-dyld[52755]: Symbol not found: _$s2os6LoggerV10GamePolicyE4toolACvau
-  Referenced from: <EF9CA6F2-E5BD-35B1-ACC3-E45E7CBB0AD4> /Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl
-  Expected in:     <7962FD29-508F-3668-87F7-68AC93844B60> /System/Library/PrivateFrameworks/GamePolicy.framework/Versions/A/GamePolicy
-Abort trap: 6
-```
-
-This may be due to a version mismatch (especially if you recently updated your OS without updating XCode). To fix, update XCode and then try running `game-mode` again.
-
-> `gamepolicyctl` tool may have been compiled against an older version of `GamePolicy.framework` than the one installed on your system. This often happens when you have mismatched Xcode and macOS versions.
-
-##### DXVK runs out of memory and crashes
-With the following repeated in the terminal
-
-```plaintext
-[mvk-warn] VK_ERROR_OUT_OF_POOL_MEMORY: VkDescriptorPool exhausted pool of (x) descriptors. Allocating descriptor dynamically.
-```
-
-You should allocate enough memory [in the pool] by creating multiple pools.
-
-`VK_ERROR_OUT_OF_POOL_MEMORY`:
-- Used to determine when to allocate a new descriptor pool.
-- Returned if allocation fails due to no more space in the descriptor pool (and not because of system or device memory exhaustion).
-
-##### Applications fail to start
-Some older games and applications assume that the current working directory is the same as that which the executable is in. Launching these executables from other locations will prevent them from starting correctly. Use `cd path_containing_exe` before invoking Wine to rule this possibility out.
-
 ### Tips + Tricks
 #### Launch games as an app
-##### Method 0: App Bundle
-TODO: How to make custom Wine as app bundle so that I can set game mode. (since `game-mode` cmd is currently broken so I can't set it that way.) this is bc macbook pro automatically enables game mode if it detects a game running. i think it determines it from `plist` in app bundle or sumn related. since i'm running via wine, i have to make one from scratch so mac recognizes it as a game and auto enables game mode for me. use bookmarked tut.
+Executing scripts via CLI can be tedious sometimes, so it's nice to launch it as an app instead. That way it's just a click away!
+
+![steam_app_icons.png](../assets/obsidian/steam_app_icons.png)
+_My custom apps for Windows version of Steam that uses DXMT and DXVK respectively_
 
 ##### Method 1: Automator
 You can use the Automator app to create a new Application that will run Steam when you click on its icon (similar to how Applications work)
 
 ![automator.png](../assets/obsidian/automator.png)
 
-Open Automator
+1. Open **Automator**
 
-Select  **Application** and click **Choose**
+2. Select  **Application** and click **Choose**
 
-In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
+3. In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
 
-Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
+4. Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
 
-```sh
-#!/bin/bash
+	```sh
+	#!/bin/bash
+	
+	arch -x86_64 /bin/bash
+	
+	export PATH="/usr/local/bin:${PATH}"
+	export D3DM_SUPPORT_DXR=1
+	export ROSETTA_ADVERTISE_AVX=1
+	export WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b"
+	export WINEESYNC=1
+	export WINEDEBUG=-all
+	export WINEPREFIX="$HOME/Games"
+	
+	wine "C:\Program Files (x86)\Steam\steam.exe" > /dev/null 2>&1 &
+	```
 
-arch -x86_64 /bin/bash
+5. Once you save this automated application (file format  **Application**, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
 
-export PATH="/usr/local/bin:${PATH}"
-export D3DM_SUPPORT_DXR=1
-export ROSETTA_ADVERTISE_AVX=1
-export WINEDLLOVERRIDES="dinput8=n,b;d3d11,d3d10,d3d12,dxgi=b"
-export WINEESYNC=1
-export WINEDEBUG=-all
-export WINEPREFIX="$HOME/Games"
+6. Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
 
-wine "C:\Program Files (x86)\Steam\steam.exe" > /dev/null 2>&1 &
-```
+	> This is the app icon I use for Steam (Windows); click on the image to download it
+	> 
+	> ![steam_icon.webp](../assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
+	> 
+	> You'll need to convert it to Apple's `.icns` file format
+	{: .prompt-tip }
 
-Once you save this automated application (file format  **Application**, I have it saved as `Steam (Windows)`, though you can name it anything), you'll want to set a custom icon to make it discernable
+7. Find the application you saved earlier, right-click it, then click **Get Info**
 
-Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
+8. Click the default icon at the top (it'll be outlined when you do), right above the **Add Tags...** textbox
 
-This is the app icon I use for Steam (Windows); click on the image to download it
-
-![steam_icon.webp](../assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
-
-I've also converted it to Apple's `.icns` file format (it isn't displaying due to the file format), so you won't have to manually convert from `.webp` to `.icns`
-![steam_icon.icns](../assets/obsidian/steam_icon.icns.md)
-
-Find the application you saved earlier, right-click it, then click **Get Info**
-
-Click the default icon at the top (it'll be outlined when you do), right above the **Add Tags...** textbox
-
-Press <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to paste the image you just copied, and you'll see the icon update accordingly
+9. Press <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to paste the image you just copied, and you'll see the icon update accordingly
 
 You can now run the Windows version of Steam anytime you click the app icon! This is much more user-friendly than running commands in the terminal each time.
 
-##### Method 2: Shortcuts
-// TODO
-
-##### Method 3: AppleScript
+##### Method 2: AppleScript
 > Taken from [David Baumgold's tutorial on installing Wine on Mac](https://www.davidbaumgold.com/tutorials/wine-mac). I haven't used this tutorial myself (I prefer my Bash scripts and Automator application), but I'm including this in case it's helpful to anyone else.
 {: .prompt-info }
 
-Open `Script Editor` (in the `/Applications/Utilities` directory)
+1. Open **Script Editor** (in the `/Applications/Utilities` directory)
 
-You should see a window with a large area you can type in near the top: this is where you write your AppleScript. In that area, type the following text:
+2. Enter the following in the window
 
-```plaintext
-tell application "Terminal"
-    do script "WINEPREFIX=~/Games wine $PATH_TO_PROGRAM.exe"
-end tell
-```
+	```plaintext
+	tell application "Terminal"
+	    do script "WINEPREFIX=~/Games wine $PATH_TO_PROGRAM.exe"
+	end tell
+	```
 
-Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable.
+3. Replace `$PATH_TO_PROGRAM` with the path from the Program Files directory to your program executable, and modify `$WINEPREFIX` as needed
 
-Press **Compile** button at the top of the window. The text should become colored to indicate that Script Editor understands what you wrote. You can also try pressing the Run button to run your script: it should open the Windows program successfully.
+4. Press **Compile** button at the top of the window; if you want to run your script, press the **Run** button
 
-Save your script; Select **File Format: Application** in the save options, and leave **Startup Screen** unchecked.
+5. Select **File Format: Application** in the save options, and leave **Startup Screen** unchecked to save your script
 
-Open up the Finder, go to where you saved your script, and drag that file to your Dock. It should stay there, just like a real application!
+6. Open up the Finder, go to where you saved your script, and drag that file to your Dock
+
+##### Method 3: Shortcuts
+// TODO
+
+##### Method 4: App Bundle
+TODO: How to make custom Wine as app bundle so that I can set game mode. (since `game-mode` cmd is currently broken so I can't set it that way.) this is bc macbook pro automatically enables game mode if it detects a game running. i think it determines it from `plist` in app bundle or sumn related. since i'm running via wine, i have to make one from scratch so mac recognizes it as a game and auto enables game mode for me. use bookmarked tut.
 
 #### Folder shortcut
 Continue reading if you want easy, quick, and convenient access to both your Mac **AND** Windows versions of Steam
@@ -2039,69 +872,57 @@ Continue reading if you want easy, quick, and convenient access to both your Mac
 ![steam_folder.png](../assets/obsidian/steam_folder.png)
 ![steam_folder2.jpg](../assets/obsidian/steam_folder2.jpg)
 
-Complete all steps in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
+> Complete all steps in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
+{: .prompt-important }
 
-Change directory to `Applications`
+1. Change directory to `Applications`
 
-```sh
-cd /Applications
-```
-{: .nolineno }
+	```sh
+	cd /Applications
+	```
+	{: .nolineno }
 
-Create a new folder in `Applications` titled `Steam`, either manually (right-click, press **New Folder**, then enter `Steam` as its name) or via terminal
+2. Create a new folder in `Applications` titled `Steam`, either manually (right-click, press **New Folder**, then enter `Steam` as its name) or via terminal
 
-```sh
-mkdir -p Steam
-```
-{: .nolineno }
+	```sh
+	mkdir -p Steam
+	```
+	{: .nolineno }
 
-> Including `-p` flag means that it'll create the new Steam folder **if and only if** it doesn't already exist
-> This is to avoid accidentally overwriting it, in case you already have a folder titled `Steam` in that location (i.e. `/Applications/Steam`)
-{: .prompt-tip }
-
-Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
+3. Move `Steam.app` and `Steam (Windows).app` (or whatever you named it in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator) section) into your new `Steam` folder (assuming you have both `.app`s in your `/Applications` directory), either manually (drag each `.app` into `Steam` folder) **OR** via terminal
  
-```sh
-mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
-```
-{: .nolineno }
+	```sh
+	mv -i Steam.app Steam && mv -i "Steam (Windows).app" Steam
+	```
+	{: .nolineno }
 
-> Including `-i` (interactive) flag means that you will be asked a confirmation if you already have a file with the same name in the same location
-> This is to avoid overwriting in case you already have `Steam.app` and/or `Steam (Windows).app` in that location (i.e. `/Applications/Steam`)
-{: .prompt-tip }
+4. Find and download a folder icon you like (preferably `.icns` file format)
 
-Find and download a folder icon you like (preferably `.icns` file format)
+	> This is the folder icon I use
+	> <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
+	{: .prompt-tip }
 
-> This is the folder icon I use
-> <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
-> 
-> Alternatively, you can download it directly here
-> ![steam_folder.icns](../assets/obsidian/steam_folder.icns.md)
-{: .prompt-tip }
+4. Once downloaded, select the folder icon and copy it, either with <kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>), or you can manually right-click the icon and click **Copy**
 
-Once downloaded, select the folder icon and copy it
-	- <kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>)
-	- Right-click the icon and click **Copy**
+5. Back in `/Applications`, right-click `Steam` folder and click **Get Info**
 
-Back in `/Applications`, right-click `Steam` folder and click **Get Info**
+	![steam_get_info.png](../assets/obsidian/steam_get_info.png)
 
-![steam_get_info.png](../assets/obsidian/steam_get_info.png)
+6. Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
 
-Click on the icon in the upper-left corner (it should be outlined in your system's accent color; in my case it's purple)
+	![steam_folder_info.png](../assets/obsidian/steam_folder_info.png)
 
-![steam_folder_info.png](../assets/obsidian/steam_folder_info.png)
+7. Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
 
-Paste the folder icon with <kbd>⌘</kbd> + <kbd>V</kbd> (i.e. <kbd>CMD</kbd> + <kbd>V</kbd>) to update `Steam` folder's icon accordingly
+8. Now that you have a custom `Steam` folder with both Mac and Windows versions of Steam (i.e. `Steam.app` and `Steam (Windows).app`), drag the folder into the dock
 
-Now that you have a custom `Steam` folder with both Mac and Windows versions of Steam (i.e. `Steam.app` and `Steam (Windows).app`), drag the folder into the dock
+9. To adjust the appearance, right-click the `Steam` folder icon in the dock (that you just dragged)
 
-To adjust the appearance, right-click the `Steam` folder icon in the dock (that you just dragged)
-
-Make the following selections
+10. Make the following selections
 	- Under **Display as**, select **Folder**
 	- Under **View content as**, select **Grid**
 
-![folder_options.png](../assets/obsidian/folder_options.png)
+	![folder_options.png](../assets/obsidian/folder_options.png)
 
 You now have a convenient way to access both versions of Steam via your dock! If you open the `Steam` folder and click on either of the `.app`s, it should launch as expected
 
@@ -2118,19 +939,16 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 
 {% tabs game-mode %}
     ---TAB: Enable
-        Enable game mode
         ```sh
         /Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl game-mode set on
         ```
         {: .nolineno }
     ---TAB: Disable
-        Disable game mode
         ```sh
         /Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl game-mode set off
         ```
         {: .nolineno }
     ---TAB: Auto
-        Automatically set game mode
         ```sh
         /Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl game-mode set auto
         ```
@@ -2138,34 +956,29 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 {% endtabs %}
 
 #### Adjust DPI scaling level
-Launch Steam with DPI scaling forced to 100%
+Launch Steam with scaling forced to 100% (96 DPI = 100% scaling); you can also use whatever DPI value you prefer
 
 ```sh
 wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 96 /f
 ```
 {: .nolineno }
 
-> 96 DPI = 100% scaling
-{: .prompt-info }
-
 #### Check prefix architecture
-##### Method 1: Environment Variable
-Prints the value of `$WINEARCH`, which should be either `win64` or `win32`
+You can manually print the value of `$WINEARCH` (which should be either `win64` or `win32`)
 
 ```sh
 echo "$WINEARCH"
 ```
 {: .nolineno }
 
-##### Method 2: System Registry
-The command below reads the system registry of `$WINEPREFIX` and returns `#arch=win32` or `#arch=win64` depending on the architecture type.
+You can also read the system registry of `$WINEPREFIX`; depending on the architecture type, it'll output `#arch=win32` or `#arch=win64`
 
 ```sh
 reg_arch="$(grep '#arch' $WINEPREFIX/system.reg)" && echo "${reg_arch#'#arch='}" || echo "Unknown"
 ```
 {: .nolineno }
 
-Prints value after `#arch=` (i.e. `win32` or `win64`) or "Unknown" if `#arch` is not in `system.reg`
+This should print value after `#arch=` (i.e. `win32` or `win64`) or "Unknown" if `#arch` is not in `system.reg`
 
 ```plaintext
 prefix="#arch="
@@ -2313,15 +1126,14 @@ Palworld-Win64-Shipping.exe
 ```
 
 #### Restrict Wine processes to subset of available cores
-Here's a hack that allows you to restrict Wine processes to a subset of the available cores.[^restrictwine]
+Pass a CPU mask through the `WINECPUMASK` environment variable[^restrictwine]
 
-You can pass a CPU mask through the `WINECPUMASK` environment variable:
+```sh
+export WINECPUMASK=0xff
+```
+{: .nolineno }
 
-`WINECPUMASK=0xff wine ... `
-
-This will tie Wine processes (including `wineserver`) to the first 8 cores. It will also limit the number of reported cores to 8.
-
-To get a performance gain on Ryzen the mask should specify the cores of one core complex (CCX). Here's little bash script that computes the mask for the first CCX:
+This will tie Wine processes (including `wineserver`) to the first 8 cores and limit the number of reported cores to 8. You may also get a performance gain if the mask specifies the cores of one core complex (CCX). E.g. this Bash script computes the mask for the first CCX:
 
 ```bash
 #!/usr/bin/env bash
@@ -2335,7 +1147,7 @@ echo -n "first CCX mask: "
 printf "0x%x\n" $CCX_MASK
 ```
 
-With this patch The Forest goes from 23 to 40 fps on a 16 core Ryzen CPU. It would be interesting to see if this also makes difference for the games mentioned here and in duplicate reports.
+With this patch The Forest goes from 23 to 40 fps on a 16 core Ryzen CPU
 
 #### Update MoltenVK
 > [MoltenVK](https://github.com/KhronosGroup/MoltenVK) is a layered implementation of [Vulkan](https://www.khronos.org/vulkan) graphics and compute functionality, built on Apple's [Metal](https://developer.apple.com/metal) graphics and compute framework...
@@ -2345,51 +1157,82 @@ With this patch The Forest goes from 23 to 40 fps on a 16 core Ryzen CPU. It wou
 
 MoltenVK is a software library which allows Vulkan applications to run on top of Metal on Apple's macOS, iOS, and tvOS operating systems.
 
+##### Update MoltenVK in CrossOver
 Assuming you already have CrossOver, it is possible to add its support for Windows Vulkan games (atop MoltenVK) to GPTk[^gptkvulk]. I also used this method to update MoltenVK for DXVK Wine build.
 
 > `$(brew --prefix game-porting-toolkit)` is equivalent to `/usr/local/opt/game-porting-toolkit`, which redirects to `/usr/local/Cellar/game-porting-toolkit/1.1`
 {: .prompt-info }
 
-Copy `x86_64-windows/vulkan-1.dll`{: .filepath} to GPTk
+1. Copy `x86_64-windows/vulkan-1.dll`{: .filepath} to GPTk
 
-```sh
-cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/x86_64-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/x86_64-windows
-```
-{: .nolineno }
+	```sh
+	cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/x86_64-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/x86_64-windows
+	```
+	{: .nolineno }
 
-Optionally copy `i386-windows/vulkan-1.dll`{: .filepath} to GPTk for 32-bit support
+2. Copy `i386-windows/vulkan-1.dll`{: .filepath} to GPTk for 32-bit support (**OPTIONAL**)
 
-```sh
-cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/i386-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/i386-windows
-```
-{: .nolineno }
+	```sh
+	cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib/wine/i386-windows/vulkan-1.dll $(brew --prefix game-porting-toolkit)/lib/wine/i386-windows
+	```
+	{: .nolineno }
 
-Copy `libMoltenVK.dylib`{: .filepath} to GPTk
+3. Copy `libMoltenVK.dylib`{: .filepath} to GPTk
 
-```sh
-cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/libMoltenVK.dylib $(brew --prefix game-porting-toolkit)/lib/external
-```
-{: .nolineno }
+	```sh
+	cp -i /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/libMoltenVK.dylib $(brew --prefix game-porting-toolkit)/lib/external
+	```
+	{: .nolineno }
 
-Set these environment variables
+4. Set these environment variables
 
-```sh
-CX_APPLEGPTK_LIBD3DSHARED_PATH="$(brew --prefix game-porting-toolkit)/lib/external/libd3dshared.dylib"
-WINEDLLPATH_PREPEND="$(brew --prefix game-porting-toolkit)/lib/wine"
-WINEDLLOVERRIDES="dxgi,d3d9,d3d10core,d3d11=b;mf,mfplat,mfreadwrite=n"
-```
-{: .nolineno }
+	```sh
+	CX_APPLEGPTK_LIBD3DSHARED_PATH="$(brew --prefix game-porting-toolkit)/lib/external/libd3dshared.dylib"
+	WINEDLLPATH_PREPEND="$(brew --prefix game-porting-toolkit)/lib/wine"
+	WINEDLLOVERRIDES="dxgi,d3d9,d3d10core,d3d11=b;mf,mfplat,mfreadwrite=n"
+	```
+	{: .nolineno }
 
 > It should be possible to source these files from other sources of Wine-Crossover, such as those provided by the Heroic Games Launcher (assuming you have not already modified it as described in the previous section. If you have, you should be able to download another version from Heroic.)
+> 
+> [According to DXVK](https://github.com/doitsujin/dxvk/issues/1788):
+> - `d3dcompiler_47`{: .filepath} is for DX12
+> - `d3dcompiler_43`{: .filepath} is for DX11
 {: .prompt-info }
 
-[According to DXVK](https://github.com/doitsujin/dxvk/issues/1788):
-- `d3dcompiler_47`{: .filepath} is for DX12
-- `d3dcompiler_43`{: .filepath} is for DX11
+##### Update MoltenVK in Wine
+1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
+
+2. Open terminal and set variables. E.g. for DXMT Wine 10.18:
+
+	```sh
+	WINE_LIB="$HOME/Wine/dxmt/10.18/lib"
+	MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
+	```
+	{: .nolineno }
+
+3. Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
+
+	```sh
+	mv -i "$WINE_LIB/libMoltenVK.dylib" "$WINE_LIB/libMoltenVK_orig.dylib"
+	```
+	{: .nolineno }
+
+4. Move new MoltenVK dylib into Wine build's lib
+
+	```sh
+	mv -i "$MVK_DYLIB" "$WINE_LIB"
+	```
+	{: .nolineno }
+
+5. Execute this command to avoid running into issues when trying to use `wine` command
+
+	```sh
+	xattr -dr com.apple.quarantine "$WINEPATH"
+	```
+	{: .nolineno }
 
 ### Scripts
-#### Shell Shortcut
-
 #### Bash Functions for Gaming
 Save this script (i.e. `gaming_funcs.sh`{: .filepath}), then add to your shell startup file. You can also find [this script in my GitHub configs repo](https://github.com/lynkos/configs/blob/main/Scripts/gaming_funcs.sh), as this version may or may not be outdated.
 
@@ -3506,8 +2349,7 @@ dlg() {
 {: file="$HOME/Scripts/gaming_funcs.sh" }
 
 #### MetalFX Integration
-Enable:
-
+##### Enable MetalFX
 ```sh
 #!/usr/bin/env bash
 
@@ -3547,8 +2389,7 @@ echo "MetalFX Integration: ENABLED"
 ```
 {: file="$HOME/Scripts/enable_metalfx.sh" }
 
-Disable:
-
+##### Disable MetalFX
 ```sh
 #!/usr/bin/env bash
 
@@ -3602,59 +2443,1183 @@ MTL_HUD_ENABLED=1 WINEESYNC=1 WINEPREFIX="$1" `brew --prefix game-porting-toolki
 ```
 {: file="/usr/local/bin/gameportingtoolkit" }
 
+#### Shell Shortcut
+// TODO
+
+### Troubleshooting
+#### Game Porting Toolkit
+This section is taken directly from different Game Porting Toolkit's `README.md` files, hence the blockquotes.
+
+##### Game won't run and crashes with an invalid instruction or complains about lack of certain instruction extensions
+> Invalid instruction crashes are sometimes caused when the Rosetta 2 instruction translation layer is unable to translate CPU instructions. You may be able to recompile a version of your game without certain instructions in order to evaluate its potential on Apple Silicon with the Game Porting Toolkit when you hit this error. You may also be able to use the `ROSETTA_ADVERTISE_AVX` environment variable to ensure your game recognizes available translation instruction extensions. When porting your code natively to Apple Silicon there are a variety or NEON and ARM instructions which offer high-performance replacements for AVX / AVX2, BMI, F16c and other less common instruction set extensions.
+
+##### Game won't run because its anti-cheat or DRM software is incompatible with Wine translation
+> You may be able to rebuild a custom version of your game in your Windows development environment with anti-cheat or DRM disabled for your own evaluation purposes. When porting your code natively to Apple Silicon and macOS, contact your anti-cheat or DRM provider—most have native Apple Silicon solutions for your native build, or you may find that existing macOS solutions like Hardened Runtime, Application Sandbox, and Application Attestation prevent forms of cheating or tampering that concern you.
+
+##### Game won’t run because it thinks the version of Windows is too old
+> First, make sure you have selected an appropriate Windows version in `winecfg`. This affects the major and minor Windows versions that are reported to your game.
+>
+> If your game checks for a specific minimum or an exact build version, you can alter this value by changing the `CurrentBuild` and `CurrentBuildNumber` values of the `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT` registry key. You must perform this step _after_ selecting a Windows version in `winecfg`. Run the following commands, replacing `«BUILD_NUMBER»` with the specific build number your game checks for; if you're unsure, build `19042` should work for most games:
+>
+> ```sh
+> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
+> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
+> /usr/local/bin/wineserver -k
+> ```
+> {: .nolineno }
+>
+> The last command will shut down the virtual Windows environment to ensure that all components agree on the Windows version the next time you launch your game.
+
+##### Game won’t run because it requires Mono, .NET, or the MSVCRT runtime
+> The evaluation environment for Windows games does not pre-install these runtime support packages. If your game makes use of one of these packages, consider searching for and downloading appropriate installers (`.exe` or `.msi`) and installing them to your evaluation environment. Additional runtime installers can be run on your environment by just launching the installer and following its installation instructions:
+>
+> ```sh
+> wine <some-installer.exe>
+> ```
+> {: .nolineno }
+>
+> `.MSI` packages can be installed by launching the Windows uninstaller application and choosing to install a downloaded `.msi` package:
+>
+> ```sh
+> wine uninstaller
+> ```
+> {: .nolineno }
+
+##### Game won’t boot anymore despite no changes
+Try clearing the shader cache
+
+```sh
+cd $(getconf DARWIN_USER_CACHE_DIR)/d3dm
+cd «GAME_NAME»
+rm -r shaders.cache
+```
+{: .nolineno }
+
+##### Enable experimental MetalFX integration
+> This **ONLY** works for **macOS 16 AND Game Porting Toolkit 3.0**!
+> 
+> Refer to [Version 3.0](2025-03-19-play-windows-games.md#version-30) on how to download **Game Porting Toolkit 3.0**
+{: .prompt-important }
+
+To enable experimental [MetalFX](https://developer.apple.com/videos/play/wwdc2022/10103) integration:
+
+1. Rename `wine/x86_64-unix/nvngx-on-metalfx.so`{: .filepath} to `wine/x86_64-unix/nvngx.so`{: .filepath} (if this hasn’t already been done)
+
+2. Rename `wine/x86_64-windows/nvngx-on-metalfx.dll`{: .filepath} to `wine/x86_64-windows/nvngx.dll`{: .filepath} (if this hasn’t already been done)
+
+3. Copy both `nvngx.dll`{: .filepath} and `nvapi64.dll`{: .filepath} to the `windows\system32` directory your Wine prefix’s virtual C: drive (open `$WINEPREFIX/drive_c/windows/system32`)
+
+4. Rename old versions in `system32` to `nvngx_orig.dll`{: .filepath} and `nvapi64_orig.dll`{: .filepath}
+
+5. Set `D3DM_ENABLE_METALFX=1` to convert DLSS functions to MetalFX (where possible)
+
+Refer to [MetalFX Integration](2025-03-19-play-windows-games.md#metalfx-integration) for Bash script.
+
+#### Steam
+##### `steamwebhelper` not responding
+Complete the following steps if you updated Steam to the latest version and/or get an error along the lines of **steamwebhelper, a critical Steam component, is not responding. The Steam UI will not be usable.** This error is common when using an outdated version of Wine with a new version of Steam.
+
+1. If you haven't already, set your `WINEPREFIX` (aka bottle), otherwise it'll default to `$HOME/.wine`
+
+	```sh
+	export WINEPREFIX="$HOME/Games"
+	```
+	{: .nolineno }
+
+2. Enter your `WINEPREFIX` (aka bottle)
+
+	```sh
+	cd "$WINEPREFIX"
+	```
+	{: .nolineno }
+
+3. Run `cmd.exe`
+
+	```sh
+	wine "C:\windows\system32\cmd.exe"
+	```
+	{: .nolineno }
+
+4. Enter your Steam directory
+
+	```sh
+	cd "drive_c\Program Files (x86)\Steam"
+	```
+	{: .nolineno }
+
+	> Try `"Z:\Users\<YOUR_USERNAME>\<YOUR_BOTTLE_NAME>\drive_c\Program Files (x86)\Steam"`{: .filepath} if the previous command doesn't work, where `<YOUR_USERNAME>` is your Mac username and `<YOUR_BOTTLE_NAME>` is `$WINEPREFIX` without `$HOME`
+	{: .prompt-tip }
+
+5. Downgrade your Steam version
+
+	> Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
+	{: .prompt-warning }
+	
+	{% tabs downgrade-steam %}
+	    ---TAB: 3/6/2025
+	        This will restore an older Steam version from 3/6/2025
+	        ```sh
+	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
+	        ```
+	        {: .nolineno }
+	    ---TAB: 1/28/2025
+	        If that doesn't work, try this Steam version from 1/28/2025
+	        ```sh
+	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
+	        ```
+	        {: .nolineno }
+	    ---TAB: 5/20/2024
+	        If that doesn't work, try this Steam version from 5/20/2024
+	        ```sh
+	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
+	        ```
+	        {: .nolineno }
+	{% endtabs %}
+	
+	> The link will not open in a browser, however, it is still active
+	{: .prompt-info }
+
+6. Exit
+
+	```sh
+	exit
+	```
+	{: .nolineno }
+
+7. Create/update `steam.cfg`
+
+	```sh
+	cat <<EOF > $WINEPREFIX/drive_c/Program\ Files\ \(x86\)/Steam/steam.cfg
+	```
+	{: .nolineno }
+
+8. Enter the following (to disable auto-update)
+
+	```plaintext
+	BootStrapperInhibitAll=enable
+	BootStrapperForceSelfUpdate=disable
+	EOF
+	```
+	{: file="$WINEPREFIX/drive_c/Program Files (x86)/Steam/steam.cfg" }
+
+9. Restart Steam
+
+	```sh
+	wine "C:\Program Files (x86)\Steam\steam.exe"
+	```
+	{: .nolineno }
+
+	Optional args for `steam.exe` (tho including them caused some issues):
+	
+	```sh
+	-noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
+	```
+	{: .nolineno }
+
+##### Steam download freezes
+This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
+
+###### Solution 1: Steam Console
+Source[^steamconsole]
+
+> Make sure you have the native Steam app for macOS
+{: .prompt-important }
+
+> Use `~` instead of `$HOME` for any paths!
+{: .prompt-warning }
+
+1. Open your web browser (e.g. Firefox, Chrome, Safari, etc.) and enter [`steam://open/console`](steam://open/console) in the URL bar
+
+2. Once Steam (for macOS) opens, click the <kbd>Console</kbd> tab
+
+3. Enter the following in the bottom prompt to enable downloading Windows games via macOS Steam
+
+	```plaintext
+	@sSteamCmdForcePlatformType windows
+	```
+
+4. Either through [SteamDB.info](https://steamdb.info) or via the store page's link, find and copy the app ID (e.g. `3527290`) of the game you want to download
+
+5. Enter the following in the console, where `<APP_ID>` is the app ID (e.g. `3164500`) of the game you want to download
+
+	```plaintext
+	app_install <APP_ID>
+	```
+
+	> If you need a beta access, include the following flag, where `<CHANNEL_NAME>` is the channel name
+	> ```plaintext
+	> -beta <CHANNEL_NAME>
+	> ```
+	{: .prompt-tip }
+
+6. Once the app is done downloading, which you can see in your Steam's Download Manager, right click it and go to **Manage** > **Browse Local Files** to open Finder's window with the game files inside; this should be in path  `$HOME/Library/Application Support/Steam/steamapps/common/<YOUR_GAMES_NAME>`, where `<YOUR_GAMES_NAME>` is the name of the game you want to download
+
+7. Move all of the aforementioned game files to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<YOUR_GAMES_NAME>`) inside your Windows Steam installation
+
+8. Two folders up (i.e. path `$HOME/Library/Application Support/Steam/steamapps/`), move the file `appmanifest_<APP_ID>.acf`{: .filepath}, where `<APP_ID>` is your game's Steam app ID, to the same location (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/`) inside your Windows Steam installation. E.g. `appmanifest_3164500.acf`{: .filepath}
+
+9. Run your Windows Steam installation as normal and the game should appear as downloaded in your Steam library
+
+###### Solution 2: SteamCMD
+> If you already have [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) installed, go straight to Step #3.
+{: .prompt-info }
+
+1. Open terminal and create `SteamCMD` directory
+
+	```sh
+	mkdir $HOME/SteamCMD && cd $HOME/SteamCMD
+	```
+	{: .nolineno }
+
+2. Download and extract SteamCMD
+
+	```sh
+	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz" | tar zxvf -
+	```
+	{: .nolineno }
+
+3. Run SteamCMD
+
+	```sh
+	./steamcmd.sh
+	```
+	{: .nolineno }
+
+4. Set your app directory, where `<APP_PATH>` is where you want to save the game. In this case, it'll be in your Wine prefix's (`$WINEPREFIX`) `steamapps` directory (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/`)
+
+	```sh
+	force_install_dir <APP_PATH>
+	```
+	{: .nolineno }
+
+	> If you are running SteamCMD from your path env or installed it as a package, it will return an error if you try to use `.` as a directory. A workaround for this is to use the absolute path to the current directory.
+	{: .prompt-warning }
+
+	> When downloading/downloaded via SteamCMD:
+	> 
+	> * Downloaded `appmanifest` is in `<APP_PATH>/steamapps/` directory
+	> * Downloaded `appmanifest` should be [moved] in `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/` directory
+	> * `<APP_PATH>/steamapps/` can be deleted AFTER its `appmanifest` has been moved to `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/` directory
+	> * `<APP_PATH>/!steamapps/` contains everything [that should be] in the game's source folder (i.e. `$WINEPREFIX/drive_c/Program Files (x86)/Steam/steamapps/common/<GAME_NAME>/`)
+	{: .prompt-info }
+
+5. Login to your Steam account, where `<STEAM_USERNAME>` is your Steam username (or `anonymous` if you don't want to login, though you won't be able to download your purchased games)
+
+	```sh
+	login <STEAM_USERNAME>
+	```
+	{: .nolineno }
+	
+	> Valve recommends setting the install directory **BEFORE** logging in
+	{: .prompt-tip }
+
+6. Install or update the app using the `app_update` command, where `<APP_ID>` is the app's [Steam Application ID](https://developer.valvesoftware.com/wiki/Steam_Application_IDs "Steam Application IDs"). If you don't know the Steam Application ID for the server, tool, or game you want to download, use [steamdb.info](https://steamdb.info) to locate it.
+
+	```sh
+	app_update <APP_ID> [-beta <BETA_NAME>] [-betapassword <BETA_PASSWORD>] [validate]
+	```
+	{: .nolineno }
+
+	> - [Dedicated server list](https://developer.valvesoftware.com/wiki/Dedicated_Servers_List "Dedicated Servers List")
+	> - Use the `-beta <BETA_NAME>` option to download a beta branch
+	> - For beta branches protected by a password, include the `-betapassword <BETA_PASSWORD>` option to be able to download from them
+	> - Add `validate` to the command to check all the server files to make sure they match SteamCMD files; this command is useful if you think files may be missing or corrupted. However, this will overwrite any changed files to the server default; any files that aren't part of the default installation will not be affected. Therefore, it is recommended you use this command only on initial installation and if there are server issues.
+	{: .prompt-tip }
+
+7. Log off Steam servers once finished
+
+	```sh
+	quit
+	```
+	{: .nolineno }
+
+ALTERNATIVELY, continue reading if you want to use a script instead
+
+```plaintext
+@ShutdownOnFailedCommand 1
+@NoPromptForPassword 1
+@sSteamCmdForcePlatformType windows
+
+force_install_dir <APP_PATH>
+login <STEAM_USERNAME> <STEAM_PASSWORD>
+
+// Use this instead if you don't want to login
+// login anonymous
+
+app_update <APP_ID> validate
+quit
+```
+{: file="install_game.txt" }
+
+Run script with the `+runscript` option, where `<SCRIPT_NAME>` is your script's filename (e.g. `install_game.txt`)
+
+```sh
+./steamcmd.sh +runscript <SCRIPT_NAME>
+```
+{: .nolineno }
+
+> - If you get an error like `Failed to load script file '<SCRIPT_NAME>'`, try providing an absolute path, e.g. `/absolute/path/to/<SCRIPT_NAME>`
+> - If you get an error like `Failed to install app '<APP_ID>' (No subscription)`, the game/server you are trying to download either requires a login or that you have purchased the game. You will therefore have to log in with a Steam username and password (i.e. use `login <STEAM_USERNAME> <STEAM_PASSWORD>` instead of `login anonymous`).
+{: .prompt-info }
+
+The aforementioned script is functionally the same as:
+
+```sh
+./steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir <APP_PATH> +login <STEAM_USERNAME> +app_update <APP_ID> validate +quit
+```
+{: .nolineno }
+
+For the sake of convenience, I've written a bash function to download a Steam app into a given `WINEPREFIX`'s Steam directory. You can find this function at [Automate Steam Downloads](2025-03-19-play-windows-games.md#automate-steam-downloads).
+
+#### Game Controller
+> Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
+{: .prompt-info }
+
+List of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
+- Xbox Wireless Controller with Bluetooth (Model 1708)
+- Xbox Wireless Controller Series S
+- Xbox Wireless Controller Series X
+- Xbox Elite Wireless Controller Series 2
+- Xbox Adaptive Controller
+- PlayStation DualShock 4 Wireless Controller
+- PlayStation 5 DualSense Wireless Controller
+- PlayStation 5 DualSense Edge Wireless Controller
+
+##### Prevent "Home" button from opening Launchpad
+> This is particularly useful when using Steam's Big Picture mode
+{: .prompt-tip }
+
+1. Disable "Home" button
+
+	```sh
+	defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
+	```
+	{: .nolineno }
+
+2. Restart the Dock process to apply changes
+
+	```sh
+	killall Dock
+	```
+	{: .nolineno }
+	
+	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
+	{: .prompt-tip }
+
+##### Disable "Share" button
+1. Disable "Share" button
+
+	```sh
+	defaults write com.apple.GameController bluetoothPrefsShareLongPressSystemGestureMode -integer -1
+	```
+	{: .nolineno }
+
+2. Restart the Dock process to apply changes
+
+	```sh
+	killall Dock
+	```
+	{: .nolineno }
+	
+	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
+	{: .prompt-tip }
+
+#### Memory
+##### Dynamically allocate VRAM
+Allocate memory for VRAM, where `DESIRED_VRAM_MB` is an integer number of how many MB of VRAM you want to allocate.[^vram]
+
+```sh
+sudo sysctl iogpu.wired_limit_mb=DESIRED_VRAM_MB
+```
+{: .nolineno }
+
+To set it permanently:
+
+```sh
+sudo touch /etc/sysctl.conf
+sudo chown root:wheel /etc/sysctl.conf
+sudo chmod 0644 /etc/sysctl.conf
+echo "iogpu.wired_limit_mb=DESIRED_VRAM_MB" >> /etc/sysctl.conf
+```
+
+##### Set video memory size
+Sometimes Game Porting Toolkit and your game not properly communicating with each other about how much Video RAM your system has (more than likely, GPTk is not getting the correct value from your system).[^vidmem]
+
+You may need this setting if you have the following symptoms:
+- Strange rendering
+- Crash/Freeze on launch
+- A log file that says something like:  
+```plaintext
+fixme:d3d_texture:texture_init Failed to create surface 0x35c4fc68, hr 0x8876017c
+err:d3d:resource_init Out of adapter memory
+```
+
+1. Click the Apple icon in the upper-left corner and select **About This Mac**
+
+	![mbp_ram.png](../assets/obsidian/mbp_ram.png)
+
+2. Note the value next to `Memory` (e.g. `64 GB`), multiply it by either `2` or `3`, divide by either `3`  or `4`, and round the result down if it's not a whole number
+
+	`64 * 2 / 3 = 128 / 3 ≈ 42`
+
+	> Your final answer is the approximate amount of VRAM you have. This is an approximation since MacBook Pro M-series uses unified memory (i.e. memory is shared between CPU and GPU), so there's only RAM, not VRAM. Technically the amount of VRAM you have is equal to the amount of RAM, but in practice it's less since some of that RAM is reserved by the system to prevent instability.
+	{: .prompt-info }
+
+3. Switch architecture
+
+	```sh
+	arch -x86_64 /bin/bash
+	```
+	{: .nolineno }
+
+4. Open `regedit`
+
+	```sh
+	wine regedit
+	```
+	{: .nolineno }
+
+5. Navigate to `HKEY_LOCAL_MACHINE\Software\Wine`
+
+6. If `Direct3D` isn't already there, right-click `Wine`and navigate to <kbd>New</kbd>
+
+7. Click **Key**
+
+8. Input `Direct3D`, then press <kbd>Enter</kbd> to save its name
+
+	> To rename a key, right-click it and click **Rename**
+	{: .prompt-tip }
+
+9. Double-click `Direct3D` to open
+
+10. Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space)
+
+11. Navigate to **New** and click **String Value**
+
+12. Input `VideoMemorySize`, then press <kbd>Enter</kbd> to save its name
+
+13. Double-click `VideoMemorySize` to set its value
+
+	![regedit_videomemorysize.png](../assets/obsidian/regedit_videomemorysize.png)
+
+14. Under `Value data:`, enter `16384` (i.e. 16.384 GB), click **OK**, then close `regedit`
+
+I recommend experimenting with the value (in MB) of `VideoMemorySize`. Some users say `4096` is better, etc. Might need to do some trial and error.
+
+##### 32bit games crash after 4GB RAM
+Set the following environment variable:
+
+```sh
+export WINE_LARGE_ADDRESS_AWARE=1
+```
+{: .nolineno }
+
+#### Wine
+`HKEY_CURRENT_USER\Software\Wine\Mac Driver`[^wine2]
+
+##### Disable vertical sync (vsync)
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'AllowVerticalSync' /t REG_SZ /d 'N' /f
+```
+{: .nolineno }
+
+##### Prevent Wine from creating filetype associations
+This method prevents the creation of filetype associations but retains the creation of XDG .desktop files (that you might see e.g. in menus).
+
+```sh
+wine reg add "HKEY_CURRENT_USER\Software\Wine\FileOpenAssociations" /v 'Enable' /d 'N'
+```
+{: .nolineno }
+
+##### Allow Wine to run
+After downloading binary files online (e.g. Wine builds, etc.), you won't be able to run it immediately since macOS's blocks it as a safety feature.
+
+To allow it to run, execute this command (`PATH_TO_WINE_DIRECTORY` is the path to your Wine directory)
+
+```sh
+xattr -dr com.apple.quarantine PATH_TO_WINE_DIRECTORY
+```
+{: .nolineno }
+
+So, for example, if you want to do it for your DXMT Wine 10.19 build in `"$HOME/Wine/dxmt/10.19"`, it'd look like:
+
+```sh
+xattr -dr com.apple.quarantine "$HOME/Wine/dxmt/10.19"
+```
+{: .nolineno }
+
+If you prefer to do this manually (which can get pretty tedious since you'd need to do this for every single file):
+
+1. Open **System Settings**
+
+2. Go to **Privacy & Security**, then scrolling down to **Security** section
+
+3. Manually click the <kbd>Allow</kbd> button for each Wine-related file after running some `wine` command
+
+##### Restore original DLL files
+```sh
+wineboot -u
+```
+{: .nolineno }
+
+##### Pixelated and limited display resolution
+Enable Retina (aka high resolution mode)
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'Y' /f
+```
+{: .nolineno }
+
+> Some games will not run with Retina mode enabled; to disable:
+> ```sh
+> wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode' /t REG_SZ /d 'N' /f
+> ```
+> {: .nolineno }
+{: .prompt-tip }
+
+To check if it's set:
+
+```sh
+wine reg query 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode'
+```
+{: .nolineno }
+
+#### Audio
+##### Some games have messed up and/or crackling audio
+This fix[^fc3-audio-fix] was recommended for audio crackling in Far Cry 3[^fc3-audio], where it sounds like it's coming out a Geiger counter
+
+1. Open **Audio MIDI Setup** app
+
+2. Select your speaker on the left, then click on the drop down menu at the right side
+
+3. Change the output to 96,000Hz (default should be set to 44,000hz I think)
+
+##### Some games don't have sound
+Some games (e.g. Cities Skylines, Starcraft 2 and Heroes of the Storm) stopped having any sound at some point. This may be due to the extra audio drivers installed as plugin by Microsoft Teams. Simply remove the audio driver:
+
+```sh
+sudo rm -rf /Library/Audio/Plug-Ins/HAL/MSTeamsAudioDevice.driver
+```
+{: .nolineno }
+
+> Removing the Teams audio drivers does not prevent Teams from working normally; apparently they're an optional module during Teams setup
+{: .prompt-info }
+
+There have been similar reports for other games that also had sound problems and after users removed any extra audio drivers, sound started working again. Looking into this problem I saw similar reports about Zoom audio drivers as well.[^mac-game-audio]
+
+Alternatively, you may have to override certain Wine DLLs[^wine-dll-audio]:
+
+```sh
+export WINEDLLOVERRIDES="xaudio2_7=n,b"
+```
+{: .nolineno }
+
+#### Fonts
+##### Unreadable or missing fonts
+If you don't have any fonts installed, you can link all of the system fonts so they are accessible from Wine:
+
+```sh
+cd "$WINEPREFIX/drive_c/windows/Fonts" && for i in /usr/share/fonts/**/*.{ttf,otf}; do ln -s "$i"; done
+```
+{: .nolineno }
+
+Wine uses FreeType to render fonts, and FreeType's defaults changed a few releases ago. Try using the following environment variable when running programs in Wine:
+
+```sh
+FREETYPE_PROPERTIES="truetype:interpreter-version=35"
+```
+{: .nolineno }
+
+Another option is to [install Microsoft's TrueType fonts](https://wiki.archlinux.org/title/Microsoft_fonts#Installation "Microsoft fonts") into your wine prefix. If this does not help, try running `winetricks corefonts` first, then `winetricks allfonts` as a last resort.
+
+After running such programs, kill all Wine servers and run `winecfg`. Fonts should be legible now.
+
+##### Smeared fonts
+If the fonts look somehow smeared, run the following command to change a setting in the Wine registry.
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N'
+```
+{: .nolineno }
+
+#### Keyboard
+##### Fix keyboard shortcuts
+Wine by default maps the keys differently than native macOS applications. It's possible to change some of the keyboard mappings.
+
+Map <kbd>Option</kbd> as <kbd>Alt</kbd>:
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftOptionIsAlt' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightOptionIsAlt' /t REG_SZ /d 'Y'
+```
+{: .nolineno }
+
+Map <kbd>Command</kbd> as <kbd>CTRL</kbd>:
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'LeftCommandIsCtrl' /t REG_SZ /d 'Y'
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightCommandIsCtrl' /t REG_SZ /d 'Y'
+```
+{: .nolineno }
+
+##### Keyboard input not working
+This could be caused by the window manager not switching focus.
+
+###### Solution 1: Winetricks
+```sh
+winetricks usetakefocus=n
+```
+{: .nolineno }
+
+###### Solution 2: Regedit
+Toggle all the **Window settings**, click **Apply**, then change them back.
+
+If that does not work, go to the **Graphics** tab of `winecfg`, disable the **Allow the window manager...** options, or set windowed mode with **Emulate a virtual desktop**.
+
+If the keyboard still does not work after unfocusing the application, try editing the registry
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v 'UseTakeFocus' /d 'N' /f
+```
+{: .nolineno }
+
+#### Miscellaneous
+##### "Symbol not found" when setting game mode
+You may get this error if setting `game-mode` (e.g. `/Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl game-mode set auto`)
+
+```plaintext
+dyld[52755]: Symbol not found: _$s2os6LoggerV10GamePolicyE4toolACvau
+  Referenced from: <EF9CA6F2-E5BD-35B1-ACC3-E45E7CBB0AD4> /Applications/Xcode.app/Contents/Developer/usr/bin/gamepolicyctl
+  Expected in:     <7962FD29-508F-3668-87F7-68AC93844B60> /System/Library/PrivateFrameworks/GamePolicy.framework/Versions/A/GamePolicy
+Abort trap: 6
+```
+
+This may be due to a version mismatch (especially if you recently updated your OS without updating XCode). To fix, update XCode and then try running `game-mode` again.
+
+> `gamepolicyctl` tool may have been compiled against an older version of `GamePolicy.framework` than the one installed on your system. This often happens when you have mismatched Xcode and macOS versions.
+
+##### DXVK runs out of memory and crashes
+With the following repeated in the terminal
+
+```plaintext
+[mvk-warn] VK_ERROR_OUT_OF_POOL_MEMORY: VkDescriptorPool exhausted pool of (x) descriptors. Allocating descriptor dynamically.
+```
+
+You should allocate enough memory [in the pool] by creating multiple pools.
+
+`VK_ERROR_OUT_OF_POOL_MEMORY`:
+- Used to determine when to allocate a new descriptor pool.
+- Returned if allocation fails due to no more space in the descriptor pool (and not because of system or device memory exhaustion).
+
+##### Applications fail to start
+Some older games and applications assume that the current working directory is the same as that which the executable is in. Launching these executables from other locations will prevent them from starting correctly. Use `cd path_containing_exe` before invoking Wine to rule this possibility out.
+
+##### "Operation not permitted" error
+macOS often restricts Terminal access to certain system-related directories, which can cause the "Operation not permitted" error when trying to delete certain files.
+
+To grant Terminal full disk access:
+
+1. Open <kbd>System Preferences</kbd>
+
+2. Go to <kbd>Privacy & Security</kbd> > <kbd>Full Disk Access</kbd>
+
+3. Grant iTerm/Terminal full disk access (if it's not already listed, click the Plus (**+**) button to add an application and choose Terminal / iTerm)
+
+### Environment Variables
+#### Wine
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Options</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+         <tr>
+            <td><code>WINE</code></td>
+            <td>Specify which version of Wine to use, if you have multiple different versions.</td>
+            <td>Wine path (i.e. <code>/path/to/your/wine</code>)</td>
+            <td><code>WINE="/usr/local/bin/wine64"</code></td>
+        </tr>
+        <tr>
+            <td><code>WINEPREFIX</code></td>
+            <td>Directory where Wine stores its data (default is <code>$HOME/.wine</code>). This directory is also used to identify the socket which is used to communicate with the <strong>wineserver</strong>. All <strong>wine</strong> processes using the same <strong>wineserver</strong> (i.e. same user) share certain things like registry, shared memory, and config file. By setting <code>WINEPREFIX</code> to different values for different <strong>wine</strong> processes, it is possible to run a number of truly independent <strong>wine</strong> processes.</td>
+            <td></td>
+            <td><code>WINEPREFIX="$HOME/Bottles/DXMT"</code></td>
+        </tr>
+        <tr>
+            <td><code>WINESERVER</code></td>
+            <td>Specifies the path and name of the <strong>wineserver</strong> binary. If not set, Wine will look for a file named "wineserver" in the path and in a few other likely locations.</td>
+            <td></td>
+            <td><code>WINESERVER=$HOME/Wine/dxmt/10.18/bin/wineserver</code></td>
+        </tr>
+        <tr>
+            <td><code>WINEDEBUG</code></td>
+            <td>Turns debugging messages on or off; can be used to silence logs, enable detailed logging for components, or filter specific messages. The syntax of the variable is of the form <code>[<em>class</em>][<strong>+</strong>|<strong>-</strong>]<em>channel</em>[,[<em>class2</em>][<strong>+</strong>|<strong>-</strong>]<em>channel2</em>]</code><br><br><em>class</em> is optional and can be one of the following: <strong>err</strong>, <strong>warn</strong>, <strong>fixme</strong>, or <strong>trace</strong>. If <em>class</em> is not specified, all debugging messages for the specified channel are turned on. Each channel will print messages about a particular component of Wine. The following character can be either <strong>+</strong> or <strong>-</strong> to switch the specified channel on or off respectively. If there is no <em>class</em> part before it, a leading <strong>+</strong> can be omitted. Note that spaces are not allowed anywhere in the string.</td>
+            <td></td>
+            <td>
+	            <ul>
+		            <li><code>WINEDEBUG=warn+all</code><br>will turn on all warning messages (recommended for debugging).</li>
+		            <li><code>WINEDEBUG=warn+dll,+heap</code><br>will turn on DLL warning messages and all heap messages.</li>
+		            <li><code>WINEDEBUG=fixme-all,warn+cursor,+relay</code><br>will turn off all FIXME messages, turn on cursor warning messages, and turn on all relay messages (API calls).</li>
+		    		<li><code>WINEDEBUG=relay</code><br>will turn on all relay messages. For more control on including or excluding functions and dlls from the relay trace, look into the <code>HKEY_CURRENT_USER\Software\Wine\Debug</code> registry key.</li>
+	            </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>WINEDLLPATH</code></td>
+            <td>Specifies the path(s) in which to search for builtin dlls and Winelib applications. This is a list of directories separated by <code>:</code>. In addition to any directory specified in <code>WINEDLLPATH</code>, Wine will also look in the installation directory.</td>
+            <td></td>
+            <td><code>WINEDLLPATH=</code></td>
+        </tr>
+        <tr>
+            <td><code>WINEDLLOVERRIDES</code></td>
+            <td>Defines the override type and load order of dlls used in the loading process for any dll. There are currently two types of libraries that can be loaded into a process address space: native windows dlls (<code>native</code>) and Wine internal dlls (<code>builtin</code>). The type may be abbreviated with the first letter of the type (<code>n</code> or <code>b</code>). The library may also be disabled (<code>''</code>). Each sequence of orders must be separated by commas.<br><br>Each dll may have its own specific load order. The load order determines which version of the dll is attempted to be loaded into the address space. If the first fails, then the next is tried and so on. Multiple libraries with the same load order can be separated with commas. It is also possible to use specify different loadorders for different libraries by separating the entries by <code>;</code>.<br><br>The load order for a 16-bit dll is always defined by the load order of the 32-bit dll that contains it (which can be identified by looking at the symbolic link of the 16-bit <code>.dll.so</code> file). For instance if <code>ole32.dll</code> is configured as <code>builtin</code>, <code>storage.dll</code> will be loaded as <code>builtin</code> too, since the 32-bit <code>ole32.dll</code> contains the 16-bit <code>storage.dll</code>.</td>
+            <td></td>
+            <td>
+            	<ul>
+		            <li><code>WINEDLLOVERRIDES="comdlg32,shell32=n,b"</code><br>Try to load <code>comdlg32</code> and <code>shell32</code> as <code>native</code> windows dll first and try the <code>builtin</code> version if the <code>native</code> load fails.</li>
+		            <li><code>WINEDLLOVERRIDES="comdlg32,shell32=n;c:\\foo\\bar\\baz=b"</code><br>Try to load the libraries <code>comdlg32</code> and <code>shell32</code> as <code>native</code> windows dlls. Furthermore, if an application request to load <code>c:\foo\bar\baz.dll</code> load the <code>builtin</code> library <code>baz</code>.</li>
+		            <li><code>WINEDLLOVERRIDES="comdlg32=b,n;shell32=b;comctl32=n;oleaut32="</code><br>Try to load <code>comdlg32</code> as <code>builtin</code> first and try the <code>native</code> version if the <code>builtin</code> load fails; load <code>shell32</code> always as <code>builtin</code> and <code>comctl32</code> always as <code>native</code>; <code>oleaut32</code> will be disabled.</li>
+		            <li><code>WINEDLLOVERRIDES="mscoree=d;mshtml=d"</code><br>Disable dialog prompting you to download Gecko and/or Mono.</li>
+	            </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>WINEPATH</code></td>
+            <td>Specifies additional path(s) to be prepended to the default Windows <code>PATH</code> environment variable. This is a list of Windows-style directories separated by <code>;</code>.<br><br>For a permanent alternative, edit (create if needed) the <code>PATH</code> value under the <code>HKEY_CURRENT_USER\Environment</code> registry key.</td>
+            <td></td>
+            <td><code>WINEPATH=</code></td>
+        </tr>
+        <tr>
+            <td><code>WINEARCH</code></td>
+            <td>Specifies the Windows architecture to support. The architecture supported by a given Wine prefix is set at prefix creation time and cannot be changed afterwards. When running with an existing prefix, Wine will refuse to start if <code>WINEARCH</code> doesn't match the prefix architecture. It is possible however to switch freely between <code>win64</code> and <code>wow64</code> with an existing 64-bit prefix.</td>
+            <td>
+	            <ul>
+		            <li><code>win32</code><br>Support only 32-bit applications</li>
+		            <li><code>win64</code><br>Support both 64-bit applications and 32-bit ones.</li>
+		            <li><code>wow64</code><br>Support 64-bit applications and 32-bit ones, using a 64-bit host process in all cases.</li>
+	            </ul>
+            </td>
+            <td><code>WINEARCH=win64</code></td>
+        </tr>
+        <tr>
+            <td><code>WINE_LARGE_ADDRESS_AWARE</code></td>
+            <td>Prevents 32bit games from crashing after reaching 4GB of RAM.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>WINE_LARGE_ADDRESS_AWARE=1</code></td>
+        </tr>
+        <tr>
+            <td><code>WINE_D3D_CONFIG</code></td>
+            <td>Specifies Direct3D configuration options. It can be used instead of modifying the <code>HKEY_CURRENT_USER\Software\Wine\Direct3D</code> registry key. The value is a comma- or semicolon-separated list of key-value pairs. If an individual setting is specified in both the environment variable and the registry, the former takes precedence.</td>
+            <td></td>
+            <td><code>WINE_D3D_CONFIG="renderer=vulkan;VideoPciVendorID=0xc0de"</code></td>
+        </tr>
+         <tr>
+            <td><code>WINEESYNC</code></td>
+            <td>Enables <em>Eventfd Synchronization (ESync)</em>, which reduces overhead from thread synchronization by replacing Windows synchronization objects with <code>eventfd</code> objects. Improves multithreaded application and game performance. Available on Linux and macOS.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>WINEESYNC=1</code></td>
+        </tr>
+        <tr>
+            <td><code>WINEMSYNC</code></td>
+            <td>Intended for <em>Mac Synchronization (MSync)</em>, adapting synchronization improvements like ESync/FSync for macOS systems using Mach ports. Aims to reduce overhead on macOS similarly to how FSync helps Linux. Experimental, still relatively new, and less mature than ESync/FSync.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>WINEMSYNC=0</code></td>
+        </tr>
+        <tr>
+            <td><code>WINE_FULLSCREEN_FSR</code></td>
+            <td>Enables FidelityFX Super Resolution (FSR) upscaling when Wine runs fullscreen apps. Good for boosting low-res games on Mac displays.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>WINE_FULLSCREEN_FSR=1</code></td>
+        </tr>
+        <tr>
+            <td><code>WINE_FULLSCREEN_FSR_STRENGTH</code></td>
+            <td>Controls image sharpness when FidelityFX Super Resolution (FSR) upscaling (i.e. <code>WINE_FULLSCREEN_FSR</code>) is enabled. Defaults to <code>5</code>.</td>
+            <td>A number from <code>5</code> (minimum) to <code>0</code> (maximum)</td>
+            <td><code>WINE_FULLSCREEN_FSR_STRENGTH=3</code></td>
+        </tr>
+        <tr>
+            <td><code>WINE_NO_FULLSCREEN</code></td>
+            <td>Forces Wine apps to run in a window even if they want fullscreen. Useful for compatibility.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>WINE_NO_FULLSCREEN=0</code></td>
+        </tr>
+        export =
+        <tr>
+            <td><code>VKD3D_FEATURE_LEVEL</code></td>
+            <td></td>
+            <td><code>12_2</code>, <code>4</code>, etc.</td>
+            <td><code>VKD3D_FEATURE_LEVEL=12_2</code></td>
+        </tr>
+        <tr>
+            <td><code>GST_DEBUG</code></td>
+            <td>Controls logging level for GStreamer (used by Wine for media playback). Useful if games/apps involve video/audio playback issues.</td>
+            <td><code>3</code> (info level), <code>4</code> (debug level)</td>
+            <td>Example</td>
+        </tr>
+        <tr>
+            <td><code>LC_ALL</code></td>
+            <td>Sets the system-wide locale for Wine and its programs. Important for avoiding weird character encoding issues (especially in older games).</td>
+            <td><code>en_US</code> or <code>en_US.UTF-8</code> (forces US English encoding</td>
+            <td><code>LC_ALL=en_US.UTF-8</code></td>
+        </tr>
+        <tr>
+            <td><code>DISPLAY</code></td>
+            <td>Specifies the X11 display to use.</td>
+            <td></td>
+            <td><code>DISPLAY=</code></td>
+        </tr>
+          <tr>
+            <td><code>AUDIODEV</code></td>
+            <td>Set the device for audio input / output. Default <code>/dev/dsp</code>.</td>
+            <td></td>
+            <td><code>AUDIODEV=/dev/dsp</code></td>
+        </tr>
+         <tr>
+            <td><code>MIXERDEV</code></td>
+            <td>Set the device for mixer controls. Default <code>/dev/mixer</code>.</td>
+            <td></td>
+            <td><code>MIXERDEV=/dev/mixer</code></td>
+        </tr>
+        <tr>
+            <td><code>MIDIDEV</code></td>
+            <td>Set the MIDI (sequencer) device. Default <code>/dev/sequencer</code>.</td>
+            <td></td>
+            <td><code>MIDIDEV=/dev/sequencer</code></td>
+        </tr>
+    </tbody>
+</table>
+
+#### D3DMetal
+Environment variables can be used to control some aspects of translation and emulation in the evaluation environment.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Options</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>D3DM_SUPPORT_DXR</code></td>
+            <td>Defaults to <code>0</code> (OFF) on M1 & M2 Macs, and to <code>1</code> (ON) for M3 & later Macs. Setting this environment variable to <code>1</code> (ON) enables DirectX Raytracing (aka DXR) features in D3DMetal’s DirectX 12 translation layer, so games querying for DXR support will find the support level and expected interfaces of DXR.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>D3DM_SUPPORT_DXR=1</code></td>
+        </tr>
+        <tr>
+            <td><code>ROSETTA_ADVERTISE_AVX</code></td>
+            <td>Defaults to <code>0</code> (OFF). On macOS 15 Sequoia, setting this environment variable to <code>1</code> (ON) causes the CPU instruction translation layer to publish cpuid information to translated applications when running in the evaluation environment, so games querying instruction set extension capabilities before utilizing them can conditionally control their use of instruction extensions. This setting does not modify the availability of the instruction set in Rosetta; it only controls whether the processor advertises its support for these extensions.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>ROSETTA_ADVERTISE_AVX=1</code></td>
+        </tr>
+        <tr>
+            <td><code>D3DM_ENABLE_METALFX</code></td>
+            <td>On macOS 16, setting this environment variable to <code>1</code> (ON) causes DLSS functions to be converted to MetalFX where possible. Setting this environment variable to <code>0</code> (OFF) causes DLSS functions to be not be available.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>D3DM_ENABLE_METALFX=1</code></td>
+        </tr>
+    </tbody>
+</table>
+
+#### DXMT
+Rename `winemetal_i386-windows.dll` in `e` to `winemetal.dll` for 32 bit. 64 bit is default; so if switching to 32bit, rename current `winemetal.dll` to `winemetal_x86_64-windows.dll` before renaming the 32bit one.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Options</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>DXMT_ENABLE_NVEXT</code></td>
+            <td>Enable [implemented subset of] NVIDIA vendor extensions and load <code>nvapi64.dll</code> and <code>nvngx.dll</code>. It is <strong>NOT</strong> recommended to always enable this extension, because the game may use certain techniques that is only fast on NVIDIA hardware but extremely slow on others. Use it when it's actually beneficial.<br><br>Current implemented features: HDR *, DLSS SuperResolution (translated to MetalFX Temporal Scaler)<br><br>*: NOT ALL GAMES REQUIRE vendor extension to enable HDR, especially if it's released recently and/or targets Windows 11.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>DXMT_ENABLE_NVEXT=1</code></td>
+        </tr>
+        <tr>
+            <td><code>MTL_SHADER_VALIDATION</code></td>
+            <td>Enable Metal shader validation layer for DXMT.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>MTL_SHADER_VALIDATION=0</code></td>
+        </tr>
+        <tr>
+            <td><code>MTL_DEBUG_LAYER</code></td>
+            <td>Enable Metal API validation layer for DXMT.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>MTL_DEBUG_LAYER=0</code></td>
+        </tr>
+        <tr>
+            <td><code>MTL_CAPTURE_ENABLED</code></td>
+            <td>Enable Metal frame capture for DXMT.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>MTL_CAPTURE_ENABLED=0</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_LOG_LEVEL</code></td>
+            <td>Controls message logging for DXMT.</td>
+            <td><code>none</code>, <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code></td>
+            <td><code>DXMT_LOG_LEVEL=warn</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_LOG_PATH</code></td>
+            <td>Changes path where DXMT log files are stored. Log files in the given directory will be called <code>app_d3d11.log</code>, <code>app_dxgi.log</code>, etc., where <code>app</code> is the name of the game executable. Set to <code>none</code> to disable log file creation entirely without disabling logging (i.e. log messages will still be printed to <code>stderr</code>).</td>
+            <td><code>/some/directory</code>, <code>none</code></td>
+            <td><code>DXMT_LOG_PATH=$HOME/dxmt/logs</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_CAPTURE_FRAME</code></td>
+            <td>Automatically captures n-th frame. Useful for debugging a replay.</td>
+            <td><code>n</code> (i.e. any positive integer)</td>
+            <td><code>DXMT_CAPTURE_FRAME=3</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_CAPTURE_EXECUTABLE</code></td>
+            <td>Must be set to enable Metal frame capture. Press <kbd>F10</kbd> to generate a capture. The captured result will be stored in the same directory as the executable.</td>
+            <td><code>"executable name without extension"</code></td>
+            <td><code>DXMT_CAPTURE_EXECUTABLE="Palworld"</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_METALFX_SPATIAL_SWAPCHAIN</code></td>
+            <td>Enable MetalFX spatial upscaler on output swapchain. By default it will double the output resolution. Set <code>d3d11.metalSpatialUpscaleFactor</code> to a value between <code>1.0</code> and <code>2.0</code> to change the scale factor.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>DXMT_METALFX_SPATIAL_SWAPCHAIN=1</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_CONFIG_FILE</code></td>
+            <td>Sets path to the DXMT configuration file. Check <a target="_blank" href="https://github.com/3Shain/dxmt/blob/main/dxmt.conf" title="Example DXMT configuration file"><code>dxmt.conf</code></a> in <a target="_blank" href="https://github.com/3Shain/dxmt" title="Link to DXMT GitHub repository">DXMT GitHub repository</a> for reference.</td>
+            <td><code>/path/to/dxmt.conf</code></td>
+            <td><code>DXMT_CONFIG_FILE=/Users/lynkos/dxmt/dxmt.conf</code></td>
+        </tr>
+        <tr>
+            <td><code>DXMT_CONFIG</code></td>
+            <td>Can be used to set config variables through the environment instead of a configuration file using the same syntax. <code>;</code> is used as a separator. Set <code>d3d11.preferredMaxFrameRate</code> to enforce the application's frame pacing being controlled by Metal. The value must be a factor of your display's refresh rate (e.g. <code>15</code>, <code>30</code>, <code>40</code>, <code>60</code>, <code>120</code> are valid for a 120hz display).</td>
+            <td><code>"DXMT config variables separated with ;"</code></td>
+            <td><code>DXMT_CONFIG="d3d11.preferredMaxFrameRate=30;d3d11.metalSpatialUpscaleFactor=1.5;"</code></td>
+        </tr>
+    </tbody>
+</table>
+
+#### DXVK
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Options</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>DXVK_ASYNC</code></td>
+            <td>Enables async shader compilation in DXVK. Reduces stutter by allowing shaders to compile in the background, but may cause visual glitches. Needs a patched version of DXVK to work.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>DXVK_ASYNC=1</code></td>
+        </tr>
+        <tr>
+            <td><code>DXVK_HUD</code></td>
+            <td>Controls a HUD which can display FPS and some stat counters.</td>
+            <td>
+		        <ul>
+			        <li><code>1</code> (has the same effect as <code>devinfo,fps</code>)</li>
+			        <li><code>full</code> (enables all available HUD elements)</li>
+			        <li><code>devinfo</code> (displays the name of the GPU and the driver version)</li>
+			        <li><code>fps</code> (shows the current frame rate)</li>
+			        <li><code>frametimes</code> (shows a frame time graph)</li>
+			        <li><code>submissions</code> (shows the number of command buffers submitted per frame)</li>
+			        <li><code>drawcalls</code> (shows the number of draw calls and render passes per frame)</li>
+			        <li><code>pipelines</code> (shows the total number of graphics and compute pipelines)</li>
+			        <li><code>memory</code> (shows the amount of device memory allocated and used)</li>
+			        <li><code>gpuload</code> (shows estimated GPU load; may be inaccurate)</li>
+			        <li><code>version</code> (shows DXVK version)</li>
+			        <li><code>api</code> (shows the D3D feature level used by the application)</li>
+			        <li><code>compiler</code> (shows shader compiler activity)</li>
+			        <li><code>samplers</code> (shows the current number of sampler pairs used; <em>D3D9 Only</em>)</li>
+			        <li><code>scale=x</code> (scales the HUD by a factor of <code>x</code>)</li>
+		        </ul>
+            </td>
+            <td><code>DXVK_HUD=1</code></td>
+        </tr>
+          <tr>
+            <td><code>DXVK_FRAME_RATE</code></td>
+            <td>Can be used to limit the frame rate. Alternatively, the configuration file can be used.</td>
+            <td><code>0</code> uncaps the frame rate, while any positive value will limit rendering to the given number of frames per second</td>
+            <td><code>DXVK_FRAME_RATE=15</code></td>
+        </tr>
+          <tr>
+            <td><code>DXVK_FILTER_DEVICE_NAME</code></td>
+            <td>Some applications do not provide a method to select a different GPU. In that case, DXVK can be forced to use a given device. Selects devices with a matching Vulkan device name, which can be retrieved with tools such as <code>vulkaninfo</code>. Matches on substrings, so "VEGA" or "AMD RADV VEGA10" is supported if the full device name is "AMD RADV VEGA10 (LLVM 9.0.0)", for example. If the substring matches more than one device, the first device matched will be used. <strong>Note</strong>: If the device filter is configured incorrectly, it may filter out all devices and applications will be unable to create a D3D device.</td>
+            <td></td>
+            <td><code>DXVK_FILTER_DEVICE_NAME="Device Name"</code></td>
+        </tr>
+          <tr>
+            <td><code>DXVK_STATE_CACHE</code></td>
+            <td>Enables state cache in DXVK.</td>
+            <td><code>0</code> (OFF), <code>1</code> (ON)</td>
+            <td><code>DXVK_STATE_CACHE=0</code></td>
+        </tr>
+        <tr>
+            <td><code>DXVK_STATE_CACHE_PATH</code></td>
+            <td>Specifies a directory where to put the cache files. Defaults to the current working directory of the application.</td>
+            <td></td>
+            <td><code>DXVK_STATE_CACHE_PATH=/some/directory</code></td>
+        </tr>
+    </tbody>
+</table>
+
+#### MoltenVK
+> This section is still under construction. Please refer to [MoltenVK's configuration parameters file](https://github.com/KhronosGroup/MoltenVK/blob/main/Docs/MoltenVK_Configuration_Parameters.md) for the full list.
+{: .prompt-info }
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Options</th>
+            <th>Default</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE</code></td>
+            <td>Enumeration</td>
+            <td>If the <code>MVK_CONFIG_PERFORMANCE_TRACKING</code> parameter is enabled, this parameter controls when MoltenVK should log activity performance events.</td>
+            <td>
+	            <ul>
+		            <li><code>0</code>: Log repeatedly every number of frames configured by the <code>MVK_CONFIG_PERFORMANCE_LOGGING_FRAME_COUNT</code> parameter.</li>
+		            <li><code>1</code>: Log immediately after each performance measurement.</li>
+		            <li><code>2</code>: Log at the end of the VkDevice lifetime. This is useful for one-shot apps such as testing frameworks.</li>
+		            <li><code>3</code>: Log at the end of the VkDevice lifetime, but continue to accumulate across multiple VkDevices throughout the app process. This is useful for testing frameworks that create many VkDevices serially.</li>
+	            </ul>
+            </td>
+            <td><code>0</code></td>
+            <td><code>MVK_CONFIG_ACTIVITY_PERFORMANCE_LOGGING_STYLE=1</code></td>
+        </tr>
+         <tr>
+            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS</code></td>
+            <td>UInt32</td>
+            <td>Controls which extensions MoltenVK should advertise it supports in <code>vkEnumerateInstanceExtensionProperties()</code> and <code>vkEnumerateDeviceExtensionProperties()</code>. This can be useful when testing MoltenVK against specific limited functionality. Any prerequisite extensions are also advertised. If bit <code>1</code> is included, all supported extensions will be advertised. A value of zero means no extensions will be advertised.</td>
+            <td>The value of this parameter is a <code>Bitwise-OR</code> of the following values:
+	            <ul>
+		            <li><code>1</code>: All supported extensions.</li>
+		            <li><code>2</code>: WSI extensions supported on the platform.</li>
+		            <li><code>4</code>: Vulkan Portability Subset extensions.</li>
+	            </ul>
+	        </td>
+            <td><code>1</code></td>
+            <td><code>MVK_CONFIG_ADVERTISE_EXTENSIONS=2</code></td>
+        </tr>
+          <tr>
+            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE</code></td>
+            <td>UInt32</td>
+            <td>Controls the Vulkan API version that MoltenVK should advertise in <code>vkEnumerateInstanceVersion()</code>, after MoltenVK adds the <code>VK_HEADER_VERSION</code> component.</td>
+            <td>
+            	<ul>
+		            <li><code>4210688</code>: Decimal number for <code>VK_API_VERSION_1_4</code>.</li>
+		            <li><code>4206592</code>: Decimal number for <code>VK_API_VERSION_1_3</code>.</li>
+		            <li><code>4202496</code>: Decimal number for <code>VK_API_VERSION_1_2</code>.</li>
+		            <li><code>4198400</code>: Decimal number for <code>VK_API_VERSION_1_1</code>.</li>
+		            <li><code>4194304</code>: Decimal number for <code>VK_API_VERSION_1_0</code>.</li>
+		            <li><code>14</code>: Shorthand for <code>VK_API_VERSION_1_4</code>.</li>
+		            <li><code>13</code>: Shorthand for <code>VK_API_VERSION_1_3</code>.</li>
+		            <li><code>12</code>: Shorthand for <code>VK_API_VERSION_1_2</code>.</li>
+		            <li><code>11</code>: Shorthand for <code>VK_API_VERSION_1_1</code>.</li>
+		            <li><code>10</code>: Shorthand for <code>VK_API_VERSION_1_0</code>.</li>
+	            </ul>
+	        </td>
+            <td><code>4210688</code> (Decimal number for <code>VK_API_VERSION_1_4</code>)</td>
+            <td><code>MVK_CONFIG_API_VERSION_TO_ADVERTISE=12</code></td>
+        </tr>
+          <tr>
+            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE</code></td>
+            <td>String</td>
+            <td>If <code>MVK_CONFIG_AUTO_GPU_CAPTURE_SCOPE</code> is any value other than <code>0</code>, this is the path to a file where the automatic GPU capture will be saved. If this parameter is an empty string (the default), automatic GPU capture will be handled by the Xcode user interface.<br><br>If this parameter is set to a valid file path, the Xcode scheme need not have Metal GPU capture enabled, and in fact the app need not be run under Xcode's control at all. This is useful in case the app cannot be run under Xcode's control. A path starting with <code>~</code> can be used to place it in a user's home directory.</td>
+            <td>Some string value</td>
+            <td><code>""</code> (i.e. empty string)</td>
+            <td><code>MVK_CONFIG_AUTO_GPU_CAPTURE_OUTPUT_FILE="~/save/path/here"</code></td>
+        </tr>
+          <tr>
+            <td><code>NAME</code></td>
+            <td>TYPE</td>
+            <td>DESC</td>
+            <td>
+            	<ul>
+		            <li><code>NUM</code>: DESC.</li>
+	            </ul>
+            </td>
+            <td><code>DEFAULT</code></td>
+            <td><code>EXAMPLE</code></td>
+        </tr>
+	</tbody>
+</table>
+
 ### Logging
-This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts.
+> This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts
+{: .prompt-info }
+
+- Logging output will appear in the Terminal window in which you launch your game as well as the system log, which can be viewed with `/System/Applications/Utilities/Console.app`{: .filepath}
+- Log messages from the evolution environment for Windows games are prefixed with **D3DM** and are logged to the system log using the "D3DMetal" category. By default the `ee4wg*` scripts will filter to just the **D3DM**-prefixed messages.
+- If you are experiencing an issue and want to send logging information through [https://feedbackassistant.apple.com](https://feedbackassistant.apple.com), please attach and send the full logs without filtering to **D3DM**
 
 > The provided `bin/ee4wg*` scripts can be copied onto your path to facilitate different forms of logging and launching. You can run these scripts from any shell; you don’t need to switch to the Rosetta environment first.
 {: .prompt-tip }
 
-> - Logging output will appear in the Terminal window in which you launch your game as well as the system log, which can be viewed with `/System/Applications/Utilities/Console.app`{: .filepath}
-> - Log messages from the evolution environment for Windows games are prefixed with **D3DM** and are logged to the system log using the "D3DMetal" category. By default the `ee4wg*` scripts will filter to just the **D3DM**-prefixed messages.
-> - If you are experiencing an issue and want to send logging information through [https://feedbackassistant.apple.com](https://feedbackassistant.apple.com), please attach and send the full logs without filtering to **D3DM**
-
-### Debugging
-Using Metal Debugger. This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts.
-
-> You will need to [disable System Integrity Protection (SIP)](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection) to debug CrossOver's Wine processes.
-> Reenable SIP after you finish debugging.
+### Debugging with Metal Debugger
+> This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts.
+> 
+> You will need to [disable System Integrity Protection (SIP)](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection) to debug CrossOver's Wine processes. Be sure to reenable SIP after you finish debugging.
 {: .prompt-info }
 
-Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler.
+1. Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler
 
-In CrossOver, select a bottle to launch your game from.
+2. In CrossOver, select a bottle to launch your game from
 
-Enable **D3DMetal** in the **Advanced Settings** for the bottle.
+3. Enable **D3DMetal** in the **Advanced Settings** for the bottle
 
-Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
+4. Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
 
-```sh
-MTL_CAPTURE_ENABLED=1
-D3DM_DXIL_PROCESS_DEBUG_INFORMATION=1
-```
-{: .nolineno }
+	```sh
+	MTL_CAPTURE_ENABLED=1
+	D3DM_DXIL_PROCESS_DEBUG_INFORMATION=1
+	```
+	{: .nolineno }
 
-In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
+5. In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
 
-In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**.
+6. In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**
 
-Close Scheme.
+7. Close Scheme
 
-Click **Debug** > **Attach to Process** from the menubar and select your launched game process.
+8. Click **Debug** > **Attach to Process** from the menubar and select your launched game process
 
-After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
+9. After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
 
-> If `lldb` suspends the process due to handling `SIGUSR1`, you will need to run the following commands to ignore this signal and continue the process:
-> ```sh
-> process handle -pass false -stop false -notify false
-> SIGUSR1
-> continue
-> ```
-> {: .nolineno }
-{: .prompt-info }
-
-Clear terminal:
-- <kbd>CTRL</kbd> + <kbd>L</kbd>
-- `clear`
+	> If `lldb` suspends the process due to handling `SIGUSR1`, you will need to run the following commands to ignore this signal and continue the process:
+	> ```sh
+	> process handle -pass false -stop false -notify false
+	> SIGUSR1
+	> continue
+	> ```
+	> {: .nolineno }
+	> 
+	> To clear terminal:
+	> - <kbd>CTRL</kbd> + <kbd>L</kbd>
+	> - `clear`
+	{: .prompt-tip }
 
 ### Further Reading
 - [Game Porting Toolkit](https://www.applegamingwiki.com/wiki/Game_Porting_Toolkit) ([AppleGamingWiki](https://www.applegamingwiki.com))
@@ -3670,7 +3635,7 @@ Clear terminal:
 - [Metal Shader Converter](https://news.ycombinator.com/item?id=36298798)
 - [Steam Command Line Options](https://developer.valvesoftware.com/wiki/Command_line_options)
 - [Edit binary](https://danluu.com/edit-binary)
-- https://forum.winehq.org/viewtopic.php?t=30767
+- [Wine Windows Steam Gives "content servers unreachable" error](https://forum.winehq.org/viewtopic.php?t=30767)
 - [macOS dylib injection](https://blog.balliskit.com/macos-dylib-injection-at-scale-designing-a-self-sufficient-loader-da8799a56ada)
 - [How to Permanently Disable Steam Client Webhelper](https://www.reddit.com/r/Steam/comments/splcjs/how_to_permanently_disable_steam_client_webhelper)
 - [CrossOver Source](https://www.codeweavers.com/crossover/source)
@@ -3683,7 +3648,7 @@ Clear terminal:
 - [Steam Console parameters aka command-line options](https://gist.github.com/davispuh/6600880)
 - [DXMT Wiki](https://github.com/3Shain/dxmt/wiki)
 - [CrossOver User Guide](https://www.codeweavers.com/support/docs/crossover-mac/index)
-- [](https://www.how2shout.com/how-to/how-to-install-apple-game-porting-toolkit-gptk-on-macos.html)
+- [How to Install Apple Game Porting Toolkit (GPTK) on macOS](https://www.how2shout.com/how-to/how-to-install-apple-game-porting-toolkit-gptk-on-macos.html)
 
 ### References
 [^controller]: [Connect a wireless game controller to your Apple device](https://support.apple.com/en-us/111099) ([Apple Support](https://support.apple.com))
@@ -3703,3 +3668,7 @@ Clear terminal:
 [^disabledecorations]: [Disable Window Decorations in the Mac Driver](https://support.codeweavers.com/disable-window-decorations-in-the-mac-driver)
 [^restrictwine]: [Wine Bugs](https://bugs.winehq.org/show_bug.cgi?id=43277#c48)
 [^winetricksrepo]: [Winetricks GitHub repository](https://github.com/Winetricks/winetricks)
+[^fc3-audio]: [Can someone help me with this in game no sound problem?](https://www.reddit.com/r/farcry3/comments/2plbu5/can_someone_help_me_with_this_in_game_no_sound) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
+[^mac-game-audio]: [Mac Mini M1 Some games don't have sound - SOLVED (issue caused by MS Teams audio driver)](https://www.reddit.com/r/macgaming/comments/vrzuvl/mac_mini_m1_some_games_dont_have_sound_solved) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
+[^wine-dll-audio]: [Far Cry 4, Crossover 25.0.1, Macbook Pro M4 pro : Performance test](https://www.reddit.com/r/macgaming/comments/1ltcbcw/far_cry_4_crossover_2501_macbook_pro_m4_pro) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
+[^fc3-audio-fix]: [Far Cry 3 Audio Crackling issues (comment)](https://www.reddit.com/r/macgaming/comments/1jcw1w7/comment/mi81abl) ([/r/MacGaming](https://www.reddit.com/r/macgaming))

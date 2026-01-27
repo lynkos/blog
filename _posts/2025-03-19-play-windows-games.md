@@ -418,131 +418,131 @@ This is the most compatible option (compared to the others), as it has all the a
 {: .prompt-info }
 
 ### Install Game Porting Toolkit
-> Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
-> ![volumes.png](../assets/obsidian/volumes.png)
-{: .prompt-info }
-
 #### Setup Game Porting Toolkit
-> Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity, but you can just skip to 
+> Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity
 {: .prompt-important }
 
-Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
+1. Go to <a target="_blank" title="Link to Apple's Game Porting Toolkit site" href="https://developer.apple.com/games/game-porting-toolkit">the official page for Game Porting Toolkit</a>, scroll down to "**Evaluate your Windows executable on Apple silicon**", and click **Download the evaluation environment for Windows games**
 
-![gptk.png](../assets/obsidian/gptk.png)
+	![gptk.png](../assets/obsidian/gptk.png)
+	
+	> You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
+	{: .prompt-info }
 
-> You can also download Game Porting Toolkit in its entirety since it includes the evaluation environment, but it'll also include a bunch of stuff that you most likely won't use, such as example code, human interface guidelines, etc.
-{: .prompt-info }
+2. You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
 
-You'll be prompted to sign into your Apple account and create an Apple Developer account if you don't have one already (don't worry, it's free)
+	![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
 
-![apple_sign_in.png](../assets/obsidian/apple_sign_in.png)
+3. Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
 
-Once redirected to the downloads page, click **Evaluation environment for Windows games 2.1.dmg** to download the evaluation environment
-
-![download_gptk.png](../assets/obsidian/download_gptk.png)
+	![download_gptk.png](../assets/obsidian/download_gptk.png)
 
 
-Double-click the `.dmg` after it's downloaded to open/mount it
+4. Double-click the `.dmg` after it's downloaded to open/mount it
 
-![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
+	![gptk_downloads.png](../assets/obsidian/gptk_downloads.png)
 
-Click **Agree** to the license agreement
+5. Click **Agree** to the license agreement
 
-![license_agreement.png](../assets/obsidian/license_agreement.png)
+	![license_agreement.png](../assets/obsidian/license_agreement.png)
 
-Once mounted, it'll open a window that should look similar to this
+6. Once mounted, it'll open a window that should look similar to this
 
-![eval_env.png](../assets/obsidian/eval_env.png)
+	![eval_env.png](../assets/obsidian/eval_env.png)
 
-You should also be able to see it in "Finder"
+	You should also be able to see it in "Finder"
 
-![eval_env2.png](../assets/obsidian/eval_env2.png)
+	![eval_env2.png](../assets/obsidian/eval_env2.png)
 
-Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
+7. Download <a target="_blank" title="Link to Xcode on Apple Developer site" href="https://developer.apple.com/xcode/resources">Command Line Tools for Xcode</a>, which you will need to <a target="_blank" title="Link to Xcode in the App Store" href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">download via the App Store</a>
 
-![app_store.png](../assets/obsidian/app_store.png)
+	![app_store.png](../assets/obsidian/app_store.png)
 
-Run the `.pkg` file
+8. Run the `.pkg` file
 	- **Manually**: Double-click the `.pkg` file
 	- Via command line (where `PKG_PATH` is the path to the `.pkg` file): `installer -pkg PKG_PATH -target <target_path>`
 
-Open your terminal, then install Rosetta
+9. Open your terminal, then install Rosetta
 
-```sh
-softwareupdate --install-rosetta
-```
-{: .nolineno }
+	```sh
+	softwareupdate --install-rosetta
+	```
+	{: .nolineno }
 
-> If you want to automatically agree to license, add `--agree-to-license` to command
-> ```sh
-> softwareupdate --install-rosetta --agree-to-license
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+	> If you want to automatically agree to license, add `--agree-to-license` to command
+	> ```sh
+	> softwareupdate --install-rosetta --agree-to-license
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
 
-![iterm.png](../assets/obsidian/iterm.png)
+	![iterm.png](../assets/obsidian/iterm.png)
 
-Enter x86_64 shell; all subsequent commands **must** be run in this shell
+10. Enter x86_64 shell; all subsequent commands **must** be run in this shell
 
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
+	```sh
+	arch -x86_64 /bin/bash
+	```
+	{: .nolineno }
+	
+	![x86_iterm.png](../assets/obsidian/x86_iterm.png)
 
-![x86_iterm.png](../assets/obsidian/x86_iterm.png)
+11. Install x86 version of Homebrew
 
-Install x86 version of Homebrew
+	```sh
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	```
+	{: .nolineno }
+	
+	![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
 
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-{: .nolineno }
+12. Set the path, depending on the number of Homebrew versions you have
 
-![homebrew_iterm.png](../assets/obsidian/homebrew_iterm.png)
+	{% tabs set-brew-path %}
+	    ---TAB: x86 AND ARM64
+	        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
+	        ```sh
+			if [ "$(arch)" = "arm64" ]; then
+			  eval "$(/opt/homebrew/bin/brew shellenv)"
+			else
+			  eval "$(/usr/local/bin/brew shellenv)"
+			  export PATH="/usr/local/bin:${PATH}"
+			fi
+			```
+			{: file="$HOME/.bashrc" }
+	        {: .nolineno }
+	    ---TAB: x86 ONLY
+	        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
+			```sh
+			(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
+			eval "$(/usr/local/bin/brew shellenv)"
+			```
+	        {: .nolineno }
+	        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+	{% endtabs %}
 
-Set the path, depending on the number of Homebrew versions you have
+13. Since your shell config file has been updated, restart the terminal and return to x86_64 shell
 
-{% tabs set-brew-path %}
-    ---TAB: x86 AND ARM64
-        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
-        ```sh
-		if [ "$(arch)" = "arm64" ]; then
-		  eval "$(/opt/homebrew/bin/brew shellenv)"
-		else
-		  eval "$(/usr/local/bin/brew shellenv)"
-		  export PATH="/usr/local/bin:${PATH}"
-		fi
-		```
-		{: file="$HOME/.bashrc" }
-        {: .nolineno }
-    ---TAB: x86 ONLY
-        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
-		```sh
-		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
-		eval "$(/usr/local/bin/brew shellenv)"
-		```
-        {: .nolineno }
-        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
-{% endtabs %}
+	```sh
+	arch -x86_64 /bin/bash
+	```
+	{: .nolineno }
 
-Since your shell config file has been updated, restart the terminal and return to x86_64 shell
+14. Confirm path
 
-```sh
-arch -x86_64 /bin/bash
-```
-{: .nolineno }
+	```sh
+	which brew
+	```
+	{: .nolineno }
+	
+	![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
+	
+	> Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
+	{: .prompt-tip }
 
-Confirm path
+15. Make sure that GPTk's `.dmg` (downloaded from Apple's website) is already mounted; it should be located in `/Volumes` directory
 
-```sh
-which brew
-```
-{: .nolineno }
-
-![which_brew_iterm.png](../assets/obsidian/which_brew_iterm.png)
-
-> Update `PATH` environment variable (in your shell config file) if the previous command doesn't print `/usr/local/bin/brew`{: .filepath}; alternatively, you can fully specify the path to brew in the subsequent commands
-{: .prompt-tip }
+	![volumes.png](../assets/obsidian/volumes.png)
 
 #### Version 3.0
 Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
@@ -552,8 +552,7 @@ brew install --cask --no-quarantine gcenx/wine/game-porting-toolkit
 ```
 {: .nolineno }
 
-> Path to `wine` executable: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
-{: .prompt-info }
+The `wine` executable is located in: `/Applications/Game Porting Toolkit.app/Contents/Resources/wine/bin/wine64`{: .filepath}
 
 > Early in the macOS 16 Tahoe beta period these pre-built tools may still be carrying the prior version of D3DMetal. You can temporarily update these tools to use the latest version:
 > 
@@ -799,7 +798,7 @@ You can use the Automator app to create a new Application that will run Steam wh
 
 3. In the sidebar on the left, click  **Utilities**, then double-click  **Run Shell Script**
 
-4. Select` /bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
+4. Select `/bin/bash` as the shell and pass input **to stdin**, then paste the following in the textbox:
 
 	```sh
 	#!/bin/bash
@@ -821,11 +820,9 @@ You can use the Automator app to create a new Application that will run Steam wh
 
 6. Copy (i.e. right-click, then press **Copy Image**) the image you want to use as your icon (preferably `.icns` file format)
 
-	> This is the app icon I use for Steam (Windows); click on the image to download it
+	> This is the [app icon](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of)[^steam-app-icon] I use for Steam (Windows); you'll need to convert it to Apple's `.icns` file format
 	> 
-	> ![steam_icon.webp](../assets/obsidian/steam_icon.webp) ([source](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of))
-	> 
-	> You'll need to convert it to Apple's `.icns` file format
+	> ![steam_icon.webp](../assets/obsidian/steam_icon.webp)
 	{: .prompt-tip }
 
 7. Find the application you saved earlier, right-click it, then click **Get Info**
@@ -870,9 +867,6 @@ Continue reading if you want easy, quick, and convenient access to both your Mac
 ![steam_folder.png](../assets/obsidian/steam_folder.png)
 ![steam_folder2.jpg](../assets/obsidian/steam_folder2.jpg)
 
-> Complete all steps in [Method 1 Automator](2025-03-19-play-windows-games.md#method-1-automator); this is necessary to create a clickable `.app` for the Windows version of Steam (i.e. `Windows (Steam).app`)
-{: .prompt-important }
-
 1. Change directory to `Applications`
 
 	```sh
@@ -897,7 +891,8 @@ Continue reading if you want easy, quick, and convenient access to both your Mac
 4. Find and download a folder icon you like (preferably `.icns` file format)
 
 	> This is the folder icon I use
-	> <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
+	> 
+	> <a target="_blank" href="https://macosicons.com/#/?icon=1QWV8oirpJ"><img alt="Steam folder icon" src="https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/c57cb1eb327518cf548ab8bfde8b821b_1QWV8oirpJ.png"></a>
 	{: .prompt-tip }
 
 4. Once downloaded, select the folder icon and copy it, either with <kbd>⌘</kbd> + <kbd>C</kbd> (i.e. <kbd>CMD</kbd> + <kbd>C</kbd>), or you can manually right-click the icon and click **Copy**
@@ -3670,3 +3665,4 @@ Rename `winemetal_i386-windows.dll` in `e` to `winemetal.dll` for 32 bit. 64 bit
 [^mac-game-audio]: [Mac Mini M1 Some games don't have sound - SOLVED (issue caused by MS Teams audio driver)](https://www.reddit.com/r/macgaming/comments/vrzuvl/mac_mini_m1_some_games_dont_have_sound_solved) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
 [^wine-dll-audio]: [Far Cry 4, Crossover 25.0.1, Macbook Pro M4 pro : Performance test](https://www.reddit.com/r/macgaming/comments/1ltcbcw/far_cry_4_crossover_2501_macbook_pro_m4_pro) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
 [^fc3-audio-fix]: [Far Cry 3 Audio Crackling issues (comment)](https://www.reddit.com/r/macgaming/comments/1jcw1w7/comment/mi81abl) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
+[^steam-app-icon]: [Some app icons I've made over the last couple of days. Spotify, Steam, Discord, and Chrome (Cycles)](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of) ([/r/Blender](https://www.reddit.com/r/blender))

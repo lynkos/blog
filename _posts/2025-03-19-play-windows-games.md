@@ -816,6 +816,7 @@ _Screenshot of Palworld running via DXMT_
 _Screenshot of Far Cry 3 running via DXMT_
 
 ### Stop Running Wine
+#### Solution 1: CLI
 All running `wine` and `wineconsole` processes are stopped at once using the [`wineserver -k`](https://gitlab.winehq.org/wine/wine/-/wikis/Wine-User's-Guide#-k-n) command.
 
 ```sh
@@ -836,6 +837,16 @@ Alternatively, try this command:
 killall -9 wineserver && killall -9 wine64-preloader
 ```
 {: .nolineno }
+
+#### Solution 2: Activity Monitor
+1. Open **Activity Monitor**
+2. In the search bar, type **wine** and hit <kbd>Enter</kbd>
+3. Select all Wine processes with <kbd>⌘</kbd> + <kbd>A</kbd>
+4. Once all Wine-related processes are selected, click the **Stop** icon
+   ![wine_process_activity_monitor.png](../assets/obsidian/wine_process_activity_monitor.png)
+5. Click <kbd>Quit</kbd>
+   ![quit_wine_activity_monitor.png](../assets/obsidian/quit_wine_activity_monitor.png)
+6. If not all of the processes end, you can try again with <kbd>Force Quit</kbd> 
 
 ## Appendix
 ### Environment Variables

@@ -337,13 +337,16 @@ This version of Wine can be used with DXMT and DXVK.
 	```
 	{: .nolineno }
 
+> 64 bit is default, so if switching to 32 bit games, rename current `winemetal.dll` to `winemetal_x86_64-windows.dll`, then rename `winemetal_i386-windows.dll` to `winemetal.dll`
+{: .prompt-info }
+
 ### Install DXVK
 > Make sure to download Wine before continuing; see [Install Wine](2025-03-19-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
 DXVK is a Vulkan-based translation layer for Direct3D 8/9/10/11 (Linux) // Direct3D 10/11 (macOS), which allows running 3D applications with Wine.
 
-MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so use modified fork [DXVK-macOS](https://github.com/Gcenx/DXVK-macOS).
+MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK, so use modified fork [DXVK-macOS](https://github.com/Gcenx/DXVK-macOS).
 
 > DXVK/Vulkan use the following env: `export MVK_CONFIG_RESUME_LOST_DEVICE=1`
 > (wine doesn't handle `VK_ERROR_DEVICE_LOST` correctly)
@@ -389,32 +392,6 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK so 
 	{: .nolineno }
 
 > There shouldn't be (i.e. don't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
-{: .prompt-info }
-
-### Install CrossOver
-This is the most compatible option (compared to the others), as it has all the aforementioned graphics APIs. You can either [purchase it from CodeWeavers](https://www.codeweavers.com/crossover/download), or install it via Homebrew:
-
-1. Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
-
-	```sh
-	brew install --cask --no-quarantine gcenx/wine/wine-crossover
-	```
-	{: .nolineno }
-
-2. Create symlink
-
-	```sh
-	ln -s "/Applications/Wine Crossover.app/Contents/Resources/wine" "$HOME/Wine/23.7.1-crossover"
-	```
-	{: .nolineno }
-
-> CrossOver's game porting toolkit lib path:
-> 
-> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`{: .filepath}
-> 
-> CrossOver's wine path:
-> 
-> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine`{: .filepath}
 {: .prompt-info }
 
 ### Install Game Porting Toolkit
@@ -498,28 +475,28 @@ This is the most compatible option (compared to the others), as it has all the a
 
 12. Set the path, depending on the number of Homebrew versions you have
 
-	{% tabs set-brew-path %}
-	    ---TAB: x86 AND ARM64
-	        If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
-	        ```sh
-			if [ "$(arch)" = "arm64" ]; then
-			  eval "$(/opt/homebrew/bin/brew shellenv)"
-			else
-			  eval "$(/usr/local/bin/brew shellenv)"
-			  export PATH="/usr/local/bin:${PATH}"
-			fi
-			```
-			{: file="$HOME/.bashrc" }
-	        {: .nolineno }
-	    ---TAB: x86 ONLY
-	        If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
-			```sh
-			(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
-			eval "$(/usr/local/bin/brew shellenv)"
-			```
-	        {: .nolineno }
-	        ![eval_iterm.png](../assets/obsidian/eval_iterm.png)
-	{% endtabs %}
+{% tabs set-brew-path %}
+	---TAB: x86 AND ARM64
+		If you use **both x86 _and_ ARM64** versions of Homebrew, you can add the following to `.bashrc` (or your preferred shell config file) so it automatically switches based off architecture type
+		```sh
+		if [ "$(arch)" = "arm64" ]; then
+		  eval "$(/opt/homebrew/bin/brew shellenv)"
+		else
+		  eval "$(/usr/local/bin/brew shellenv)"
+		  export PATH="/usr/local/bin:${PATH}"
+		fi
+		```
+		{: file="$HOME/.bashrc" }
+		{: .nolineno }
+	---TAB: x86 ONLY
+		If you **only have x86** version of Homebrew (which was installed in the previous step), execute this command to append the path (`eval "$(/usr/local/bin/brew shellenv)"`) to `.bash_profile`
+		```sh
+		(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> $HOME/.bash_profile
+		eval "$(/usr/local/bin/brew shellenv)"
+		```
+		{: .nolineno }
+		![eval_iterm.png](../assets/obsidian/eval_iterm.png)
+{% endtabs %}
 
 13. Since your shell config file has been updated, restart the terminal and return to x86_64 shell
 
@@ -544,7 +521,7 @@ This is the most compatible option (compared to the others), as it has all the a
 
 	![volumes.png](../assets/obsidian/volumes.png)
 
-#### Version 3.0
+#### Method 1: Prebuilt
 Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
 
 ```sh
@@ -566,7 +543,10 @@ The `wine` executable is located in: `/Applications/Game Porting Toolkit.app/Con
 > {: .nolineno }
 {: .prompt-tip }
 
-#### Version 2.1 (OUTDATED)
+#### Method 2: Build
+> You can't build any versions after **Version 2.1** since it's out of date, so refer to [Method 1 Prebuilt](2025-03-19-play-windows-games.md#method-1-prebuilt) instead and ignore this section
+{: .prompt-warning }
+
 1. Download Apple tap
 
 	```sh
@@ -651,12 +631,38 @@ You can use the installer script in [Steam Installer](2025-03-19-play-windows-ga
 	```
 	{: .nolineno }
 
-3. If it works, continue to [Usage](2025-03-19-play-windows-games.md#usage) section. Otherwise, follow the steps in [[#`steamwebhelper` not responding]] section before moving onto the [Usage](2025-03-19-play-windows-games.md#usage) section.
+3. If it works, continue to [Usage](2025-03-19-play-windows-games.md#usage) section. Otherwise, follow the steps in [steamwebhelper not responding](2025-03-19-play-windows-games.md#steamwebhelper-not-responding) section before moving onto the [Usage](2025-03-19-play-windows-games.md#usage) section.
+
+### Install CrossOver
+This is the most compatible option (compared to the others), as it has all the aforementioned graphics APIs. You can either [purchase it from CodeWeavers](https://www.codeweavers.com/crossover/download), or install it via Homebrew:
+
+1. Install pre-built version of CrossOver v23.7.1 (Wine 8.0.1) via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
+
+	```sh
+	brew install --cask --no-quarantine gcenx/wine/wine-crossover
+	```
+	{: .nolineno }
+
+2. Create symlink
+
+	```sh
+	ln -s "/Applications/Wine Crossover.app/Contents/Resources/wine" "$HOME/Wine/23.7.1-crossover"
+	```
+	{: .nolineno }
+
+> CrossOver's game porting toolkit lib path:
+> 
+> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/lib64/apple_gptk/external/`{: .filepath}
+> 
+> CrossOver's wine path:
+> 
+> `/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/CrossOver-Hosted Application/wine`{: .filepath}
+{: .prompt-info }
 
 ### Install Winetricks
 According to the Winetricks GitHub repository[^winetricksrepo], "Winetricks is an easy way to work around problems in Wine. It has a menu of supported applications for which it can do all the workarounds automatically. It also allows the installation of missing DLLs and tweaking of various Wine settings."
 
-The installation process is straightforward and relatively simple:
+#### Method 1: Package Manager
 
 {% tabs install-winetricks %}
     ---TAB: Homebrew
@@ -673,9 +679,27 @@ The installation process is straightforward and relatively simple:
 
 I recommend using Homebrew, since the MacPorts version is out-of-date.
 
-Alternatively, you can manually install it by downloading the [latest version directly](https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks). For previous versions, check out [their releases](https://github.com/Winetricks/winetricks/releases).
+#### Method 2: Manually
+1. Uninstall any previous versions of Winetricks (if applicable)
 
-If you choose to manually install, make sure to uninstall any previous versions of Winetricks (if applicable). Then extract the archive, `cd` into the extracted folder, and run `sudo make install`. There's also an installer script provided by Winetricks that you can find in [Winetricks Installer](2025-03-19-play-windows-games.md#winetricks-installer).
+2. Download the [latest version](https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks)
+
+	> For previous versions, check out [their releases](https://github.com/Winetricks/winetricks/releases)
+	{: .prompt-info }
+
+3. Extract the archive
+
+4. `cd` into the extracted folder
+
+5. Run the following:
+
+	```sh
+	sudo make install
+	```
+	{: .nolineno }
+
+#### Method 3: Installer Script
+Refer to the installer script at [Winetricks Installer](2025-03-19-play-windows-games.md#winetricks-installer).
 
 ## Configuration
 Configuring Wine is typically accomplished using:
@@ -2193,7 +2217,6 @@ echo "DXMT installation complete!"
 This script is taken directly from Winetricks GitHub repository[^winetricksrepo].
 
 ##### Method 1: `sudo`
-
 ```sh
 #!/bin/sh
 
@@ -2436,12 +2459,9 @@ MTL_HUD_ENABLED=1 WINEESYNC=1 WINEPREFIX="$1" `brew --prefix game-porting-toolki
 ```
 {: file="/usr/local/bin/gameportingtoolkit" }
 
-#### Shell Shortcut
-// TODO
-
 ### Troubleshooting
 #### Game Porting Toolkit
-This section is taken directly from different Game Porting Toolkit's `README.md` files, hence the blockquotes.
+Most of this section is taken directly from different Game Porting Toolkit's `README.md` files, hence the blockquotes.
 
 ##### Game won't run and crashes with an invalid instruction or complains about lack of certain instruction extensions
 > Invalid instruction crashes are sometimes caused when the Rosetta 2 instruction translation layer is unable to translate CPU instructions. You may be able to recompile a version of your game without certain instructions in order to evaluate its potential on Apple Silicon with the Game Porting Toolkit when you hit this error. You may also be able to use the `ROSETTA_ADVERTISE_AVX` environment variable to ensure your game recognizes available translation instruction extensions. When porting your code natively to Apple Silicon there are a variety or NEON and ARM instructions which offer high-performance replacements for AVX / AVX2, BMI, F16c and other less common instruction set extensions.
@@ -2509,8 +2529,14 @@ To enable experimental [MetalFX](https://developer.apple.com/videos/play/wwdc202
 Refer to [MetalFX Integration](2025-03-19-play-windows-games.md#metalfx-integration) for Bash script.
 
 #### Steam
-##### `steamwebhelper` not responding
-Complete the following steps if you updated Steam to the latest version and/or get an error along the lines of **steamwebhelper, a critical Steam component, is not responding. The Steam UI will not be usable.** This error is common when using an outdated version of Wine with a new version of Steam.
+##### steamwebhelper not responding
+Complete the following steps if you updated Steam to the latest version and/or get an error along the lines of:
+
+```plaintext
+steamwebhelper, a critical Steam component, is not responding. The Steam UI will not be usable.
+```
+
+This error is common when using an outdated version of Wine with a new version of Steam.
 
 1. If you haven't already, set your `WINEPREFIX` (aka bottle), otherwise it'll default to `$HOME/.wine`
 
@@ -2545,32 +2571,32 @@ Complete the following steps if you updated Steam to the latest version and/or g
 
 5. Downgrade your Steam version
 
-	> Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
-	{: .prompt-warning }
+> Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
+{: .prompt-warning }
 	
-	{% tabs downgrade-steam %}
-	    ---TAB: 3/6/2025
-	        This will restore an older Steam version from 3/6/2025
-	        ```sh
-	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
-	        ```
-	        {: .nolineno }
-	    ---TAB: 1/28/2025
-	        If that doesn't work, try this Steam version from 1/28/2025
-	        ```sh
-	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
-	        ```
-	        {: .nolineno }
-	    ---TAB: 5/20/2024
-	        If that doesn't work, try this Steam version from 5/20/2024
-	        ```sh
-	        steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
-	        ```
-	        {: .nolineno }
-	{% endtabs %}
-	
-	> The link will not open in a browser, however, it is still active
-	{: .prompt-info }
+{% tabs downgrade-steam %}
+	---TAB: 3/6/2025
+		This will restore an older Steam version from 3/6/2025
+		```sh
+		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
+		```
+		{: .nolineno }
+	---TAB: 1/28/2025
+		If that doesn't work, try this Steam version from 1/28/2025
+		```sh
+		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
+		```
+		{: .nolineno }
+	---TAB: 5/20/2024
+		If that doesn't work, try this Steam version from 5/20/2024
+		```sh
+		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
+		```
+		{: .nolineno }
+{% endtabs %}
+
+> The link will not open in a browser, however, it is still active
+{: .prompt-info }
 
 6. Exit
 
@@ -2602,12 +2628,13 @@ Complete the following steps if you updated Steam to the latest version and/or g
 	```
 	{: .nolineno }
 
-	Optional args for `steam.exe` (tho including them caused some issues):
-	
-	```sh
-	-noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
-	```
-	{: .nolineno }
+> Optional args for `steam.exe` (tho including them caused some issues):
+> 
+> ```sh
+> -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
+> ```
+> {: .nolineno }
+{: .prompt-tip }
 
 ##### Steam download freezes
 This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
@@ -2726,34 +2753,40 @@ Source[^steamconsole]
 	```
 	{: .nolineno }
 
-ALTERNATIVELY, continue reading if you want to use a script instead
+**ALTERNATIVELY**, continue reading if you want to use a script instead
 
-```plaintext
-@ShutdownOnFailedCommand 1
-@NoPromptForPassword 1
-@sSteamCmdForcePlatformType windows
+1. Create a file `install_game.txt` with the following contents, and replace the :
 
-force_install_dir <APP_PATH>
-login <STEAM_USERNAME> <STEAM_PASSWORD>
+	```plaintext
+	@ShutdownOnFailedCommand 1
+	@NoPromptForPassword 1
+	@sSteamCmdForcePlatformType windows
+	
+	// Install game into <APP_PATH>
+	force_install_dir <APP_PATH>
+	
+	// Log into your Steam account
+	login <STEAM_USERNAME> <STEAM_PASSWORD>
+	// OR if you don't want to login, remove the previous line and uncomment the next line
+	// login anonymous
+	
+	// To find your Steam game's app ID: https://steamdb.info
+	app_update <APP_ID> validate
+	
+	quit
+	```
+	{: file="install_game.txt" }
 
-// Use this instead if you don't want to login
-// login anonymous
+2. Run script with the `+runscript` option
 
-app_update <APP_ID> validate
-quit
-```
-{: file="install_game.txt" }
-
-Run script with the `+runscript` option, where `<SCRIPT_NAME>` is your script's filename (e.g. `install_game.txt`)
-
-```sh
-./steamcmd.sh +runscript <SCRIPT_NAME>
-```
-{: .nolineno }
-
-> - If you get an error like `Failed to load script file '<SCRIPT_NAME>'`, try providing an absolute path, e.g. `/absolute/path/to/<SCRIPT_NAME>`
-> - If you get an error like `Failed to install app '<APP_ID>' (No subscription)`, the game/server you are trying to download either requires a login or that you have purchased the game. You will therefore have to log in with a Steam username and password (i.e. use `login <STEAM_USERNAME> <STEAM_PASSWORD>` instead of `login anonymous`).
-{: .prompt-info }
+	```sh
+	./steamcmd.sh +runscript install_game.txt
+	```
+	{: .nolineno }
+	
+	> - If you get an error like `Failed to load script file '<SCRIPT_NAME>'`, try providing an absolute path, e.g. `/absolute/path/to/<SCRIPT_NAME>`
+	> - If you get an error like `Failed to install app '<APP_ID>' (No subscription)`, the game/server you are trying to download either requires a login or that you have purchased the game. You will therefore have to log in with a Steam username and password (i.e. use `login <STEAM_USERNAME> <STEAM_PASSWORD>` instead of `login anonymous`).
+	{: .prompt-info }
 
 The aforementioned script is functionally the same as:
 
@@ -3108,15 +3141,15 @@ You should allocate enough memory [in the pool] by creating multiple pools.
 Some older games and applications assume that the current working directory is the same as that which the executable is in. Launching these executables from other locations will prevent them from starting correctly. Use `cd path_containing_exe` before invoking Wine to rule this possibility out.
 
 ##### "Operation not permitted" error
-macOS often restricts Terminal access to certain system-related directories, which can cause the "Operation not permitted" error when trying to delete certain files.
+macOS often restricts Terminal/iTerm access to certain system-related directories, which can cause the "Operation not permitted" error when trying to delete certain files.
 
-To grant Terminal full disk access:
+To grant full disk access:
 
 1. Open <kbd>System Preferences</kbd>
 
 2. Go to <kbd>Privacy & Security</kbd> > <kbd>Full Disk Access</kbd>
 
-3. Grant iTerm/Terminal full disk access (if it's not already listed, click the Plus (**+**) button to add an application and choose Terminal / iTerm)
+3. Grant Terminal/iTerm full disk access (if it's not already listed, click the Plus (**+**) button to add an application and choose Terminal/iTerm)
 
 ### Environment Variables
 #### Wine
@@ -3322,7 +3355,6 @@ Environment variables can be used to control some aspects of translation and emu
 </table>
 
 #### DXMT
-Rename `winemetal_i386-windows.dll` in `e` to `winemetal.dll` for 32 bit. 64 bit is default; so if switching to 32bit, rename current `winemetal.dll` to `winemetal_x86_64-windows.dll` before renaming the 32bit one.
 
 <table>
     <thead>

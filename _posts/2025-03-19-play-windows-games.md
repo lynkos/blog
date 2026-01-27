@@ -3604,18 +3604,18 @@ Environment variables can be used to control some aspects of translation and emu
 {: .prompt-tip }
 
 ### Debugging with Metal Debugger
-> This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts.
-> 
-> You will need to [disable System Integrity Protection (SIP)](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection) to debug CrossOver's Wine processes. Be sure to reenable SIP after you finish debugging.
+> This subsection is taken directly from Game Porting Toolkit's `README.md` file and has been modified in some parts
 {: .prompt-info }
 
-1. Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler
+1. [Disable System Integrity Protection (SIP)](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection)
 
-2. In CrossOver, select a bottle to launch your game from
+2. Compile your shaders with embedded debug information ([https://developer.apple.com/metal/shader-converter/#shader](https://developer.apple.com/metal/shader-converter/#shader)) by passing `-Zi -Qembed_debug` to the DX Compiler
 
-3. Enable **D3DMetal** in the **Advanced Settings** for the bottle
+3. In CrossOver, select a bottle to launch your game from
 
-4. Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
+4. Enable **D3DMetal** in the **Advanced Settings** for the bottle
+
+5. Launch your game by clicking **Run Command**, choosing your game executable, and inserting the following environment variables to enable Metal debugging and processing of debug information:
 
 	```sh
 	MTL_CAPTURE_ENABLED=1
@@ -3623,15 +3623,15 @@ Environment variables can be used to control some aspects of translation and emu
 	```
 	{: .nolineno }
 
-5. In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
+6. In Xcode, click **Debug** > **Debug Executable…** from the menubar and select `CrossOver.app` (this is just to get a workspace window open)
 
-6. In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**
+7. In the visible Scheme options, click the **Options** tab and change **GPU Frame Capture** from **Automatically** to **Metal**
 
-7. Close Scheme
+8. Close Scheme
 
-8. Click **Debug** > **Attach to Process** from the menubar and select your launched game process
+9. Click **Debug** > **Attach to Process** from the menubar and select your launched game process
 
-9. After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
+10. After the debugger attaches to the process, you can [capture your Metal workload](https://developer.apple.com/documentation/xcode/capturing-a-metal-workload-in-xcode#Capture-your-Metal-workload-while-debugging).
 
 	> If `lldb` suspends the process due to handling `SIGUSR1`, you will need to run the following commands to ignore this signal and continue the process:
 	> ```sh
@@ -3645,6 +3645,8 @@ Environment variables can be used to control some aspects of translation and emu
 	> - <kbd>CTRL</kbd> + <kbd>L</kbd>
 	> - `clear`
 	{: .prompt-tip }
+
+11. Reenable SIP after you finish debugging
 
 ### Further Reading
 - [Game Porting Toolkit](https://www.applegamingwiki.com/wiki/Game_Porting_Toolkit) ([AppleGamingWiki](https://www.applegamingwiki.com))

@@ -2986,25 +2986,7 @@ Another option is to [install Microsoft's TrueType fonts](https://wiki.archlinux
 
 After running such programs, kill all Wine servers and run `winecfg`. Fonts should be legible now.
 
-##### Smeared fonts
-If the fonts look somehow smeared, run the following command to change a setting in the Wine registry.
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N'
-```
-{: .nolineno }
-
-##### Disable anti-aliased fonts
-Disable anti-aliased fonts[^disableantialias]
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
-```
-{: .nolineno }
-
-##### Enable font smoothing
+##### Font smoothing
 Font smoothing improves the font's display resolution and font rendering.
 
 ###### Method 1: Winetricks
@@ -3014,12 +2996,49 @@ winetricks fontsmooth=rgb
 {: .nolineno }
 
 ###### Method 2: Regedit
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
-```
-{: .nolineno }
+
+{% tabs font-smoothing %}
+	---TAB: Anti-alias
+		Enable anti-alias
+		```sh
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
+		```
+		{: .nolineno }
+		If the fonts look somehow smeared, disable anti-aliased fonts
+		```sh
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
+		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
+		```
+		{: .nolineno }
+	---TAB: Subpixel smoothing
+		Enable subpixel smoothing/rendering/anti-aliasing (ClearType) RGB
+		```sh
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+		```
+		{: .nolineno }
+		Disable subpixel smoothing
+		```sh
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+		```
+	---TAB: Font smoothing
+		Enable standard font smoothing
+		```sh
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
+		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+		```
+		{: .nolineno }
+{% endtabs %}
 
 `HKEY_CURRENT_USER\Control Panel\Desktop` keys:
 
@@ -3038,35 +3057,7 @@ wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRend
 	- Value `1`: RGB format (red, green, blue) for LCD, normal
 	- ~~Value `2`: BGR format (blue, green, red) for LCD~~
 
-Enable subpixel smoothing/rendering/anti-aliasing (ClearType) RGB[^fontsmooth]:
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-```
-{: .nolineno }
-
-Enable standard font smoothing[^improvegui]:
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-```
-{: .nolineno }
-
-Disable subpixel smoothing/rendering/anti-aliasing:
-
-```sh
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-```
-{: .nolineno }
+Source 1[^disableantialias], Source 2[^fontsmooth], Source 3[^improvegui]
 
 #### Keyboard
 ##### Fix keyboard shortcuts

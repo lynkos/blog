@@ -978,14 +978,24 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 
 #### Adjust game controller
 > Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
+> 
+> Here's a list of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
+> - Xbox Wireless Controller with Bluetooth (Model 1708)
+> - Xbox Wireless Controller Series S
+> - Xbox Wireless Controller Series X
+> - Xbox Elite Wireless Controller Series 2
+> - Xbox Adaptive Controller
+> - PlayStation DualShock 4 Wireless Controller
+> - PlayStation 5 DualSense Wireless Controller
+> - PlayStation 5 DualSense Edge Wireless Controller
 {: .prompt-info }
 
 1. I recommend disabling the "Home" button to prevent it from opening Launchpad; this can be useful when using Steam's Big Picture mode
 
-```sh
-defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
-```
-{: .nolineno }
+	```sh
+	defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
+	```
+	{: .nolineno }
 
 2. I also recommend disabling the "Share" button
 
@@ -1003,16 +1013,6 @@ defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integ
 	
 	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
 	{: .prompt-tip }
-
-Here's a list of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
-- Xbox Wireless Controller with Bluetooth (Model 1708)
-- Xbox Wireless Controller Series S
-- Xbox Wireless Controller Series X
-- Xbox Elite Wireless Controller Series 2
-- Xbox Adaptive Controller
-- PlayStation DualShock 4 Wireless Controller
-- PlayStation 5 DualSense Wireless Controller
-- PlayStation 5 DualSense Edge Wireless Controller
 
 #### Update MoltenVK
 [MoltenVK](https://github.com/KhronosGroup/MoltenVK) is a layered implementation of [Vulkan](https://www.khronos.org/vulkan) graphics and compute functionality, built on Apple's [Metal](https://developer.apple.com/metal) graphics and compute framework. This allows Vulkan applications to run on top of Metal on Apple's macOS, iOS, and tvOS operating systems.

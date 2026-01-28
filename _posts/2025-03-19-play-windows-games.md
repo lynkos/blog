@@ -2142,7 +2142,7 @@ su root sh -c 'mv update_winetricks /usr/bin/'
 ```
 
 #### Automate Steam Downloads
-If you'd prefer to do this manually, refer to [Solution 2 SteamCMD](2025-03-19-play-windows-games.md#solution-2-steamcmd). Alternatively, check out [Solution 1 Steam Console](2025-03-19-play-windows-games.md#solution-1-steam-console) for an alternate method.
+If you'd prefer to do this manually, refer to [Method 2 SteamCMD](2025-03-19-play-windows-games.md#method-2-steamcmd). Alternatively, check out [Method 1 Steam Console](2025-03-19-play-windows-games.md#method-1-steam-console) for an alternate solution.
 
 ```bash
 #!/usr/bin/env bash

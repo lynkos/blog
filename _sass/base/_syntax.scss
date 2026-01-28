@@ -115,10 +115,13 @@ div[class^='language-'] {
   overflow-x: auto;
   display: flow-root;
 
+  // Fixes sizing issue in smaller screens
+  margin: 0 !important;
+
   .content > & {
     @include mx.ml-mr(-1rem);
 
-    border-radius: 0;
+    // border-radius: 0;
 
     @include bp.sm {
       @include mx.ml-mr(0);

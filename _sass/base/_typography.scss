@@ -178,7 +178,7 @@ main {
       > blockquote[class^='prompt-'] {
         @include mx.ml-mr(-1rem);
 
-        border-radius: 0;
+        // border-radius: 0;
         max-width: none;
       }
     }

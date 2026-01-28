@@ -264,6 +264,11 @@ main {
           @extend %table-cell;
         }
       }
-    } /* tbody */
-  } /* table */
+    }
+
+    /* Remove spacing below <ul> elements in <table> element */
+    ul, ol, dl {
+      margin: 0;
+    }
+  }
 }

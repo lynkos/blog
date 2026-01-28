@@ -309,10 +309,3 @@
     text-anchor: middle;
   }
 }
-
-/* Remove spacing below <ul> elements in <table> element */
-table {
-  ul, ol, dl {
-    margin: 0;
-  }
-}

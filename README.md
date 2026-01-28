@@ -27,7 +27,7 @@
   <a target="_blank" href="https://deepwiki.com/lynkos/blog" title="DeepWiki for lynkos/blog repository"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
   <br><br>
   
-  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been **heavily modified** to include a [graph view plugin](_plugins/graph-generator.rb), [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), [link preview](_javascript/modules/components/link-preview.js), [image proxy](#setup-image-proxy) (e.g. for Twitter links), [Jekyll plugin to fix malformed Markdown links](_plugins/fix-anchor-links.rb), auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml), custom "Important" prompt, and more.
+  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been **heavily modified** to include a [graph view plugin](_plugins/graph-generator.rb), [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), [link preview](_javascript/modules/components/link-preview.js), [image proxy](#setup-image-proxy) (e.g. for Twitter links), [Jekyll plugin to fix malformed Markdown links](_plugins/fix-anchor-links.rb), auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml), custom "Important" prompt, custom <code>details</code> styling, and more.
 </div>
 
 ## Quick Start

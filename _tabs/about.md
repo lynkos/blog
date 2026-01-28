@@ -92,5 +92,5 @@ Here are some of my research interests:
     </tbody>
 </table>
 
-> This website's theme is a modified, custom version of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a>, for which full credit goes to <a target="_blank" href="https://github.com/cotes2020" title="Link to cotes2020 profile on GitHub">Cotes Chung (aka <code>cotes2020</code>)</a>. See the <a target="_blank" href="https://github.com/cotes2020/chirpy-starter/blob/main/LICENSE" title="Link to Chirpy Jekyll theme's license">original MIT license here</a>.
+> This website's theme is a <a target="_blank" href="https://github.com/lynkos/blog" title="Link to this website's GitHub repository">custom, heavily modified fork</a> of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a>, for which full credit goes to <a target="_blank" href="https://github.com/cotes2020" title="Link to cotes2020 profile on GitHub">Cotes Chung (aka <code>cotes2020</code>)</a>. See the <a target="_blank" href="https://github.com/cotes2020/chirpy-starter/blob/main/LICENSE" title="Link to Chirpy Jekyll theme's license">original MIT license here</a>.
 {: .prompt-info }

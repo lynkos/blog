@@ -185,6 +185,61 @@ main {
   }
 }
 
+/* --- Details element --- */
+::details-content {
+  background: var(--card-bg);
+  border-radius: 0 0 v.$radius-lg v.$radius-lg;
+}
+
+details {
+  border: 1px solid var(--language-border-color);
+  border-radius: v.$radius-lg;
+
+  summary {
+    font-weight: 600;
+    font-size: 1.18rem;
+    position: relative;
+    anchor-name: --summary;
+    color: var(--btn-backtotop-color);
+    background: var(--highlight-bg-color);
+    padding: .5rem .75rem .5rem 2rem;
+    border-radius: v.$radius-lg;
+    
+  
+    &::marker {
+      content: "";
+    }
+    
+    &::before {
+      content: "\f105";
+      font-size: 1rem;
+      font-family: "Font Awesome 6 Free";
+      position: absolute;
+      position-anchor: --summary;
+      inset-block-start: 25%;
+      inset-inline-start: .75rem;
+      position-area: start;
+    }
+  }
+
+  &[open] summary {
+    border-radius: v.$radius-lg v.$radius-lg 0 0;
+    border-bottom: 1px solid var(--language-border-color);
+
+    &::before {
+      transform: rotate(90deg);
+    }
+  }
+
+  p, pre {
+    margin: 0 !important;
+  }
+
+  p, code, pre, blockquote {
+    padding: .75rem !important;
+  }
+}
+
 .footnotes > ol {
   padding-left: 2rem;
   margin-top: 0.5rem;

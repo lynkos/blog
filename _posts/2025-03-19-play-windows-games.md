@@ -972,118 +972,49 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
         {: .nolineno }
 {% endtabs %}
 
-#### Adjust DPI scaling level
-Launch Steam with scaling forced to 100% (96 DPI = 100% scaling); you can also use whatever DPI value you prefer
+#### Adjust game controller
+> Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
+{: .prompt-info }
+
+1. I recommend disabling the "Home" button to prevent it from opening Launchpad; this can be useful when using Steam's Big Picture mode
 
 ```sh
-wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 96 /f
+defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
 ```
 {: .nolineno }
 
-#### Check prefix architecture
-You can manually print the value of `$WINEARCH` (which should be either `win64` or `win32`)
+2. I also recommend disabling the "Share" button
 
-```sh
-echo "$WINEARCH"
-```
-{: .nolineno }
+	```sh
+	defaults write com.apple.GameController bluetoothPrefsShareLongPressSystemGestureMode -integer -1
+	```
+	{: .nolineno }
 
-You can also read the system registry of `$WINEPREFIX`; depending on the architecture type, it'll output `#arch=win32` or `#arch=win64`
+3. Restart the Dock process to apply changes
 
-```sh
-reg_arch="$(grep '#arch' $WINEPREFIX/system.reg)" && echo "${reg_arch#'#arch='}" || echo "Unknown"
-```
-{: .nolineno }
+	```sh
+	killall Dock
+	```
+	{: .nolineno }
+	
+	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
+	{: .prompt-tip }
 
-This should print value after `#arch=` (i.e. `win32` or `win64`) or "Unknown" if `#arch` is not in `system.reg`
-
-```plaintext
-prefix="#arch="
-reg_val="#arch=win64"
-wine_arch=${reg_val#"$prefix"}
-echo "${wine_arch}"
-win64
-```
-
-#### Set drivers
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /d 'mac,x11' /f
-```
-{: .nolineno }
-
-#### Enable noflicker
-```sh
-wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /t REG_SZ /v 'ForceOpenGLBackingStore' /d 'Y' /f
-```
-{: .nolineno }
-
-#### Shader caching
-You can view and/or delete the shader caches if you run into any issues, like [Game won’t boot anymore despite no changes](2025-03-19-play-windows-games.md#game-wont-boot-anymore-despite-no-changes)
-
-##### D3DM shader caching
-```sh
-$(getconf DARWIN_USER_CACHE_DIR)/d3dm
-```
-{: .nolineno }
-
-Example contents
-
-```plaintext
-CrashReportClient.exe                 MassEffectLauncher.exe
-EADesktop.exe                         MCC-Win64-Shipping.exe
-EALaunchHelper.exe                    OblivionRemastered-Win64-Shipping.exe
-EpicWebHelper.exe                     Palworld-Win64-Shipping.exe
-GhostOfTsushima.exe                   Schedule I.exe
-GoW.exe                               SkyrimSE.exe
-IGOProxy64.exe                        steamwebhelper.exe
-```
-
-The shaders for each game are in the `shaders.cache` subdirectory in each game directory. E.g. cached shaders for *Schedule I* would be in `$(getconf DARWIN_USER_CACHE_DIR)/d3dm/Schedule I.exe/shaders.cache`
-
-##### DXMT shader caching
-```sh
-$(getconf DARWIN_USER_CACHE_DIR)/dxmt
-```
-{: .nolineno }
-
-Example contents
-
-```plaintext
-EpicWebHelper.exe           steamwebhelper.exe
-Palworld-Win64-Shipping.exe
-```
-
-#### Restrict Wine processes to subset of available cores
-Pass a CPU mask through the `WINECPUMASK` environment variable[^restrictwine]
-
-```sh
-export WINECPUMASK=0xff
-```
-{: .nolineno }
-
-This will tie Wine processes (including `wineserver`) to the first 8 cores and limit the number of reported cores to 8. You may also get a performance gain if the mask specifies the cores of one core complex (CCX). E.g. this Bash script computes the mask for the first CCX:
-
-```bash
-#!/usr/bin/env bash
-local model_name="$(sysctl -n machdep.cpu.brand_string)"
-
-NUM_CPUS=$(sysctl -n hw.logicalcpu)
-echo "$NUM_CPUS-core CPU"
-
-CCX_MASK=$(((1 << $NUM_CPUS / 2) - 1))
-echo -n "first CCX mask: "
-printf "0x%x\n" $CCX_MASK
-```
-
-With this patch The Forest goes from 23 to 40 fps on a 16 core Ryzen CPU
+Here's a list of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
+- Xbox Wireless Controller with Bluetooth (Model 1708)
+- Xbox Wireless Controller Series S
+- Xbox Wireless Controller Series X
+- Xbox Elite Wireless Controller Series 2
+- Xbox Adaptive Controller
+- PlayStation DualShock 4 Wireless Controller
+- PlayStation 5 DualSense Wireless Controller
+- PlayStation 5 DualSense Edge Wireless Controller
 
 #### Update MoltenVK
-> [MoltenVK](https://github.com/KhronosGroup/MoltenVK) is a layered implementation of [Vulkan](https://www.khronos.org/vulkan) graphics and compute functionality, built on Apple's [Metal](https://developer.apple.com/metal) graphics and compute framework...
-> 
+[MoltenVK](https://github.com/KhronosGroup/MoltenVK) is a layered implementation of [Vulkan](https://www.khronos.org/vulkan) graphics and compute functionality, built on Apple's [Metal](https://developer.apple.com/metal) graphics and compute framework. This allows Vulkan applications to run on top of Metal on Apple's macOS, iOS, and tvOS operating systems.
+
 > Refer to 
 [MoltenVK's `README.md`](https://github.com/KhronosGroup/MoltenVK?tab=readme-ov-file#command_line_build) for steps on how to install MoltenVK from source
-
-MoltenVK is a software library which allows Vulkan applications to run on top of Metal on Apple's macOS, iOS, and tvOS operating systems.
 
 ##### Update MoltenVK in CrossOver
 Assuming you already have CrossOver, it is possible to add its support for Windows Vulkan games (atop MoltenVK) to GPTk[^gptkvulk]. I also used this method to update MoltenVK for DXVK Wine build.
@@ -2708,59 +2639,6 @@ The aforementioned script is functionally the same as:
 
 For the sake of convenience, I've written a bash function to download a Steam app into a given `WINEPREFIX`'s Steam directory. You can find this function at [Automate Steam Downloads](2025-03-19-play-windows-games.md#automate-steam-downloads).
 
-#### Game Controller
-> Make sure your game controller is compatible with macOS. While Xbox and PlayStation are the most popular game controllers, I think other Bluetooth game controllers are compatible too (so you're not limited to those two).[^controller]
-{: .prompt-info }
-
-List of currently supported Xbox[^xbox] and PlayStation[^ps] controllers as of this writing:
-- Xbox Wireless Controller with Bluetooth (Model 1708)
-- Xbox Wireless Controller Series S
-- Xbox Wireless Controller Series X
-- Xbox Elite Wireless Controller Series 2
-- Xbox Adaptive Controller
-- PlayStation DualShock 4 Wireless Controller
-- PlayStation 5 DualSense Wireless Controller
-- PlayStation 5 DualSense Edge Wireless Controller
-
-##### Prevent "Home" button from opening Launchpad
-> This is particularly useful when using Steam's Big Picture mode
-{: .prompt-tip }
-
-1. Disable "Home" button
-
-	```sh
-	defaults write com.apple.GameController bluetoothPrefsMenuLongPressAction -integer 0
-	```
-	{: .nolineno }
-
-2. Restart the Dock process to apply changes
-
-	```sh
-	killall Dock
-	```
-	{: .nolineno }
-	
-	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
-	{: .prompt-tip }
-
-##### Disable "Share" button
-1. Disable "Share" button
-
-	```sh
-	defaults write com.apple.GameController bluetoothPrefsShareLongPressSystemGestureMode -integer -1
-	```
-	{: .nolineno }
-
-2. Restart the Dock process to apply changes
-
-	```sh
-	killall Dock
-	```
-	{: .nolineno }
-	
-	> Alternatively, you can logout and log back in again (though this is likely more time-consuming than executing the aforementioned command)
-	{: .prompt-tip }
-
 #### Memory
 ##### Dynamically allocate VRAM
 Allocate memory for VRAM, where `DESIRED_VRAM_MB` is an integer number of how many MB of VRAM you want to allocate.[^vram]
@@ -2935,6 +2813,75 @@ To check if it's set:
 wine reg query 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RetinaMode'
 ```
 {: .nolineno }
+
+##### Adjust DPI scaling level
+You can adjust scaling to 100% (96 DPI = 100% scaling), or you can also use whatever DPI value you prefer
+
+```sh
+wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'LogPixels' /t REG_DWORD /d 96 /f
+```
+{: .nolineno }
+
+##### Set drivers
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /d 'mac,x11' /f
+```
+{: .nolineno }
+
+##### Enable noflicker
+```sh
+wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /t REG_SZ /v 'ForceOpenGLBackingStore' /d 'Y' /f
+```
+{: .nolineno }
+
+##### Restrict Wine processes to subset of available cores
+Pass a CPU mask through the `WINECPUMASK` environment variable[^restrictwine]
+
+```sh
+export WINECPUMASK=0xff
+```
+{: .nolineno }
+
+This will tie Wine processes (including `wineserver`) to the first 8 cores and limit the number of reported cores to 8. You may also get a performance gain if the mask specifies the cores of one core complex (CCX). E.g. this Bash script computes the mask for the first CCX:
+
+```bash
+#!/usr/bin/env bash
+local model_name="$(sysctl -n machdep.cpu.brand_string)"
+
+NUM_CPUS=$(sysctl -n hw.logicalcpu)
+echo "$NUM_CPUS-core CPU"
+
+CCX_MASK=$(((1 << $NUM_CPUS / 2) - 1))
+echo -n "first CCX mask: "
+printf "0x%x\n" $CCX_MASK
+```
+
+With this patch The Forest goes from 23 to 40 fps on a 16 core Ryzen CPU
+
+##### Check prefix architecture
+You can manually print the value of `$WINEARCH` (which should be either `win64` or `win32`)
+
+```sh
+echo "$WINEARCH"
+```
+{: .nolineno }
+
+You can also read the system registry of `$WINEPREFIX`; depending on the architecture, it should output `#arch=win32`, `#arch=win64`, or `Unknown`
+
+```sh
+reg_arch="$(grep '#arch' $WINEPREFIX/system.reg)" && echo "${reg_arch#'#arch='}" || echo "Unknown"
+```
+{: .nolineno }
+
+This should print value after `#arch=` (i.e. `win32` or `win64`) or "Unknown" if `#arch` is not in `system.reg`
+
+```plaintext
+prefix="#arch="
+reg_val="#arch=win64"
+wine_arch=${reg_val#"$prefix"}
+echo "${wine_arch}"
+win64
+```
 
 #### Audio
 ##### Some games have messed up and/or crackling audio
@@ -3131,6 +3078,42 @@ If the keyboard still does not work after unfocusing the application, try editin
 wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v 'UseTakeFocus' /d 'N' /f
 ```
 {: .nolineno }
+
+#### Shaders
+You can view and/or delete the shader caches if you run into any issues, like [Game won’t boot anymore despite no changes](2025-03-19-play-windows-games.md#game-wont-boot-anymore-despite-no-changes)
+
+##### D3DM shader caching
+```sh
+$(getconf DARWIN_USER_CACHE_DIR)/d3dm
+```
+{: .nolineno }
+
+Example contents
+
+```plaintext
+CrashReportClient.exe                 MassEffectLauncher.exe
+EADesktop.exe                         MCC-Win64-Shipping.exe
+EALaunchHelper.exe                    OblivionRemastered-Win64-Shipping.exe
+EpicWebHelper.exe                     Palworld-Win64-Shipping.exe
+GhostOfTsushima.exe                   Schedule I.exe
+GoW.exe                               SkyrimSE.exe
+IGOProxy64.exe                        steamwebhelper.exe
+```
+
+The shaders for each game are in the `shaders.cache` subdirectory in each game directory. E.g. cached shaders for *Schedule I* would be in `$(getconf DARWIN_USER_CACHE_DIR)/d3dm/Schedule I.exe/shaders.cache`
+
+##### DXMT shader caching
+```sh
+$(getconf DARWIN_USER_CACHE_DIR)/dxmt
+```
+{: .nolineno }
+
+Example contents
+
+```plaintext
+EpicWebHelper.exe           steamwebhelper.exe
+Palworld-Win64-Shipping.exe
+```
 
 #### Miscellaneous
 ##### "Symbol not found" when setting game mode

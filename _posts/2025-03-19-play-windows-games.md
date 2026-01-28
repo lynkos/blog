@@ -230,7 +230,8 @@ This version of Wine can be used with DXMT and DXVK.
 
 // TODO: Instead of creating separate Wine copies for each graphics API, why not just use the same Wine build with all graphics API files (dlls, so, etc.), e.g. `winemetal_dxmt.dll`{: .filepath} vs `winemetal_dxvk.dll`{: .filepath}, `winemetal_orig.dll`{: .filepath}, etc. When setting a specific build (e.g. DXMT, DXVK, etc.), the relevant file(s) will be renamed (e.g. current `winemetal.dll`{: .filepath} is renamed to `winemetal_xyz.dll`{: .filepath}, then `winemetal_dxmt.dll`{: .filepath} is renamed to `winemetal.dll`{: .filepath} in order to enable DXMT).
 
-### Install DXMT
+### Install Graphics APIs
+#### Install DXMT
 > Make sure to download Wine before continuing; see [Install Wine](2025-03-19-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
@@ -344,7 +345,7 @@ This version of Wine can be used with DXMT and DXVK.
 > 64 bit is default, so if switching to 32 bit games, rename current `winemetal.dll` to `winemetal_x86_64-windows.dll`, then rename `winemetal_i386-windows.dll` to `winemetal.dll`
 {: .prompt-info }
 
-### Install DXVK
+#### Install DXVK
 > Make sure to download Wine before continuing; see [Install Wine](2025-03-19-play-windows-games.md#install-wine) for instructions.
 {: .prompt-important }
 
@@ -398,8 +399,8 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK, so
 > There shouldn't be (i.e. don't add, b/c it didn't originally come w/) a `winemetal.dll`{: .filepath} in DXVK'S `$WINEPREFIX`
 {: .prompt-info }
 
-### Install Game Porting Toolkit
-#### Setup Game Porting Toolkit
+#### Install Game Porting Toolkit
+##### Setup Game Porting Toolkit
 > Downloading Game Porting Toolkit via Apple Developer is no longer a necessary requirement; I'm keeping this here for posterity
 {: .prompt-important }
 
@@ -525,7 +526,7 @@ MoltenVK doesn't provide the required Vulkan extensions to use upstream DXVK, so
 
 	![volumes.png](../assets/img/obsidian/volumes.png)
 
-#### Method 1: Prebuilt
+##### Method 1: Prebuilt
 Install Dean Greer's `game-porting-toolkit` via `x86` version of Homebrew (`/usr/local/bin/brew`{: .filepath})
 
 ```sh
@@ -547,7 +548,7 @@ The `wine` executable is located in: `/Applications/Game Porting Toolkit.app/Con
 > {: .nolineno }
 {: .prompt-tip }
 
-#### Method 2: Build
+##### Method 2: Build
 > You can't build any versions after **Version 2.1** since it's out of date, so refer to [Method 1 Prebuilt](2025-03-19-play-windows-games.md#method-1-prebuilt) instead and ignore this section
 {: .prompt-warning }
 
@@ -770,7 +771,7 @@ _Screenshot of Palworld running via DXMT_
 _Screenshot of Far Cry 3 running via DXMT_
 
 ### Stop Running Wine
-#### Solution 1: CLI
+#### Method 1: CLI
 All running `wine` and `wineconsole` processes are stopped at once using the [`wineserver -k`](https://gitlab.winehq.org/wine/wine/-/wikis/Wine-User's-Guide#-k-n) command.
 
 ```sh
@@ -792,7 +793,7 @@ killall -9 wineserver && killall -9 wine64-preloader
 ```
 {: .nolineno }
 
-#### Solution 2: Activity Monitor
+#### Method 2: Activity Monitor
 1. Open **Activity Monitor**
 
 2. In the search bar, type **wine** and hit <kbd>Enter</kbd>
@@ -1020,7 +1021,39 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 > Refer to 
 [MoltenVK's `README.md`](https://github.com/KhronosGroup/MoltenVK?tab=readme-ov-file#command_line_build) for steps on how to install MoltenVK from source
 
-##### Update MoltenVK in CrossOver
+##### Method 1: Wine
+1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
+
+2. Open terminal and set variables. E.g. for DXMT Wine 10.18:
+
+	```sh
+	WINE_LIB="$HOME/Wine/dxmt/10.18/lib"
+	MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
+	```
+	{: .nolineno }
+
+3. Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
+
+	```sh
+	mv -i "$WINE_LIB/libMoltenVK.dylib" "$WINE_LIB/libMoltenVK_orig.dylib"
+	```
+	{: .nolineno }
+
+4. Move new MoltenVK dylib into Wine build's lib
+
+	```sh
+	mv -i "$MVK_DYLIB" "$WINE_LIB"
+	```
+	{: .nolineno }
+
+5. Execute this command to avoid running into issues when trying to use `wine` command
+
+	```sh
+	xattr -dr com.apple.quarantine "$WINEPATH"
+	```
+	{: .nolineno }
+
+##### Method 2: CrossOver
 Assuming you already have CrossOver, it is possible to add its support for Windows Vulkan games (atop MoltenVK) to GPTk[^gptkvulk]. I also used this method to update MoltenVK for DXVK Wine build.
 
 > `$(brew --prefix game-porting-toolkit)` is equivalent to `/usr/local/opt/game-porting-toolkit`, which redirects to `/usr/local/Cellar/game-porting-toolkit/1.1`
@@ -1062,38 +1095,6 @@ Assuming you already have CrossOver, it is possible to add its support for Windo
 > - `d3dcompiler_47`{: .filepath} is for DX12
 > - `d3dcompiler_43`{: .filepath} is for DX11
 {: .prompt-info }
-
-##### Update MoltenVK in Wine
-1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)
-
-2. Open terminal and set variables. E.g. for DXMT Wine 10.18:
-
-	```sh
-	WINE_LIB="$HOME/Wine/dxmt/10.18/lib"
-	MVK_DYLIB="$HOME/Downloads/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib"
-	```
-	{: .nolineno }
-
-3. Backup original copy by renaming `libMoltenVK.dylib`{: .filepath} in Wine build's lib to `libMoltenVK_orig.dylib`{: .filepath}
-
-	```sh
-	mv -i "$WINE_LIB/libMoltenVK.dylib" "$WINE_LIB/libMoltenVK_orig.dylib"
-	```
-	{: .nolineno }
-
-4. Move new MoltenVK dylib into Wine build's lib
-
-	```sh
-	mv -i "$MVK_DYLIB" "$WINE_LIB"
-	```
-	{: .nolineno }
-
-5. Execute this command to avoid running into issues when trying to use `wine` command
-
-	```sh
-	xattr -dr com.apple.quarantine "$WINEPATH"
-	```
-	{: .nolineno }
 
 ### Scripts
 #### Bash Functions for Gaming
@@ -2485,7 +2486,7 @@ This error is common when using an outdated version of Wine with a new version o
 ##### Steam download freezes
 This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
 
-###### Solution 1: Steam Console
+###### Method 1: Steam Console
 Source[^steamconsole]
 
 > Make sure you have the native Steam app for macOS
@@ -2526,7 +2527,7 @@ Source[^steamconsole]
 
 9. Run your Windows Steam installation as normal and the game should appear as downloaded in your Steam library
 
-###### Solution 2: SteamCMD
+###### Method 2: SteamCMD
 > If you already have [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) installed, go straight to Step #3.
 {: .prompt-info }
 
@@ -3065,13 +3066,13 @@ wine reg add 'HKEY_CURRENT_USER\Software\Wine\Mac Driver' /v 'RightCommandIsCtrl
 ##### Keyboard input not working
 This could be caused by the window manager not switching focus.
 
-###### Solution 1: Winetricks
+###### Method 1: Winetricks
 ```sh
 winetricks usetakefocus=n
 ```
 {: .nolineno }
 
-###### Solution 2: Regedit
+###### Method 2: Regedit
 Toggle all the **Window settings**, click **Apply**, then change them back.
 
 If that does not work, go to the **Graphics** tab of `winecfg`, disable the **Allow the window manager...** options, or set windowed mode with **Emulate a virtual desktop**.

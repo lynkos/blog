@@ -3006,7 +3006,7 @@ winetricks fontsmooth=rgb
 		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
 		```
 		{: .nolineno }
-		If the fonts look somehow smeared, disable anti-aliased fonts
+		If the fonts look somehow smeared, [disable anti-aliased fonts](https://support.codeweavers.com/en_US/bottles-associations-fonts/how-can-i-turn-off-anti-aliased-fonts)
 		```sh
 		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
 		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
@@ -3014,7 +3014,7 @@ winetricks fontsmooth=rgb
 		```
 		{: .nolineno }
 	---TAB: Subpixel smoothing
-		Enable subpixel smoothing/rendering/anti-aliasing (ClearType) RGB
+		Enable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)/rendering/anti-aliasing (ClearType) RGB
 		```sh
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
@@ -3022,7 +3022,7 @@ winetricks fontsmooth=rgb
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
 		```
 		{: .nolineno }
-		Disable subpixel smoothing
+		Disable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)
 		```sh
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
@@ -3030,7 +3030,7 @@ winetricks fontsmooth=rgb
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
 		```
 	---TAB: Font smoothing
-		Enable standard font smoothing
+		Enable [standard font smoothing](https://www.elevenforum.com/t/enable-or-disable-font-smoothing-in-windows-11.8476)
 		```sh
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
 		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
@@ -3040,24 +3040,56 @@ winetricks fontsmooth=rgb
 		{: .nolineno }
 {% endtabs %}
 
-`HKEY_CURRENT_USER\Control Panel\Desktop` keys:
+**`HKEY_CURRENT_USER\Control Panel\Desktop`  Keys**:
 
-- `FontSmoothing`
-	- Value `0`: Disable font smoothing
-	- ~~Value `1`: Enable standard font smoothing~~
-	- Value `2`: Enable ClearType font smoothing
-- `FontSmoothingType`
-	- ~~Value `0`: Switch to gray (i.e. basic) font smoothing~~
-	- Value `1`: Regular; switch to gray (i.e. basic) font smoothing
-	- Value `2`: Subpixel; switch to colored (i.e. ClearType) font smoothing
-- `FontSmoothingGamma`
-	- Value between `0` (dark/heavier) to `2200` (light/finer) decimal: Intensity of color and darkness of the smoothing.
-- `FontSmoothingOrientation`
-	- Value `0`: ~~None~~ BGR (?)
-	- Value `1`: RGB format (red, green, blue) for LCD, normal
-	- ~~Value `2`: BGR format (blue, green, red) for LCD~~
-
-Source 1[^disableantialias], Source 2[^fontsmooth], Source 3[^improvegui]
+<table>
+	<thead>
+	    <tr>
+	        <th><center>Registry Key</center></th>
+	        <th><center>Value</center></th>
+	    </tr>
+    </thead>
+    <tbody>
+	    <tr>
+	        <td><code>FontSmoothing</code></td>
+	        <td>
+		        <ul>
+			        <li><code>0</code>: Disable font smoothing</li>
+			        <li><s><code>1</code>: Enable standard font smoothing</s></li>
+			        <li><code>2</code>: Enable ClearType font smoothing</li>
+		        </ul>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td><code>FontSmoothingType</code></td>
+	        <td>
+		        <ul>
+			        <li><s><code>0</code>: Switch to gray (i.e. basic) font smoothing</s></li>
+			        <li><code>1</code>: Regular; switch to gray (i.e. basic) font smoothing</li>
+			        <li><code>2</code>: Subpixel; switch to colored (i.e. ClearType) font smoothing</li>
+		        </ul>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td><code>FontSmoothingGamma</code></td>
+	        <td>
+		        <ul>
+			        <li><code>0</code> (dark/heavier) to <code>2200</code> (light/finer) decimal: Intensity of color and darkness of the smoothing</li>
+		        </ul>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td><code>FontSmoothingOrientation</code></td>
+	        <td>
+		        <ul>
+			        <li><code>0</code>: <s>None</s> BGR (?)</li>
+			        <li><code>1</code>: RGB format (red, green, blue) for LCD, normal</li>
+			        <li><s><code>2</code>: BGR format (blue, green, red) for LCD</s></li>
+		        </ul>
+	        </td>
+	    </tr>
+    </tbody>
+</table>
 
 #### Keyboard
 ##### Fix keyboard shortcuts
@@ -3680,9 +3712,6 @@ Environment variables can be used to control some aspects of translation and emu
 [^winefiles]: [Wine Files](https://gitlab.winehq.org/wine/wine/-/wikis/Man-Pages/wine#files)
 [^steamconsole]: [Steam Console](https://www.reddit.com/r/macgaming/comments/1lqee3q/comment/n12hfzp) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
 [^wine2]: [Wine (Arch Linux)](https://wiki.archlinux.org/title/Wine)
-[^fontsmooth]: [Enable or Disable Font Smoothing in Windows](https://www.elevenforum.com/t/enable-or-disable-font-smoothing-in-windows-11.8476/)
-[^improvegui]: [Improve GUI Appearance of Wine Applications](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)
-[^disableantialias]: [How Can I Turn Off Anti-aliased Fonts](https://support.codeweavers.com/en_US/bottles-associations-fonts/how-can-i-turn-off-anti-aliased-fonts)
 [^disabledecorations]: [Disable Window Decorations in the Mac Driver](https://support.codeweavers.com/disable-window-decorations-in-the-mac-driver)
 [^restrictwine]: [Wine Bugs](https://bugs.winehq.org/show_bug.cgi?id=43277#c48)
 [^winetricksrepo]: [Winetricks GitHub repository](https://github.com/Winetricks/winetricks)

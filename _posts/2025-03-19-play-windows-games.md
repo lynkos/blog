@@ -3284,7 +3284,6 @@ To grant full disk access:
             <td><code>0</code> (OFF), <code>1</code> (ON)</td>
             <td><code>WINE_NO_FULLSCREEN=0</code></td>
         </tr>
-        export =
         <tr>
             <td><code>VKD3D_FEATURE_LEVEL</code></td>
             <td></td>
@@ -3300,7 +3299,7 @@ To grant full disk access:
         <tr>
             <td><code>LC_ALL</code></td>
             <td>Sets the system-wide locale for Wine and its programs. Important for avoiding weird character encoding issues (especially in older games).</td>
-            <td><code>en_US</code> or <code>en_US.UTF-8</code> (forces US English encoding</td>
+            <td><code>en_US</code> or <code>en_US.UTF-8</code> (forces US English encoding)</td>
             <td><code>LC_ALL=en_US.UTF-8</code></td>
         </tr>
         <tr>

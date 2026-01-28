@@ -43,7 +43,7 @@ image:
 ```
 {: file="templates/default.txt" }
 
-|    **Key**    | **Description**                                |
+| **Key**       | **Description**                                |
 | :------------ | :--------------------------------------------- |
 | `share`       | When `true`, it will push to Github            |
 | `title`       | Post title                                     |
@@ -189,12 +189,12 @@ image:
 19. Click **Repository permissions** under **Permissions**
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
-	| **Permission** | **Access**     | **Reason**                      |
-	| :-------------- | :------------- | :------------------------------ |
-	| Contents        | Read and write | Create branch                   |
-	| Metadata        | Read-only      | Mandatory                       |
-	| Pull requests   | Read and write | Create and merge pull requests  |
-	| Workflows       | Read and write | Create/update file              |
+ | **Permission** | **Access**     | **Reason**                     |
+ | :------------- | :------------- | :----------------------------- |
+ | Contents       | Read and write | Create branch                  |
+ | Metadata       | Read-only      | Mandatory                      |
+ | Pull requests  | Read and write | Create and merge pull requests |
+ | Workflows      | Read and write | Create/update file             |
 
 21. Click **Generate token**
 22. Copy the generated GitHub personal access token; it should start with `github_` followed by a long, random string of alphanumeric characters and underscores
@@ -241,9 +241,9 @@ I've always been a fan of dark mode color scheme, especially solarized dark. I a
 
 > Here are mine, for reference
 {: .prompt-tip }
-![color_scheme.png](../assets/obsidian/color_scheme.png)
-![features.png](../assets/obsidian/features.png)
-![layout_typography.png](../assets/obsidian/layout_typography.png)
+![color_scheme.png](../assets/img/obsidian/color_scheme.png)
+![features.png](../assets/img/obsidian/features.png)
+![layout_typography.png](../assets/img/obsidian/layout_typography.png)
 
 ## Create Post
 ### Preview Image

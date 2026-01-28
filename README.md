@@ -225,7 +225,7 @@ Install by going to [Giscus](https://giscus.app) and filling out the form. For i
        "overrideAttachments": [],
        "keySendFile": [],
        "notes": false,
-       "folder": "assets/obsidian",
+       "folder": "assets/img/obsidian",
        "convertEmbedToLinks": "keep",
        "charConvert": "->",
        "unHandledObsidianExt": [],

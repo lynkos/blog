@@ -28,11 +28,11 @@ Buying storage for your new MacBook is expensive and can be inconvenient. Custom
 This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] should provide some context:
 > An SSD controller, also referred to as a processor, includes the electronics that bridge the NAND Flash memory components to the SSD input/output interfaces. The controller is an embedded processor that executes firmware-level software. The SSD firmware is device specific, and in most cases can be updated.
 > 
-> ![ssd.png](../assets/obsidian/ssd.png)
+> ![ssd.png](../assets/img/obsidian/ssd.png)
 > 
 >  Since November 2020, Apple has placed their SSD (NAND flash) Controller on the SoC and kept the NAND Flash separate for security reasons. This makes it nearly impossible to remove the SSD from a stolen M1/M2 Mac and view the data on another Mac. Even if you have the exact same model of Apple Silicon Mac to install it in. The Secure Enclave (also on the SoC) is isolated from the main processor to provide an extra layer of security and is designed to keep sensitive user data secure even when the Application Processor kernel becomes compromised.
 >  
->  ![ssd_chart.jpg](../assets/obsidian/ssd_chart.jpg)
+>  ![ssd_chart.jpg](../assets/img/obsidian/ssd_chart.jpg)
 
 There's a bunch of SSDs and enclosures to choose from. How did I narrow it down, and why did I choose the WD_BLACK SN850X and the OWC Express 1M2 Enclosure?
 
@@ -42,11 +42,11 @@ I was torn between the Samsung 990 PRO and WD_BLACK SN850X, but chose the latter
 
 > Prior to macOS Monterey, Samsung drives worked seemingly without issue. We don't know what changed in macOS 12 but we do know that Samsung's proprietary NVMe SSD controllers do not work well with macOS Monterey or Ventura. It doesn't look like a firmware fix from Samsung is ever going to be released. Here's a few examples of their drives that will potentially lead to ultra long macOS boot times. Some have reported six to seven minutes.
 > 
-> ![ssd_csv.png](../assets/obsidian/ssd_csv.png)
+> ![ssd_csv.png](../assets/img/obsidian/ssd_csv.png)
 > 
 > This is TRIM and APFS related. Disabling TRIM is not recommended... Acasis, who makes Mac compatible NVMe enclosures, warns their customers about using Samsung 970 EVO (Plus) drives with their product. Note that the WD SN570, SN770 and SN850(X) perform the very best of any drives
 > 
-> ![ssd_compat.jpg](../assets/obsidian/ssd_compat.jpg)
+> ![ssd_compat.jpg](../assets/img/obsidian/ssd_compat.jpg)
 
 This has been documented several times, such as with [Acidanthera's research on the Samsung "TRIM Bug"](https://github.com/dortania/bugtracker/issues/192) and [this thread on tonymacx86.com that shows how write speeds are reduced to extremely slow levels when using a Samsung NVMe with an APFS formatted drive](https://www.tonymacx86.com/threads/slow-random-writes-on-nvme-ssd.327436).
 
@@ -96,11 +96,11 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 1. Open **Disk Utility**
    ![Disk Utility app](https://help.apple.com/assets/63FD50B6B945CD5D3F3A2AD3/63FD50B7B945CD5D3F3A2ADA/en_US/f606b0483c6a446b0ea4554b02fca0cc.png)
 2. Click on <kbd>View</kbd>, then <kbd>Show All Devices</kbd>
-   ![disk_utility_view.png](../assets/obsidian/disk_utility_view.png)
+   ![disk_utility_view.png](../assets/img/obsidian/disk_utility_view.png)
 3. In the sidebar, select your SSD under **External**; in this example, it's named "WD_BLACK SN850X 4000GB Media"
-   ![disk_utility_ssd.png](../assets/obsidian/disk_utility_ssd.png)
+   ![disk_utility_ssd.png](../assets/img/obsidian/disk_utility_ssd.png)
 4. Click the <kbd>Erase</kbd> button
-   ![disk_utility_erase.png](../assets/obsidian/disk_utility_erase.png)
+   ![disk_utility_erase.png](../assets/img/obsidian/disk_utility_erase.png)
 5. Click the <kbd>Scheme</kbd> pop-up menu, then choose <kbd>GUID Partition Map</kbd>
 6. Click the <kbd>Format</kbd> pop-up menu, then choose the <kbd>Apple File System (APFS)</kbd> format
 7. Enter a name
@@ -112,21 +112,21 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 
 1. Click on your SSD in **Disk Utility**
 2. Click on the <kbd>+</kbd> symbol above **Volume** to add a volume
-	![disk_utility_volume.png](../assets/obsidian/disk_utility_volume.png)
+	![disk_utility_volume.png](../assets/img/obsidian/disk_utility_volume.png)
 3. Enter a name for the volume, then click <kbd>Size Options...</kbd> button
-	![disk_utility_add_apfs.png](../assets/obsidian/disk_utility_add_apfs.png)
+	![disk_utility_add_apfs.png](../assets/img/obsidian/disk_utility_add_apfs.png)
 4. If you plan on having more than 1 volume on your SSD, enter your **Reserve Size** and/or **Quota Size** (both values are optional)
-	![disk_utility_size_options.png](../assets/obsidian/disk_utility_size_options.png)
+	![disk_utility_size_options.png](../assets/img/obsidian/disk_utility_size_options.png)
 	- **Reserve Size**: Ensures that the amount of storage remains available for this volume
 	- **Quota Size**: Limits how much storage the volume can allocate
 5. Click <kbd>Add</kbd>, then <kbd>Done</kbd>
 6. Repeat Steps 1 – 5 for each volume you want to create; in my case, I created 2 volumes: 1 for **Backups** and 1 for **Games**
 7. To view your newly created volumes, click on <kbd>View</kbd>, then <kbd>Show Only Volumes</kbd>
 
-![Games volume setup](../assets/obsidian/disk_utility_games.png)
+![Games volume setup](../assets/img/obsidian/disk_utility_games.png)
 _**Games** volume setup in **Disk Utility**_
 
-![Backups volume setup](../assets/obsidian/disk_utility_backups.png)
+![Backups volume setup](../assets/img/obsidian/disk_utility_backups.png)
 _**Backups** volume setup in **Disk Utility**_
 
 ### Setup Volumes
@@ -136,21 +136,21 @@ _**Backups** volume setup in **Disk Utility**_
 #### Backups: Time Machine
 1. Open **System Settings**
 2. Click <kbd>General</kbd>, then <kbd>Time Machine</kbd>
-   ![settings_general_time_machine.png](../assets/obsidian/settings_general_time_machine.png)
+   ![settings_general_time_machine.png](../assets/img/obsidian/settings_general_time_machine.png)
 3. Click the <kbd>+</kbd> symbol
-   ![settings_add_backup.png](../assets/obsidian/settings_add_backup.png)
+   ![settings_add_backup.png](../assets/img/obsidian/settings_add_backup.png)
 4. Select the volume you want to use as your backup device, then click <kbd>Set Up Disk...</kbd>
-   ![settings_select_backup.png](../assets/obsidian/settings_select_backup.png)
+   ![settings_select_backup.png](../assets/img/obsidian/settings_select_backup.png)
 5. Customize it to your liking, then click <kbd>Done</kbd>
-   ![settings_setup_disk.png](../assets/obsidian/settings_setup_disk.png)
+   ![settings_setup_disk.png](../assets/img/obsidian/settings_setup_disk.png)
 6. It should now appear as one of the listed backup devices
 7. Click <kbd>Options...</kbd> for further customization, then click <kbd>Done</kbd>
-   ![settings_time_machine_options.png](../assets/obsidian/settings_time_machine_options.png)
+   ![settings_time_machine_options.png](../assets/img/obsidian/settings_time_machine_options.png)
 
 Now that it's setup, you can use your device as backup. If you're still in the **Time Machine** settings and want to immediately backup: right-click your backup device, then click <kbd>Back Up to "&lt;YOUR_DEVICE_NAME&gt;" Now</kbd>
 
 Anytime you want to create a backup, click the **Time Machine** icon in your menubar, then click <kbd>Back Up Now</kbd> in the dropdown
-![time_machine_menubar.png](../assets/obsidian/time_machine_menubar.png)
+![time_machine_menubar.png](../assets/img/obsidian/time_machine_menubar.png)
 
 #### Games: Steam
 > If you're like me and want to save both Windows (played via WINE) **AND** Mac games to the SSD, you'll want to create 2 separate folders in your volume. This is to avoid [installation conflicts and other issues](https://steamcommunity.com/discussions/forum/2/4202490864584630436).
@@ -166,14 +166,14 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 
 1. Open **Finder**
 2. Click on the volume you want to save your games to, then create 2 folders: `WindowsGames` and `MacGames`
-   ![finder_games.png](../assets/obsidian/finder_games.png)
+   ![finder_games.png](../assets/img/obsidian/finder_games.png)
 3. Open the Mac **Steam** client, then open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking <kbd>Steam</kbd> > <kbd>Preferences</kbd> in the menubar)
 4. Click <kbd>Storage</kbd>
-   ![steam_storage.png](../assets/obsidian/steam_storage.png)
+   ![steam_storage.png](../assets/img/obsidian/steam_storage.png)
 5. Navigate to your backup
-   ![steam_storage_games.png](../assets/obsidian/steam_storage_games.png)
+   ![steam_storage_games.png](../assets/img/obsidian/steam_storage_games.png)
 6. Click the <kbd>...</kbd> icon, then click <kbd>Remove Library</kbd>
-   ![steam_storage_remove.png](../assets/obsidian/steam_storage_remove.png)
+   ![steam_storage_remove.png](../assets/img/obsidian/steam_storage_remove.png)
 7. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking <kbd>Steam</kbd> > <kbd>Quit Steam</kbd> in the menubar, or right-click the Steam icon in the dock and click <kbd>Quit</kbd>)
 8. Reopen **Finder** and navigate to your drive
 9. Create a new `steamapps` folder inside **BOTH** `MacGames` **AND** `WindowsGames`
@@ -187,24 +187,24 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
    {: file="/Volumes/<YOUR_DEVICE_NAME>" }
 10. Relaunch the Mac **Steam** client, open **Settings** (either with <kbd>⌘</kbd> + <kbd>,</kbd> or by clicking <kbd>Steam</kbd> > <kbd>Preferences</kbd> in the menubar), then click <kbd>Storage</kbd>
 11. Click <kbd>+ Add Drive</kbd>
-    ![steam_add_drive.png](../assets/obsidian/steam_add_drive.png)
+    ![steam_add_drive.png](../assets/img/obsidian/steam_add_drive.png)
 12. Select <kbd>Let me choose another location</kbd> from the dropdown, then click <kbd>Add</kbd>
 13. Navigate to your drive, select `MacGames`, then click <kbd>Open</kbd>
-    ![steam_add_drive_select.png](../assets/obsidian/steam_add_drive_select.png)
+    ![steam_add_drive_select.png](../assets/img/obsidian/steam_add_drive_select.png)
 14. Quit Steam (either with <kbd>⌘</kbd> + <kbd>Q</kbd>, by clicking <kbd>Steam</kbd> > <kbd>Quit Steam</kbd> in the menubar, or right-click the Steam icon in the dock and click <kbd>Quit</kbd>)
 15. Open your Windows **Steam** client (e.g. via CrossOver, your own WINE setup, etc.)
 16. Click <kbd>Steam</kbd> > <kbd>Settings</kbd>
-    ![win_steam_settings.png](../assets/obsidian/win_steam_settings.png)
+    ![win_steam_settings.png](../assets/img/obsidian/win_steam_settings.png)
 17. Navigate to <kbd>Storage</kbd>, then click <kbd>+ Add Drive</kbd>
 18. Select <kbd>Let me choose another location</kbd> from the dropdown, then click <kbd>Add</kbd>
 19. Navigate to your drive, select `WindowsGames`, then click <kbd>Open</kbd>
-    ![win_steam_select_drive.png](../assets/obsidian/win_steam_select_drive.png)
+    ![win_steam_select_drive.png](../assets/img/obsidian/win_steam_select_drive.png)
 
 If everything's setup properly, you should be able to install games into their respective drives!
 
 ## Performance
 ### WD_BLACK SN850X
-![Disk speed test](../assets/obsidian/disk_speed_test.png)
+![Disk speed test](../assets/img/obsidian/disk_speed_test.png)
 _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12)_
 
 ### OWC Express 1M2

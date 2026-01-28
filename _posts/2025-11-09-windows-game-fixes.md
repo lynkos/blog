@@ -509,20 +509,20 @@ Sorry, your system does not meet the minimum requirements to play TESIV: Oblivio
 
 3. Navigate to `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion`
 
-	![regedit.png](../assets/obsidian/regedit.png)
+	![regedit.png](../assets/img/obsidian/regedit.png)
 
 4. Make sure `ProductName` says `Microsoft Windows 10`
 5. Make sure `CurrentVersion` says `10.0`
 6. Double-click `CurrentBuild` to change its value
 7. Under `Value data:`, enter `19045`, then click <kbd>OK</kbd>
 
-	![regedit_currentbuild.png](../assets/obsidian/regedit_currentbuild.png)
+	![regedit_currentbuild.png](../assets/img/obsidian/regedit_currentbuild.png)
 
 8. Double-click `CurrentBuildNumber` to change its value
 9. Under `Value data:`, enter `19045`, then click <kbd>OK</kbd>
 10. Right-click anywhere that isn't a key (i.e. right-click anywhere in the white space) and navigate to <kbd>New</kbd>
 
-	![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
+	![regedit_new_string.jpeg](../assets/img/obsidian/regedit_new_string.jpeg)
 
 11. Click <kbd>String Value</kbd>
 12. Input `ReleaseId`, then press <kbd>Enter</kbd> to save its name
@@ -534,7 +534,7 @@ Sorry, your system does not meet the minimum requirements to play TESIV: Oblivio
 14. Under `Value data:`, enter `22H2`, then click <kbd>OK</kbd>
 15. Right-click and navigate to <kbd>New</kbd>
 
-	![regedit_new_string.jpeg](../assets/obsidian/regedit_new_string.jpeg)
+	![regedit_new_string.jpeg](../assets/img/obsidian/regedit_new_string.jpeg)
 
 16. Click <kbd>String Value</kbd>
 17. Input `DisplayVersion`, then press <kbd>Enter</kbd> to save its name
@@ -545,7 +545,7 @@ Sorry, your system does not meet the minimum requirements to play TESIV: Oblivio
 22. Input `UBR`, then press <kbd>Enter</kbd> to save its name
 23. Double-click `UBR` key to set its value
 
-	![regedit_ubr.png](../assets/obsidian/regedit_ubr.png)
+	![regedit_ubr.png](../assets/img/obsidian/regedit_ubr.png)
 
 24. Select  <kbd>Decimal</kbd> under `Base`
 25. Under `Value data:`, enter `2965`, then click <kbd>OK</kbd>

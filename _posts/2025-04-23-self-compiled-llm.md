@@ -141,7 +141,7 @@ $HOME/
 
 2. Once you are prompted to specify your installation method, select `2) Customize installation` by entering `2` in the CLI
 
-	![install_rustup.png](../assets/obsidian/install_rustup.png)
+	![install_rustup.png](../assets/img/obsidian/install_rustup.png)
 	
 	```plaintext
 	1) Proceed with standard installation (default - just press enter)
@@ -298,24 +298,24 @@ Cargo's bin directory (`$HOME/.cargo/bin`)
 	> clang -mcpu=help
 	> ```
 	> {: .nolineno }
-	> ![compiler_flags_list.png](../assets/obsidian/compiler_flags_list.png)
+	> ![compiler_flags_list.png](../assets/img/obsidian/compiler_flags_list.png)
 	> 
 	> List valid CMake flags with `ccmake`
 	> ```sh
 	> ccmake .
 	> ```
 	> {: .nolineno }
-	> ![ccmake_list.png](../assets/obsidian/ccmake_list.png)
+	> ![ccmake_list.png](../assets/img/obsidian/ccmake_list.png)
 	>
 	> List valid CMake flags with `cmake`
 	> ```sh
 	> cmake -L
 	> ```
 	> {: .nolineno }
-	> ![cmake_list_flags.png](../assets/obsidian/cmake_list_flags.png)
+	> ![cmake_list_flags.png](../assets/img/obsidian/cmake_list_flags.png)
 	{: .prompt-tip }
 	
-	![cmake_llvm.png](../assets/obsidian/cmake_llvm.png)
+	![cmake_llvm.png](../assets/img/obsidian/cmake_llvm.png)
 
 10. Go to `build`
 
@@ -358,7 +358,7 @@ Cargo's bin directory (`$HOME/.cargo/bin`)
 	```
 	{: .nolineno }
 	
-	![build_llvm.png](../assets/obsidian/build_llvm.png)
+	![build_llvm.png](../assets/img/obsidian/build_llvm.png)
 
 13. Confirm that LLVM was compiled with support for Arm(R)-based targets
 
@@ -457,7 +457,7 @@ arm64-apple-darwin24.4.0
 	  -DCMAKE_EXE_LINKER_FLAGS="-Wl,-S"
 	```
 	
-	![cmake_tvm.png](../assets/obsidian/cmake_tvm.png)
+	![cmake_tvm.png](../assets/img/obsidian/cmake_tvm.png)
 	
 	> If you're compiling **heavily vectorized code**, you might want to explore `-fvectorize` or `-fassociative-math` for `DCMAKE_C_FLAGS` and `DCMAKE_CXX_FLAGS`
 	{: .prompt-tip }
@@ -476,11 +476,11 @@ arm64-apple-darwin24.4.0
 	> {: .nolineno }
 	{: .prompt-tip }
 	
-	![cmake_tvm2.png](../assets/obsidian/cmake_tvm2.png)
+	![cmake_tvm2.png](../assets/img/obsidian/cmake_tvm2.png)
 
 8. If successful, you should have both `libtvm` and `libtvm_runtime` within `$HOME/.llm/tvm-unity/build` directory
 
-	![built_tvm_dir.png](../assets/obsidian/built_tvm_dir.png)
+	![built_tvm_dir.png](../assets/img/obsidian/built_tvm_dir.png)
 
 9. Install built binaries into `install` directory
 
@@ -489,7 +489,7 @@ arm64-apple-darwin24.4.0
 	```
 	{: .nolineno }
 	
-	![cmake_tvm3.png](../assets/obsidian/cmake_tvm3.png)
+	![cmake_tvm3.png](../assets/img/obsidian/cmake_tvm3.png)
 
 10. Set environment variables
 
@@ -526,7 +526,7 @@ arm64-apple-darwin24.4.0
 	> {: .nolineno }
 	{: .prompt-tip }
 	
-	![tvm_python.png](../assets/obsidian/tvm_python.png)
+	![tvm_python.png](../assets/img/obsidian/tvm_python.png)
 
 13. Validate TVM installation by locating TVM Python package
 
@@ -783,15 +783,15 @@ python -c "import mlc_llm; print(mlc_llm)"
 	```
 	{: .nolineno }
 	
-	| Argument                             | Description                                                                                                                                | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Default                     |
-	|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-	| `<CONFIG>`                           | Defines model architecture, including vocabulary size, number of layers, hidden size, number of attention heads, etc.                      | - Path to HuggingFace model directory with `config.json`; includes non-quantized model weights in PyTorch or SafeTensor format, tokenizer configurations, and `generation_config.json` for more default configuration for text generation ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/tree/main))<br> - Path to `config.json` ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/blob/main/config.json))<br> - Pre-defined model name ([see `MODEL_PRESETS`](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/compiler/model/model.py)) |                             |
-	| `--quantization <QUANTIZATION_MODE>` | ([Quantization mode](https://llm.mlc.ai/docs/compilation/configure_quantization.html#quantization-mode) used during compilation            | - `q0f16`<br> - `q0f32`<br> - `q3f16_1`<br> - `q4f16_1`<br> - `q4f32_1`<br> - `q4f16_awq`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                             |
-	| `--model-type <MODEL_TYPE>`          | Model architecture                                                                                                                         | `"llama"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inferred from `config.json` |
-	| `--device <DEVICE>`                  | Device used for quantization                                                                                                               | `"cuda"`, `"cuda:0"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Auto-detected GPU           |
-	| `--source <SOURCE>`                  | Path to original model weight                                                                                                              | Path to model                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Inferred from `config`      |
-	| `--source-format <SOURCE_FORMAT>`    | Source model weight's format                                                                                                               | Format type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Inferred from `config`      |
-	| `--output, -o <OUTPUT>`              | Output directory for quantized weights (i.e. where to save quantized model weight); contains `params_shard_*.bin` and `ndarray-cache.json` | Path to directory                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                             |
+ | Argument                             | Description                                                                                                                                | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Default                     |
+ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+ | `<CONFIG>`                           | Defines model architecture, including vocabulary size, number of layers, hidden size, number of attention heads, etc.                      | - Path to HuggingFace model directory with `config.json`; includes non-quantized model weights in PyTorch or SafeTensor format, tokenizer configurations, and `generation_config.json` for more default configuration for text generation ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/tree/main))<br> - Path to `config.json` ([example](https://huggingface.co/codellama/CodeLlama-7b-hf/blob/main/config.json))<br> - Pre-defined model name ([see `MODEL_PRESETS`](https://github.com/mlc-ai/mlc-llm/blob/main/python/mlc_llm/compiler/model/model.py)) |                             |
+ | `--quantization <QUANTIZATION_MODE>` | ([Quantization mode](https://llm.mlc.ai/docs/compilation/configure_quantization.html#quantization-mode) used during compilation            | - `q0f16`<br> - `q0f32`<br> - `q3f16_1`<br> - `q4f16_1`<br> - `q4f32_1`<br> - `q4f16_awq`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                             |
+ | `--model-type <MODEL_TYPE>`          | Model architecture                                                                                                                         | `"llama"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inferred from `config.json` |
+ | `--device <DEVICE>`                  | Device used for quantization                                                                                                               | `"cuda"`, `"cuda:0"`, etc.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Auto-detected GPU           |
+ | `--source <SOURCE>`                  | Path to original model weight                                                                                                              | Path to model                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Inferred from `config`      |
+ | `--source-format <SOURCE_FORMAT>`    | Source model weight's format                                                                                                               | Format type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Inferred from `config`      |
+ | `--output, -o <OUTPUT>`              | Output directory for quantized weights (i.e. where to save quantized model weight); contains `params_shard_*.bin` and `ndarray-cache.json` | Path to directory                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                             |
 	
 	E.g.:
 	
@@ -1161,12 +1161,12 @@ mlc_llm chat <MODEL> \
 ```
 {: .nolineno }
 
-| Argument                         | Description                                                             | Options                                                                                                                                                                                                                                                                                                                         | Default                                                                | Example                                                         |
-|----------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|-----------------------------------------------------------------|
-| `<MODEL>`                        | Model source                                                            | - Path to `mlc-chat-config.json`<br> - MLC model directory containing `mlc-chat-config.json` (i.e. after compiling with MLC-LLM build process)<br>- Model name with quantization scheme (e.g. `Llama-2-7b-chat-hf-q4f16_1`)<br>- Link to a HuggingFace repository (i.e. `HF://<HF_USER>/<HF_MODEL>`) with an MLC compiled model |                                                                        | `"$HOME/Models/mlc-chat-config.json"`                           |
-| `--model-lib <MODEL_LIB_PATH>`   | Model library file (e.g. `.so`)                                         | Path to model library                                                                                                                                                                                                                                                                                                           | Detected path for given `model`; compiles in JIT if no model lib found | `--model-lib "$HOME/Models/example_model.so"`                   |
-| `--device <DEVICE>`              | Device to run on, formatted as `device_name:device_id` or `device_name` | `device_name`:<br>- `cuda`<br>- `metal`<br>- `vulkan`<br>- `rocm`<br>- `opencl`<br>- `auto` (i.e. detects local device)<br>`device_id`: Non-negative integer                                                                                                                                                                    | - `device_name`: `auto`<br>- `device_id`: `0`                          | `--device "metal"`                                              |
-| `--overrides <OVERRIDES>`        | Model configuration overrides for advanced tuning                       | - `context_window_size`<br>- `prefill_chunk_size`<br>- `sliding_window_size`<br>- `attention_sink_size`<br>- `max_num_sequence`<br>- `tensor_parallel_shards`                                                                                                                                                                   |                                                                        | `--overrides "context_window_size=1024;prefill_chunk_size=128"` |
+| Argument                       | Description                                                             | Options                                                                                                                                                                                                                                                                                                                         | Default                                                                | Example                                                         |
+| ------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `<MODEL>`                      | Model source                                                            | - Path to `mlc-chat-config.json`<br> - MLC model directory containing `mlc-chat-config.json` (i.e. after compiling with MLC-LLM build process)<br>- Model name with quantization scheme (e.g. `Llama-2-7b-chat-hf-q4f16_1`)<br>- Link to a HuggingFace repository (i.e. `HF://<HF_USER>/<HF_MODEL>`) with an MLC compiled model |                                                                        | `"$HOME/Models/mlc-chat-config.json"`                           |
+| `--model-lib <MODEL_LIB_PATH>` | Model library file (e.g. `.so`)                                         | Path to model library                                                                                                                                                                                                                                                                                                           | Detected path for given `model`; compiles in JIT if no model lib found | `--model-lib "$HOME/Models/example_model.so"`                   |
+| `--device <DEVICE>`            | Device to run on, formatted as `device_name:device_id` or `device_name` | `device_name`:<br>- `cuda`<br>- `metal`<br>- `vulkan`<br>- `rocm`<br>- `opencl`<br>- `auto` (i.e. detects local device)<br>`device_id`: Non-negative integer                                                                                                                                                                    | - `device_name`: `auto`<br>- `device_id`: `0`                          | `--device "metal"`                                              |
+| `--overrides <OVERRIDES>`      | Model configuration overrides for advanced tuning                       | - `context_window_size`<br>- `prefill_chunk_size`<br>- `sliding_window_size`<br>- `attention_sink_size`<br>- `max_num_sequence`<br>- `tensor_parallel_shards`                                                                                                                                                                   |                                                                        | `--overrides "context_window_size=1024;prefill_chunk_size=128"` |
 
 E.g. To use the model at `https://huggingface.co/mlc-ai/Llama-3-8B-Instruct-q4f16_1-MLC`
 
@@ -1191,14 +1191,14 @@ mlc_llm chat "$HOME/.llm/models/pygmalion-2-13b-q4f16_1"
 
 Use these commands to interact with the model:
 
-| Command            | Description                                                                                                                                                                                   | Example                                                                |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `/help`            | Print special commands                                                                                                                                                                        |                                                                        |
-| `/exit`            | Quit CLI                                                                                                                                                                                      |                                                                        |
-| `/stats`           | Print stats of last request (token/sec)                                                                                                                                                       |                                                                        |
-| `/metrics`         | Print full engine metrics                                                                                                                                                                     |                                                                        |
-| `/reset`           | Restart fresh chat                                                                                                                                                                            |                                                                        |
-| `/set [overrides]` | Override settings in generation config. Note: Separate stop words in the `stop` option with commas (`,`). Start new line for multi-line inputs with <kbd>Escape</kbd> + <kbd>Enter</kbd> to   | `/set temperature=0.5;top_p=0.8;seed=23;max_tokens=100;stop=str1,str2` |
+| Command            | Description                                                                                                                                                                                 | Example                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `/help`            | Print special commands                                                                                                                                                                      |                                                                        |
+| `/exit`            | Quit CLI                                                                                                                                                                                    |                                                                        |
+| `/stats`           | Print stats of last request (token/sec)                                                                                                                                                     |                                                                        |
+| `/metrics`         | Print full engine metrics                                                                                                                                                                   |                                                                        |
+| `/reset`           | Restart fresh chat                                                                                                                                                                          |                                                                        |
+| `/set [overrides]` | Override settings in generation config. Note: Separate stop words in the `stop` option with commas (`,`). Start new line for multi-line inputs with <kbd>Escape</kbd> + <kbd>Enter</kbd> to | `/set temperature=0.5;top_p=0.8;seed=23;max_tokens=100;stop=str1,str2` |
 
 #### REST Server
 Launch [REST server](https://llm.mlc.ai/docs/deploy/rest.html#deploy-rest-api) via command line to serve model for OpenAI chat completion requests

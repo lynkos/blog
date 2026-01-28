@@ -667,22 +667,13 @@ This is the most compatible option (compared to the others), as it has all the a
 ### Install Winetricks
 According to the Winetricks GitHub repository[^winetricksrepo], "Winetricks is an easy way to work around problems in Wine. It has a menu of supported applications for which it can do all the workarounds automatically. It also allows the installation of missing DLLs and tweaking of various Wine settings."
 
-#### Method 1: Package Manager
+#### Method 1: Homebrew
+The most straightforward method is to download via Homebrew.
 
-{% tabs install-winetricks %}
-    ---TAB: Homebrew
-        ```sh
-        brew install winetricks
-        ```
-        {: .nolineno }
-    ---TAB: MacPorts
-        ```sh
-        sudo port install winetricks
-        ```
-        {: .nolineno }
-{% endtabs %}
-
-I recommend using Homebrew, since the MacPorts version is out-of-date.
+```sh
+brew install winetricks
+```
+{: .nolineno }
 
 #### Method 2: Manually
 1. Uninstall any previous versions of Winetricks (if applicable)
@@ -2308,42 +2299,50 @@ MTL_HUD_ENABLED=1 WINEESYNC=1 WINEPREFIX="$1" `brew --prefix game-porting-toolki
 
 ### Troubleshooting
 #### Game Porting Toolkit
-Most of this section is taken directly from different Game Porting Toolkit's `README.md` files, hence the blockquotes.
+Most of this section is taken directly from different Game Porting Toolkit's `README.md` file.
 
 ##### Game won't run and crashes with an invalid instruction or complains about lack of certain instruction extensions
-> Invalid instruction crashes are sometimes caused when the Rosetta 2 instruction translation layer is unable to translate CPU instructions. You may be able to recompile a version of your game without certain instructions in order to evaluate its potential on Apple Silicon with the Game Porting Toolkit when you hit this error. You may also be able to use the `ROSETTA_ADVERTISE_AVX` environment variable to ensure your game recognizes available translation instruction extensions. When porting your code natively to Apple Silicon there are a variety or NEON and ARM instructions which offer high-performance replacements for AVX / AVX2, BMI, F16c and other less common instruction set extensions.
+Invalid instruction crashes are sometimes caused when the Rosetta 2 instruction translation layer is unable to translate CPU instructions.
+
+You may be able to recompile a version of your game without certain instructions in order to evaluate its potential on Apple Silicon with the Game Porting Toolkit when you hit this error. You may also be able to use the `ROSETTA_ADVERTISE_AVX` environment variable to ensure your game recognizes available translation instruction extensions.
+
+When porting your code natively to Apple Silicon there are a variety or NEON and ARM instructions which offer high-performance replacements for AVX / AVX2, BMI, F16c and other less common instruction set extensions.
 
 ##### Game won't run because its anti-cheat or DRM software is incompatible with Wine translation
-> You may be able to rebuild a custom version of your game in your Windows development environment with anti-cheat or DRM disabled for your own evaluation purposes. When porting your code natively to Apple Silicon and macOS, contact your anti-cheat or DRM provider—most have native Apple Silicon solutions for your native build, or you may find that existing macOS solutions like Hardened Runtime, Application Sandbox, and Application Attestation prevent forms of cheating or tampering that concern you.
+You may be able to rebuild a custom version of your game in your Windows development environment with anti-cheat or DRM disabled for your own evaluation purposes.
+
+When porting your code natively to Apple Silicon and macOS, contact your anti-cheat or DRM provider—most have native Apple Silicon solutions for your native build, or you may find that existing macOS solutions like Hardened Runtime, Application Sandbox, and Application Attestation prevent forms of cheating or tampering that concern you.
 
 ##### Game won’t run because it thinks the version of Windows is too old
-> First, make sure you have selected an appropriate Windows version in `winecfg`. This affects the major and minor Windows versions that are reported to your game.
->
-> If your game checks for a specific minimum or an exact build version, you can alter this value by changing the `CurrentBuild` and `CurrentBuildNumber` values of the `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT` registry key. You must perform this step _after_ selecting a Windows version in `winecfg`. Run the following commands, replacing `«BUILD_NUMBER»` with the specific build number your game checks for; if you're unsure, build `19042` should work for most games:
->
-> ```sh
-> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
-> wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
-> /usr/local/bin/wineserver -k
-> ```
-> {: .nolineno }
->
-> The last command will shut down the virtual Windows environment to ensure that all components agree on the Windows version the next time you launch your game.
+First, make sure you have selected an appropriate Windows version in `winecfg`. This affects the major and minor Windows versions that are reported to your game.
+
+If your game checks for a specific minimum or an exact build version, you can alter this value by changing the `CurrentBuild` and `CurrentBuildNumber` values of the `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT` registry key. You must perform this step _after_ selecting a Windows version in `winecfg`.
+
+Run the following commands, replacing `«BUILD_NUMBER»` with the specific build number your game checks for; if you're unsure, build `19042` should work for most games:
+
+```sh
+wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuild /t REG_SZ /d «BUILD_NUMBER» /f
+wine reg add 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentBuildNumber /t REG_SZ /d «BUILD_NUMBER» /f
+/usr/local/bin/wineserver -k
+```
+{: .nolineno }
+
+The last command will shut down the virtual Windows environment to ensure that all components agree on the Windows version the next time you launch your game.
 
 ##### Game won’t run because it requires Mono, .NET, or the MSVCRT runtime
-> The evaluation environment for Windows games does not pre-install these runtime support packages. If your game makes use of one of these packages, consider searching for and downloading appropriate installers (`.exe` or `.msi`) and installing them to your evaluation environment. Additional runtime installers can be run on your environment by just launching the installer and following its installation instructions:
->
-> ```sh
-> wine <some-installer.exe>
-> ```
-> {: .nolineno }
->
-> `.MSI` packages can be installed by launching the Windows uninstaller application and choosing to install a downloaded `.msi` package:
->
-> ```sh
-> wine uninstaller
-> ```
-> {: .nolineno }
+The evaluation environment for Windows games does not pre-install these runtime support packages. If your game makes use of one of these packages, consider searching for and downloading appropriate installers (`.exe` or `.msi`) and installing them to your evaluation environment. Additional runtime installers can be run on your environment by just launching the installer and following its installation instructions:
+
+```sh
+wine <some-installer.exe>
+```
+{: .nolineno }
+
+`.MSI` packages can be installed by launching the Windows uninstaller application and choosing to install a downloaded `.msi` package:
+
+```sh
+wine uninstaller
+```
+{: .nolineno }
 
 ##### Game won’t boot anymore despite no changes
 Try clearing the shader cache
@@ -2358,7 +2357,7 @@ rm -r shaders.cache
 ##### Enable experimental MetalFX integration
 > This **ONLY** works for **macOS 16 AND Game Porting Toolkit 3.0**!
 > 
-> Refer to [Version 3.0](2025-03-19-play-windows-games.md#version-30) on how to download **Game Porting Toolkit 3.0**
+> Refer to [Method 1 Prebuilt](2025-03-19-play-windows-games.md#method-1-prebuilt) on how to download **Game Porting Toolkit 3.0**
 {: .prompt-important }
 
 To enable experimental [MetalFX](https://developer.apple.com/videos/play/wwdc2022/10103) integration:

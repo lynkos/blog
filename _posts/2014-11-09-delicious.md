@@ -3,7 +3,7 @@ title: Delicious! - 60
 description: 
 date: 2014-11-09 21:41:00 -0400
 math: false
-categories: [ write-up ]
+categories: [ write-up, ctf ]
 tags: [ ctf, technology, web-exploitation, cybersecurity, computer-science ]
 ---
 > This is an archived blog post I wrote while in high school.

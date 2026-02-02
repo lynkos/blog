@@ -6,6 +6,7 @@ date: 2025-11-09 13:13:13 -0400
 filename: 2025-11-09-windows-game-fixes
 categories:
   - guide
+  - unix-gaming
 tags:
   - tutorial
   - gaming

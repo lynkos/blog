@@ -7,6 +7,7 @@ filename: 2025-04-23-self-compiled-llm
 description: A compendium of the best ways to privately and efficiently run optimized, self-compiled LLMs locally on MacBook Pro Apple Silicon M-series.
 categories:
   - guide
+  - development
 tags:
   - tutorial
   - computer-science
@@ -14,10 +15,7 @@ tags:
   - development
   - artificial-intelligence
   - machine-learning
-  - AI
-  - ML
   - large-language-models
-  - LLM
 ---
 > **This article/tutorial is still under construction. Feel free to bookmark this post to come back later, as there may be new information by then!**
 {: .prompt-important }

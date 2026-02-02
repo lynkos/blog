@@ -7,6 +7,7 @@ pin: true
 filename: 2025-03-19-play-windows-games
 categories:
   - guide
+  - unix-gaming
 tags:
   - tutorial
   - gaming

@@ -6,6 +6,7 @@ filename: 2025-01-20-custom-storage
 description: DIY guide on building your own storage solution with a WD_BLACK SN850X NVMe SSD (or any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor) and an OWC Express 1M2 Enclosure.
 categories:
   - guide
+  - hardware
 tags:
   - tutorial
   - computer-science
@@ -13,6 +14,7 @@ tags:
   - gaming
   - mac
   - unix
+  - hardware
 image:
   path: /assets/img/previews/custom-storage-preview.png
   lqip: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAABXElEQVQoU6WSwUvCcBTHv79NcTDEIAx20cNOE7122H8QBf0LXTsFXUWkwAixVYQQlCAUdPFWdAmKoiI86MX0INuwLTwIEoRrJO3XNshLqYce/ODxe+/zfV8ej+CfQcbxmqbRcDiMaDQ6tsdjfxV1Xac8z8N+mwUNmSCEIBaLjRUZFUzT9MH33gwIQ9FUr5BKpeA4DrLZLEqlEqnX63R1bR1Pdzcjzk/6/T61LAtflgDCvYJhGAQCAeTzeSiKQmq1Gt0unuD0cAeLS8tofs7BvD5mXXeOL9BqteRIJPIwHA7BcRxUVYUsy6RarVIpkUDmoILm7RkGHza0noP78zJEUfTZkZVOp0NZloX3BEHw/9vtNs0cXeDlsQI2xKO4W0AwGIQkSSSZTNJGo+FuaEJ0u90F27YvC3v72NrcgOuS5HK5lXQ6Xf7BJgp4TYZhDNxFPsfj8fm/Zk0VmHZn32sufwtDDaUHAAAAAElFTkSuQmCC

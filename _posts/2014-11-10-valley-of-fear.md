@@ -3,8 +3,8 @@ title: The Valley of Fear - 20
 description: 
 date: 2014-11-10 20:51:00 -0400
 math: false
-categories: [ computer-science ]
-tags: [ ctf, technology, cryptography, cybersecurity ]
+categories: [ write-up ]
+tags: [ ctf, technology, cryptography, cybersecurity, computer-science ]
 ---
 > This is an archived blog post I wrote while in high school.
 > 

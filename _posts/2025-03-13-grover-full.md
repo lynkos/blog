@@ -4,8 +4,8 @@ date: 2025-03-13 13:59:02 -0400
 description: Full-length article on Grover's Algorithm, i.e. Quantum Search Algorithm, which efficiently searches an unsorted database.
 pin: true
 math: true
-categories: [ math, physics, computer-science ]
-tags: [ algorithms, quantum-computing, grovers-algorithm ]
+categories: [ article ]
+tags: [ algorithms, quantum-computing, grovers-algorithm, math, physics, computer-science ]
 ---
 > This is a full-length article on Grover's algorithm. For a shorter version, see [Quantum Search Algorithm](2025-02-05-grover.md).
 > 

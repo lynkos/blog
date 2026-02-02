@@ -3,8 +3,8 @@ title: Function Address - 60
 description: 
 date: 2014-11-09 19:34:00 -0400
 math: false
-categories: [ computer-science ]
-tags: [ ctf, technology, reverse-engineering, cybersecurity ]
+categories: [ write-up ]
+tags: [ ctf, technology, reverse-engineering, cybersecurity, computer-science ]
 ---
 > This is an archived blog post I wrote while in high school.
 > 

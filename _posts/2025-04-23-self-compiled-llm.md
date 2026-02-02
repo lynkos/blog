@@ -6,7 +6,6 @@ date: 2025-04-23 15:36:01 -0400
 filename: 2025-04-23-self-compiled-llm
 description: A compendium of the best ways to privately and efficiently run optimized, self-compiled LLMs locally on MacBook Pro Apple Silicon M-series.
 categories:
-  - tutorial
   - guide
 tags:
   - tutorial

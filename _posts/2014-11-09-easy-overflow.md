@@ -3,8 +3,8 @@ title: Easy Overflow - 40
 description: 
 date: 2014-11-09 18:25:00 -0400
 math: true
-categories: [ computer-science ]
-tags: [ ctf, technology, binary-exploitation, cybersecurity ]
+categories: [ write-up ]
+tags: [ ctf, technology, binary-exploitation, cybersecurity, computer-science ]
 ---
 > This is an archived blog post I wrote while in high school.
 > 

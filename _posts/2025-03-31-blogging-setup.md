@@ -5,13 +5,12 @@ date: 2025-03-31 14:43:26 -0400
 filename: 2025-03-31-blogging-setup
 description: My blogging setup, aka how to create a blog with Obsidian and Chirpy (Jekyll theme)
 categories:
-  - tutorial
   - guide
-  - computer-science
 tags:
   - tutorial
   - technology
   - development
+  - computer-science
 ---
 Though I use [Jekyll](https://jekyllrb.com), this should technically work with any blogging framework. This tutorial assumes that you are familiar with Jekyll, GitHub Pages, etc.
 

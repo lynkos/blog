@@ -4,8 +4,8 @@ description: This paper discusses the social and global impact of the singularit
 pin: true
 date: 2025-03-13 13:29:02 -0400
 math: true
-categories: [ math, computer-science ]
-tags: [ algorithms, artificial-intelligence, machine-learning, singularity, technology, robotics, ethics, deep-neural-networks, alignment ]
+categories: [ article ]
+tags: [ algorithms, artificial-intelligence, machine-learning, singularity, technology, robotics, ethics, deep-neural-networks, alignment, math, computer-science ]
 ---
 ***Abstract** — This paper discusses the social and global impact of the singularity and its accompanying technologies, among other things.*
 

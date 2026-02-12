@@ -50,11 +50,11 @@ I've always been a fan of dark mode color scheme, especially solarized dark. I a
 
 10. Modify the settings to your liking
 
-> Here are mine, for reference
-{: .prompt-tip }
-![color_scheme.png](../assets/img/obsidian/color_scheme.png)
-![features.png](../assets/img/obsidian/features.png)
-![layout_typography.png](../assets/img/obsidian/layout_typography.png)
+    Here are mine, for reference:
+
+    ![color_scheme.png](../assets/img/obsidian/color_scheme.png)
+    ![features.png](../assets/img/obsidian/features.png)
+    ![layout_typography.png](../assets/img/obsidian/layout_typography.png)
 
 ### Obsidian Mobile App
 I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-notes/id1557175442) with iCloud, which I'll walk through in this section, though Obsidian also offers Obsidian Sync as an alternative. If you don't have an Apple device, iCloud isn't applicable.
@@ -209,12 +209,12 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
-	| **Permission** | **Access**      | **Reason**                                     |
-	| :--------------- | :-------------- | :-------------------------------- |
-	| Contents            | Read and write | Create branch                                |
-	| Metadata           | Read-only         | Mandatory                                      |
-	| Pull requests     | Read and write | Create and merge pull requests  |
-	| Workflows         | Read and write | Create/update file                          |
+    | **Permission** | **Access**     | **Reason**                     |
+    | :------------- | :------------- | :----------------------------- |
+    | Contents       | Read and write | Create branch                  |
+    | Metadata       | Read-only      | Mandatory                      |
+    | Pull requests  | Read and write | Create and merge pull requests |
+    | Workflows      | Read and write | Create/update file             |
 
 21. Click <kbd>Generate token</kbd>
 

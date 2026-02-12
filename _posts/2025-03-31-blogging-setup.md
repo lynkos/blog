@@ -61,7 +61,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 1. Once the Obsidian app is downloaded, check your iCloud Drive: There should be an `Obsidian` folder; if not, make one
 
-2. Move all your vaults (i.e. directories) to `Obsidian` folder. E.g. my vault is named `Writing`, with path of `iCloud Drive/Obsidian/Writing/` (which, in my case, points to `$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Writing/`)
+2. Move all your vaults (i.e. directories) to `Obsidian` folder. E.g. my vault is named `Writing`, with path of `iCloud Drive/Obsidian/Writing/`{: .filepath} (which, in my case, points to `$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Writing/`{: .filepath})
 
 ### Setup Enveloppe
 1. Launch **Obsidian**
@@ -78,7 +78,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 7. Click on [Enveloppe](obsidian://show-plugin?id=obsidian-mkdocs-publisher), then click **Install**
 
-8. Once Enveloppe's installed, go to its Settings
+8. Once Enveloppe's installed, go to its settings (i.e. under **Community plugins** section in the settings sidebar, click **Enveloppe**)
 
 9. Copy my Enveloppe settings
 
@@ -209,12 +209,12 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
-	| **Permission** | **Access**     | **Reason**                      |
-	| :-------------- | :------------- | :------------------------------ |
-	| Contents        | Read and write | Create branch                   |
-	| Metadata        | Read-only      | Mandatory                       |
-	| Pull requests   | Read and write | Create and merge pull requests  |
-	| Workflows       | Read and write | Create/update file              |
+	| **Permission** | **Access**      | **Reason**                                     |
+	| :--------------- | :-------------- | :-------------------------------- |
+	| Contents            | Read and write | Create branch                                |
+	| Metadata           | Read-only         | Mandatory                                      |
+	| Pull requests     | Read and write | Create and merge pull requests  |
+	| Workflows         | Read and write | Create/update file                          |
 
 21. Click <kbd>Generate token</kbd>
 
@@ -300,7 +300,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	{: file="_config.yml" }
 
 ### Setup Image Proxy
-A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it; this way I can embed images from Twitter/X. Custom Ruby plugin [`_plugins/gallery.rb`](https://github.com/lynkos/blog/blob/main/_plugins/gallery.rb) automatically prepends Twitter/X URLs within a gallery (i.e. `{% gallery %} ... {% endgallery %}`) with the value of [`worker_base_url`](https://github.com/lynkos/blog/blob/main/_plugins/gallery.rb#L33). Additional sites will be added as needed. This proxy currently only supports Twitter/X.
+A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images from sites that may restrict it; this way I can embed images from Twitter/X. Custom Ruby plugin [`_plugins/gallery.rb`](https://github.com/lynkos/blog/blob/main/_plugins/gallery.rb) automatically prepends Twitter/X URLs within a gallery with the value of [`worker_base_url`](https://github.com/lynkos/blog/blob/main/_plugins/gallery.rb#L33). Additional sites will be added as needed. This proxy currently only supports Twitter/X.
 
 1. Sign up and/or login to [Cloudflare](https://cloudflare.com)
 
@@ -490,10 +490,7 @@ To generate a base64-encoded LQIP for the `lqip` field:
 
 6. Depending on your browser, copy the image link directly (i.e. click <kbd>Copy Image Link</kbd>) **OR** open the image in a new tab (i.e. <kbd>Open Image in New Tab</kbd>) and copy the URL in the address bar
    
-	> Image link **MUST** be a base64 string that starts with:
-	> ```plaintext
-	> data:content/type;base64
-	> ```
+	> Image link **MUST** be a base64 string that starts with `data:content/type;base64`
 	{: .prompt-important }
 
 6. Paste the base64 string (aka image link) in the `lqip` field of the front matter (i.e. use it to replace `base64-encoded-lqip`)
@@ -520,33 +517,31 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
 	{: .prompt-tip }
 
 2. Confirm the remote URL with either command
-	* Command #1
-		* Input:
-			  ```sh
-			  git remote show
-			  ```
-			  {: .nolineno }
-		
-		* Example Output:
-			  ```plaintext
-			  origin
-			  upstream
-			  ```
+	* Command #1:
+		  ```sh
+		  git remote show
+		  ```
+		  {: .nolineno }
 	
-	* Command #2
-		* Input:
-			  ```sh
-			  git remote -v
-			  ```
-			  {: .nolineno }
-		
-		* Example Output:
-			  ```plaintext
-			  origin  https://github.com/lynkos/blog.git (fetch)
-			  origin  https://github.com/lynkos/blog.git (push)
-			  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
-			  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
-			  ```
+	* Example Output #1:
+		  ```plaintext
+		  origin
+		  upstream
+		  ```
+	
+	* Command #2:
+		  ```sh
+		  git remote -v
+		  ```
+		  {: .nolineno }
+	
+	* Example Output #2:
+		  ```plaintext
+		  origin  https://github.com/lynkos/blog.git (fetch)
+		  origin  https://github.com/lynkos/blog.git (push)
+		  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
+		  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
+		  ```
 
 3. Fetch latest changes from upstream repository
 
@@ -636,10 +631,8 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 9. Click the <kbd>Create pull request</kbd> button
 
 ## Credits
-This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian).
-
-Preview image taken from [`@socra`](https://velog.io/@socra/Obsidian%EC%9C%BC%EB%A1%9C-%EC%A7%80%ED%82%AC-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0).
-
-Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)).
-
-Check out the [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki) and [original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE) for more information.
+* This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian)
+* Preview image taken from [`@socra`](https://velog.io/@socra/Obsidian%EC%9C%BC%EB%A1%9C-%EC%A7%80%ED%82%AC-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
+* Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)); for more information, check out:
+	* [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki)
+	* [Original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE)

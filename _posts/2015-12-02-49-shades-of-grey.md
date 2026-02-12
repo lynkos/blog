@@ -5,6 +5,10 @@ date: 2015-12-02 22:13:00 -0400
 math: false
 categories: [ write-up, ctf ]
 tags: [ ctf, technology, digital-forensics, cybersecurity, computer-science ]
+image:
+  path: /assets/img/previews/49-shades-preview.png
+  lqip: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAQABADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwBY+ZWkDykzDG0nDOmBwM7eu09OPrUSxxi5laScm5DsC5f5QxGflGB6eo7D3pUkEsaGWVcxcFZCOVy3cck5OMcfw9KTcZ2E88MrxqRGWCKpXa3pjH8Q4+pzgCgD/9k=
+  alt: Image included with this problem
 ---
 > This is an archived blog post I wrote while in high school.
 > 
@@ -13,9 +17,7 @@ tags: [ ctf, technology, digital-forensics, cybersecurity, computer-science ]
 
 > We only have 49 shades of gray D:
 > 
-> #000000 to #f5f5f5... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
-> 
-> ![Image](https://i.imgur.com/moVmzyy.png)
+> `#000000` to `#f5f5f5`... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
 
 This is one of my personal favorites from the CTF, and I'm not entirely sure why. Regardless, all it takes is a little coding, pattern-finding, and logic.
 
@@ -23,31 +25,30 @@ The way I approached the problem was to first println every single pixel (in hex
 
 I decided that I'd remove any duplicates from the list, thus considerably narrowing down the previous amount of hexadecimals. Here's the list:
 
-|         |         |         |         |         |         |         |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| #dcdcdc | #cdcdcd | #bebebe | #919191 | #4b4b4b | #d2d2d2 | #c3c3c3 |
-| #414141 | #191919 | #f5f5f5 | #141414 | #828282 | #646464 | #a5a5a5 |
-| #0a0a0a | #6e6e6e | #969696 | #5a5a5a | #696969 | #737373 | #464646 |
-| #373737 | #a0a0a0 | #f0f0f0 | #c8c8c8 | #d7d7d7 | #3c3c3c | #ebebeb |
-| #7d7d7d | #282828 | #787878 | #aaaaaa | #000000 | #1e1e1e | #8c8c8c |
-| #323232 | #232323 | #e6e6e6 | #e1e1e1 | #b9b9b9 | #9b9b9b | #b4b4b4 |
-| #5f5f5f | #878787 | #afafaf | #050505 | #2d2d2d | #555555 | #0f0f0f |
+| --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| `#dcdcdc` | `#cdcdcd` | `#bebebe` | `#919191` | `#4b4b4b` | `#d2d2d2` | `#c3c3c3` |
+| `#414141` | `#191919` | `#f5f5f5` | `#141414` | `#828282` | `#646464` | `#a5a5a5` |
+| `#0a0a0a` | `#6e6e6e` | `#969696` | `#5a5a5a` | `#696969` | `#737373` | `#464646` |
+| `#373737` | `#a0a0a0` | `#f0f0f0` | `#c8c8c8` | `#d7d7d7` | `#3c3c3c` | `#ebebeb` |
+| `#7d7d7d` | `#282828` | `#787878` | `#aaaaaa` | `#000000` | `#1e1e1e` | `#8c8c8c` |
+| `#323232` | `#232323` | `#e6e6e6` | `#e1e1e1` | `#b9b9b9` | `#9b9b9b` | `#b4b4b4` |
+| `#5f5f5f` | `#878787` | `#afafaf` | `#050505` | `#2d2d2d` | `#555555` | `#0f0f0f` |
 
 Interestingly, the amount of pixels above is equal to 49, just like in the problem title. Also, all those pixels are shades of grey, amounting to 49 shades of grey, implying that we're getting closer to the flag (as 50th shade of grey, aka the missing shade, is the flag).
 
 One of the first things I noticed was the pattern/correlation between each hexadecimal value. It was as though every value had its reverse in its list (with the exception of hexadecimal values made up of one letter/number).
 
-e.g. #414141 and #141414 were on the list, #0a0a0a and #a0a0a0, #696969 and #969696, etc.
+e.g. `#414141` and `#141414` were on the list, `#0a0a0a` and `#a0a0a0`, `#696969` and `#969696`, etc.
 
-I decided to remove any values whose reverse was on that list, along with any values whose hexadecimal value was made up of one letter or number (e.g. #000000, #aaaaaa, etc.).
+I decided to remove any values whose reverse was on that list, along with any values whose hexadecimal value was made up of one letter or number (e.g. `#000000`, `#aaaaaa`, etc.).
 
-After doing so, I was left with #050505 and #afafaf
+After doing so, I was left with `#050505` and `#afafaf`
 
 At that point, it was clear to me that their reverse was the missing shade (and so the flag), but only one of the reverse values worked, rather than both.
 
-It seemed strange that I was given two answers, but then I remember back to the question: the color range was from #000000 to #f5f5f5.
+It seemed strange that I was given two answers, but then I remember back to the question: the color range was from `#000000` to `#f5f5f5`.
 
-The reverse of #afafaf is #fafafa, which is not in the range between #000000 and #f5f5f5, eliminating that as the choice, hence leaving the only choice (and correct answer) to be #505050.
+The reverse of `#afafaf` is `#fafafa`, which is not in the range between `#000000` and `#f5f5f5`, eliminating that as the choice, hence leaving the only choice (and correct answer) to be `#505050`.
 
 For reference, the code I used to solve the problem is below; it's written in Java.
 
@@ -159,6 +160,5 @@ For reference, the code I used to solve the problem is below; it's written in Ja
       }  
  }
 ```
-{: .nolineno}
 
 Flag: `#505050`

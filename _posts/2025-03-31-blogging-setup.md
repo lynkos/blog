@@ -255,9 +255,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	```
 
 6. Add the `<script>` tag
-   * If you're **NOT** using `jekyll-theme-chirpy`,  to your website's template where you want the comments to appear
-     > If an element with the `giscus` class exists, the comments will be placed there instead
-     {: .prompt-info }
+   * If you're **NOT** using `jekyll-theme-chirpy`,  to your website's template where you want the comments to appear (**Note: If an element with the `giscus` class exists, the comments will be placed there instead**)
    * If you **ARE** using the [Jekyll theme Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy), continue to the next section
 
 **_OPTIONAL: ADD COMMENTS FEATURE TO `jekyll-theme-chirpy`_**
@@ -517,31 +515,31 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
 	{: .prompt-tip }
 
 2. Confirm the remote URL with either command
-	* Command #1:
-		  ```sh
-		  git remote show
-		  ```
-		  {: .nolineno }
+	* Command #1
+	  ```sh
+	  git remote show
+	  ```
+	  {: .nolineno }
 	
-	* Example Output #1:
-		  ```plaintext
-		  origin
-		  upstream
-		  ```
+	* Example Output #1
+	  ```plaintext
+	  origin
+	  upstream
+	  ```
 	
-	* Command #2:
-		  ```sh
-		  git remote -v
-		  ```
-		  {: .nolineno }
+	* Command #2
+	  ```sh
+	  git remote -v
+	  ```
+	  {: .nolineno }
 	
-	* Example Output #2:
-		  ```plaintext
-		  origin  https://github.com/lynkos/blog.git (fetch)
-		  origin  https://github.com/lynkos/blog.git (push)
-		  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
-		  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
-		  ```
+	* Example Output #2
+	  ```plaintext
+	  origin  https://github.com/lynkos/blog.git (fetch)
+	  origin  https://github.com/lynkos/blog.git (push)
+	  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (fetch)
+	  upstream        https://github.com/cotes2020/jekyll-theme-chirpy.git (push)
+	  ```
 
 3. Fetch latest changes from upstream repository
 
@@ -633,6 +631,6 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 ## Credits
 * This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian)
 * Preview image taken from [`@socra`](https://velog.io/@socra/Obsidian%EC%9C%BC%EB%A1%9C-%EC%A7%80%ED%82%AC-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
-* Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)); for more information, check out:
+* Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)); for more information:
 	* [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki)
 	* [Original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE)

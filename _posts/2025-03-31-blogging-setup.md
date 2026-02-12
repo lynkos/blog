@@ -209,12 +209,12 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
- | **Permission** | **Access**     | **Reason**                     |
- | :------------- | :------------- | :----------------------------- |
- | Contents       | Read and write | Create branch                  |
- | Metadata       | Read-only      | Mandatory                      |
- | Pull requests  | Read and write | Create and merge pull requests |
- | Workflows      | Read and write | Create/update file             |
+	| **Permission** | **Access**     | **Reason**                      |
+	| :-------------- | :------------- | :------------------------------ |
+	| Contents        | Read and write | Create branch                   |
+	| Metadata        | Read-only      | Mandatory                       |
+	| Pull requests   | Read and write | Create and merge pull requests  |
+	| Workflows       | Read and write | Create/update file              |
 
 21. Click <kbd>Generate token</kbd>
 
@@ -446,7 +446,7 @@ image:
 ```
 {: file="templates/default.txt" }
 
-| **Key**       | **Description**                                                                                 |
+|    **Key**    | **Description**                                                                                 |
 | :------------ | :---------------------------------------------------------------------------------------------- |
 | `share`       | When `true`, it will push to Github                                                             |
 | `title`       | Post title                                                                                      |

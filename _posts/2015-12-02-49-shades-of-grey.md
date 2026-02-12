@@ -12,10 +12,10 @@ tags: [ ctf, technology, digital-forensics, cybersecurity, computer-science ]
 {: .prompt-important }
 
 > We only have 49 shades of gray D:
->
+> 
 > #000000 to #f5f5f5... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
->
-> [Image](https://imgur.com/moVmzyy)
+> 
+> ![Image](https://i.imgur.com/moVmzyy.png)
 
 This is one of my personal favorites from the CTF, and I'm not entirely sure why. Regardless, all it takes is a little coding, pattern-finding, and logic.
 

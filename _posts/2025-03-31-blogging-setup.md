@@ -27,7 +27,7 @@ Though I use [Jekyll](https://jekyllrb.com), this should technically work with a
 ### Obsidian Theme
 I've always been a fan of dark mode color scheme, especially solarized dark. I also prefer to avoid cluttered UI, which is why I use the [**Minimal Theme Settings**](https://github.com/kepano/obsidian-minimal-settings) plugin.
 
-1. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd> ) in **Obsidian**
+1. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd>) in **Obsidian**
 
 2. Go to **Community plugins** tab
 3. If it isn't already, turn off **Restricted mode** to enable community plugins
@@ -62,7 +62,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 ### Setup Enveloppe
 1. Launch **Obsidian**
 
-2. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd> )
+2. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd>)
 
 3. Go to **Community plugins** tab
 
@@ -218,21 +218,6 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 23. Back in Enveloppe settings, paste it in the **GitHub token** area
 
-**_OPTIONAL: Create Hotkey_**
-
-24. Go to **Hotkeys** tab
-
-25. Scroll to **Enveloppe: Upload single current active note**
-
-26. Click the **+** icon (says **Customize this command** when you hover over it)
-
-27. Press <kbd>Command ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>P</kbd>, or your preferred hotkey
-
-Now we can automatically auto-publish your Obsidian post to your blog by using that hotkey!
-
-> Make sure `share: true` is in the frontmatter, otherwise it won't post
-{: .prompt-important }
-
 ### Setup Comments
 1. If you haven't already, make your blog's [GitHub repository public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
 
@@ -332,6 +317,7 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
 9. Click the <kbd>Edit Code</kbd> button; you can also access this page later by going to **Compute (Workers)** > **Workers & Pages**, clicking the worker (i.e. `img-proxy`), then clicking the small icon **</>** in the upper-right corner
 
 10. This should open the Cloudflare Workers IDE; replace the default code in `worker.js` with the following code:
+    
     ```js
     export default {
       /**
@@ -405,6 +391,32 @@ A custom [Cloudflare Worker](https://workers.cloudflare.com) hotlinks images fro
 
 20.  You can now use the custom domain for your image proxy at `https://img-proxy.<YOUR_ROOT_DOMAIN>/?url=<IMAGE_URL>` (e.g. `https://img-proxy.example.com/?url=https://pbs.twimg.com/media/GzPhoaKWoAA16uA?format=jpg&name=medium`)
 
+### Create Hotkeys
+1. Launch **Obsidian**
+
+2. Save the template in [Default Template](2025-03-31-blogging-setup.md#default-template) to your vault (e.g. `templates/default.txt`{: .filepath})
+
+3. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd>)
+
+4. Go to **Hotkeys** tab
+
+5. Scroll to **Templates: Insert template**
+
+6. Click the **+** icon (says **Customize this command** when you hover over it)
+
+7. Press <kbd>Command ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>T</kbd>, or your preferred hotkey
+
+8. Scroll to **Enveloppe: Upload single current active note**
+
+9. Click the **+** icon (says **Customize this command** when you hover over it)
+
+10. Press <kbd>Command ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>P</kbd>, or your preferred hotkey
+
+Now we can automatically apply the template to any new post and auto-publish your Obsidian post to your blog with those hotkeys!
+
+> Make sure `share: true` is in the frontmatter, otherwise it won't post
+{: .prompt-important }
+
 ## Writing Posts
 ### Default Template
 You'll need to add the following to the top of every Markdown post you make
@@ -430,54 +442,38 @@ image:
 ```
 {: file="templates/default.txt" }
 
-|    **Key**    | **Description**                                                         |
-| :------------ | :---------------------------------------------------------------------- |
-| `share`       | When `true`, it will push to Github                                     |
-| `title`       | Post title                                                              |
-| `date`        | Date and time created; format `YYYY-MM-DD HH:MM:SS UTC_OFFSET`          |
-| `filename`    | Where your file will be saved in Github; format `YYYY-MM-DD-title-here` |
-| `description` | Post description; will appear below post title                          |
-| `math`        | Enable MathJax for LaTeX processing                                     |
-| `pin`         | When `true`, it will pin this post on website                           |
-| `toc`         | When `false`, the table of contents is hidden                           |
-| `comments`    | When `false`, the comments section is hidden                            |
-| `categories`  | Categories                                                              |
-| `tags`        | Tags                                                                    |
-| `path`        | Path to preview image                                                   |
-| `lqip`        | Base64-encoded LQIP (for your preview image)                            |
-| `alt`         | Preview image caption and alt text                                      |
-
-**_OPTIONAL: Create Hotkey_**
-1. Launch **Obsidian**
-
-2. Save the aforementioned template in your vault (e.g. `templates/default.txt`{: .filepath})
-
-3. Open **Settings** (<kbd>Command ⌘</kbd> + <kbd>,</kbd> )
-
-4. Go to **Hotkeys** tab
-
-5. Scroll to **Templates: Insert template**
-
-6. Click the **+** icon (says **Customize this command** when you hover over it)
-
-7. Press <kbd>Command ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>T</kbd>, or your preferred hotkey
-
-Now we can automatically apply the template to any new post by using that hotkey!
+|    **Key**    | **Description**                                                                                 |
+| :------------ | :---------------------------------------------------------------------------------------------- |
+| `share`       | When `true`, it will push to Github                                                             |
+| `title`       | Post title                                                                                      |
+| `date`        | Date and time created; format `yyyy-mm-dd hh:mm:ss utc_offset`                                  |
+| `filename`    | Where your file will be saved in Github; format `yyyy-mm-dd-title-here`                         |
+| `description` | Optional post description; will appear below post title and in previews                         |
+| `math`        | When `true`, enables MathJax for LaTeX processing                                               |
+| `pin`         | When `true`, it will pin this post on website                                                   |
+| `toc`         | When `false`, the table of contents is hidden                                                   |
+| `comments`    | When `false`, the comments section is hidden                                                    |
+| `categories`  | Optional list of categories; 1st element is main category, remaining elements are subcategories |
+| `tags`        | Optional list of tags                                                                           |
+| `path`        | Optional path to preview image                                                                  |
+| `lqip`        | Optional preview image's base64-encoded LQIP                                                    |
+| `alt`         | Optional caption and alt text for preview image (can be left blank)                             |
 
 ### Add Preview Image
-To add a preview image to a post, make sure the following is in your Markdown file's front matter:
+To add a preview image to a post, make sure the following is in your Markdown file's front matter
+
 ```yaml
 image:
   path: /path/to/image.png
   lqip: base64-encoded-lqip
-  alt: Optional image caption and alt text (can be left blank)
+  alt: Optional image caption and alt text
 ```
 {: .nolineno }
 
 To generate a base64-encoded LQIP for the `lqip` field:
 1. Visit [lqip generator](https://chrisleverseo.com/tools/lqip-generator-tool)
 
-2. Input your preview image
+2. Upload your preview image
 
 3. Customize the options as needed; here are my recommendations:
 	* **Placeholder Size**: `Small`
@@ -490,7 +486,7 @@ To generate a base64-encoded LQIP for the `lqip` field:
 
 6. Depending on your browser, copy the image link directly (i.e. click <kbd>Copy Image Link</kbd>) **OR** open the image in a new tab (i.e. <kbd>Open Image in New Tab</kbd>) and copy the URL in the address bar
    
-	> The image link **MUST** be a base64 string that starts with:
+	> Image link **MUST** be a base64 string that starts with:
 	> ```plaintext
 	> data:content/type;base64
 	> ```

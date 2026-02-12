@@ -12,6 +12,10 @@ tags:
   - technology
   - development
   - computer-science
+image:
+  path: /assets/img/previews/blogging-setup-preview.png
+  lqip: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAQABgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDq9W1S6tNd06zRFWC4PLkg+Yc4K46jAIPvx6HOyzFWQBGYMcEjHy8E5PPtjjPWs+axKagbxZdRlMzqphS4AjjAKndtJHHyc4yTubg54kluLtGmSKzumLBmR28oohAIAxvBOSoPP97kj+FtppaAR2uofbNYuLeIyeVbJtcFAAXJ68ncehA4A4brlaKdaWnMc6RPZ7pGmmg4BeQjbk7WK4Iycc5ODwQclSN26H//2Q==
+  alt:
 ---
 Though I use [Jekyll](https://jekyllrb.com), this should technically work with any blogging framework. This tutorial assumes that you are familiar with Jekyll, GitHub Pages, etc.
 
@@ -205,12 +209,12 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 20. Always choose the minimal permissions necessary, so all options should be set to **Access: No access**, with the exception of the following:
 
-	| **Permission** | **Access**     | **Reason**                      |
-	| :-------------- | :------------- | :------------------------------ |
-	| Contents        | Read and write | Create branch                   |
-	| Metadata        | Read-only      | Mandatory                       |
-	| Pull requests   | Read and write | Create and merge pull requests  |
-	| Workflows       | Read and write | Create/update file              |
+ | **Permission** | **Access**     | **Reason**                     |
+ | :------------- | :------------- | :----------------------------- |
+ | Contents       | Read and write | Create branch                  |
+ | Metadata       | Read-only      | Mandatory                      |
+ | Pull requests  | Read and write | Create and merge pull requests |
+ | Workflows      | Read and write | Create/update file             |
 
 21. Click <kbd>Generate token</kbd>
 
@@ -442,7 +446,7 @@ image:
 ```
 {: file="templates/default.txt" }
 
-|    **Key**    | **Description**                                                                                 |
+| **Key**       | **Description**                                                                                 |
 | :------------ | :---------------------------------------------------------------------------------------------- |
 | `share`       | When `true`, it will push to Github                                                             |
 | `title`       | Post title                                                                                      |
@@ -631,8 +635,10 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 
 9. Click the <kbd>Create pull request</kbd> button
 
-## Credit
+## Credits
 This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian).
+
+Preview image taken from [`@socra`](https://velog.io/@socra/Obsidian%EC%9C%BC%EB%A1%9C-%EC%A7%80%ED%82%AC-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0).
 
 Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)).
 

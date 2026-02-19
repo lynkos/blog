@@ -26,7 +26,22 @@ image:
 Buying storage for your new MacBook is expensive and can be inconvenient. Customers can't modify internal storage later, so what you buy is what you get. But what if you wanted an additional, customizable, and portable 4 TB SSD storage? That's what this guide seeks to address.
 
 ## Background
-This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] should provide some context:
+An SSD, short for *Solid-State Drive*, is a data storage device that uses nonvolatile flash memory (which is composed of integrated circuits). An _SSD controller_ keeps track of where data is stored within the drive, thus allowing you to access your data.
+
+In order to communicate data, SSDs contain floating gate transistors in grid patterns where different charges translate into binary ones and zeroes. Each row in the grid patterns is called a _page_, while a _block_ -- which is where information is stored -- is composed of many pages.
+
+Here's a summary of SSDs provided by AWS[^ssd-aws]:
+
+|               | **Explanation**                                                                                                            |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| How it works  | SSDs store data on electronic circuits.                                                                                    |
+| Read process  | An SSD controller finds the correct address and reads its charges.                                                         |
+| Write process | An SSD copies data to a new block, then erases the old block. It then writes new to the old block by changing its charges. |
+| Performance   | SSDs are faster than HDDs. They’re silent and run cooler.                                                                  |
+| Cost          | SSDs are costlier than HDDs.                                                                                               |
+| Durability    | SSDs are electrical, which makes them less prone to damage.                                                                |
+
+This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] provides additional context that's specific to Apple / macOS:
 > An SSD controller, also referred to as a processor, includes the electronics that bridge the NAND Flash memory components to the SSD input/output interfaces. The controller is an embedded processor that executes firmware-level software. The SSD firmware is device specific, and in most cases can be updated.
 > 
 > ![ssd.png](../assets/img/obsidian/ssd.png)
@@ -35,7 +50,7 @@ This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-comp
 >  
 >  ![ssd_chart.jpg](../assets/img/obsidian/ssd_chart.jpg)
 
-There's a bunch of SSDs and enclosures to choose from. How did I narrow it down, and why did I choose the WD_BLACK SN850X and the OWC Express 1M2 Enclosure?
+There are a bunch of SSDs and enclosures to choose from. How did I narrow it down, and why did I choose the WD_BLACK SN850X and the OWC Express 1M2 Enclosure?
 
 Well, first, I wanted to make sure it was compatible with Mac (since I use a MacBook Pro). It needs to be customizable, so buying a pre-made external drive was out of the question. Since I'd be using it for game storage, it also had to be powerful and made with that purpose in mind. Of course, I also want to use it for backups and other stuff (i.e. not just gaming). I own _a lot_ of games (mostly on Steam), so I decided to play it safe and went with 4 TB storage size.
 
@@ -56,9 +71,9 @@ Although I'm currently using macOS Tahoe, like I said, I chose to avoid the Sams
 The OWC Express 1M2 Enclosure was an easy choice since they are known to support both Mac AND Windows, and (to my knowledge) have a reputation for quality.
 
 ## Requirements
-- [x] [WD_BLACK SN850X without Heatsink](https://shop.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0) **OR** any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor
-- [x] [OWC Express 1M2 Enclosure](https://www.owc.com/solutions/express-1m2) (**0TB**, i.e. just the enclosure **ONLY**)
-- [x] macOS 10.13 or later
+- [x] [WD_BLACK SN850X _without_ Heatsink](https://shop.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0) **OR** any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor
+- [x] **0TB** OWC Express 1M2 Enclosure [40Gb/s](https://www.owc.com/solutions/express-1m2) **OR** [80Gb/s](https://www.owc.com/solutions/express-1m2-80g)
+- [x] macOS 10.13 or later (for 40Gb/s) **OR** macOS 10.14 or later (for 80Gb/s)
 - [x] [Pelican 1040 Micro Case](https://www.pelican.com/us/en/product/cases/micro/1040?sku=1040-025-100) (**OPTIONAL**)
 - [x] [USB-C Dust Plug](https://a.co/d/emuCPyw) (**OPTIONAL**)
 
@@ -66,28 +81,26 @@ The OWC Express 1M2 Enclosure was an easy choice since they are known to support
 ### Device Assembly
 1. Place OWC Express 1M2 upside down on a flat static free surface
 2. Remove the screws by using the included screwdriver
-   ![Unscrewed OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-07_Lid_Slid_Off_bkxlr9)
+   ![owc_assembly_1.webp](../assets/img/obsidian/owc_assembly_1.webp)
 3. Slide back then lift away the bottom tray
-   ![Opening OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-08_Lid_Lift_igs5bn)
+   ![owc_assembly_2.webp](../assets/img/obsidian/owc_assembly_2.webp)
 4. Once the enclosure is open, take your NVMe M.2 SSD and carefully slide it inside
-   ![Sliding SSD into OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-14_Notch_Glow_csugmw)
-   ![Full view of sliding SSD into OWC Express 1M2](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-16_SSD_In_y1kevt)
+   ![owc_assembly_3.jpg](../assets/img/obsidian/owc_assembly_3.jpg)
+   ![owc_assembly_4.webp](../assets/img/obsidian/owc_assembly_4.webp)
    > If your SSD has a 2242 **OR** 2230 form factor, you will need a 5mm hex socket to loosen the drive post, then move it to the desired form factor position
-   > ![Loosening drive post in enclosure](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-24_2242_Post_Move_xyvd8q)
+   > ![owc_assembly_5.webp](../assets/img/obsidian/owc_assembly_5.webp)
    {: .prompt-info }
 5. Screw the SSD into the enclosure so it's secured
-   ![Securing SSD into enclosure](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-17_SSD_Screw_Down_yxkgjm)
-   ![Secured SSD inside enclosure](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-18_SSD_Down_dit7no)
+   ![owc_assembly_6.webp](../assets/img/obsidian/owc_assembly_6.webp)
+   ![owc_assembly_7.webp](../assets/img/obsidian/owc_assembly_7.webp)
 6. Align the enclosure's previously removed bottom tray with the top cover so the thermal pad (i.e. yellow and purple strip inside the enclosure) is atop the SSD, slide the pieces together, then gently press down the top cover to ensure they stick
-   ![Closing SSD](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-08_Lid_Lift_igs5bn)
+   ![owc_assembly_8.webp](../assets/img/obsidian/owc_assembly_8.webp)
 7. To make sure it's properly shut, screw the previously removed screws back inside the enclosure with the screwdriver
-   ![Screwing enclosure shut](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-27_Case_Screws_In_xnuvwy)
+   ![owc_assembly_9.webp](../assets/img/obsidian/owc_assembly_9.webp)
 8. Peel open one of the included rubber foots and press it into the crevice containing the screws
-   ![Placing sticker on enclosure](https://media.owcnow.com/image/upload/e_trim,bo_4px_solid_black/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp1M2-Man-28_Pads_On_w9thz4)
+   ![owc_assembly_10.webp](../assets/img/obsidian/owc_assembly_10.webp)
 9. Using the included 0.3M (12") USB4 cable, connect it into the OWC Express 1M2 USB4 port and your Mac
-   ![USB4 port on the enclosure's side](https://media.owcnow.com/image/upload/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp_1M2_Back_a6m1pj)
    > If successfully connected, the LED indicator should light up
-   > ![LED indicator on the enclosure's side](https://media.owcnow.com/image/upload/w_800,c_scale,f_auto,q_auto,dpr_2.0/Exp_1M2_Front_v1_ccjxv4)
    {: .prompt-info }
 
 ### Format SSD
@@ -162,7 +175,7 @@ Anytime you want to create a backup, click the **Time Machine** icon in your men
 > 3. Click <kbd>+ Add Drive</kbd>
 > 4. Select your drive from the dropdown
 > 
-> If you're interested in reading more about my WINE setup, check out [How to Run Windows Games and Programs on Mac](2025-03-19-play-windows-games.md).
+> If you're interested in reading more about my WINE setup, check out [2025-03-19-play-windows-games](./2025-03-19-play-windows-games.md).
 {: .prompt-info }
 
 1. Open **Finder**
@@ -209,27 +222,28 @@ If everything's setup properly, you should be able to install games into their r
 _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12)_
 
 ### OWC Express 1M2
-For your convenience, OWC has tested how the OWC Express 1M2 Enclosure performs on Apple Silicon devices.[^owc-perf] Although they only tested it on iPad Pros, this should still give you a rough idea of its performance.
+#### 40 Gb/s (original model)
+> Ideal for use with USB4 40Gb/s and USB-C 10Gb/s Mac and PC computers, iPads, and tablets.[^owc-exp-40]
 
-| **Tested Host**        | **Transfer Direction** | **Performance** |
-| ---------------------- | ---------------------- | --------------- |
-| iPad Pro 12.9" 5th gen | Express → iPad         | 588 MB/s        |
-| iPad Pro 12.9" 5th gen | iPad → Express         | 1,970 MB/s      |
-| iPad Pro 12.9" 4th gen | Express → iPad         | 221 MB/s        |
-| iPad Pro 12.9" 4th gen | iPad → Express         | 600 MB/s        |
-| iPad Pro 11" 4th gen   | Express → iPad         | 319 MB/s        |
-| iPad Pro 11" 4th gen   | iPad → Express         | 1,618 MB/s      |
-| iPad Pro 11" 3rd gen   | Express → iPad         | 553 MB/s        |
-| iPad Pro 11" 3rd gen   | iPad → Express         | 1,671 MB/s      |
-| 2023 Mac Pro           | Express → Mac Pro      | 3,122 MB/s      |
-| 2023 Mac Pro           | Mac Pro → Express      | 3,250 MB/s      |
+| **Connected To...**                          | **Runs As**   | **Up to Real-World Speed** |
+|----------------------------------------------|---------------|----------------------------|
+| Mac computers with Apple Silicon M1/M2/M3/M4 | USB4 (40Gb/s) | 3189MB/s                   |
+| USB4 (40Gb/s) port on any PC                 | USB4 (40Gb/s) | 3836MB/s                   |
+| Thunderbolt 4 port on any PC                 | USB4 (40Gb/s) | 3836MB/s                   |
+| USB-C (10Gb/s) port on iPad, Mac, or PC      | USB4 (10Gb/s) | 990MB/s                    |
 
-Here are the takeaways[^owc-perf]:
+#### 80 Gb/s
+> Specifically optimized for Thunderbolt 3/4/5 and USB4 80Gb/s computers.[^owc-exp-80]
 
-> - Transferring files from the OWC Express 1M2 to the Apple Silicon iPad Pro experienced the limitation of up to 600MB/s.
-> - Transferring from the Apple Silicon iPad Pro to the OWC Express 1M2 experienced the limitation of up to 1,970MB/s.
-> - The OWC Express 1M2 can produce better performance and experiences 3,200MB/s when connected with a 2023 Mac Pro. 
+| **Connected To...**               | **Real-World Speed** |
+|-----------------------------------|----------------------|
+| USB4 80Gb/s or Thunderbolt 5 host | 3189MB/s             |
+| USB4 40Gb/s host                  | 3836MB/s             |
+| Thunderbolt 4 host                | 3836MB/s             |
+| Thunderbolt 3 host (Mac only)     | 990MB/s              |
 
 ## References
 [^nvme-mac]: [Choosing a Compatible NVMe SSD for your macOS Boot Drive](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)
-[^owc-perf]: [Apple Silicon iPad Pro (Thunderbolt Enabled): External Drive Performance](https://eshop.macsales.com/manuals/apple-silicon-ipad-pro-external-drive-performance-support-article)
+[^owc-exp-40]: [Express 1M2](https://www.owc.com/solutions/express-1m2)
+[^owc-exp-80]: [Express 1M2 80G](https://www.owc.com/solutions/express-1m2-80g)
+[^ssd-aws]: [What's the Difference Between an SSD and a Hard Drive?](https://aws.amazon.com/compare/the-difference-between-ssd-hard-drive/#whats-the-difference-between-an-ssd-and-a-hard-drive--1f38gxj)

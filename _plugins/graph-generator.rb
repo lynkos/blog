@@ -188,14 +188,22 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
     return result
   end
   
-  # 2. YYYY-MM-DD-* filename pattern (without .md)
+  # 2. ./YYYY-MM-DD-*.md filename pattern
+  if url.match?(/^\.\/\d{4}-\d{2}-\d{2}-.+\.md$/)
+    clean = url.sub(/^\.\//, '') # strip the leading ./
+    result = filename_to_url[clean]
+    # puts "      Filename pattern match: #{result}" if result
+    return result
+  end
+
+  # 3. YYYY-MM-DD-* filename pattern (without .md)
   if url.match?(/^\d{4}-\d{2}-\d{2}-.+$/) && !url.include?('/')
     result = filename_to_url[url] || filename_to_url["#{url}.md"]
     # puts "      Filename base pattern match: #{result}" if result
     return result
   end
   
-  # 3. _posts/* or /_posts/* patterns
+  # 4. _posts/* or /_posts/* patterns
   if url.match?(%r{^/?_posts/.+\.md$})
     filename = File.basename(url)
     result = filename_to_url[filename]
@@ -203,7 +211,7 @@ def normalize_url(url, baseurl, site_url, filename_to_url, slug_to_url, posts)
     return result
   end
   
-  # 4. Full domain URLs - extract the path
+  # 5. Full domain URLs - extract the path
   if url.match?(%r{^https?://})
     # Check if it's one of our supported domains
     supported_domains = [

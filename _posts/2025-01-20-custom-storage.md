@@ -237,10 +237,10 @@ _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/u
 
 | **Connected To...**               | **Real-World Speed** |
 |-----------------------------------|----------------------|
-| USB4 80Gb/s or Thunderbolt 5 host | 3189MB/s             |
-| USB4 40Gb/s host                  | 3836MB/s             |
-| Thunderbolt 4 host                | 3836MB/s             |
-| Thunderbolt 3 host (Mac only)     | 990MB/s              |
+| USB4 80Gb/s or Thunderbolt 5 host | Over 6000MB/s        |
+| USB4 40Gb/s host                  | Over 3800MB/s        |
+| Thunderbolt 4 host                | Up to 3800MB/s       |
+| Thunderbolt 3 host (Mac only)     | Up to 2800MB/s       |
 
 ## References
 [^nvme-mac]: [Choosing a Compatible NVMe SSD for your macOS Boot Drive](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)

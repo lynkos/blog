@@ -121,12 +121,12 @@ I have different versions of Wine on my system which I use for different purpose
 - **Wine Devel.app**: I use this if I want to use DXMT or DXVK graphics API. This build uses a recent version of Wine (10.18).
 - **CrossOver.app**: I don't use this, but it contains some useful files that I can use with other Wine builds. See [Install CrossOver](2025-03-19-play-windows-games.md#install-crossover) for more details.
 
-| Prefix                    | Build Name       | Wine Version | Graphics API(s)                | Description                   |
-| :------------------------ | :--------------- | :----------- | :----------------------------- | :---------------------------- |
-| `$HOME/Bottles/GPTk`      | gptk/3.0b2       | 7.7          | D3DMetal                       | Game Porting Toolkit 3 Beta 2 |
-| `$HOME/Bottles/DXMT`      | dxmt/10.18       | 10.18        | DXMT, MoltenVK                 | DirectX to Metal              |
-| `$HOME/Bottles/DXVK`      | dxvk/10.18       | 10.18        | DXVK, MoltenVK                 | DirectX to Vulkan             |
-| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | 8.0.1        | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeavers      |
+| Prefix                    | Build Name       | Graphics API(s)                | Description             |
+| :------------------------ | :--------------- | :----------------------------- | :---------------------- |
+| `$HOME/Bottles/GPTk`      | gptk/3_0_2       | D3DMetal                       | Game Porting Toolkit 3  |
+| `$HOME/Bottles/DXMT`      | dxmt/10.18       | DXMT, MoltenVK                 | DirectX to Metal        |
+| `$HOME/Bottles/DXVK`      | dxvk/10.18       | DXVK, MoltenVK                 | DirectX to Vulkan       |
+| `$HOME/Bottles/CrossOver` | crossover/23.7.1 | D3DMetal, DXMT, DXVK, MoltenVK | CrossOver by CodeWeaver |
 
 Since we'll be working with several different Wine builds, we should create a directory containing each of these Wine builds to keep it organized.
 
@@ -2401,7 +2401,7 @@ This error is common when using an outdated version of Wine with a new version o
 3. Run `cmd.exe`
 
 	```sh
-	wine "C:\windows\system32\cmd.exe"
+	"$WINE" "C:\windows\system32\cmd.exe"
 	```
 	{: .nolineno }
 
@@ -2439,10 +2439,16 @@ This error is common when using an outdated version of Wine with a new version o
 		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
 		```
 		{: .nolineno }
+	---TAB: 7/2/2023
+		If that doesn't work, try this Steam version from 7/2/2023
+		```sh
+		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl https://web.archive.org/web/20230702125953if_/media.steampowered.com/client -exitsteam
+		```
+		{: .nolineno }
 {% endtabs %}
 
-> The link will not open in a browser, however, it is still active
-{: .prompt-info }
+> Visit the Internet Archive / Wayback Machine to view [all archived versions of Steam from 10/17/2007 to present](https://web.archive.org/web/20251001000000*/media.steampowered.com).
+{: .prompt-tip }
 
 6. Exit
 
@@ -2470,7 +2476,7 @@ This error is common when using an outdated version of Wine with a new version o
 9. Restart Steam
 
 	```sh
-	wine "C:\Program Files (x86)\Steam\steam.exe"
+	"$WINE" "C:\Program Files (x86)\Steam\steam.exe"
 	```
 	{: .nolineno }
 
@@ -2484,6 +2490,10 @@ This error is common when using an outdated version of Wine with a new version o
 
 ##### Steam download freezes
 This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.
+
+You may need to add Steam as a trusted device[^steam-privacy]:
+
+<kbd>System Settings</kbd> > <kbd>Privacy & Security</kbd> > <kbd>App Management</kbd>
 
 ###### Method 1: Steam Console
 Source[^steamconsole]
@@ -3706,3 +3716,4 @@ Environment variables can be used to control some aspects of translation and emu
 [^wine-dll-audio]: [Far Cry 4, Crossover 25.0.1, Macbook Pro M4 pro : Performance test](https://www.reddit.com/r/macgaming/comments/1ltcbcw/far_cry_4_crossover_2501_macbook_pro_m4_pro) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
 [^fc3-audio-fix]: [Far Cry 3 Audio Crackling issues (comment)](https://www.reddit.com/r/macgaming/comments/1jcw1w7/comment/mi81abl) ([/r/MacGaming](https://www.reddit.com/r/macgaming))
 [^steam-app-icon]: [Some app icons I've made over the last couple of days. Spotify, Steam, Discord, and Chrome (Cycles)](https://www.reddit.com/r/blender/comments/shk9dr/some_app_icons_ive_made_over_the_last_couple_of) ([/r/Blender](https://www.reddit.com/r/blender))
+[^steam-privacy]: [Steam doesn't download games through Whiskey... It just simply stops all the network download and disk writing. Any idea why?](https://reddit.com/r/macgaming/comments/17xw1pn/steam_doesnt_download_games_through_whiskey_it/k9r8f7b) ([/r/MacGaming](https://www.reddit.com/r/macgaming))

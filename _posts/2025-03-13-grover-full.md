@@ -123,6 +123,7 @@ grover_oracle.draw("mpl", style = "iqp")
 ```
 
 ![Generated quantum circuit for Oracle](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/circuits/oracle.png)
+_Generated quantum circuit for Oracle_
 
 ## Diffuser
 Diffuser $D$ amplifies the target state(s) (which deamplifies all other states) with a reflection about the average amplitude. In other words, it increases the probability of getting the $n$-qubit target state(s) marked by $U_{w}$ and, ultimately, the right answer.
@@ -160,7 +161,8 @@ grover_diffuser = diffuser()
 grover_diffuser.draw("mpl", style = "iqp")
 ```
 
-![Generated quantum circuit for Oracle](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/circuits/diffuser.png)
+![Generated quantum circuit for Diffuser](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/circuits/diffuser.png)
+_Generated quantum circuit for Diffuser_
 
 ## Grover's Algorithm
 Grover's algorithm, also known as quantum search algorithm, finds $m$ target(s) within a database of size $N$; this is particularly useful for unstructured searches. A search is performed by evaluating a function (i.e. $U_{w}$) that returns a particular value for the target(s) and another value for all other objects in the database. More generally, it solves the problem of function inversion: Given $y = f(x)$ where $x$ can take $N$ values, Grover's algorithm finds the value $x = f^{−1}(y)$ with $O(\sqrt{N})$ evaluations; a naïve exhaustive search (i.e. classical algorithm) would require about $O(N)$ evaluations. This is a significant, quadratric speed-up!
@@ -234,7 +236,8 @@ grover_circuit, density_matrix = grover(grover_oracle, grover_diffuser)
 grover_circuit.draw("mpl", style = "iqp")
 ```
 
-![Generated grover circuit](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/circuits/grover.png)
+![Generated quantum circuit for Grover's algorithm](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/circuits/grover.png)
+_Generated quantum circuit for Grover's algorithm_
 
 Here we simulate Grover's algorithm using the `AerSimulator` backend, which is a local simulator that can simulate quantum circuits with noise. We transpile the circuit to optimize it for the backend, then run the simulation with a specified number of shots. We then get the results of the simulation and display the top measurement(s) (state(s) with the highest frequency) and target state(s) in binary and decimal form. We determine if the top measurement(s) equals the target state(s) and print the result.
 
@@ -314,7 +317,8 @@ from qiskit.visualization import plot_histogram
 plot_histogram(data = results, legend = ["Qubits"], number_to_keep = len(TARGETS), title = TITLE)
 ```
 
-![Simulation results of grover's algorithm](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/simulations/ipynb.png)
+![Simulation results of Grover's algorithm](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/simulations/ipynb.png)
+_Simulation results of Grover's algorithm_
 
 ## Density Matrix
 Density matrix is a collection of numbers in a matrix used to describe $n$-qubit state(s) in a system. In our case, `density_matrix` represents $m$ winner(s) (which should equal our target state(s)), and is visualized in the diagrams below.
@@ -328,7 +332,8 @@ density_matrix.draw("city")
 ```
 {: .nolineno }
 
-![City plot of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/city.png)
+![City plot representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/city.png)
+_City plot representation of density matrix_
 
 ### Bloch Sphere
 Bloch sphere is a 3D geometric representation of a single qubit's state. A point $(\theta, \phi)$ on the sphere's surface denotes a pure state, represented by state vector $\ket{\psi}$, with its north and south poles corresponding to $\ket{0}$ and $\ket{1}$ respectively. This means that we can always say for certain (100% probability) that our system's in state $\ket{\psi}$. In other words, for a pure state we have complete knowledge of the system and know exactly what state it's in.
@@ -352,11 +357,11 @@ A point inside the sphere denotes a mixed state, represented by density matrix $
 $\hat{\rho} = \sum\limits_{k}^{N} p_{k} \ket{\psi_{k}} \bra{\psi_{k}} =
 \displaystyle\frac{1}{2} \begin{bmatrix}1 + r_{z} & r_{x} - ir_{y} \\ r_{x} + ir_{y} & 1 - r_{z}\end{bmatrix}$
 
-Weights $p_{k}$ can be interpreted as the probability of the system being in state $\ket{\psi_{k}}$ where $0 \lt p_{k} \le 1$. Note: $\hat{\rho}$ of a pure state naturally reduces to $\ket{\psi}$ with $p = 1$.
+Weights $p_{k}$ can be interpreted as the probability of the system being in state $\ket{\psi_{k}}$ where $0 \le p_{k} \le 1$. Note: $\hat{\rho}$ of a pure state naturally reduces to $\ket{\psi}$ with $p = 1$.
 
 $N$ is the total number of possible states the system could be in with $\sum\limits_{k}^{N} p_{k} = 1$.
 
-$\ket{\psi_{k}} \bra{\psi_{k}}$ represents the outer product of the state $ket{\psi_{k}}$ with itself, producing a matrix known as the projection operator $\hat{P_{\psi_{k}}}$.
+$\ket{\psi_{k}} \bra{\psi_{k}}$ represents the outer product of the state $\ket{\psi_{k}}$ with itself, producing a matrix known as the projection operator $\hat{P_{\psi_{k}}}$.
 
 Coefficients $r_{x}, r_{y}, r_{z}$ are components of the vector representing a mixed state, known as the Bloch vector $\vec{r}$.
 
@@ -368,6 +373,7 @@ density_matrix.draw("bloch", reverse_bits = True)
 {: .nolineno }
 
 ![Bloch sphere representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/bloch.png)
+_Bloch sphere representation of density matrix_
 
 ### Hinton Plot
 Hinton plot represents the real and imaginary parts of $n$-qubit state(s) on 2D plots by using squares. Positive and negative values are represented by white and black squares respectively, and the size of each square represents the magnitude of each value.
@@ -378,18 +384,20 @@ density_matrix.draw("hinton")
 ```
 {: .nolineno }
 
-![Hinton plot of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/hinton.png)
+![Hinton plot representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/hinton.png)
+_Hinton plot representation of density matrix_
 
 ### Q-Sphere
 Q-Sphere is a visualization of $n$-qubit state(s) that associates each computational basis state with a point on the surface of a sphere. A node is visible at each point; each node's radius is proportional to the probability $p_{k}$ of its basis state, whereas the node color indicates its phase $\varphi_{k}$. The sphere's north and south poles correspond to basis states $\ket{0}^{\otimes n}$ and $\ket{1}^{\otimes n}$ respectively, with all other basis states in between. Beginning at the north pole and progressing southward, each successive latitude has basis states with a greater number of $1$'s; a basis state's latitude is determined by its Hamming distance from $\ket{0}^{\otimes n}$. The vector(s) on the sphere represents the system's density matrix.
 
 ```py
-# Qsphere representation of density_matrix
+# Q-sphere representation of density_matrix
 density_matrix.draw("qsphere")
 ```
 {: .nolineno }
 
 ![Q-sphere representation of density matrix](https://raw.githubusercontent.com/lynkos/grovers-algorithm/main/assets/figures/q-sphere.png)
+_Q-sphere representation of density matrix_
 
 ## References
 * [Grover's Search Algorithm for $n$ Qubits with Optimal Number of Iterations](https://arxiv.org/pdf/2011.04051.pdf)

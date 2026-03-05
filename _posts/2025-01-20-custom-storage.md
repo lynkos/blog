@@ -84,15 +84,15 @@ There's also been issues with the Samsung 990 PRO's reliability across different
 
 Reddit user [RobbieKhan](https://www.reddit.com/user/robbiekhan) reported[^reddit-990-pro]:
 
->  Screenshot:
->  
->  ![Screenshot of reddit user's Samsung 990 Pro health](https://i.imgur.com/V7GBP5v.png)
->  
->  Got my 990 Pro 2TB to upgrade from a 970 Evo Plus which I've had for over a year. The 970 for ref was at 99% health still last week before I disconnected it to clone over from onto the 990 Pro.
->  
->  The 990 was fine until the other day when I noticed the health reported as 99%, now today I'm seeing 98%, only written an additional few tens of GB to it since that time.
->  
->  Edit* My drive had dropped to 94% health before I contacted Samsung RMA service.
+> Screenshot:
+> 
+> ![Screenshot of reddit user's Samsung 990 Pro health](https://i.imgur.com/V7GBP5v.png)
+> 
+> Got my 990 Pro 2TB to upgrade from a 970 Evo Plus which I've had for over a year. The 970 for ref was at 99% health still last week before I disconnected it to clone over from onto the 990 Pro.
+> 
+> The 990 was fine until the other day when I noticed the health reported as 99%, now today I'm seeing 98%, only written an additional few tens of GB to it since that time.
+> 
+> Edit* My drive had dropped to 94% health before I contacted Samsung RMA service.
 
 Twitter user [Neil Schofield](https://x.com/neilaschofield) reported[^samsung-990-pro-twitter]:
 

@@ -26,7 +26,7 @@ image:
 Buying storage for your new MacBook is expensive and can be inconvenient. Customers can't modify internal storage later, so what you buy is what you get. But what if you wanted an additional, customizable, and portable 4 TB SSD external drive? That's what this guide seeks to address.
 
 {% gallery %}
-	src="/assets/img/obsidian/my_storage_setup.jpg" alt="My storage setup: WD_BLACK SN850X NVMe SSD + OWC Express 1M2 Enclosure inside of a Pelican 1040 Micro Case" height="450"
+	src="/assets/img/obsidian/my_storage_setup.jpg" alt="WD_BLACK SN850X NVMe SSD + OWC Express 1M2 Enclosure inside of a Pelican 1040 Micro Case" height="450"
 	src="/assets/img/obsidian/my_storage_setup_open.jpg" alt="Opened Pelican 1040 Micro Case containing my storage setup" height="450"
 	src="/assets/img/obsidian/my_storage_setup_details.jpg" alt="Contents of my Pelican 1040 Micro Case: My storage setup and accessories" height="450"
 	src="/assets/img/obsidian/my_storage_setup_back.jpg" alt="Back of my OWC Express 1M2 Enclosure" height="450"
@@ -40,7 +40,7 @@ In order to communicate data, SSDs contain floating gate transistors in grid pat
 Here's a summary of SSDs provided by AWS[^ssd-aws]:
 
 |                   |                                                                                                                            |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **How it works**  | SSDs store data on electronic circuits.                                                                                    |
 | **Read process**  | An SSD controller finds the correct address and reads its charges.                                                         |
 | **Write process** | An SSD copies data to a new block, then erases the old block. It then writes new to the old block by changing its charges. |
@@ -263,7 +263,7 @@ _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/u
 > Ideal for use with USB4 40Gb/s and USB-C 10Gb/s Mac and PC computers, iPads, and tablets.[^owc-exp-40]
 
 | **Connected To...**                          | **Runs As**   | **Up to Real-World Speed** |
-|----------------------------------------------|---------------|----------------------------|
+| -------------------------------------------- | ------------- | -------------------------- |
 | Mac computers with Apple Silicon M1/M2/M3/M4 | USB4 (40Gb/s) | 3189MB/s                   |
 | USB4 (40Gb/s) port on any PC                 | USB4 (40Gb/s) | 3836MB/s                   |
 | Thunderbolt 4 port on any PC                 | USB4 (40Gb/s) | 3836MB/s                   |
@@ -273,7 +273,7 @@ _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/u
 > Specifically optimized for Thunderbolt 3/4/5 and USB4 80Gb/s computers.[^owc-exp-80]
 
 | **Connected To...**               | **Real-World Speed** |
-|-----------------------------------|----------------------|
+| --------------------------------- | -------------------- |
 | USB4 80Gb/s or Thunderbolt 5 host | Over 6000MB/s        |
 | USB4 40Gb/s host                  | Over 3800MB/s        |
 | Thunderbolt 4 host                | Up to 3800MB/s       |

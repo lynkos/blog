@@ -199,9 +199,14 @@
   }
 }
 
-/* Add a transparency effect for thumnbail images */
 .slide-preview {
+  /* Add a transparency effect for thumnbail images */
   opacity: 0.6;
+
+  /* Make thumbnail images cover their containers */
+  object-fit: cover;
+  width: 250px;
+  height: 125px;
 }
 
 .active,

@@ -48,13 +48,9 @@
   }
 
   .lineno {
+    @extend %no-cursor;
     text-align: right;
     color: var(--highlight-lineno-color);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 } /* .highlight */
 

@@ -192,6 +192,7 @@ details {
   border-radius: v.$radius-lg;
 
   summary {
+    @extend %no-cursor;
     font-weight: 600;
     font-size: 1.18rem;
     position: relative;
@@ -201,11 +202,6 @@ details {
     padding: .5rem .75rem .5rem 2rem;
     border-radius: v.$radius-lg;
     list-style: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   
     &::marker,
     &::-webkit-details-marker {

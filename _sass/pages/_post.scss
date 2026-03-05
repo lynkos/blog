@@ -71,11 +71,8 @@ header {
   }
 
   .share-wrapper {
+    @extend %no-cursor;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 
     %icon-size {
       font-size: 1.125rem;

@@ -112,15 +112,14 @@
 
 .prev,
 .next {
+  @extend %no-cursor;
   position: absolute;
   color: var(--link-color);
   width: auto;
   padding: var(--arrow-padding);
   font-weight: bold;
   font-size: 20px;
-  user-select: none;
   transition: all .35s ease-in-out;
-  -webkit-user-select: none;
   text-shadow: 0 0 1px var(--code-header-muted-color);
 
   &:hover {

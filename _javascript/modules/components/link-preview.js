@@ -1,3 +1,8 @@
+/**
+ * Apply link preview when hovering over links in post content.
+ * Fetches and displays a preview of the linked page.
+ */
+
 const CONFIG = {
   previewDelay: 0, // ms
   maxPreviewLength: 200, // chars

@@ -1,3 +1,7 @@
+/**
+ * Tabs component
+ */
+
 function initTabs() {
   const tabContainers = document.querySelectorAll(".tab-container");
 

@@ -39,7 +39,6 @@ In order to communicate data, SSDs contain floating gate transistors in grid pat
 
 Here's a summary of SSDs provided by AWS[^ssd-aws]:
 
-|                   |                                                                                                                            |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **How it works**  | SSDs store data on electronic circuits.                                                                                    |
 | **Read process**  | An SSD controller finds the correct address and reads its charges.                                                         |

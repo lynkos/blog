@@ -3,7 +3,7 @@ share: true
 title: Custom Storage
 date: 2026-01-20 20:15:03 -0400
 filename: 2025-01-20-custom-storage
-description: DIY guide on building your own storage solution with a WD_BLACK SN850X NVMe SSD (or any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor) and an OWC Express 1M2 Enclosure.
+description: DIY guide on building your own external drive with a WD_BLACK SN850X NVMe SSD (or any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor) and an OWC Express 1M2 Enclosure.
 categories:
   - guide
   - hardware
@@ -23,7 +23,14 @@ image:
 > **Note**: I started writing this before SSD prices skyrocketed, so I'm aware that some of the following (namely SSDs being an affordable option to adding additional storage to your Mac) may no longer be applicable...
 {: .prompt-important }
 
-Buying storage for your new MacBook is expensive and can be inconvenient. Customers can't modify internal storage later, so what you buy is what you get. But what if you wanted an additional, customizable, and portable 4 TB SSD storage? That's what this guide seeks to address.
+Buying storage for your new MacBook is expensive and can be inconvenient. Customers can't modify internal storage later, so what you buy is what you get. But what if you wanted an additional, customizable, and portable 4 TB SSD external drive? That's what this guide seeks to address.
+
+{% gallery %}
+	src="/assets/img/obsidian/my_storage_setup.jpg" alt="My storage setup: WD_BLACK SN850X NVMe SSD + OWC Express 1M2 Enclosure inside of a Pelican 1040 Micro Case" height="450"
+	src="/assets/img/obsidian/my_storage_setup_open.jpg" alt="Opened Pelican 1040 Micro Case containing my storage setup" height="450"
+	src="/assets/img/obsidian/my_storage_setup_details.jpg" alt="Contents of my Pelican 1040 Micro Case: My storage setup and accessories" height="450"
+	src="/assets/img/obsidian/my_storage_setup_back.jpg" alt="Back of my OWC Express 1M2 Enclosure" height="450"
+{% endgallery %}
 
 ## Background
 An SSD, short for *Solid-State Drive*, is a data storage device that uses nonvolatile flash memory (which is composed of integrated circuits). An _SSD controller_ keeps track of where data is stored within the drive, thus allowing you to access your data.
@@ -32,14 +39,14 @@ In order to communicate data, SSDs contain floating gate transistors in grid pat
 
 Here's a summary of SSDs provided by AWS[^ssd-aws]:
 
-|               | **Explanation**                                                                                                            |
-|---------------|----------------------------------------------------------------------------------------------------------------------------|
-| How it works  | SSDs store data on electronic circuits.                                                                                    |
-| Read process  | An SSD controller finds the correct address and reads its charges.                                                         |
-| Write process | An SSD copies data to a new block, then erases the old block. It then writes new to the old block by changing its charges. |
-| Performance   | SSDs are faster than HDDs. They’re silent and run cooler.                                                                  |
-| Cost          | SSDs are costlier than HDDs.                                                                                               |
-| Durability    | SSDs are electrical, which makes them less prone to damage.                                                                |
+|                   |                                                                                                                            |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **How it works**  | SSDs store data on electronic circuits.                                                                                    |
+| **Read process**  | An SSD controller finds the correct address and reads its charges.                                                         |
+| **Write process** | An SSD copies data to a new block, then erases the old block. It then writes new to the old block by changing its charges. |
+| **Performance**   | SSDs are faster than HDDs. They’re silent and run cooler.                                                                  |
+| **Cost**          | SSDs are costlier than HDDs.                                                                                               |
+| **Durability**    | SSDs are electrical, which makes them less prone to damage.                                                                |
 
 This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] provides additional context that's specific to Apple / macOS:
 > An SSD controller, also referred to as a processor, includes the electronics that bridge the NAND Flash memory components to the SSD input/output interfaces. The controller is an embedded processor that executes firmware-level software. The SSD firmware is device specific, and in most cases can be updated.
@@ -52,9 +59,11 @@ This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-comp
 
 There are a bunch of SSDs and enclosures to choose from. How did I narrow it down, and why did I choose the WD_BLACK SN850X and the OWC Express 1M2 Enclosure?
 
-Well, first, I wanted to make sure it was compatible with Mac (since I use a MacBook Pro). It needs to be customizable, so buying a pre-made external drive was out of the question. Since I'd be using it for game storage, it also had to be powerful and made with that purpose in mind. Of course, I also want to use it for backups and other stuff (i.e. not just gaming). I own _a lot_ of games (mostly on Steam), so I decided to play it safe and went with 4 TB storage size.
+Well, first, I wanted to make sure it was compatible with Mac (since I use a MacBook Pro). It must be customizable and be high performance, so buying a pre-made external drive was out of the question. The OWC Express 1M2 Enclosure was an easy choice since it has a robust heatsink, supports both Mac AND Windows, and (to my knowledge) has a reputation for quality.
 
-I was torn between the Samsung 990 PRO and WD_BLACK SN850X, but chose the latter after reading about a weird bug with Samsung 990 PRO that only affects Macs[^nvme-mac].
+Since I'd be using it for game storage, it has to be powerful and made with that purpose in mind. It has to be able to save both Windows AND Mac games from Steam. Of course, I also want to use it for backups and other stuff (i.e. not just gaming). Since I own _a lot_ of games (mostly on Steam), I decided to play it safe and went with 4 TB storage size.
+
+I was torn between the Samsung 990 PRO and WD_BLACK SN850X, but chose the latter after reading about a weird bug with Samsung 990 PRO that only affects Macs[^nvme-mac]:
 
 > Prior to macOS Monterey, Samsung drives worked seemingly without issue. We don't know what changed in macOS 12 but we do know that Samsung's proprietary NVMe SSD controllers do not work well with macOS Monterey or Ventura. It doesn't look like a firmware fix from Samsung is ever going to be released. Here's a few examples of their drives that will potentially lead to ultra long macOS boot times. Some have reported six to seven minutes.
 > 
@@ -66,9 +75,37 @@ I was torn between the Samsung 990 PRO and WD_BLACK SN850X, but chose the latter
 
 This has been documented several times, such as with [Acidanthera's research on the Samsung "TRIM Bug"](https://github.com/dortania/bugtracker/issues/192) and [this thread on tonymacx86.com that shows how write speeds are reduced to extremely slow levels when using a Samsung NVMe with an APFS formatted drive](https://www.tonymacx86.com/threads/slow-random-writes-on-nvme-ssd.327436).
 
-Although I'm currently using macOS Tahoe, like I said, I chose to avoid the Samsung 990 PRO just in case. The fact that Apple sources their SSDs from Western Digital (aka SanDisk) also helped me feel sure of my choice.
+There's also been issues with the Samsung 990 PRO's reliability across different operating systems (i.e. not just macOS); multiple people have reported a drop of around 1% endurance per week[^samsung-neowin] and a loss of 10-12% health within a month[^samsung-health].
 
-The OWC Express 1M2 Enclosure was an easy choice since they are known to support both Mac AND Windows, and (to my knowledge) have a reputation for quality.
+[overclock.net](https://www.overclock.net) user [Midian](https://www.overclock.net/members/midian.259976) reported[^990-pro-overclock]:
+
+> Drive is just 1 month old and already it seems 7% is used up, the TBW is no where near the supposed 1200TBW it's capable of so what is going on here? ... I have tried other programs and they all report the same 93% health. Readings have dropped from 95% to 93% in just a few days with no dramatic increase in TBW.
+> 
+> ![samsung_990_pro_performance.png](../assets/img/obsidian/samsung_990_pro_performance.png)
+
+Reddit user [RobbieKhan](https://www.reddit.com/user/robbiekhan) reported[^reddit-990-pro]:
+
+>  Screenshot:
+>  
+>  ![Screenshot of reddit user's Samsung 990 Pro health](https://i.imgur.com/V7GBP5v.png)
+>  
+>  Got my 990 Pro 2TB to upgrade from a 970 Evo Plus which I've had for over a year. The 970 for ref was at 99% health still last week before I disconnected it to clone over from onto the 990 Pro.
+>  
+>  The 990 was fine until the other day when I noticed the health reported as 99%, now today I'm seeing 98%, only written an additional few tens of GB to it since that time.
+>  
+>  Edit* My drive had dropped to 94% health before I contacted Samsung RMA service.
+
+Twitter user [Neil Schofield](https://x.com/neilaschofield) reported[^samsung-990-pro-twitter]:
+
+> 36% worn out after writing less than 2TB of data?
+> 
+> ![Screenshot of Twitter user Neil Schofield's Samsung 990 PRO health](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/FnF-f4uWYAELMvo?format=png&name=900x900)
+
+This is unusual because the Samsung 990 Pro 2TB has 1200TBW. If it's 36% worn out, that implies it already wrote 432TB (0.36 * 1200TB) of data. But this makes no sense since less than 2TB of data was written, meaning it should actually be close to 0.17% (2TB / 1200TB) worn out (i.e. nearly brand new)?
+
+Samsung is aware of this issue and has since released a firmware update[^samsung-990-pro-firmware], but this only stops it from degrading further and doesn't reverse any existing degraded health.
+
+The fact that Apple sources their SSDs from Western Digital/SanDisk also helped me feel sure of my choice.
 
 ## Requirements
 - [x] [WD_BLACK SN850X _without_ Heatsink](https://shop.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd?sku=WDS400T2X0E-00BCA0) **OR** any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor
@@ -247,3 +284,9 @@ _Speed test performed with [Blackmagic Disk Speed Test](https://apps.apple.com/u
 [^owc-exp-40]: [Express 1M2](https://www.owc.com/solutions/express-1m2)
 [^owc-exp-80]: [Express 1M2 80G](https://www.owc.com/solutions/express-1m2-80g)
 [^ssd-aws]: [What's the Difference Between an SSD and a Hard Drive?](https://aws.amazon.com/compare/the-difference-between-ssd-hard-drive/#whats-the-difference-between-an-ssd-and-a-hard-drive--1f38gxj)
+[^samsung-health]: [Samsung 990 Pro SSDs Report Rapid Health Degradation](https://www.tomshardware.com/news/samsung-990-pro-health-dropping-fast)
+[^samsung-neowin]: [Samsung refusing to acknowledge and replace 990 Pro SSD with rapid health drops [Update]](https://www.neowin.net/news/samsung-refusing-to-acknowledge-and-replace-990-pro-ssd-rapid-health-drops)
+[^990-pro-overclock]: [Problem with S.M.A.R.T. health reading on Samsung 990 Pro 2TB SSD](https://www.overclock.net/threads/problem-with-s-m-a-r-t-health-reading-on-samsung-990-pro-2tb-ssd.1803022)
+[^reddit-990-pro]: [Samsung 990 Pro 2TB lost 2% health in the space of a week after 1.8TB writes?](https://www.reddit.com/r/buildapc/comments/102ampe/samsung_990_pro_2tb_lost_2_health_in_the_space_of) ([/r/BuildAPC](https://www.reddit.com/r/buildapc))
+[^samsung-990-pro-firmware]: [Samsung 990 Pro SSD firmware update should halt—but not reverse—rapid wear-out](https://arstechnica.com/gadgets/2023/02/samsung-releases-firmware-fix-for-rapid-failure-issue-in-new-990-pro-ssds)
+[^samsung-990-pro-twitter]: [Tweet](https://x.com/neilaschofield/status/1617212993535721474) by [Neil Schofield](https://x.com/neilaschofield)

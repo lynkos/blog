@@ -144,6 +144,7 @@
   @extend %text-sm;
   top: calc(var(--arrow-padding) / 2);
   left: calc(var(--arrow-padding) / 2);
+  padding: 0 calc(var(--arrow-padding) / 2);
 }
 
 .slideshow {
@@ -162,14 +163,17 @@
   color: var(--text-color);
   background: var(--gallery-caption-bg);
   border-radius: v.$radius-sm;
-  padding: 0 calc(var(--arrow-padding) / 2);
   box-shadow: 0 0 calc(var(--arrow-padding) / 2) var(--gallery-caption-bg);
 }
 
 #caption {
   overflow: auto;  
   align-self: flex-end;
-  margin-bottom: calc(var(--arrow-padding) / 2);
+  margin: calc(var(--arrow-padding) / 2);
+  margin-top: 0;
+  padding: calc(var(--arrow-padding) / 3) calc(var(--arrow-padding) / 2);
+  line-height: 1.4;
+  font-size: 90%;
 }
 
 /* Thumbnail images */

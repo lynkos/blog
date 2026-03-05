@@ -98,7 +98,7 @@ Twitter user [Neil Schofield](https://x.com/neilaschofield) reported[^samsung-99
 
 > 36% worn out after writing less than 2TB of data?
 > 
-> ![Screenshot of Twitter user Neil Schofield's Samsung 990 PRO health](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/FnF-f4uWYAELMvo?format=png&name=900x900)
+> ![Screenshot of Twitter user Neil Schofield's Samsung 990 PRO health](https://img-proxy.lynkos.dev/?url=https://pbs.twimg.com/media/FnF-f4uWYAELMvo.png?format=png&name=900x900)
 
 This is unusual because the Samsung 990 Pro 2TB has 1200TBW. If it's 36% worn out, that implies it already wrote 432TB (0.36 * 1200TB) of data. But this makes no sense since less than 2TB of data was written, meaning it should actually be close to 0.17% (2TB / 1200TB) worn out (i.e. nearly brand new)?
 

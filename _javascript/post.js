@@ -1,6 +1,7 @@
 import { basic, initTopbar, initSidebar } from './modules/layouts';
 
 import {
+  applyRoundedCorners,
   loadImg,
   imgPopup,
   initLocaleDatetime,
@@ -11,6 +12,7 @@ import {
   initTabs
 } from './modules/components';
 
+applyRoundedCorners();
 loadImg();
 initToc();
 imgPopup();

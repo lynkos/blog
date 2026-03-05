@@ -48,16 +48,3 @@ export function imgPopup() {
     });
   }
 }
-
-// ONLY applies rounded corners if slideshow image completely fills gallery/slideshow container
-document.querySelectorAll('.slides a.popup img').forEach(img => {
-  img.onload = () => {
-    const parent = img.closest('.slideshow');
-    //console.log(`Image loaded: ${img.src}, natural size: ${img.clientWidth}x${img.clientHeight}, slideshow size: ${parent.clientWidth}x${parent.clientHeight}`);
-    if (
-      img.clientWidth === parent.clientWidth && img.clientHeight === parent.clientHeight
-    ) {
-      img.classList.add('fills-slideshow');
-    } else img.classList.remove('fills-slideshow');
-  };
-});

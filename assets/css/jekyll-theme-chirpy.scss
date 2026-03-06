@@ -142,6 +142,7 @@
 
 .slide-index {
   @extend %text-sm;
+  @extend %no-cursor;
   top: calc(var(--arrow-padding) / 2);
   left: calc(var(--arrow-padding) / 2);
   padding: 0 calc(var(--arrow-padding) / 2);
@@ -185,9 +186,14 @@
 
   &-column {
     align-self: center;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--language-border-color);
+    }
   }
 
   &-row &-column {
+    @extend %no-cursor;
     height: 100%;
 
     &:first-child img {

@@ -1,5 +1,5 @@
 ---
 layout: graph
 icon: fas fa-hexagon-nodes
-order: 4
+order: 2
 ---

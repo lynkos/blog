@@ -113,7 +113,7 @@ The fact that Apple sources their SSDs from Western Digital/SanDisk also helped 
 - [x] [Pelican 1040 Micro Case](https://www.pelican.com/us/en/product/cases/micro/1040?sku=1040-025-100) (**OPTIONAL**)
 - [x] [USB-C Dust Plug](https://a.co/d/emuCPyw) (**OPTIONAL**)
 
-## Initial Setup
+## Setup
 ### Device Assembly
 1. Place OWC Express 1M2 upside down on a flat static free surface
 2. Remove the screws by using the included screwdriver

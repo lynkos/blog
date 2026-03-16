@@ -2,6 +2,7 @@
 share: true
 title: Custom Storage
 date: 2026-01-20 20:15:03 -0400
+pin: true
 filename: 2025-01-20-custom-storage
 description: DIY guide on building your own external drive with a WD_BLACK SN850X NVMe SSD (or any NVMe M.2 SSDs with 2280 / 2242 / 2230 form factor) and an OWC Express 1M2 Enclosure.
 categories:

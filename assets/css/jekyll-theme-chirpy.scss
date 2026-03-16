@@ -321,3 +321,24 @@
     text-anchor: middle;
   }
 }
+
+/* Drafts */
+#drafts-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+
+  ul.task-list li ul {
+    margin: 0 !important;
+  }
+
+  .subtitle {
+    margin-top: 0 !important;
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-family: Lato,"Microsoft Yahei",sans-serif;
+    color: var(--heading-color);
+  }
+}

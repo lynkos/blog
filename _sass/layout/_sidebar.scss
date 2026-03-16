@@ -76,7 +76,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   }
 
   .profile-wrapper {
-    @include mx.mt-mb(2.5rem);
+    @include mx.mt-mb(2rem);
     @extend %clickable-transition;
 
     padding-left: 2.5rem;

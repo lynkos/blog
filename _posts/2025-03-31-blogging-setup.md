@@ -423,28 +423,30 @@ Now we can automatically apply the template to any new post and auto-publish you
 ### Default Template
 You'll need to add the following to the top of every Markdown post you make
 
-```plaintext
+{% raw %}
+```yaml
 ---
 share: false
 title: {{title}}
-date: {{date}} {{time}}
-filename: "{{date}}-{{title}}"
-description:
+date: {{date:YYYY-MM-DD}} {{time:HH:mm:ss ZZ}}
+filename: "{{date:YYYY-MM-DD}}-{{title}}"
+description: Post summary.
 math: false
 pin: false
 toc: true
 comments: true
-categories:
-tags:
+categories: [top_category, sub_category]
+tags: [tag]
 image:
-  path:
-  lqip:
-  alt:
+  path: /relative/path/to/image
+  lqip: minified_image_encoded_in_base64
+  alt: Image caption
 ---
 ```
 {: file="templates/default.txt" }
+{% endraw %}
 
-|    **Key**    | **Description**                                                                                 |
+| **Key**       | **Description**                                                                                 |
 | :------------ | :---------------------------------------------------------------------------------------------- |
 | `share`       | When `true`, it will push to Github                                                             |
 | `title`       | Post title                                                                                      |

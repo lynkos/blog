@@ -1,6 +1,6 @@
 ---
 layout: drafts
-icon: far fa-pen-to-square
+icon: fas fa-file-pen
 order: 6
 ---
 <p class="subtitle">Posts I'm currently working on. Checked items have been published. Once a draft is finalized, it will be removed from this list.</p>

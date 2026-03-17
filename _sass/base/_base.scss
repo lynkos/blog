@@ -210,8 +210,47 @@ main {
     }
   } /* ul */
 
+  $dt-right-padding: 4rem;
+  $dd-right-padding: calc($dt-right-padding + 2rem);
+  $vertical-line-padding: calc($dt-right-padding - 1.25rem);
+  $dl-line-spacing: 28.8333px;
+
+  dl > dt {
+    padding-left: $dt-right-padding;
+  }
+
   dl > dd {
-    margin-left: 1rem;
+    padding-left: $dd-right-padding;
+  }
+
+  dl {
+    position: relative;
+    border: 1px solid var(--main-border-color);
+    border-radius: v.$radius-sm;
+    line-height: $dl-line-spacing;
+    background-color: var(--desc-list-background);
+
+    & > :not(:first-child) {
+      background-size: 100% $dl-line-spacing;
+      background-image: linear-gradient(
+        var(--desc-list-horizontal-line-color) 1px,
+        transparent 1px
+      );
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: $vertical-line-padding;
+      width: 1px;
+      background-color: var(--desc-list-vertical-line-color);
+    }
+  }
+
+  dd {
+    margin-bottom: 0;
   }
 
   ::marker {

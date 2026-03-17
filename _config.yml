@@ -124,12 +124,13 @@ comments:
     repo_id: R_kgDOOjkByg
     category: "Announcements"
     category_id: DIC_kwDOOjkBys4Cptnv
-    mapping: "pathname" # optional, default to 'pathname'
-    strict: 0 # optional, default to '0'
+    mapping: # optional, default to 'pathname'
+    strict: # optional, default to '0'
     input_position: "top" # optional, default to 'bottom'
-    lang: en # optional, default to the value of `site.lang`
-    loading: lazy # comments loading will be deferred till user scrolls near comments container
-    reactions_enabled: 1 # optional, default to the value of `1`
+    lang: # optional, default to the value of `site.lang`
+    loading: # optional, default to 'lazy'
+    # comments loading will be deferred till user scrolls near comments container
+    reactions_enabled: # optional, default to the value of `1`
     theme: preferred_color_scheme # comments theme
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets

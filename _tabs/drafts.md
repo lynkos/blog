@@ -3,7 +3,7 @@ layout: drafts
 icon: far fa-pen-to-square
 order: 6
 ---
-<p class="subtitle">Posts I'm currently working on</p>
+<p class="subtitle">Posts I'm currently working on. Checked items have been published. Once a draft is finalized, it will be removed from this list.</p>
 
 - [ ] **Development Setup**
   - A comprehensive doc about my development setup
@@ -14,3 +14,6 @@ order: 6
 - [ ] **Self-Care Regimen**
 - [ ] **Setting Up a Virtual Machine in macOS M-series**
 - [ ] **The Connection Between Mulholland Drive and Dharmic Philosophy**
+- [x] [**How to Run Windows Games and Programs on Mac**](https://blog.lynkos.dev/posts/play-windows-games)
+- [x] [**Windows Game-Specific Fixes on macOS**](https://blog.lynkos.dev/posts/windows-game-fixes)
+- [x] [**How to Build and Run Optimized, Self-Compiled LLMs Locally on MacBook Pro Apple Silicon M-series**](https://blog.lynkos.dev/posts/self-compiled-llm)

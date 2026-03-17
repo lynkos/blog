@@ -57,7 +57,7 @@ webmaster_verifications:
 # Web Analytics Settings
 analytics:
   google:
-    id: G-EGD18P42F5 # fill in your Google Analytics ID
+    id: # fill in your Google Analytics ID
   goatcounter:
     id: lynkos-blog # fill in your GoatCounter ID
   umami:

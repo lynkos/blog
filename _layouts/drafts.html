@@ -1,26 +1,10 @@
 ---
 layout: page
+refactor: true
 ---
+
+{% include lang.html %}
+
 <div id="drafts-container">
-    <p class="subtitle">Posts I'm currently working on</p>
-    <ul class="task-list">
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>Development Setup</strong>
-            <ul>
-                <li>A comprehensive doc about my development setup</li>
-            </ul>
-        </li>
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>Post-Quantum Blockchain</strong>
-            <ul>
-                <li>A summary of Tiago M. Fernández-Caramès's and Paula Fraga-Lamas's paper "Towards Post-Quantum Blockchain: A Review on Blockchain Cryptography Resistant to Quantum Computing Attacks"</li>
-            </ul>
-        </li>
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>Quantum-Secure Protocol</strong>
-            <ul>
-                <li>Implementation of multi-party computation (MPC), a quantum-resistant cryptographic algorithm, with custom client-server software to securely compute the product of N massive matrices</li>
-            </ul>
-        </li>
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>Self-Care Regimen</strong></li>
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>Setting Up a Virtual Machine in macOS M-series</strong></li>
-        <li class="task-list-item"><i class="far fa-circle fa-fw"></i><strong>The Connection Between Mulholland Drive and Dharmic Philosophy</strong></li>
-    </ul>
+    {{content}}
 </div>

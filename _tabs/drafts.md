@@ -1,10 +1,9 @@
 ---
 layout: drafts
 icon: fas fa-file-pen
+subtitle: Posts I'm currently working on. Checked items have been published. Once a draft is finalized, it will be removed from this list.
 order: 6
 ---
-<p class="subtitle">Posts I'm currently working on. Checked items have been published. Once a draft is finalized, it will be removed from this list.</p>
-
 - [ ] **Development Setup**
   - A comprehensive doc about my development setup
 - [ ] **Post-Quantum Blockchain**

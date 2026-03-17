@@ -210,22 +210,28 @@ main {
     }
   } /* ul */
 
-  $dt-right-padding: 4rem;
-  $dd-right-padding: calc($dt-right-padding + 2rem);
-  $vertical-line-padding: calc($dt-right-padding - 1.25rem);
+  $dt-left-padding: 4rem;
+  $dd-left-padding: calc($dt-left-padding + 1.75rem);
+  $vertical-line-padding: calc($dt-left-padding - 1.25rem);
+  $dl-right-padding: 2rem;
   $dl-line-spacing: 28.8333px;
 
   dl > dt {
-    padding-left: $dt-right-padding;
+    padding-left: $dt-left-padding;
   }
 
   dl > dd {
-    padding-left: $dd-right-padding;
+    padding-left: $dd-left-padding;
+  }
+
+  dl > dt, dd {
+    padding-right: $dl-right-padding;
   }
 
   dl {
     position: relative;
-    border: 1px solid var(--main-border-color);
+    border: 1px solid var(--desc-list-border);
+    box-shadow: 0 0 5px var(--desc-list-border);
     border-radius: v.$radius-sm;
     line-height: $dl-line-spacing;
     background-color: var(--desc-list-background);

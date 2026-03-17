@@ -25,6 +25,7 @@
   or page.layout == 'archives'
   or page.layout == 'category'
   or page.layout == 'tag'
+  or page.layout == 'drafts'
 %}
   {% assign locale = include.lang | split: '-' | first %}
 
@@ -56,7 +57,7 @@
 {% case page.layout %}
   {% when 'home', 'categories', 'post', 'page' %}
     {% assign js = page.layout %}
-  {% when 'archives', 'category', 'tag' %}
+  {% when 'archives', 'category', 'tag', 'drafts' %}
     {% assign js = 'misc' %}
   {% else %}
     {% assign js = 'commons' %}

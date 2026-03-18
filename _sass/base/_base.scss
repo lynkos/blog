@@ -22,7 +22,7 @@ $hole-cx: calc($hole-container-width / 2);
 $hole-cy: calc($hole-container-height / 2);
 
 // Manually set circle fill="var(--main-bg)" depending on theme since CSS variables don't work in SVG
-$hole-dark: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" style="border:1px solid red" width="#{$hole-container-width}" height="#{$hole-container-height}" viewBox="0 0 #{$hole-container-width} #{$hole-container-height}"><circle fill="rgb(27, 27, 30)" stroke="rgba(45, 45, 45, 0.5)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
+$hole-dark: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-container-width}" height="#{$hole-container-height}" viewBox="0 0 #{$hole-container-width} #{$hole-container-height}"><circle fill="rgb(27, 27, 30)" stroke="rgba(45, 45, 45, 0.5)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
 $hole-light: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-container-width}" height="#{$hole-container-height}" viewBox="0 0 #{$hole-container-width} #{$hole-container-height}"><circle fill="white" stroke="rgb(235, 235, 235)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
 
 // theme: paper color + hole svg + hole position + add multiple holes vertically

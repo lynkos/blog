@@ -20,12 +20,13 @@ $hole-radius: 5px;
 $hole-border-width: 1px;
 $hole-cx: calc($hole-radius + $hole-border-width);
 $hole-cy: calc($dl-line-spacing / 2);
-$hole-offset: calc(($vertical-line-padding / 2) - $hole-radius - $hole-border-width);
+$hole-offset: calc(($vertical-line-padding / 2) - $hole-cx);
 
 // Manually set circle stroke="var(--desc-list-border)" fill="var(--main-bg)" depending on theme since CSS variables don't work in SVG
 $hole-dark: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-width}" height="#{$hole-height}" viewBox="0 0 #{$hole-width} #{$hole-height}"><circle fill="rgb(27, 27, 30)" stroke="rgba(45, 45, 45, 0.5)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
 $hole-light: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-width}" height="#{$hole-height}" viewBox="0 0 #{$hole-width} #{$hole-height}"><circle fill="white" stroke="rgb(243, 243, 243)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
 
+// theme: paper color + hole svg + hole position + add multiple holes vertically
 $hole-themes: (
   dark: var(--desc-list-background) url("#{$hole-dark}") $hole-offset 0px repeat-y,
   light: var(--desc-list-background) url("#{$hole-light}") $hole-offset 0px repeat-y

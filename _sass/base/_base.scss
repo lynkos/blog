@@ -14,22 +14,21 @@ $dl-right-padding: 2rem;
 $dl-line-spacing: 28.8333px;
 
 // Holes in paper effect for description lists (i.e. `dl`)
-$hole-width: 32px;
-$hole-height: $dl-line-spacing;
-$hole-radius: 5px;
+$hole-container-width: $vertical-line-padding;
+$hole-container-height: $dl-line-spacing - 0px;
 $hole-border-width: 1px;
-$hole-cx: calc($hole-radius + $hole-border-width);
-$hole-cy: calc($dl-line-spacing / 2);
-$hole-offset: calc(($vertical-line-padding / 2) - $hole-cx);
+$hole-radius: 5px;
+$hole-cx: calc($hole-container-width / 2);
+$hole-cy: calc($hole-container-height / 2);
 
-// Manually set circle stroke="var(--desc-list-border)" fill="var(--main-bg)" depending on theme since CSS variables don't work in SVG
-$hole-dark: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-width}" height="#{$hole-height}" viewBox="0 0 #{$hole-width} #{$hole-height}"><circle fill="rgb(27, 27, 30)" stroke="rgba(45, 45, 45, 0.5)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
-$hole-light: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-width}" height="#{$hole-height}" viewBox="0 0 #{$hole-width} #{$hole-height}"><circle fill="white" stroke="rgb(243, 243, 243)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
+// Manually set circle fill="var(--main-bg)" depending on theme since CSS variables don't work in SVG
+$hole-dark: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" style="border:1px solid red" width="#{$hole-container-width}" height="#{$hole-container-height}" viewBox="0 0 #{$hole-container-width} #{$hole-container-height}"><circle fill="rgb(27, 27, 30)" stroke="rgba(45, 45, 45, 0.5)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
+$hole-light: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="#{$hole-container-width}" height="#{$hole-container-height}" viewBox="0 0 #{$hole-container-width} #{$hole-container-height}"><circle fill="white" stroke="rgb(235, 235, 235)" stroke-width="#{$hole-border-width}" cx="#{$hole-cx}" cy="#{$hole-cy}" r="#{$hole-radius}"/></svg>';
 
 // theme: paper color + hole svg + hole position + add multiple holes vertically
 $hole-themes: (
-  dark: var(--desc-list-background) url("#{$hole-dark}") $hole-offset 0px repeat-y,
-  light: var(--desc-list-background) url("#{$hole-light}") $hole-offset 0px repeat-y
+  dark: var(--desc-list-background) url("#{$hole-dark}") 0 0 repeat-y,
+  light: var(--desc-list-background) url("#{$hole-light}") 0 0 repeat-y
 );
 
 :root {
@@ -273,7 +272,7 @@ main {
       background-size: 100% $dl-line-spacing;
       background-image: linear-gradient(
         var(--desc-list-horizontal-line-color) 1px,
-        transparent 1px
+        transparent 0
       );
     }
 

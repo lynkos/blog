@@ -1,5 +1,6 @@
 ---
 title: 49 Shades of Grey - 125
+pin: true
 description: 
 date: 2015-12-02 22:13:00 -0400
 math: false

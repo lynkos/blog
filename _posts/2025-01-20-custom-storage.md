@@ -56,7 +56,7 @@ Durability
 
 In order to communicate data, SSDs contain floating gate transistors in grid patterns where different charges translate into binary ones and zeroes. Each row in the grid patterns is called a _page_, while a _block_ -- which is where information is stored -- is composed of many pages.
 
-This except from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] provides additional context that's specific to Apple / macOS:
+This excerpt from [TonyMacx86](https://www.tonymacx86.com/threads/choosing-a-compatible-nvme-ssd-for-your-macos-boot-drive.323479)[^nvme-mac] provides additional context that's specific to Apple / macOS:
 > An SSD controller, also referred to as a processor, includes the electronics that bridge the NAND Flash memory components to the SSD input/output interfaces. The controller is an embedded processor that executes firmware-level software. The SSD firmware is device specific, and in most cases can be updated.
 > 
 > ![ssd.png](../assets/img/obsidian/ssd.png)

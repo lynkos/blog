@@ -197,7 +197,8 @@ header {
   p {
     font-size: 1.1rem;
     line-height: 1.5rem;
-    margin-top: 0.3rem;
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.75rem !important;
     white-space: normal;
   }
 } /* .post-navigation */
@@ -441,7 +442,8 @@ header {
     @extend %text-ellipsis;
 
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.6rem !important;
+    margin-bottom: 0.25rem !important;
     white-space: break-spaces;
     display: -webkit-box;
     -webkit-line-clamp: 2;

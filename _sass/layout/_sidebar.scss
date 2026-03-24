@@ -177,8 +177,8 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     margin-bottom: 1.1rem; // 1.5rem;
 
     @include bp.xxxl {
-      padding-left: 2.75rem;
-      margin-bottom: 1.75rem;
+      padding-left: 2rem;
+      //margin-bottom: 1.75rem;
     }
 
     $btn-size: 1.5rem;

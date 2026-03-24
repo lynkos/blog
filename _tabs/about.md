@@ -12,7 +12,7 @@ I enjoy traveling, <a href="https://github.com/lynkos/lynkos/blob/master/PHOTOGR
 On top of all that, I enjoy reading research papers and watching YouTube channels (e.g. <a href="https://www.youtube.com/user/keeroyz" target="_blank"><u>Two Minute Papers</u></a>, <a href="https://www.youtube.com/c/3blue1brown" target="_blank"><u>3Blue1Brown</u></a>, etc). If I had to name a research paper that's currently piqued my interest, it'd have to be <a href="https://ieeexplore.ieee.org/document/8967098" target="_blank"><u>Towards Post-Quantum Blockchain: A Review on Blockchain Cryptography Resistant to Quantum Computing Attacks</u></a> by Tiago M. Fernández-Caramès and Paula Fraga-Lamas.
 
 Here are some of my research interests:
-<table>
+<table align="center">
     <tbody>
     <tr>
         <td>Post-Quantum Cybersecurity</td>

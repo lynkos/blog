@@ -36,6 +36,8 @@ $hole-themes: (
 }
 
 html {
+  scroll-behavior: smooth;
+  
   @media (prefers-color-scheme: light) {
     &:not([data-mode]),
     &[data-mode='light'] {

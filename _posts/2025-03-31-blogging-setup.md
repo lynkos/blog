@@ -287,12 +287,12 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	    repo_id: <REPO_ID>
 	    category: "Announcements"
 	    category_id: <CATEGORY_ID>
-	    mapping: "pathname" # optional, default to 'pathname'
-	    strict: 0 # optional, default to '0'
+	    mapping: # optional, default to 'pathname'
+	    strict: # optional, default to '0'
 	    input_position: "top" # optional, default to 'bottom'
-	    lang: en # optional, default to the value of `site.lang`
+	    lang: # optional, default to the value of `site.lang`
 	    loading: lazy # comments loading will be deferred till user scrolls near comments container
-	    reactions_enabled: 1 # optional, default to the value of `1`
+	    reactions_enabled: # optional, default to the value of `1`
 	    theme: preferred_color_scheme # comments theme
 	```
 	{: file="_config.yml" }

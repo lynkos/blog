@@ -54,11 +54,11 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   }
 
   #avatar {
-    display: block;
+    display: inline-block;
     width: 6.5rem;
     height: 6.5rem;
     overflow: hidden;
-    box-shadow: var(--avatar-border-color) 0 0 0 2px;
+    box-shadow: var(--avatar-border-color) 0 0 0 1.5px;
     transform: translateZ(0); /* fixed the zoom in Safari */
 
     @include bp.sm {
@@ -79,7 +79,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     @include mx.mt-mb(2rem);
     @extend %clickable-transition;
 
-    padding-left: 2.5rem;
+    padding-left: 1.25rem;
     padding-right: 1.25rem;
     width: 100%;
 
@@ -105,7 +105,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     letter-spacing: 0.25px;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
-    width: fit-content;
+    width: 100%;
     color: var(--site-title-color);
   }
 

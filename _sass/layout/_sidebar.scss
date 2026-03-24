@@ -84,13 +84,13 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     width: 100%;
 
     @include bp.lg {
-      margin-top: 3rem;
+      margin-top: 2.5rem; //3rem;
     }
 
     @include bp.xxxl {
-      margin-top: 3.5rem;
-      margin-bottom: 2.5rem;
-      padding-left: 3.5rem;
+      margin-top: 3rem; // 3.5rem;
+      margin-bottom: 2rem; // 2.5rem;
+      padding-left: 3rem; // 3.5rem;
     }
   }
 
@@ -172,9 +172,9 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   }
 
   .sidebar-bottom {
-    padding-left: 2rem;
-    padding-right: 1rem;
-    margin-bottom: 1.5rem;
+    padding-left: 1.25rem; // 2rem;
+    padding-right: 1.25rem; // 1rem;
+    margin-bottom: 1.1rem; // 1.5rem;
 
     @include bp.xxxl {
       padding-left: 2.75rem;

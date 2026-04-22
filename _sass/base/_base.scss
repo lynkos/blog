@@ -11,11 +11,11 @@ $dt-left-padding: 4rem;
 $dd-left-padding: calc($dt-left-padding + 1.75rem);
 $vertical-line-padding: calc($dt-left-padding - 1.25rem);
 $dl-right-padding: 2rem;
-$dl-line-spacing: 28.8333px;
+$dl-line-spacing: 29px;
 
 // Holes in paper effect for description lists (i.e. `dl`)
 $hole-container-width: $vertical-line-padding;
-$hole-container-height: $dl-line-spacing - 0px;
+$hole-container-height: $dl-line-spacing;
 $hole-border-width: 1px;
 $hole-radius: 5px;
 $hole-cx: calc($hole-container-width / 2);

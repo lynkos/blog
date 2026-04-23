@@ -735,9 +735,11 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	  {: .nolineno }
 	
 	* Example Output
+	  {% raw %}
 	  ```plaintext
 	  * main
 	  ```
+	  {% endraw %}
 
 #### Commit Message Conventions
 General structure:

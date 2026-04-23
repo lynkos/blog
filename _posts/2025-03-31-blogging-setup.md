@@ -247,7 +247,6 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 		data-reactions-enabled="1"
 		data-emit-metadata="0"
 		data-input-position="top"
-		data-theme="preferred_color_scheme"
 		data-lang="en"
 		data-loading="lazy"
 		crossorigin="anonymous"
@@ -294,7 +293,6 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	    lang: # optional, default to the value of `site.lang`
 	    loading: lazy # comments loading will be deferred till user scrolls near comments container
 	    reactions_enabled: # optional, default to the value of `1`
-	    theme: preferred_color_scheme # comments theme
 	```
 	{: file="_config.yml" }
 

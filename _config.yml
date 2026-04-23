@@ -122,7 +122,7 @@ comments:
   giscus:
     repo: lynkos/blog # <gh-username>/<repo>
     repo_id: R_kgDOOjkByg
-    category: "Announcements"
+    category: "Comments"
     category_id: DIC_kwDOOjkBys4Cptnv
     mapping: # optional, default to 'pathname'
     strict: # optional, default to '0'

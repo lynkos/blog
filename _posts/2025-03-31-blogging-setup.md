@@ -53,9 +53,9 @@ I've always been a fan of dark mode color scheme, especially solarized dark. I a
 
     Here are mine, for reference:
 
-    ![color_scheme.png](../assets/img/obsidian/color_scheme.png)
-    ![features.png](../assets/img/obsidian/features.png)
-    ![layout_typography.png](../assets/img/obsidian/layout_typography.png)
+    ![color_scheme.png](../assets/img/obsidian/color_scheme.png){: w="750" }
+    ![features.png](../assets/img/obsidian/features.png){: w="750" }
+    ![layout_typography.png](../assets/img/obsidian/layout_typography.png){: w="750" }
 
 ### Obsidian Mobile App
 I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-notes/id1557175442) with iCloud, which I'll walk through in this section, though Obsidian also offers Obsidian Sync as an alternative. If you don't have an Apple device, iCloud isn't applicable.
@@ -709,11 +709,11 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	> 	{: .nolineno }
 	> 
 	> * Visual Studio Code
-	> 	1. Open Command Palette (shortcut: <kbd>⌘ CMD</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd>)
+	> 	1. Open Command Palette (shortcut: <kbd>Command ⌘</kbd> + <kbd>Shift ⇧</kbd> + <kbd>P</kbd>)
 	> 	
 	> 	2. Select **Preferences: Open User Settings (JSON)** (global settings) **OR** select **Preferences: Open Workspace Settings (JSON)** (local settings)
 	> 	
-	> 	3. Add the following setting, then save your changes (shortcut: <kbd>⌘ CMD</kbd> + <kbd>S</kbd>)
+	> 	3. Add the following setting, then save your changes (shortcut: <kbd>Command ⌘</kbd> + <kbd>S</kbd>)
 	> 		```json
 	> 		"git.allowForcePush": true,
 	> 		```

@@ -584,9 +584,9 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
 ### Contribute Upstream
 Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) with only a subset of your commits. This is useful if you want to add a feature to upstream without committing all your changes.
 
+#### Create Branch
 If you haven't already, complete Step 1 and Step 2 in [Sync Fork with Upstream](2025-03-31-blogging-setup.md#sync-fork-with-upstream) section before continuing.
 
-#### Create Branch
 ##### Manually via GitHub
 1. Go to your GitHub repository (i.e. `https://github.com/USERNAME/REPOSITORY_NAME`)
 

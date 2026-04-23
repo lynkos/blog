@@ -126,8 +126,12 @@
   /* Description List (i.e. <dl>) */
   --desc-list-bg: #151515;
   --desc-list-border-color: rgba(45, 45, 45, 0.5);
-  --desc-list-horizontal-line-color: #2d2d2d;
-  --desc-list-vertical-line-color: var(--desc-list-horizontal-line-color);
+  --desc-list-line-color: #2d2d2d;
+  --desc-list-margin-color: var(--desc-list-line-color);
+
+  .content dl {
+    @include mx.dl-holes(rgb(27, 27, 30), rgba(45, 45, 45, 0.5));
+  }
 
   .light {
     display: none;
@@ -317,10 +321,5 @@
 
   .highlight .ss {
     color: #90a959;
-  }
-
-  /* Description List (i.e. <dl>) */
-  .content dl {
-    @include mx.dl-holes(rgb(27, 27, 30), rgba(45, 45, 45, 0.5));
   }
 }

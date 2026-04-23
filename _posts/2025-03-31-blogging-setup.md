@@ -226,13 +226,26 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 ### Setup Comments
 1. If you haven't already, make your blog's [GitHub repository public](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
 
-2. [Enable your repository's **Discussions** feature](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
+2. Go to your GitHub repository's settings (i.e. `https://github.com/GITHUB_USERNAME/REPO/settings`), scroll down to **Features** and enable the [**Discussions** feature](https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/enabling-or-disabling-github-discussions-for-a-repository)
 
-3. Install the [Giscus app](https://github.com/apps/giscus) on GitHub
+3. Go to the **Discussions** tab (i.e. `https://github.com/GITHUB_USERNAME/REPO/discussions`), then click the pencil icon next to **Categories**
 
-4. Go to [Giscus](https://giscus.app) and fill out the form
+4. Edit the default `Announcements` category:
+   * **Category name**: `Comments`
+   * **Category icon**: 💬
+   * **Description**: `Comments on posts`
+   * **Discussion Format**: `Announcement`
+   * **Add this category to a section (optional)**: `No section`
 
-5. Copy the auto-generated `<script>` under **Enable giscus**
+5. Click <kbd>Save changes</kbd>
+
+6. (OPTIONAL) Delete all other default categories, if you don't need it, by clicking the trash icon next to the category name
+
+7. Install the [Giscus app](https://github.com/apps/giscus) on GitHub
+
+8. Go to [Giscus](https://giscus.app) and fill out the form
+
+9. Copy the auto-generated `<script>` under **Enable giscus**
    
    Example code with my configuration:
 
@@ -240,7 +253,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	<script src="https://giscus.app/client.js"
 		data-repo="<GITHUB_USERNAME>/<REPO>"
 		data-repo-id="<REPO_ID>"
-		data-category="Announcements"
+		data-category="Comments"
 		data-category-id="<CATEGORY_ID>"
 		data-mapping="pathname"
 		data-strict="0"
@@ -254,7 +267,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	</script>
 	```
 
-6. Add the `<script>` tag
+10. Add the `<script>` tag
    * If you're **NOT** using `jekyll-theme-chirpy`,  to your website's template where you want the comments to appear (**Note: If an element with the `giscus` class exists, the comments will be placed there instead**)
    * If you **ARE** using the [Jekyll theme Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy), continue to the next section
 
@@ -285,7 +298,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 	  giscus:
 	    repo: <GITHUB_USERNAME>/<REPO>
 	    repo_id: <REPO_ID>
-	    category: "Announcements"
+	    category: "Comments"
 	    category_id: <CATEGORY_ID>
 	    mapping: # optional, default to 'pathname'
 	    strict: # optional, default to '0'

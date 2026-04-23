@@ -447,7 +447,7 @@ image:
 {: file="templates/default.txt" }
 {% endraw %}
 
-|    **Key**    | **Description**                                                                                 |
+| **Key**       | **Description**                                                                                 |
 | :------------ | :---------------------------------------------------------------------------------------------- |
 | `share`       | When `true`, it will push to Github                                                             |
 | `title`       | Post title                                                                                      |
@@ -585,7 +585,7 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 If you haven't already, complete the steps in [Sync Fork with Upstream](2025-03-31-blogging-setup.md#sync-fork-with-upstream) section before continuing.
 
 #### Create Branch
-##### GitHub
+##### Manually via GitHub
 1. Go to your GitHub repository (i.e. https://github.com/USERNAME/REPOSITORY_NAME)
 
 2. Navigate to your GitHub repository's branches page (i.e. https://github.com/USERNAME/REPOSITORY_NAME/branches):
@@ -631,7 +631,7 @@ If you haven't already, complete the steps in [Sync Fork with Upstream](2025-03-
 
 13. Click the <kbd>Create pull request</kbd> button
 
-##### Cherry pick Commits
+##### Cherry Picking Commits
 1. Create a new branch, e.g. `BRANCH_NAME`
 
 	```sh
@@ -750,7 +750,7 @@ General structure:
 [optional footer]
 ```
 
-|   **Type**  | **Description**                                                                                                 |
+| **Type**    | **Description**                                                                                                 |
 | :---------- | :-------------------------------------------------------------------------------------------------------------- |
 | `fix`       | Change that fixes a bug or error                                                                                |
 | `feat`      | Change that adds, adjusts, or removes a feature                                                                 |

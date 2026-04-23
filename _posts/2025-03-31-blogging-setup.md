@@ -809,13 +809,11 @@ flowchart TD
 ```
 
 ## Credits
-* This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian)
+* Tutorial inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian)
 * Preview image taken from [`@socra`](https://velog.io/@socra/Obsidian%EC%9C%BC%EB%A1%9C-%EC%A7%80%ED%82%AC-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
 * Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)); for more information:
 	* [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki)
 	* [Original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE)
-
-## References
 * [Commit Message Chart](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13?permalink_comment_id=5893039#gistcomment-5893039)
 * [Conventional Commit Messages (Gist)](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
 * [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0)

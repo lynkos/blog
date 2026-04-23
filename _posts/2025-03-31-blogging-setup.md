@@ -715,7 +715,7 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	> 	
 	> 	3. Add the following setting, then save your changes (shortcut: <kbd>Command ⌘</kbd> + <kbd>S</kbd>)
 	> 		```json
-	> 		"git.allowForcePush": true,
+	> 		"git.allowForcePush": true
 	> 		```
 	> 		{: .nolineno }
 	{: .prompt-tip }

@@ -754,7 +754,7 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	  {% endraw %}
 
 #### Commit Message Conventions
-General structure:
+Commit messages should follow this format:
 
 ```plaintext
 <type>(<optional scope>): <description>
@@ -763,6 +763,7 @@ General structure:
 
 [optional footer]
 ```
+{: file="General Structure" }
 
 | **Type**    | **Description**                                                                                                 |
 | :---------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -780,9 +781,10 @@ General structure:
 | `deprecate` | Change that deprecates functionality                                                                            |
 | `revert`    | Reverts to a previous commit                                                                                    |
 
-Use the following chart:
-
 ```mermaid
+---
+title: Commit Message Flowchart
+---
 flowchart TD
    T[Did you deprecate a feature?]
    T -- Yes --> U[deprecate]

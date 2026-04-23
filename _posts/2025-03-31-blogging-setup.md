@@ -4,6 +4,7 @@ title: My Blogging Setup
 date: 2025-03-31 14:43:26 -0400
 filename: 2025-03-31-blogging-setup
 description: My blogging setup, aka how to create a blog with Obsidian and Chirpy (Jekyll theme)
+mermaid: true
 categories:
   - guide
   - development
@@ -446,7 +447,7 @@ image:
 {: file="templates/default.txt" }
 {% endraw %}
 
-| **Key**       | **Description**                                                                                 |
+|    **Key**    | **Description**                                                                                 |
 | :------------ | :---------------------------------------------------------------------------------------------- |
 | `share`       | When `true`, it will push to Github                                                             |
 | `title`       | Post title                                                                                      |
@@ -581,30 +582,78 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
 ### Contribute Upstream
 Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) with only a subset of your commits. This is useful if you want to add a feature to upstream without committing all your changes.
 
-1. If you haven't already, complete the steps in [Sync Fork with Upstream](2025-03-31-blogging-setup.md#sync-fork-with-upstream) section
+If you haven't already, complete the steps in [Sync Fork with Upstream](2025-03-31-blogging-setup.md#sync-fork-with-upstream) section before continuing.
 
-2. Create a new branch, e.g. `BRANCH_NAME`
+#### Create Branch
+##### GitHub
+1. Go to your GitHub repository (i.e. https://github.com/USERNAME/REPOSITORY_NAME)
+
+2. Navigate to your GitHub repository's branches page (i.e. https://github.com/USERNAME/REPOSITORY_NAME/branches):
+	* Click <kbd><code>N</code> Branches</kbd>, where `N` is your GitHub repository's current number of branches
+	* Alternatively, click the button for your default branch, which is <kbd>main</kbd> in my case, then click <kbd>View all branches</kbd>
+
+3. Click <kbd>New branch</kbd>
+
+4. Enter the new branch's name (i.e. `BRANCH_NAME`), then select `cotes2020/jekyll-theme-chirpy` repository and `master` branch (under **Source**)
+
+5. Click <kbd>Create new branch</kbd>
+
+6. The branch should now appear on your GitHub repository's branches page under **Your branches** and **Active branches**
+
+7. Go (i.e. `cd /path/to/REPOSITORY_NAME`) to your repository and fetch the newly created branch
+
+	```sh
+	git fetch origin BRANCH_NAME
+	```
+	{: .nolineno }
+
+	> Alternatively, if you want to fetch **ALL** remote branches:
+	> ```sh
+	> git fetch origin
+	> ```
+	> {: .nolineno }
+	{: .prompt-tip }
+
+8. Switch to your branch
+
+	```sh
+	git checkout -b BRANCH_NAME
+	```
+	{: .nolineno }
+
+9. Make your changes, then commit and push them
+
+10. Go to the originally forked repository, i.e. [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy)
+
+11. Click the <kbd>New pull request</kbd> button
+
+12. Complete the pull request template accordingly
+
+13. Click the <kbd>Create pull request</kbd> button
+
+##### Cherry pick Commits
+1. Create a new branch, e.g. `BRANCH_NAME`
 
 	```sh
 	git checkout -b BRANCH_NAME upstream/master
 	```
 	{: .nolineno }
 
-3. Cherry pick the commit(s) you want to include in the PR
+2. Cherry pick the commit(s) you want to include in the PR
 
 	```sh
 	git cherry-pick COMMIT_HASH
 	```
 	{: .nolineno }
 
-4. Push your branch
+3. Push your branch
 
 	```sh
 	git push origin BRANCH_NAME
 	```
 	{: .nolineno }
 
-5. If successful, the terminal should output something similar to this:
+4. If successful, the terminal should output something similar to this:
 
    ```plaintext
    Enumerating objects: 111, done.
@@ -622,13 +671,142 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
     * [new branch]      BRANCH_NAME -> BRANCH_NAME
    ```
 
-6. Go to the originally forked repository, i.e. [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy)
+5. Go to the originally forked repository, i.e. [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy)
 
-7. Click the <kbd>New pull request</kbd> button
+6. Click the <kbd>New pull request</kbd> button
 
-8. Complete the pull request template accordingly
+7. Complete the pull request template accordingly
 
-9. Click the <kbd>Create pull request</kbd> button
+8. Click the <kbd>Create pull request</kbd> button
+
+#### Delete Branch (Optional)
+Once you no longer need a branch (e.g. its PR has been approved and merged), you can delete it
+
+1. Delete it remotely with one of the following methods
+	* Via command line
+	  ```sh
+	  git push origin -d BRANCH_NAME
+	  ```
+	  {: .nolineno }
+	
+	* Via GitHub.com
+	  1. Go to your GitHub repository's branches page (i.e. https://github.com/USERNAME/REPOSITORY_NAME/branches)
+	  2. Find your branch
+	  3. Click the Trash icon on the right-hand side of the branch's row
+
+2. Remove stale references (i.e. pruning)
+
+	```sh
+	git fetch -p
+	```
+	{: .nolineno }
+
+	> To automatically prune after every fetch:
+	> * Command line
+	> 	```sh
+	> 	git config --global fetch.prune true
+	> 	```
+	> 	{: .nolineno }
+	> 
+	> * Visual Studio Code
+	> 	1. Open Command Palette (shortcut: <kbd>⌘ CMD</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd>)
+	> 	
+	> 	2. Select **Preferences: Open User Settings (JSON)** (global settings) **OR** select **Preferences: Open Workspace Settings (JSON)** (local settings)
+	> 	
+	> 	3. Add the following setting, then save your changes (shortcut: <kbd>⌘ CMD</kbd> + <kbd>S</kbd>)
+	> 		```json
+	> 		"git.allowForcePush": true,
+	> 		```
+	> 		{: .nolineno }
+	{: .prompt-tip }
+
+3. Delete it locally
+	
+	```sh
+	git branch -D BRANCH_NAME
+	```
+	{: .nolineno }
+
+4. Confirm it's successfully been pruned and deleted by making sure it doesn't appear in the output
+	* Command
+	  ```sh
+	  git branch
+	  ```
+	  {: .nolineno }
+	
+	* Example Output
+	  ```plaintext
+	  * main
+	  ```
+
+#### Commit Message Conventions
+General structure:
+
+```plaintext
+<type>(<optional scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+|   **Type**  | **Description**                                                                                                 |
+| :---------- | :-------------------------------------------------------------------------------------------------------------- |
+| `fix`       | Change that fixes a bug or error                                                                                |
+| `feat`      | Change that adds, adjusts, or removes a feature                                                                 |
+| `refactor`  | Change that rewrites or restructures code without altering behavior                                             |
+| `perf`      | Change that improves performance; subset of `refactor`                                                          |
+| `style`     | Change that addresses code style (e.g. white-space, formatting, missing semi-colons) without affecting behavior |
+| `test`      | Change that adds or changes test(s)                                                                             |
+| `build`     | Change that affects build system or component(s) (e.g. build tools, external dependencies, project version)     |
+| `docs`      | Change to documentation                                                                                         |
+| `ops`       | Change that affects operational aspects (e.g. infra, DevOps, backups, monitoring, recovery procedures)          |
+| `chore`     | Change to routine or automated tasks (e.g. dependency update, modifying config files, non-functional tasks)     |
+| `release`   | Change that relates to a new version release                                                                    |
+| `deprecate` | Change that deprecates functionality                                                                            |
+| `revert`    | Reverts to a previous commit                                                                                    |
+
+Use the following chart:
+
+```mermaid
+flowchart TD
+   T[Did you deprecate a feature?]
+   T -- Yes --> U[deprecate]
+   T -- No --> V[Did you revert to a previous commit?]
+
+   V -- Yes --> W[revert]
+   V -- No --> X[Did you create a new release?]
+
+   X -- Yes --> Y[release]
+   X -- No --> A[Did you fix a bug?]
+
+   A -- Yes --> B[fix]
+   A -- No --> C[Did you change functionality or UI?]
+
+   C -- Yes --> D[feat]
+   C -- No --> E[Did you add or change tests?]
+
+   E -- Yes --> F[test]
+   E -- No --> G[Did you change code style or formatting?]
+
+   G -- Yes --> H[style]
+   G -- No --> I[Did you make changes to documentation?]
+
+   I -- Yes --> J[docs]
+   I -- No --> K[Did you change things related to build or deploy operations?]
+
+   K -- Yes --> L[build]
+   K -- No --> M[Did you change something related to DevOps, infra, or backups?]
+
+   M -- Yes --> N[ops]
+   M -- No --> O[Did you complete a maintenance or non-code task?]
+
+   O -- Yes --> P[chore]
+   O -- No --> Q[Did you rewrite or restructure code specifically for performance?]
+
+   Q -- Yes --> R[perf]
+   Q -- No --> S[refactor]
+```
 
 ## Credits
 * This tutorial is inspired by [Alex Oliveira](https://alexoliveira.cc)'s blog post [Jekyll Blogging with Obsidian](https://alexoliveira.cc/guide/jekyll-with-obsidian)
@@ -636,3 +814,10 @@ Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`]
 * Full credit for [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) goes to [`cotes2020`](https://github.com/cotes2020) (aka [Cotes Chung](https://cotes.page)); for more information:
 	* [Wiki docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki)
 	* [Original license](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE)
+
+## References
+* [Commit Message Chart](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13?permalink_comment_id=5893039#gistcomment-5893039)
+* [Conventional Commit Messages (Gist)](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
+* [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0)
+* [Angular: Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#commit)
+* [Commit Message Guide](https://developers.google.com/blockly/guides/contribute/get-started/commits)

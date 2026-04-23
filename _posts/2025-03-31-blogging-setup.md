@@ -623,7 +623,16 @@ If you haven't already, complete Step 1 and Step 2 in [Sync Fork with Upstream](
 	```
 	{: .nolineno }
 
-9. Make your changes, then commit and push them
+9. Make your changes, then stage, commit, and push them
+
+	```sh
+	git commit -am "COMMIT_MESSAGE"
+	git push origin BRANCH_NAME
+	```
+	{: .nolineno }
+
+	> Refer to [Commit Message Conventions](#commit-message-conventions) section for commit message guidelines
+	{: .prompt-tip }
 
 10. Go to the originally forked repository, i.e. [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy)
 

@@ -235,7 +235,6 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
    * **Category icon**: 💬
    * **Description**: `Comments on posts`
    * **Discussion Format**: `Announcement`
-   * **Add this category to a section (optional)**: `No section`
 
 5. Click <kbd>Save changes</kbd>
 

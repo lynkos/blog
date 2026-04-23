@@ -433,6 +433,7 @@ date: {{date:YYYY-MM-DD}} {{time:HH:mm:ss ZZ}}
 filename: "{{date:YYYY-MM-DD}}-{{title}}"
 description: Post summary.
 math: false
+mermaid: false
 pin: false
 toc: true
 comments: true
@@ -455,6 +456,7 @@ image:
 | `filename`    | Where your file will be saved in Github; format `yyyy-mm-dd-title-here`                         |
 | `description` | Optional post description; will appear below post title and in previews                         |
 | `math`        | When `true`, enables MathJax for LaTeX processing                                               |
+| `mermaid`     | When `true`, enables Mermaid for diagram rendering                                              |
 | `pin`         | When `true`, it will pin this post on website                                                   |
 | `toc`         | When `false`, the table of contents is hidden                                                   |
 | `comments`    | When `false`, the comments section is hidden                                                    |
@@ -586,9 +588,9 @@ If you haven't already, complete Step 1 and Step 2 in [Sync Fork with Upstream](
 
 #### Create Branch
 ##### Manually via GitHub
-1. Go to your GitHub repository (i.e. https://github.com/USERNAME/REPOSITORY_NAME)
+1. Go to your GitHub repository (i.e. `https://github.com/USERNAME/REPOSITORY_NAME`)
 
-2. Navigate to your GitHub repository's branches page (i.e. https://github.com/USERNAME/REPOSITORY_NAME/branches):
+2. Navigate to your GitHub repository's branches page (i.e. `https://github.com/USERNAME/REPOSITORY_NAME/branches`):
 	* Click <kbd><code>N</code> Branches</kbd>, where `N` is your GitHub repository's current number of branches
 	* Alternatively, click the button for your default branch, which is <kbd>main</kbd> in my case, then click <kbd>View all branches</kbd>
 
@@ -607,7 +609,7 @@ If you haven't already, complete Step 1 and Step 2 in [Sync Fork with Upstream](
 	```
 	{: .nolineno }
 
-	> Alternatively, if you want to fetch **ALL** remote branches:
+	> To fetch **ALL** remote branches:
 	> ```sh
 	> git fetch origin
 	> ```
@@ -690,7 +692,7 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	  {: .nolineno }
 	
 	* Via GitHub.com
-	  1. Go to your GitHub repository's branches page (i.e. https://github.com/USERNAME/REPOSITORY_NAME/branches)
+	  1. Go to your GitHub repository's branches page (i.e. `https://github.com/USERNAME/REPOSITORY_NAME/branches`)
 	  2. Find your branch
 	  3. Click the Trash icon on the right-hand side of the branch's row
 
@@ -717,6 +719,7 @@ Once you no longer need a branch (e.g. its PR has been approved and merged), you
 	> 		```json
 	> 		"git.allowForcePush": true
 	> 		```
+	> 		{: file="settings.json" }
 	> 		{: .nolineno }
 	{: .prompt-tip }
 

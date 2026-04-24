@@ -13,6 +13,12 @@ const CONFIG = {
     'blog.lynkos.dev',
     '127.0.0.1',
     'localhost'
+  ],
+  ignoredClasses: [ // Skip links with these classes
+    'popup',
+    'img-link',
+    'recently-updated',
+    'no-preview'
   ]
 };
 
@@ -198,12 +204,10 @@ export function initLinkPreview() {
     document.querySelectorAll(selector).forEach(link => {
       // Skip anchors and links with certain classes
       const href = link.getAttribute('href');
-      if (!href || 
-          link.classList.contains('popup') ||
-          link.classList.contains('img-link') ||
-          link.classList.contains('recently-updated') ||
-          link.classList.contains('no-preview') ||
-          !isAllowedUrl(href)) {
+      if (!href ||
+          !isAllowedUrl(href) ||
+          CONFIG.ignoredClasses.some(cls => link.classList.contains(cls))
+          ) {
         return;
       }
       

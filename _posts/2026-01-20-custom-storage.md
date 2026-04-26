@@ -149,7 +149,7 @@ The fact that Apple sources their SSDs from Western Digital/SanDisk also helped 
    {: .prompt-info }
 
 ### Format SSD
-> Make sure to complete **ALL** the steps in [Device Assembly](2025-01-20-custom-storage.md#device-assembly) before proceeding
+> Make sure to complete **ALL** the steps in [Device Assembly](2026-01-20-custom-storage.md#device-assembly) before proceeding
 {: .prompt-important }
 
 1. Open **Disk Utility**
@@ -166,7 +166,7 @@ The fact that Apple sources their SSDs from Western Digital/SanDisk also helped 
 8. Click <kbd>Erase</kbd>, then click <kbd>Done</kbd>
 
 ### Create Volumes
-> Make sure to complete **ALL** the steps in [Format SSD](2025-01-20-custom-storage.md#format-ssd) before proceeding
+> Make sure to complete **ALL** the steps in [Format SSD](2026-01-20-custom-storage.md#format-ssd) before proceeding
 {: .prompt-important }
 
 1. Click on your SSD in **Disk Utility**
@@ -189,7 +189,7 @@ _**Games** volume setup in **Disk Utility**_
 _**Backups** volume setup in **Disk Utility**_
 
 ### Setup Volumes
-> Make sure to complete **ALL** the steps in [Create Volumes](2025-01-20-custom-storage.md#create-volumes) before proceeding
+> Make sure to complete **ALL** the steps in [Create Volumes](2026-01-20-custom-storage.md#create-volumes) before proceeding
 {: .prompt-important }
 
 #### Backups: Time Machine

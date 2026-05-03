@@ -252,6 +252,14 @@ main {
 
   dd {
     margin-bottom: 0;
+
+    ul {
+      margin-bottom: 0 !important;
+      
+      li {
+        margin: 0 !important;
+      }
+    }
   }
 
   ::marker {

@@ -12,7 +12,6 @@ order: 6
   - Implementation of multi-party computation (MPC), a quantum-resistant cryptographic algorithm, with custom client-server software to securely compute the product of N massive matrices
 - [ ] **Self-Care Regimen**
 - [ ] **Setting Up a Virtual Machine in macOS M-series**
-- [ ] **The Connection Between Mulholland Drive and Dharmic Philosophy**
 - [x] [**How to Run Windows Games and Programs on Mac**](https://blog.lynkos.dev/posts/play-windows-games)
 - [x] [**Windows Game-Specific Fixes on macOS**](https://blog.lynkos.dev/posts/windows-game-fixes)
 - [x] [**How to Build and Run Optimized, Self-Compiled LLMs Locally on MacBook Pro Apple Silicon M-series**](https://blog.lynkos.dev/posts/self-compiled-llm)

@@ -3,7 +3,7 @@
 icon: fas fa-info-circle
 order: 1
 ---
-Hi, I'm Kiran. My areas of focus are Computer Science, Mathematics, and Statistics. I'm a 4x Software Engineer Intern at Oracle Cloud during Summers 2021 – 2024 and have worked as a research assistant on post-quantum cybersecurity research.
+Hi, I'm Kiran. I'm originally from (i.e. born and raised in) Miami, Florida. My family is from Suriname, a former Dutch colony in South America, and the Netherlands. My areas of focus are Computer Science, Mathematics, and Statistics. I'm a 4x Software Engineer Intern at Oracle Cloud during Summers 2021 – 2024 and have worked as a research assistant on post-quantum cybersecurity research.
 
 I've been coding since I was 12, starting off with HTML, CSS, and some JavaScript in order to customize my Tumblr blog at the time. I soon became obsessed with the web design aspect of programming, creating Tumblr themes for others as a theme-maker. However, it wasn't until I took AP Computer Science in 10th grade that I learned my first real programming language: Java. After that, everything fell into place. I joined my high school's computer science club and participated in programming competitions (i.e. competitive programming) along with cybersecurity competitions (i.e. CTFs aka capture the flags). After school I'd come home and practice [competitive] programming problems from <a target="_blank" href="https://onlinejudge.org" title="UVa Online Judge"><u>UVa Online Judge</u></a>. I genuinely had no particular reason or incentive for doing so; it was all for the love of the game.
 

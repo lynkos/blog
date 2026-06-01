@@ -4,7 +4,8 @@ import {
   loadImg,
   imgPopup,
   initClipboard,
-  loadMermaid
+  loadMermaid,
+  initCodeRunner
 } from './modules/components';
 
 applyRoundedCorners();
@@ -14,4 +15,5 @@ initSidebar();
 initTopbar();
 initClipboard();
 loadMermaid();
+initCodeRunner();
 basic();

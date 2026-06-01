@@ -236,15 +236,30 @@
         <span data-label-text="{{ _label_text | strip }}"><i class="{{ _label_icon }}"></i></span>
       {% endcapture %}
 
+      <!-- Determine if this language supports in-browser execution -->
+      {% assign _runnable_langs = 'rust,rs,js,javascript' | split: ',' %}
+      {% assign _wrap_open    = '' %}
+      {% assign _run_btn_html = '' %}
+      {% assign _wrap_close   = '' %}
+      {% if _runnable_langs contains _lang %}
+        {% assign _wrap_open    = '<div class="code-buttons">' %}
+        {% assign _run_btn_html = '<button aria-label="run" class="run-btn" data-lang="' | append: _lang | append: '"><i class="fas fa-play"></i></button>' %}
+        {% assign _wrap_close   = '</div>' %}
+      {% endif %}
+      {% assign _copy_btn = '<button aria-label="copy" data-title-succeed="' | append: site.data.locales[include.lang].post.button.copy_code.succeed | append: '"><i class="far fa-clipboard"></i></button>' %}
+
       {% assign _new_content = _new_content
         | append: _snippet
         | append: '<div class="code-header">'
         | append: _label
-        | append: '<button aria-label="copy" data-title-succeed="'
-        | append: site.data.locales[include.lang].post.button.copy_code.succeed
-        | append: '"><i class="far fa-clipboard"></i></button></div>'
+        | append: _wrap_open
+        | append: _run_btn_html
+        | append: _copy_btn
+        | append: _wrap_close
+        | append: '</div>'
         | append: '<div class="highlight"><code>'
       %}
+
     {% endif %}
   {% endfor %}
 

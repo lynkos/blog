@@ -253,3 +253,59 @@ div {
     }
   }
 }
+
+/* ── Button group wrapper (run + copy side by side) */
+.code-buttons {
+  display: flex;
+  align-items: center;
+
+  // The run button inherits all the base button styles from the existing
+  // `.code-header button { ... }` rule above. We only need the disabled state.
+  .run-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+/* Execution results panel */
+.execution-results {
+  margin-top: 0.4rem;
+  border-radius: v.$radius-lg;
+  border: 1px solid var(--language-border-color);
+  overflow: hidden;
+  font-family: var(--bs-font-monospace);
+  font-size: v.$code-font-size;
+
+  .execution-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 1rem;
+    background-color: var(--highlight-bg-color);
+    color: var(--code-header-text-color);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--language-border-color);
+
+    i {
+      font-size: 0.8rem;
+      width: 0.75rem; // prevent layout shift when icon switches
+    }
+  }
+
+  .execution-output {
+    margin: 0;
+    padding: 0.6rem 1rem;
+    background-color: var(--highlight-bg-color);
+    color: var(--code-color);
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+
+  // Red output text when the execution itself reported a failure
+  &.execution-error .execution-output {
+    color: var(--prompt-danger-icon-color);
+  }
+}

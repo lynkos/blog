@@ -246,7 +246,7 @@
         {% assign _run_btn_html = '<button aria-label="run" class="run-btn" data-lang="' | append: _lang | append: '"><i class="fas fa-play"></i></button>' %}
         {% assign _wrap_close   = '</div>' %}
       {% endif %}
-      {% assign _copy_btn = '<button aria-label="copy" data-title-succeed="' | append: site.data.locales[include.lang].post.button.copy_code.succeed | append: '"><i class="far fa-clipboard"></i></button>' %}
+      {% assign _copy_btn = '<button aria-label="copy" class="copy-btn" data-title-succeed="' | append: site.data.locales[include.lang].post.button.copy_code.succeed | append: '"><i class="far fa-clipboard"></i></button>' %}
 
       {% assign _new_content = _new_content
         | append: _snippet

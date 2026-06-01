@@ -286,10 +286,9 @@ div {
     font-weight: 600;
     cursor: pointer;
     user-select: none;
-    border-bottom: 0;
 
     &[aria-expanded="true"] {
-      border-bottom: 1px solid var(--language-border-color) !important;
+      border-bottom: 1px solid var(--language-border-color);
     }
 
     i {

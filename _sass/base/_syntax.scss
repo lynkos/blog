@@ -286,7 +286,11 @@ div {
     font-weight: 600;
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid var(--language-border-color);
+    border-bottom: 0;
+
+    &[aria-expanded="true"] {
+      border-bottom: 1px solid var(--language-border-color) !important;
+    }
 
     i {
       font-size: 0.8rem;

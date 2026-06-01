@@ -1,12 +1,20 @@
 /**
  * Code block runner
  *
- * Adds a "Run" button to supported code blocks. On click, executes the code
- * (Rust via play.rust-lang.org, JavaScript via sandboxed eval) and renders
- * an "Execution results" panel below the block.
+ * Supported languages and their execution backends:
+ *   Rust       → Rust Playground API (play.rust-lang.org) — purpose-built,
+ *                supports channels, editions, and detailed error spans
+ *   JavaScript → new Function() running in the browser — no network needed
+ *   Python     → Piston API (emkc.org) — free, no API key required
+ *   Java       → Piston API (emkc.org) — same; file is always named Main.java
+ *                so the public class must also be named Main
  */
 
 const RUST_PLAYGROUND = 'https://play.rust-lang.org/execute';
+const PYODIDE_API = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full';
+const PYODIDE_JS = `${PYODIDE_API}/pyodide.js`;
+
+let pyodideReady = null;
 
 // ── Executors ──────────────────────────────────────────────────────────────
 
@@ -32,14 +40,9 @@ async function executeRust(code) {
 
 function executeJavaScript(code) {
   const lines = [];
+  const prev  = { log: console.log, warn: console.warn, error: console.error };
 
-  // Temporarily redirect console output so we can capture it
-  const prev = {
-    log:   console.log,
-    warn:  console.warn,
-    error: console.error
-  };
-
+  // Redirect all console output so we can capture it for display.
   const capture = (prefix, ...args) => {
     const text = args
       .map(a => (typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)))
@@ -52,24 +55,77 @@ function executeJavaScript(code) {
   console.error = (...a) => { capture('[error]', ...a); prev.error(...a); };
 
   try {
-    // eslint-disable-next-line no-eval
-    eval(code);
+    // new Function(code)() runs the string as a function body in global scope,
+    // which avoids Rollup's eval warning. Direct `eval` triggers that warning
+    // because Rollup can't safely rename closure-scoped variables that eval
+    // might reference by name. new Function has no access to the local closure,
+    // so Rollup is free to minify as normal.
+    new Function(code)(); // eslint-disable-line no-new-func
     return { success: true,  output: lines.join('\n') || '(no output)' };
   } catch (e) {
     return { success: false, output: `${e.name}: ${e.message}` };
   } finally {
-    Object.assign(console, prev); // always restore, even on throw
+    // Always restore console, even if the user's code throws.
+    Object.assign(console, prev);
+  }
+}
+
+async function loadPyodide() {
+  if (pyodideReady) return pyodideReady;
+
+  pyodideReady = new Promise((resolve, reject) => {
+    if (window.loadPyodide) {
+      resolve(window.loadPyodide({ indexURL: PYODIDE_API }));
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = PYODIDE_JS;
+    script.async = true;
+    script.onload = () => {
+      window.loadPyodide({ indexURL: PYODIDE_API })
+        .then(resolve)
+        .catch(reject);
+    };
+    script.onerror = () => reject(new Error('Failed to load Pyodide'));
+    document.head.appendChild(script);
+  });
+
+  return pyodideReady;
+}
+
+async function executePython(code) {
+  const pyodide = await loadPyodide();
+
+  // Capture stdout/stderr
+  let output = '';
+  pyodide.setStdout({
+    batched: (s) => { output += s; }
+  });
+  pyodide.setStderr({
+    batched: (s) => { output += s; }
+  });
+
+  try {
+    await pyodide.runPythonAsync(code);
+    return { success: true, output: output.trim() || '(no output)' };
+  } catch (e) {
+    return { success: false, output: `${e.name}: ${e.message}` };
+  } finally {
+    // Reset handlers to avoid leaking output between runs
+    pyodide.setStdout({});
+    pyodide.setStderr({});
   }
 }
 
 // ── DOM helpers ────────────────────────────────────────────────────────────
 
 function extractCode(container) {
-  // .rouge-code is the table cell that holds only the code (no line numbers)
+  // .rouge-code is the table cell that holds only the code, excluding the
+  // line-number gutter. Prefer it so we don't send line numbers to the API.
   const rougeCode = container.querySelector('.rouge-code');
   if (rougeCode) return rougeCode.innerText;
 
-  // Plain (non-table) highlight block
   const code = container.querySelector('.highlight code');
   if (code) return code.innerText;
 
@@ -92,11 +148,10 @@ function setButtonLoading(btn, loading) {
 }
 
 /**
- * Insert (or update in place) the results panel immediately after the
- * language container div. Wires up a collapse toggle on the header.
+ * Insert a results panel immediately after the language container div, or
+ * update it in place if the user runs the same block a second time.
  */
 function upsertResults(container, { success, output }) {
-  // Re-use an existing panel if the user runs the block a second time
   const sibling = container.nextElementSibling;
   let panel = sibling?.classList.contains('execution-results') ? sibling : null;
 
@@ -115,13 +170,14 @@ function upsertResults(container, { success, output }) {
     <pre class="execution-output">${escapeHtml(output ?? '(no output)')}</pre>
   `;
 
-  // Collapse/expand on header click
   panel.querySelector('.execution-header').addEventListener('click', () => {
     const pre    = panel.querySelector('.execution-output');
     const isOpen = pre.style.display !== 'none';
 
     pre.style.display = isOpen ? 'none' : '';
-    panel.querySelector('i').className   = isOpen ? 'fas fa-angle-right' : 'fas fa-angle-down';
+    panel.querySelector('i').className = isOpen
+      ? 'fas fa-angle-right'
+      : 'fas fa-angle-down';
     panel.querySelector('.execution-header')
          .setAttribute('aria-expanded', String(!isOpen));
   });
@@ -144,12 +200,21 @@ export function initCodeRunner() {
       try {
         let result;
 
-        if (lang === 'rust' || lang === 'rs') {
-          result = await executeRust(code);
-        } else if (lang === 'js' || lang === 'javascript') {
-          result = executeJavaScript(code);
-        } else {
-          result = { success: false, output: `'${lang}' is not supported for execution.` };
+        switch (lang) {
+          case 'rust':
+          case 'rs':
+            result = await executeRust(code);
+            break;
+          case 'js':
+          case 'javascript':
+            result = executeJavaScript(code);
+            break;
+          case 'python':
+          case 'py':
+            result = await executePython(code);
+            break;
+          default:
+            result = { success: false, output: `'${lang}' is not supported for execution.` };
         }
 
         upsertResults(container, result);

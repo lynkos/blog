@@ -2,12 +2,8 @@
  * Code block runner
  *
  * Supported languages and their execution backends:
- *   Rust       → Rust Playground API (play.rust-lang.org) — purpose-built,
- *                supports channels, editions, and detailed error spans
- *   JavaScript → new Function() running in the browser — no network needed
- *   Python     → Piston API (emkc.org) — free, no API key required
- *   Java       → Piston API (emkc.org) — same; file is always named Main.java
- *                so the public class must also be named Main
+ * JavaScript → new Function() running in the browser — no network needed
+ * Python     → Pyodide API — free, no API key required
  */
 
 const PYODIDE_API = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full';
@@ -34,17 +30,11 @@ function executeJavaScript(code) {
   console.error = (...a) => { capture('[error]', ...a); prev.error(...a); };
 
   try {
-    // new Function(code)() runs the string as a function body in global scope,
-    // which avoids Rollup's eval warning. Direct `eval` triggers that warning
-    // because Rollup can't safely rename closure-scoped variables that eval
-    // might reference by name. new Function has no access to the local closure,
-    // so Rollup is free to minify as normal.
     new Function(code)(); // eslint-disable-line no-new-func
     return { success: true,  output: lines.join('\n') || '(no output)' };
   } catch (e) {
     return { success: false, output: `${e.name}: ${e.message}` };
   } finally {
-    // Always restore console, even if the user's code throws.
     Object.assign(console, prev);
   }
 }
@@ -76,7 +66,6 @@ async function loadPyodide() {
 async function executePython(code) {
   const pyodide = await loadPyodide();
 
-  // Capture stdout/stderr
   let output = '';
   pyodide.setStdout({
     batched: (s) => { output += s; }
@@ -91,7 +80,6 @@ async function executePython(code) {
   } catch (e) {
     return { success: false, output: `${e.name}: ${e.message}` };
   } finally {
-    // Reset handlers to avoid leaking output between runs
     pyodide.setStdout({});
     pyodide.setStderr({});
   }
@@ -100,8 +88,6 @@ async function executePython(code) {
 // ── DOM helpers ────────────────────────────────────────────────────────────
 
 function extractCode(container) {
-  // .rouge-code is the table cell that holds only the code, excluding the
-  // line-number gutter. Prefer it so we don't send line numbers to the API.
   const rougeCode = container.querySelector('.rouge-code');
   if (rougeCode) return rougeCode.innerText;
 
@@ -126,10 +112,6 @@ function setButtonLoading(btn, loading) {
   btn.disabled = loading;
 }
 
-/**
- * Insert a results panel immediately after the language container div, or
- * update it in place if the user runs the same block a second time.
- */
 function upsertResults(container, { success, output }) {
   const sibling = container.nextElementSibling;
   let panel = sibling?.classList.contains('execution-results') ? sibling : null;

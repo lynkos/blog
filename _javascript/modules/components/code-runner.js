@@ -10,33 +10,12 @@
  *                so the public class must also be named Main
  */
 
-const RUST_PLAYGROUND = 'https://play.rust-lang.org/execute';
 const PYODIDE_API = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full';
 const PYODIDE_JS = `${PYODIDE_API}/pyodide.js`;
 
 let pyodideReady = null;
 
 // ── Executors ──────────────────────────────────────────────────────────────
-
-async function executeRust(code) {
-  const res = await fetch(RUST_PLAYGROUND, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      channel: 'stable',
-      mode: 'debug',
-      edition: '2021',
-      crateType: 'bin',
-      tests: false,
-      code,
-      backtrace: false
-    })
-  });
-
-  if (!res.ok) throw new Error(`Playground returned HTTP ${res.status}`);
-  const { success, stdout, stderr } = await res.json();
-  return { success, output: success ? stdout : stderr };
-}
 
 function executeJavaScript(code) {
   const lines = [];
@@ -201,10 +180,6 @@ export function initCodeRunner() {
         let result;
 
         switch (lang) {
-          case 'rust':
-          case 'rs':
-            result = await executeRust(code);
-            break;
           case 'js':
           case 'javascript':
             result = executeJavaScript(code);

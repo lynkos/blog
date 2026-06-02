@@ -236,15 +236,42 @@
         <span data-label-text="{{ _label_text | strip }}"><i class="{{ _label_icon }}"></i></span>
       {% endcapture %}
 
+      <!-- Determine if this language supports in-browser execution -->
+      {% assign _runnable_langs = 'js,javascript,python,py' | split: ',' %}
+      {% assign _wrap_open    = '' %}
+      {% assign _run_btn_html = '' %}
+      {% assign _wrap_close   = '' %}
+
+      {% assign _run_enabled = false %}
+      {% if _left contains ' run="' %}
+        {% assign _run_enabled = true %}
+      {% endif %}
+
+      {% assign _run_lang = _lang %}
+      {% if _left contains 'run="' %}
+        {% assign _run_lang = _left | split: 'run="' | last | split: '"' | first %}
+      {% endif %}
+
+      {% if _run_enabled and _runnable_langs contains _run_lang %}
+        {% assign _wrap_open    = '<div class="code-buttons">' %}
+        {% assign _run_btn_html = '<button aria-label="run" class="run-btn" data-lang="' | append: _run_lang | append: '"><i class="fas fa-play"></i></button>' %}
+        {% assign _wrap_close   = '</div>' %}
+      {% endif %}
+
+      {% assign _copy_btn = '<button aria-label="copy" class="copy-btn" data-title-succeed="' | append: site.data.locales[include.lang].post.button.copy_code.succeed | append: '"><i class="far fa-clipboard"></i></button>' %}
+
       {% assign _new_content = _new_content
         | append: _snippet
         | append: '<div class="code-header">'
         | append: _label
-        | append: '<button aria-label="copy" data-title-succeed="'
-        | append: site.data.locales[include.lang].post.button.copy_code.succeed
-        | append: '"><i class="far fa-clipboard"></i></button></div>'
+        | append: _wrap_open
+        | append: _run_btn_html
+        | append: _copy_btn
+        | append: _wrap_close
+        | append: '</div>'
         | append: '<div class="highlight"><code>'
       %}
+
     {% endif %}
   {% endfor %}
 

@@ -9,7 +9,8 @@ import {
   initToc,
   loadMermaid,
   initLinkPreview,
-  initTabs
+  initTabs,
+  initCodeRunner
 } from './modules/components';
 
 applyRoundedCorners();
@@ -23,4 +24,5 @@ initTopbar();
 loadMermaid();
 initLinkPreview();
 initTabs();
+initCodeRunner();
 basic();

@@ -27,8 +27,31 @@
   <a target="_blank" href="https://deepwiki.com/lynkos/blog" title="DeepWiki for lynkos/blog repository"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
   <br><br>
   
-  This is a fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a> that has been **heavily modified** to include a [graph view plugin](_plugins/graph-generator.rb), [tabbed container plugin](_plugins/tabs.rb), [gallery slideshow plugin](_plugins/gallery.rb), [link preview](_javascript/modules/components/link-preview.js), [image proxy](https://blog.lynkos.dev/posts/blogging-setup#setup-image-proxy) (e.g. for Twitter links), [Jekyll plugin to fix malformed Markdown links](_plugins/fix-anchor-links.rb), a "Drafts" tab that lists the articles/posts I'm currently working on, custom description list (i.e. `dl` element) style, auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml), custom "Important" prompt, custom <code>details</code> styling, and more.
+  This is a **heavily modified** fork of <a target="_blank" href="https://github.com/cotes2020/jekyll-theme-chirpy" title="Link to jekyll-theme-chirpy GitHub repository"><code>jekyll-theme-chirpy</code></a>
 </div>
+
+## Features
+### Original Features
+- **Design & UX** - Responsive layout, Dark/Light modes, Localized UI language, and Dark mode images
+- **Content Management** - Pinned posts, Hierarchical categories, Trending tags, Auto-generated Table of Contents, and Last modified dates
+- **Rich Text Support** - Syntax highlighting, Mathematical expressions, Mermaid diagrams & flowcharts, and Embedded media
+- **Interactivity & Outreach** - Built-in search, Multiple comment systems, and Atom feeds
+- **System & Optimization** - PWA support, integrated Web analytics, and advanced SEO performance
+
+### Added Features
+- [**Graph View** Plugin](_plugins/graph-generator.rb) and [Tab](_tabs/graph.md)
+- [**Tabbed Container** Plugin](_plugins/tabs.rb)
+- [**Gallery Slideshow** Plugin](_plugins/gallery.rb)
+- [**Link Preview** on Hover](_javascript/modules/components/link-preview.js)
+- [**Runs Code Snippets**](_javascript/modules/components/code-runner.js) (currently only supports Python and JavaScript)
+- [**Custom Image Proxy**](https://blog.lynkos.dev/posts/blogging-setup#setup-image-proxy) (e.g. for Twitter links)
+- [Auto-fix Malformed Markdown Links Plugin](_plugins/fix-anchor-links.rb)
+- [**Drafts** Tab](_tabs/drafts.md)
+- Custom "**Important**" prompt
+- Custom `dl` (description list) styling inspired by lined paper
+- Custom `details` styling
+- Auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml)
+- And more!
 
 ## Quick Start
 ### Initial Setup

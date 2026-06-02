@@ -30,7 +30,7 @@ function executeJavaScript(code) {
   console.error = (...a) => { capture('[error]', ...a); prev.error(...a); };
 
   try {
-    new Function(code)(); // eslint-disable-line no-new-func
+    new Function(code)();
     return { success: true,  output: lines.join('\n') || '(no output)' };
   } catch (e) {
     return { success: false, output: `${e.name}: ${e.message}` };

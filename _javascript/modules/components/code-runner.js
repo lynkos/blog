@@ -126,7 +126,7 @@ function upsertResults(container, { success, output }) {
   panel.innerHTML = `
     <div class="execution-header" role="button" aria-expanded="true">
       <i class="fas fa-angle-down"></i>
-      <span>Execution results</span>
+      <span>Output</span>
     </div>
     <pre class="execution-output">${escapeHtml(output ?? '(no output)')}</pre>
   `;

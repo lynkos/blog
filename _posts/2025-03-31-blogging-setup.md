@@ -512,19 +512,21 @@ To generate a base64-encoded LQIP for the `lqip` field:
 	{: .prompt-tip }
 
 ### Add Runnable Code Blocks
-Add `{: run="<language>" }` **AFTER** the Markdown code snippet of a supported language.
+1. Add `{: run="<language>" }` **AFTER** the Markdown code snippet of a supported language
 
-| **Language** | **Values**         |
-| :----------- | :----------------- |
-| `JavaScript` | `javascript`, `js` |
-| `Python`     | `python`, `py`     |
+   | **Language** | **Values**         |
+   | :----------- | :----------------- |
+   | JavaScript   | `javascript`, `js` |
+   | Python       | `python`, `py`     |
+
+2. Click the <kbd>▶︎</kbd> button in the upper-right corner to run the code snippet in browser
 
 E.g. This Markdown code:
 
 ````markdown
 ```python
 def main():
-    print("Hello World!")
+    print("Hello World from Python!")
 
 main()
 ```
@@ -535,13 +537,35 @@ Results in this executable Python code block:
 
 ```python
 def main():
-    print("Hello World!")
+    print("Hello World from Python!")
 
 main()
 ```
 {: run="python" }
 
-Click the <kbd>▶︎</kbd> button in the upper-right corner to run the code snippet in browser
+As another example, this Markdown code:
+
+````markdown
+```js
+function main() {
+    console.log("Hello World from JavaScript!");
+}
+
+main();
+```
+{: run="js" }
+````
+
+Results in this executable JavaScript code block:
+
+```js
+function main() {
+    console.log("Hello World from JavaScript!");
+}
+
+main();
+```
+{: run="js" }
 
 ## Appendix
 ### Sync Fork with Upstream

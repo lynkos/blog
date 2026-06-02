@@ -511,6 +511,38 @@ To generate a base64-encoded LQIP for the `lqip` field:
 	> To verify that the base64 string works, visit [Base64 Image Viewer](https://jaredwinick.github.io/base64-image-viewer) and paste the base64 string in the input field below **Base64 Image String**
 	{: .prompt-tip }
 
+### Add Runnable Code Blocks
+Add `{: run="<language>" }` **AFTER** the Markdown code snippet of a supported language.
+
+| **Language** | **Values**         |
+| :----------- | :----------------- |
+| `JavaScript` | `javascript`, `js` |
+| `Python`     | `python`, `py`     |
+
+E.g. This Markdown code:
+
+````markdown
+```python
+def main():
+    print("Hello World!")
+
+main()
+```
+{: run="python" }
+````
+
+Results in this executable Python code block:
+
+```python
+def main():
+    print("Hello World!")
+
+main()
+```
+{: run="python" }
+
+Click the <kbd>▶︎</kbd> button in the upper-right corner to run the code snippet in browser
+
 ## Appendix
 ### Sync Fork with Upstream
 To keep fork up-to-date with original repository (i.e. Chirpy)

@@ -44,6 +44,7 @@
 - [**Gallery Slideshow** Plugin](_plugins/gallery.rb)
 - [**Link Preview** on Hover](_javascript/modules/components/link-preview.js)
 - [**Runs Code Snippets**](_javascript/modules/components/code-runner.js) (currently only supports Python and JavaScript)
+- [**Progress Circle**](assets/js/progress-circle.js)
 - [**Custom Image Proxy**](https://blog.lynkos.dev/posts/blogging-setup#setup-image-proxy) (e.g. for Twitter links)
 - [Auto-fix Malformed Markdown Links Plugin](_plugins/fix-anchor-links.rb)
 - [**Drafts** Tab](_tabs/drafts.md)

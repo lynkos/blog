@@ -568,6 +568,37 @@ main();
 {: run="js" }
 
 ## Appendix
+### Workflow
+```mermaid
+---
+title: CI/CD Pipeline
+---
+graph TD
+    Trigger([Push to Main / PR]) --> Checkout[Checkout Code]
+            
+    Checkout --> SetupEnv[Setup Pages]
+    
+    subgraph Setup Environment
+        SetupEnv --> SetupRuby[Setup Ruby]
+    end
+    
+    subgraph Build
+        SetupRuby --> BuildSite[Build Site]
+        BuildSite --> GenerateCNAME[Generate CNAME]
+        GenerateCNAME --> GenerateNojekyll[Generate .nojekyll]
+    end
+
+    GenerateNojekyll --> JoinNode{Successful?}
+    JoinNode -- Yes --> UploadArtifact[Upload site artifact]
+    JoinNode -- No --> JobFail([Pipeline Failed])
+    UploadArtifact --> JobPass([Deploy to GitHub Pages])
+    
+    classDef fail fill:#cf222e,stroke:#fff,stroke-width:1px,color:#fff;
+    classDef pass fill:green,stroke:#fff,stroke-width:1px,color:#fff;
+    class JobFail fail;
+    class JobPass pass;
+```
+
 ### Sync Fork with Upstream
 To keep fork up-to-date with original repository (i.e. Chirpy)
 

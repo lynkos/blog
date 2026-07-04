@@ -9,6 +9,7 @@
   <img alt="Bash" src="https://img.shields.io/static/v1?label=Language&style=flat&message=Bash&logo=gnubash&color=4EAA25&labelColor=393939&logoColor=4EAA25">
   <img alt="YAML" src="https://img.shields.io/static/v1?label=Language&style=flat&message=YAML&logo=yaml&color=CB171E&labelColor=393939&logoColor=CB171E">
   <img alt="JSON" src="https://img.shields.io/static/v1?label=Language&style=flat&message=JSON&logo=json&color=000000&labelColor=393939&logoColor=000000">
+  <img alt="XML" src="https://img.shields.io/static/v1?label=Language&style=flat&message=XML&logo=xml&color=005FAD&labelColor=393939&logoColor=005FAD">
   <img alt="Bootstrap" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Bootstrap&logo=bootstrap&color=7952B3&labelColor=393939&logoColor=7952B3">
   <img alt="Babel" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Babel&logo=babel&color=F9DC3E&labelColor=393939&logoColor=F9DC3E">
   <img alt="Rollup" src="https://img.shields.io/static/v1?label=Package&style=flat&message=Rollup&logo=rollupdotjs&color=EC4A3F&labelColor=393939&logoColor=EC4A3F">

@@ -81,7 +81,7 @@ I use [Obsidian's iPhone app](https://apps.apple.com/us/app/obsidian-connected-n
 
 8. Once Enveloppe's installed, go to its settings (i.e. under **Community plugins** section in the settings sidebar, click **Enveloppe**)
 
-9. Copy my Enveloppe settings
+9. Copy my Enveloppe (v7.6.3) settings
 
 	```json
 	{

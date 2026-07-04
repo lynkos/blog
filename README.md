@@ -40,7 +40,7 @@
 - **System & Optimization** - PWA support, integrated Web analytics, and advanced SEO performance
 
 ### Added Features
-- [**Graph View** Plugin](_plugins/graph-generator.rb) and [Tab](_tabs/graph.md)
+- [**Graph View** Plugin](_plugins/graph-generator.rb), [Script](assets/js/graph.js), and [Tab](_tabs/graph.md)
 - [**Tabbed Container** Plugin](_plugins/tabs.rb)
 - [**Gallery Slideshow** Plugin](_plugins/gallery.rb)
 - [**Link Preview** on Hover](_javascript/modules/components/link-preview.js)

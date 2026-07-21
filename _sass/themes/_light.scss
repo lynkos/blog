@@ -130,6 +130,13 @@
   --desc-list-line-color: #00b0d7;
   --desc-list-margin-color: #db4034;
   
+  /* Graph */
+  --graph-edge-color: #e6e8e9;
+  --graph-node-color: var(--link-color);
+  --graph-node-hover-color: var(--link-hover-color);
+  --graph-node-drag-color: var(--link-hover-color);
+  --graph-label-color: var(--text-color);
+
   .content dl {
     @include mx.dl-holes(white, rgb(235, 235, 235)); // rgb(243, 243, 243));
   }

@@ -3,7 +3,7 @@ class InteractiveGraph {
     RADIUS: 15,
     TRANSITION_DURATION: 300,
     MAX_LABEL_LENGTH: 10,
-    EDGE_WIDTH: 3,
+    EDGE_WIDTH: 2.5,
     DIM_OPACITY: 0.25,
     COLLISION_RADIUS: 10,
     CHARGE: -350,
@@ -103,7 +103,7 @@ class InteractiveGraph {
       .enter()
       .append('line')
       .attr('class', 'link')
-      .attr('stroke', 'var(--main-border-color)')
+      .attr('stroke', 'var(--graph-edge-color)')
       .attr('stroke-width', InteractiveGraph.CONFIG.EDGE_WIDTH);
 
     // Nodes
@@ -248,7 +248,7 @@ class InteractiveGraph {
           
           // Change node color + cursor while dragging
           circle.style('cursor', 'grabbing');
-          circle.style('fill', 'var(--link-hover-color)');
+          circle.style('fill', 'var(--graph-node-drag-color)');
         }
         
         // Keep dragged node highlighted

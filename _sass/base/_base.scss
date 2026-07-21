@@ -71,8 +71,7 @@ main {
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  @extend %rounded;
+  border-radius: var(--bs-card-border-radius);
 
   // FIXME: Setting no-bg in front-matter doesn't do anything
   // Remove background from preview image, for now
@@ -84,8 +83,7 @@ main {
     height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-
-    @extend %rounded;
+    border-radius: var(--bs-card-border-radius);
 
     @at-root #post-list & {
       width: 100%;
@@ -94,15 +92,13 @@ main {
 }
 
 .post-preview {
-  @extend %rounded;
-
   border: 0;
   background: var(--card-bg);
   box-shadow: var(--card-shadow);
+  border-radius: var(--bs-card-border-radius);
 
   &::before {
-    @extend %rounded;
-
+    border-radius: var(--bs-card-border-radius);
     content: '';
     width: 100%;
     height: 100%;

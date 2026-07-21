@@ -79,6 +79,8 @@
   --card-hovor-bg: #464d51;
   --card-shadow: rgb(21, 21, 21, 0.72) 0 6px 18px 0,
     rgb(137, 135, 135, 0.24) 0 0 0 1px;
+  --card-shadow-hover: 0 0.85rem 2rem rgba(0, 0, 0, 0.35),
+    0 0 0 1px color-mix(in srgb, var(--link-color) 30%, transparent);
   --kbd-wrap-color: #6a6a6a;
   --kbd-text-color: #d3d3d3;
   --kbd-bg-color: #242424;

@@ -9,6 +9,52 @@
     margin-top: 2.5rem;
   }
 
+  /* Enhanced hover effect for homepage post cards; doesn't change default state */
+  & > article.card-wrapper.card {
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, outline-color 0.35s ease;
+    
+    & .card-title {
+      transition: color 0.35s ease;
+    }
+      
+    /* Float up and add extra stroke on hover */
+    &:is(:hover, :focus-within) {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    /* Emphasis line on the left */
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      bottom: 1rem;
+      width: 4px;
+      border-radius: calc(var(--bs-card-border-radius) * 100);
+      background: var(--link-color);
+      opacity: 0;
+      transform: scaleY(0.35);
+      transform-origin: center;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    &:hover {
+      &::before {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+      
+      /* Add !important since Chirpy's title color has it */
+      & .card-title {
+        color: var(--link-color) !important;
+      }
+    }
+  }
+
   .card-wrapper {
     &:hover {
       text-decoration: none;

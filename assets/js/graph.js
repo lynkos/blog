@@ -14,6 +14,13 @@ class InteractiveGraph {
     FALLBACK_HEIGHT: 600
   };
 
+  static SUPPORTED_NODE_CATEGORIES = new Set([
+    'article',
+    'guide',
+    'transcript',
+    'write-up'
+  ]);
+
   constructor(containerId, searchDataPath, edgesDataPath) {
     this.container = document.getElementById(containerId);
     this.searchDataPath = searchDataPath;
@@ -45,7 +52,9 @@ class InteractiveGraph {
       this.nodes = searchData.map((item, index) => ({
         id: index,
         label: item.title,
-        url: item.url
+        url: item.url,
+        categories: item.categories || [],
+        category: this.getPrimaryCategory(item.categories)
       }));
       
       this.edges = edgesData.edges || [];
@@ -115,6 +124,7 @@ class InteractiveGraph {
       .call(this.createDragBehavior());
 
     node.append('circle')
+      .attr('class', d => `graph-node ${this.getCategoryClass(d.category)}`)
       .attr('r', InteractiveGraph.CONFIG.RADIUS)
       .style('cursor', 'pointer');
 
@@ -225,6 +235,29 @@ class InteractiveGraph {
       .transition()
       .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
       .style('opacity', 1);
+  }
+
+  getPrimaryCategory(categories) {
+    if (!categories) return null;
+    if (Array.isArray(categories)) return categories[0] || null;
+    if (typeof categories === 'string') {
+      return categories.split(',').map(s => s.trim()).filter(Boolean)[0] || null;
+    }
+    return null;
+  }
+
+  getCategoryClass(category) {
+    if (!category) return 'graph-node--default';
+    
+    const normalized = category
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/, '');
+
+    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(normalized)
+      ? `graph-node--${normalized}`
+      : 'graph-node--default';
   }
   
   createDragBehavior() {

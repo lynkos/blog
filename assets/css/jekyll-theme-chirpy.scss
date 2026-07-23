@@ -304,6 +304,13 @@
 }
 
 .node {
+  text {
+    pointer-events: none;
+    font-size: 12px;
+    fill: var(--graph-label-color);
+    text-anchor: middle;
+  }
+
   circle {
     cursor: pointer;
     fill: var(--graph-node-color);
@@ -312,13 +319,36 @@
     &:hover {
       fill: var(--graph-node-hover-color);
     }
-  }
 
-  text {
-    pointer-events: none;
-    font-size: 12px;
-    fill: var(--graph-label-color);
-    text-anchor: middle;
+    &.graph-node--default {
+      --graph-node-color: var(--graph-node-color-default);
+      --graph-node-hover-color: var(--graph-node-hover-color-default);
+      --graph-node-drag-color: var(--graph-node-drag-color-default);
+    }
+
+    &.graph-node--article {
+      --graph-node-color: var(--graph-node-color-article);
+      --graph-node-hover-color: var(--graph-node-hover-color-article);
+      --graph-node-drag-color: var(--graph-node-drag-color-article);
+    }
+
+    &.graph-node--guide {
+      --graph-node-color: var(--graph-node-color-guide);
+      --graph-node-hover-color: var(--graph-node-hover-color-guide);
+      --graph-node-drag-color: var(--graph-node-drag-color-guide);
+    }
+
+    &.graph-node--transcript {
+      --graph-node-color: var(--graph-node-color-transcript);
+      --graph-node-hover-color: var(--graph-node-hover-color-transcript);
+      --graph-node-drag-color: var(--graph-node-drag-color-transcript);
+    }
+
+    &.graph-node--write-up {
+      --graph-node-color: var(--graph-node-color-write-up);
+      --graph-node-hover-color: var(--graph-node-hover-color-write-up);
+      --graph-node-drag-color: var(--graph-node-drag-color-write-up);
+    }
   }
 }
 

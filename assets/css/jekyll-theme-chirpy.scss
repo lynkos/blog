@@ -288,6 +288,23 @@
   overflow: hidden;
 }
 
+.graph-legend-group {
+  width: auto;
+  height: auto;
+
+  g {
+    cursor: pointer;
+  }
+}
+
+.legend-item {
+  text {
+    fill: var(--text-color);
+    text-transform: capitalize;
+    font-size: 13px;
+  }
+}
+
 .graph-tooltip {
   position: absolute;
   text-align: center;

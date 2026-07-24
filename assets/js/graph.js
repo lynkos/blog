@@ -11,7 +11,8 @@ class InteractiveGraph {
     MIN_ZOOM: 0.25,
     MAX_ZOOM: 5,
     FALLBACK_WIDTH: 800,
-    FALLBACK_HEIGHT: 600
+    FALLBACK_HEIGHT: 600,
+    LEGEND_PADDING: 12
   };
 
   static SUPPORTED_NODE_CATEGORIES = new Set([
@@ -34,6 +35,8 @@ class InteractiveGraph {
     this.highlightedNode = null;
     this.dragStartTime = 0;
     this.isDragging = false;
+    this.categories = [];
+    this.selectedCategories = new Set();
     
     this.init();
   }
@@ -54,9 +57,12 @@ class InteractiveGraph {
         label: item.title,
         url: item.url,
         categories: item.categories || [],
-        category: this.getPrimaryCategory(item.categories)
+        category: this.getPrimaryCategory(item.categories) || 'uncategorized'
       }));
-      
+
+      this.categories = Array.from(new Set(this.nodes.map(node => node.category)));
+      this.selectedCategories = new Set(this.categories);
+
       this.edges = edgesData.edges || [];
       
       if (this.nodes.length === 0) {
@@ -67,6 +73,8 @@ class InteractiveGraph {
       this.setupSVG();
       this.setupSimulation();
       this.render();
+      this.renderLegend();
+      this.updateFilter();
     } catch (error) {
       console.error('Error loading graph data:', error);
       this.container.innerHTML = '<p>Error loading graph data</p>';
@@ -91,6 +99,11 @@ class InteractiveGraph {
       .on('click', () => this.resetHighlight());
     
     this.graphGroup = this.svg.append('g').attr('class', 'graph-group');
+
+    this.legendGroup = this.svg
+      .append('g')
+      .attr('class', 'graph-legend-group')
+      .attr('transform', `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING})`);
   }
 
   setupSimulation() {
@@ -154,6 +167,85 @@ class InteractiveGraph {
     });
 
     this.nodeSelection = node;
+  }
+
+  toggleCategory(category) {
+    if (this.selectedCategories.has(category)) this.selectedCategories.delete(category);
+    else this.selectedCategories.add(category);
+
+    this.updateFilter();
+    this.renderLegend();
+  }
+
+  renderLegend() {
+    const itemHeight = 28;
+    const radius = 7;
+
+    const legendItems = this.legendGroup
+      .selectAll('.legend-item')
+      .data(this.categories, d => d);
+
+    const enter = legendItems.enter()
+      .append('g')
+      .attr('class', 'legend-item')
+      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * itemHeight})`)
+      .on('click', (event, category) => this.toggleCategory(category));
+
+    enter.append('circle')
+      .attr('cx', 0)
+      .attr('cy', 0)
+      .attr('r', radius)
+      .attr('fill', d => this.getLegendColor(d));
+
+    enter.append('text')
+      .attr('x', (radius * 2))
+      .attr('y', (radius / 2))
+      .text(d => d === 'uncategorized' ? 'No Category' : d);
+
+    legendItems.merge(enter)
+      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * itemHeight})`)
+      .select('circle')
+      .attr('fill', d => this.getLegendColor(d))
+      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : 0.35);
+
+    legendItems.merge(enter)
+      .select('text')
+      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : 0.45);
+
+    legendItems.exit().remove();
+  }
+
+  getLegendColor(category) {
+    const normalized = category === 'uncategorized'
+      ? 'default'
+      : category.toLowerCase()
+          .replace(/[^a-z0-9_-]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+
+    const computedStyle = getComputedStyle(document.documentElement);
+    const cssVar = `--graph-node-color-${normalized}`;
+    const color = computedStyle.getPropertyValue(cssVar).trim();
+
+    return color || computedStyle.getPropertyValue('--graph-node-color').trim() || computedStyle.getPropertyValue('--graph-node-color-default').trim();
+  }
+
+  updateFilter() {
+    const selected = this.selectedCategories;
+
+    this.nodeSelection
+    .style('display', d => (selected.has(d.category) ? null : 'none'));
+
+    const visibleIds = new Set(
+      this.nodes
+        .filter(d => selected.has(d.category))
+        .map(d => d.id)
+    );
+
+    this.linkSelection
+      .style('display', d =>
+        visibleIds.has(d.source.id) && visibleIds.has(d.target.id) ? null : 'none'
+      );
   }
 
   handleNodeClick(event, node) {

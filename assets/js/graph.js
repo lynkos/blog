@@ -19,7 +19,8 @@ class InteractiveGraph {
     'article',
     'guide',
     'transcript',
-    'write-up'
+    'write-up',
+    'tutorial'
   ]);
 
   constructor(containerId, searchDataPath, edgesDataPath) {
@@ -71,7 +72,6 @@ class InteractiveGraph {
       }
       
       this.setupSVG();
-      this.setupSimulation();
       this.render();
       this.renderLegend();
       this.updateFilter();
@@ -103,13 +103,19 @@ class InteractiveGraph {
     this.legendGroup = this.svg
       .append('g')
       .attr('class', 'graph-legend-group')
-      .attr('transform', `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING})`);
-  }
-
-  setupSimulation() {
-    const width = this.container.clientWidth || InteractiveGraph.CONFIG.FALLBACK_WIDTH;
-    const height = this.container.clientHeight || InteractiveGraph.CONFIG.FALLBACK_HEIGHT;
+      .attr('transform', `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING / 2}, ${InteractiveGraph.CONFIG.LEGEND_PADDING / 2})`);
     
+    this.legendGroup
+      .append('rect')
+      .attr('class', 'graph-legend-bg')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('rx', 5)
+      .attr('ry', 5)
+      .attr('fill', 'var(--graph-legend-bg)')
+      .attr('stroke', 'var(--graph-edge-color)')
+      .attr('stroke-width', 0.75);
+
     this.simulation = d3.forceSimulation(this.nodes)
       .force('link', d3.forceLink(this.edges).id(d => d.id).distance(InteractiveGraph.CONFIG.EDGE_DISTANCE))
       .force('charge', d3.forceManyBody().strength(InteractiveGraph.CONFIG.CHARGE))
@@ -206,13 +212,17 @@ class InteractiveGraph {
       .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * itemHeight})`)
       .select('circle')
       .attr('fill', d => this.getLegendColor(d))
-      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : 0.35);
+      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
 
     legendItems.merge(enter)
       .select('text')
-      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : 0.45);
+      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
 
     legendItems.exit().remove();
+
+    this.legendGroup.select('.graph-legend-bg')
+      .attr('width', 110)
+      .attr('height', 140);
   }
 
   getLegendColor(category) {

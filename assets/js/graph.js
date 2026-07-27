@@ -74,6 +74,7 @@ class InteractiveGraph {
       this.setupSVG();
       this.render();
       this.renderLegend();
+      this.renderSettings();
       this.updateFilter();
     } catch (error) {
       console.error('Error loading graph data:', error);
@@ -85,16 +86,17 @@ class InteractiveGraph {
     const width = this.container.clientWidth || InteractiveGraph.CONFIG.FALLBACK_WIDTH;
     const height = this.container.clientHeight || InteractiveGraph.CONFIG.FALLBACK_HEIGHT;
     
+    this.zoom = d3.zoom()
+      .scaleExtent([InteractiveGraph.CONFIG.MIN_ZOOM, InteractiveGraph.CONFIG.MAX_ZOOM])
+      .on('zoom', (event) => {
+        this.graphGroup.attr('transform', event.transform);
+      });
+
     this.svg = d3.select(this.container)
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .call(d3.zoom()
-        .scaleExtent([InteractiveGraph.CONFIG.MIN_ZOOM, InteractiveGraph.CONFIG.MAX_ZOOM])
-        .on('zoom', (event) => {
-          this.graphGroup.attr('transform', event.transform);
-        })
-      )
+      .call(this.zoom)
       // Reset highlighting when clicking background
       .on('click', () => this.resetHighlight());
     
@@ -106,6 +108,34 @@ class InteractiveGraph {
       .force('collision', d3.forceCollide().radius(InteractiveGraph.CONFIG.COLLISION_RADIUS))
       .force('x', d3.forceX(width / 2))
       .force('y', d3.forceY(height / 2));
+  }
+
+  zoomIn() {
+    const current = d3.zoomTransform(this.svg.node());
+    const next = Math.min(current.k * 1.3, InteractiveGraph.CONFIG.MAX_ZOOM);
+    this.svg.transition().duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .call(this.zoom.scaleTo, next);
+  }
+
+  zoomOut() {
+    const current = d3.zoomTransform(this.svg.node());
+    const next = Math.max(current.k / 1.3, InteractiveGraph.CONFIG.MIN_ZOOM);
+    this.svg.transition().duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .call(this.zoom.scaleTo, next);
+  }
+
+  centerGraph() {
+    this.svg.transition().duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
+      .call(this.zoom.transform, d3.zoomIdentity);
+  }
+
+  renderSettings() {
+    const settingsEl = document.getElementById('graph-settings');
+    if (!settingsEl) return;
+
+    settingsEl.querySelector('[data-action="zoom-in"]').addEventListener('click', () => this.zoomIn());
+    settingsEl.querySelector('[data-action="zoom-out"]').addEventListener('click', () => this.zoomOut());
+    settingsEl.querySelector('[data-action="center"]').addEventListener('click', () => this.centerGraph());
   }
 
   render() {
@@ -179,7 +209,7 @@ class InteractiveGraph {
       this.categories.forEach((category) => {
         const item = document.createElement('button');
         item.type = 'button';
-        item.className = 'graph-legend-item';
+        item.className = 'graph-legend-item graph-button';
         item.dataset.category = category;
 
         item.addEventListener('pointerdown', (e) => e.stopPropagation());

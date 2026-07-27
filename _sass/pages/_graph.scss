@@ -2,16 +2,41 @@
 
 $gap: calc(v.$code-dot-gap / 2);
 
+#graph-settings {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: v.$code-dot-gap;
+}
+
+.graph-settings-button {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+}
+
 #graph-container {
   width: 100%;
-  height: 70vh;
+  height: 66vh;
   position: relative;
   overflow: hidden;
 }
 
+.graph-button {
+  border-radius: v.$radius-sm;
+  cursor: pointer;
+  color: var(--text-color);
+  background: transparent;
+  transition: background 0.2s ease;
+  border: none;
+  gap: $gap;
+
+  &:hover {
+    background: var(--sidebar-hover-bg);
+  }
+}
+
 #graph-legend {
   display: block;
-  margin-bottom: $gap;
 
   .graph-legend-list {
     display: flex;
@@ -23,18 +48,8 @@ $gap: calc(v.$code-dot-gap / 2);
   .graph-legend-item {
     display: inline-flex;
     align-items: center;
-    gap: $gap;
     padding: 4px 8px;
-    background: transparent;
-    border-radius: v.$radius-sm;
-    border: none;
-    cursor: pointer;
-    color: var(--text-color);
     font-size: 13px;
-
-    &:hover {
-      background: var(--sidebar-hover-bg);
-    }
 
     // dimmed state when not selected
     &:not(.selected) {

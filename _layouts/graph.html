@@ -3,6 +3,11 @@ layout: page
 ---
 <div id="graph-legend" aria-label="Graph Legend"></div>
 <div id="graph-container"></div>
+<div id="graph-settings" aria-label="Graph Settings">
+    <button type="button" class="graph-settings-button graph-button" title="Zoom Out" data-action="zoom-out"><i alt="Zoom Out" class="fas fa-magnifying-glass-minus"></i></button>
+    <button type="button" class="graph-settings-button graph-button" title="Center" data-action="center"><i alt="Center" class="fas fa-arrows-to-circle"></i></button>
+    <button type="button" class="graph-settings-button graph-button" title="Zoom In" data-action="zoom-in"><i alt="Zoom In" class="fas fa-magnifying-glass-plus"></i></button>
+</div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="{{ '/assets/js/graph.js' | relative_url }}"></script>

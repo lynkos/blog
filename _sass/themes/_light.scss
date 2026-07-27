@@ -135,22 +135,27 @@
   --graph-label-color: var(--text-color);
   --graph-legend-bg: var(--sidebar-bg);
 
+  /* Default (Link Color) */
   --graph-node-color-default: var(--link-color);
   --graph-node-hover-color-default: var(--link-hover-color);
   --graph-node-drag-color-default: var(--link-hover-color);
 
+  /* Article (Blue) */
   --graph-node-color-article: #1f78b4;
   --graph-node-hover-color-article: #155d8f;
   --graph-node-drag-color-article: #104266;
 
+  /* Guide (Green) */
   --graph-node-color-guide: #4daf4a;
   --graph-node-hover-color-guide: #3c8b3c;
   --graph-node-drag-color-guide: #2e6b2e;
 
+  /* Transcript (Purple) */
   --graph-node-color-transcript: #984ea3;
   --graph-node-hover-color-transcript: #7a3783;
   --graph-node-drag-color-transcript: #5b2d62;
 
+  /* Write-Up (Orange) */
   --graph-node-color-write-up: #ff7f00;
   --graph-node-hover-color-write-up: #cc6500;
   --graph-node-drag-color-write-up: #994d00;

@@ -184,7 +184,7 @@ class InteractiveGraph {
   }
 
   renderLegend() {
-    const itemHeight = 28;
+    const lineHeight = 24;
     const radius = 7;
 
     const legendItems = this.legendGroup
@@ -194,7 +194,7 @@ class InteractiveGraph {
     const enter = legendItems.enter()
       .append('g')
       .attr('class', 'legend-item')
-      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * itemHeight})`)
+      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * lineHeight})`)
       .on('click', (event, category) => this.toggleCategory(category));
 
     enter.append('circle')
@@ -209,7 +209,7 @@ class InteractiveGraph {
       .text(d => d === 'uncategorized' ? 'No Category' : d);
 
     legendItems.merge(enter)
-      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * itemHeight})`)
+      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * lineHeight})`)
       .select('circle')
       .attr('fill', d => this.getLegendColor(d))
       .attr('opacity', d => this.selectedCategories.has(d) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
@@ -220,9 +220,27 @@ class InteractiveGraph {
 
     legendItems.exit().remove();
 
+    // measure max text width
+    let maxTextWidth = 0;
+    this.legendGroup.selectAll('.legend-item text').each(function() {
+      const w = this.getBBox().width;
+      if (w > maxTextWidth) maxTextWidth = w;
+    });
+
+    const bgWidth = ((InteractiveGraph.CONFIG.LEGEND_PADDING + radius) * 2) + maxTextWidth;
+    const bgHeight = this.categories.length * lineHeight; // + InteractiveGraph.CONFIG.LEGEND_PADDING;
+
+    // apply bg size and store legend bbox in SVG coords (legendGroup transform origin uses LEGEND_PADDING/2)
+    const legendX = InteractiveGraph.CONFIG.LEGEND_PADDING / 2;
+    const legendY = InteractiveGraph.CONFIG.LEGEND_PADDING / 2;
+    this.legendBBox = { x: legendX, y: legendY, width: bgWidth, height: bgHeight };
+
     this.legendGroup.select('.graph-legend-bg')
-      .attr('width', 110)
-      .attr('height', 140);
+      .attr('width', bgWidth)
+      .attr('height', bgHeight);
+
+    this.legendGroup.attr('pointer-events', 'all')
+      .on('pointerdown', (event) => { event.stopPropagation(); });
   }
 
   getLegendColor(category) {

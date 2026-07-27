@@ -222,11 +222,9 @@ class InteractiveGraph {
           .replace(/-+/g, '-')
           .replace(/^-|-$/g, '');
 
-    const computedStyle = getComputedStyle(document.documentElement);
-    const cssVar = `--graph-node-color-${normalized}`;
-    const color = computedStyle.getPropertyValue(cssVar).trim();
-
-    return color || computedStyle.getPropertyValue('--graph-node-color').trim() || computedStyle.getPropertyValue('--graph-node-color-default').trim();
+    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(normalized)
+      ? `var(--graph-node-color-${normalized})`
+      : 'var(--graph-node-color-default)';
   }
 
   updateFilter() {

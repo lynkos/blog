@@ -118,5 +118,11 @@
       --graph-node-hover-color: var(--graph-node-hover-color-write-up);
       --graph-node-drag-color: var(--graph-node-drag-color-write-up);
     }
+
+    &.graph-node--uncategorized {
+      --graph-node-color: var(--graph-node-color-uncategorized);
+      --graph-node-hover-color: var(--graph-node-hover-color-uncategorized);
+      --graph-node-drag-color: var(--graph-node-drag-color-uncategorized);
+    }
   }
 }

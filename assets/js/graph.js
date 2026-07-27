@@ -19,7 +19,8 @@ class InteractiveGraph {
     'guide',
     'transcript',
     'write-up',
-    'tutorial'
+    'tutorial',
+    'uncategorized'
   ]);
 
   constructor(containerId, searchDataPath, edgesDataPath) {
@@ -215,15 +216,8 @@ class InteractiveGraph {
   }
 
   getLegendColor(category) {
-    const normalized = category === 'uncategorized'
-      ? 'default'
-      : category.toLowerCase()
-          .replace(/[^a-z0-9_-]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
-
-    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(normalized)
-      ? `var(--graph-node-color-${normalized})`
+    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(category)
+      ? `var(--graph-node-color-${category})`
       : 'var(--graph-node-color-default)';
   }
 

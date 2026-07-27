@@ -160,6 +160,11 @@
   --graph-node-hover-color-write-up: #cc6500;
   --graph-node-drag-color-write-up: #994d00;
 
+  /* Uncategorized (Grey) */
+  --graph-node-color-uncategorized: #ccc;
+  --graph-node-hover-color-uncategorized: #bbb;
+  --graph-node-drag-color-uncategorized: #aaa;
+
   .content dl {
     @include mx.dl-holes(white, rgb(235, 235, 235)); // rgb(243, 243, 243));
   }

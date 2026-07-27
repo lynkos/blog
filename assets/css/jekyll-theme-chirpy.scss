@@ -337,6 +337,10 @@
       fill: var(--graph-node-hover-color);
     }
 
+    &:active {
+      fill: var(--graph-node-drag-color);
+    }
+
     &.graph-node--default {
       --graph-node-color: var(--graph-node-color-default);
       --graph-node-hover-color: var(--graph-node-hover-color-default);

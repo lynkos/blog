@@ -133,10 +133,38 @@
 
   /* Graph */
   --graph-edge-color: rgba(54, 55, 55, 0.75);
-  --graph-node-color: var(--link-color);
-  --graph-node-hover-color: var(--link-hover-color);
-  --graph-node-drag-color: var(--link-hover-color);
   --graph-label-color: var(--text-color);
+  --graph-legend-bg: var(--sidebar-bg);
+
+  /* Default (Link Color) */
+  --graph-node-color-default: var(--link-color);
+  --graph-node-hover-color-default: var(--link-hover-color);
+  --graph-node-drag-color-default: var(--link-hover-color);
+
+  /* Article (Red) */
+  --graph-node-color-article: #e88f8f;
+  --graph-node-hover-color-article: #e17575;
+  --graph-node-drag-color-article: #d85a5a;
+
+  /* Guide (Green) */
+  --graph-node-color-guide: #9ddc9b;
+  --graph-node-hover-color-guide: #85d183;
+  --graph-node-drag-color-guide: #6ac56a;
+
+  /* Transcript (Purple) */
+  --graph-node-color-transcript: #c89bd4;
+  --graph-node-hover-color-transcript: #bb85ca;
+  --graph-node-drag-color-transcript: #ad6ebf;
+
+  /* Write-Up (Orange) */
+  --graph-node-color-write-up: #ffbf80;
+  --graph-node-hover-color-write-up: #ffae5c;
+  --graph-node-drag-color-write-up: #ff9d38;
+
+  /* Uncategorized (Grey) */
+  --graph-node-color-uncategorized: #ccc;
+  --graph-node-hover-color-uncategorized: #bbb;
+  --graph-node-drag-color-uncategorized: #aaa;
 
   .content dl {
     @include mx.dl-holes(rgb(27, 27, 30), rgba(45, 45, 45, 0.5));

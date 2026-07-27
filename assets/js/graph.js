@@ -14,6 +14,15 @@ class InteractiveGraph {
     FALLBACK_HEIGHT: 600
   };
 
+  static SUPPORTED_NODE_CATEGORIES = new Set([
+    'article',
+    'guide',
+    'transcript',
+    'write-up',
+    'tutorial',
+    'uncategorized'
+  ]);
+
   constructor(containerId, searchDataPath, edgesDataPath) {
     this.container = document.getElementById(containerId);
     this.searchDataPath = searchDataPath;
@@ -27,6 +36,8 @@ class InteractiveGraph {
     this.highlightedNode = null;
     this.dragStartTime = 0;
     this.isDragging = false;
+    this.categories = [];
+    this.selectedCategories = new Set();
     
     this.init();
   }
@@ -45,9 +56,14 @@ class InteractiveGraph {
       this.nodes = searchData.map((item, index) => ({
         id: index,
         label: item.title,
-        url: item.url
+        url: item.url,
+        categories: item.categories || [],
+        category: this.getPrimaryCategory(item.categories) || 'uncategorized'
       }));
-      
+
+      this.categories = Array.from(new Set(this.nodes.map(node => node.category)));
+      this.selectedCategories = new Set(this.categories);
+
       this.edges = edgesData.edges || [];
       
       if (this.nodes.length === 0) {
@@ -56,8 +72,9 @@ class InteractiveGraph {
       }
       
       this.setupSVG();
-      this.setupSimulation();
       this.render();
+      this.renderLegend();
+      this.updateFilter();
     } catch (error) {
       console.error('Error loading graph data:', error);
       this.container.innerHTML = '<p>Error loading graph data</p>';
@@ -82,12 +99,7 @@ class InteractiveGraph {
       .on('click', () => this.resetHighlight());
     
     this.graphGroup = this.svg.append('g').attr('class', 'graph-group');
-  }
 
-  setupSimulation() {
-    const width = this.container.clientWidth || InteractiveGraph.CONFIG.FALLBACK_WIDTH;
-    const height = this.container.clientHeight || InteractiveGraph.CONFIG.FALLBACK_HEIGHT;
-    
     this.simulation = d3.forceSimulation(this.nodes)
       .force('link', d3.forceLink(this.edges).id(d => d.id).distance(InteractiveGraph.CONFIG.EDGE_DISTANCE))
       .force('charge', d3.forceManyBody().strength(InteractiveGraph.CONFIG.CHARGE))
@@ -115,6 +127,7 @@ class InteractiveGraph {
       .call(this.createDragBehavior());
 
     node.append('circle')
+      .attr('class', d => `graph-node ${this.getCategoryClass(d.category)}`)
       .attr('r', InteractiveGraph.CONFIG.RADIUS)
       .style('cursor', 'pointer');
 
@@ -144,6 +157,86 @@ class InteractiveGraph {
     });
 
     this.nodeSelection = node;
+  }
+
+  toggleCategory(category) {
+    if (this.selectedCategories.has(category)) this.selectedCategories.delete(category);
+    else this.selectedCategories.add(category);
+
+    this.updateFilter();
+    this.renderLegend();
+  }
+
+  renderLegend() {
+    const legendEl = document.getElementById('graph-legend');
+    if (!legendEl) return;
+
+    let list = legendEl.querySelector('.graph-legend-list');
+    if (!list) {
+      list = document.createElement('div');
+      list.className = 'graph-legend-list';
+
+      this.categories.forEach((category) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'graph-legend-item';
+        item.dataset.category = category;
+
+        item.addEventListener('pointerdown', (e) => e.stopPropagation());
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleCategory(category);
+        });
+
+        const dot = document.createElement('span');
+        dot.className = 'legend-dot';
+        item.appendChild(dot);
+
+        const label = document.createElement('span');
+        label.className = 'legend-label';
+        label.textContent = category === 'uncategorized' ? 'No Category' : category;
+        item.appendChild(label);
+
+        list.appendChild(item);
+      });
+
+      legendEl.appendChild(list);
+    }
+
+    // update state & colors (runs every render)
+    this.categories.forEach((category) => {
+      const sel = list.querySelector(`[data-category="${CSS.escape(category)}"]`);
+      if (!sel) return;
+      if (this.selectedCategories.has(category)) sel.classList.add('selected');
+      else sel.classList.remove('selected');
+
+      const dot = sel.querySelector('.legend-dot');
+      if (dot) dot.style.background = this.getLegendColor(category);
+    });
+  }
+
+  getLegendColor(category) {
+    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(category)
+      ? `var(--graph-node-color-${category})`
+      : 'var(--graph-node-color-default)';
+  }
+
+  updateFilter() {
+    const selected = this.selectedCategories;
+
+    this.nodeSelection
+    .style('display', d => (selected.has(d.category) ? null : 'none'));
+
+    const visibleIds = new Set(
+      this.nodes
+        .filter(d => selected.has(d.category))
+        .map(d => d.id)
+    );
+
+    this.linkSelection
+      .style('display', d =>
+        visibleIds.has(d.source.id) && visibleIds.has(d.target.id) ? null : 'none'
+      );
   }
 
   handleNodeClick(event, node) {
@@ -225,6 +318,29 @@ class InteractiveGraph {
       .transition()
       .duration(InteractiveGraph.CONFIG.TRANSITION_DURATION)
       .style('opacity', 1);
+  }
+
+  getPrimaryCategory(categories) {
+    if (!categories) return null;
+    if (Array.isArray(categories)) return categories[0] || null;
+    if (typeof categories === 'string') {
+      return categories.split(',').map(s => s.trim()).filter(Boolean)[0] || null;
+    }
+    return null;
+  }
+
+  getCategoryClass(category) {
+    if (!category) return 'graph-node--default';
+    
+    const normalized = category
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/, '');
+
+    return InteractiveGraph.SUPPORTED_NODE_CATEGORIES.has(normalized)
+      ? `graph-node--${normalized}`
+      : 'graph-node--default';
   }
   
   createDragBehavior() {

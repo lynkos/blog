@@ -11,8 +11,7 @@ class InteractiveGraph {
     MIN_ZOOM: 0.25,
     MAX_ZOOM: 5,
     FALLBACK_WIDTH: 800,
-    FALLBACK_HEIGHT: 600,
-    LEGEND_PADDING: 12
+    FALLBACK_HEIGHT: 600
   };
 
   static SUPPORTED_NODE_CATEGORIES = new Set([
@@ -100,22 +99,6 @@ class InteractiveGraph {
     
     this.graphGroup = this.svg.append('g').attr('class', 'graph-group');
 
-    this.legendGroup = this.svg
-      .append('g')
-      .attr('class', 'graph-legend-group')
-      .attr('transform', `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING / 2}, ${InteractiveGraph.CONFIG.LEGEND_PADDING / 2})`);
-    
-    this.legendGroup
-      .append('rect')
-      .attr('class', 'graph-legend-bg')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('rx', 5)
-      .attr('ry', 5)
-      .attr('fill', 'var(--graph-legend-bg)')
-      .attr('stroke', 'var(--graph-edge-color)')
-      .attr('stroke-width', 0.75);
-
     this.simulation = d3.forceSimulation(this.nodes)
       .force('link', d3.forceLink(this.edges).id(d => d.id).distance(InteractiveGraph.CONFIG.EDGE_DISTANCE))
       .force('charge', d3.forceManyBody().strength(InteractiveGraph.CONFIG.CHARGE))
@@ -184,63 +167,51 @@ class InteractiveGraph {
   }
 
   renderLegend() {
-    const lineHeight = 24;
-    const radius = 7;
+    const legendEl = document.getElementById('graph-legend');
+    if (!legendEl) return;
 
-    const legendItems = this.legendGroup
-      .selectAll('.legend-item')
-      .data(this.categories, d => d);
+    let list = legendEl.querySelector('.graph-legend-list');
+    if (!list) {
+      list = document.createElement('div');
+      list.className = 'graph-legend-list';
 
-    const enter = legendItems.enter()
-      .append('g')
-      .attr('class', 'legend-item')
-      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * lineHeight})`)
-      .on('click', (event, category) => this.toggleCategory(category));
+      this.categories.forEach((category) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'graph-legend-item';
+        item.dataset.category = category;
 
-    enter.append('circle')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', radius)
-      .attr('fill', d => this.getLegendColor(d));
+        item.addEventListener('pointerdown', (e) => e.stopPropagation());
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleCategory(category);
+        });
 
-    enter.append('text')
-      .attr('x', (radius * 2))
-      .attr('y', (radius / 2))
-      .text(d => d === 'uncategorized' ? 'No Category' : d);
+        const dot = document.createElement('span');
+        dot.className = 'legend-dot';
+        item.appendChild(dot);
 
-    legendItems.merge(enter)
-      .attr('transform', (d, i) => `translate(${InteractiveGraph.CONFIG.LEGEND_PADDING}, ${InteractiveGraph.CONFIG.LEGEND_PADDING + i * lineHeight})`)
-      .select('circle')
-      .attr('fill', d => this.getLegendColor(d))
-      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
+        const label = document.createElement('span');
+        label.className = 'legend-label';
+        label.textContent = category === 'uncategorized' ? 'No Category' : category;
+        item.appendChild(label);
 
-    legendItems.merge(enter)
-      .select('text')
-      .attr('opacity', d => this.selectedCategories.has(d) ? 1 : InteractiveGraph.CONFIG.DIM_OPACITY);
+        list.appendChild(item);
+      });
 
-    legendItems.exit().remove();
+      legendEl.appendChild(list);
+    }
 
-    // measure max text width
-    let maxTextWidth = 0;
-    this.legendGroup.selectAll('.legend-item text').each(function() {
-      const w = this.getBBox().width;
-      if (w > maxTextWidth) maxTextWidth = w;
+    // update state & colors (runs every render)
+    this.categories.forEach((category) => {
+      const sel = list.querySelector(`[data-category="${CSS.escape(category)}"]`);
+      if (!sel) return;
+      if (this.selectedCategories.has(category)) sel.classList.add('selected');
+      else sel.classList.remove('selected');
+
+      const dot = sel.querySelector('.legend-dot');
+      if (dot) dot.style.background = this.getLegendColor(category);
     });
-
-    const bgWidth = ((InteractiveGraph.CONFIG.LEGEND_PADDING + radius) * 2) + maxTextWidth;
-    const bgHeight = this.categories.length * lineHeight; // + InteractiveGraph.CONFIG.LEGEND_PADDING;
-
-    // apply bg size and store legend bbox in SVG coords (legendGroup transform origin uses LEGEND_PADDING/2)
-    const legendX = InteractiveGraph.CONFIG.LEGEND_PADDING / 2;
-    const legendY = InteractiveGraph.CONFIG.LEGEND_PADDING / 2;
-    this.legendBBox = { x: legendX, y: legendY, width: bgWidth, height: bgHeight };
-
-    this.legendGroup.select('.graph-legend-bg')
-      .attr('width', bgWidth)
-      .attr('height', bgHeight);
-
-    this.legendGroup.attr('pointer-events', 'all')
-      .on('pointerdown', (event) => { event.stopPropagation(); });
   }
 
   getLegendColor(category) {

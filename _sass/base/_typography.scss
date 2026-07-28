@@ -382,6 +382,8 @@ details {
   font-size: 20px;
   transition: all .35s ease-in-out;
   text-shadow: 0 0 1px var(--code-header-muted-color);
+  border-bottom: none !important;
+  text-decoration: none !important;
 
   &:hover {
     transition: all .35s ease-in-out;

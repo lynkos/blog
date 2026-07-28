@@ -137,12 +137,24 @@
       {% endif %}
     {% endfor %}
 
-    <!-- Reconstruct the element with the stars after its text -->
+    <!-- Accessible text for screen readers -->
+    {% capture _accessible_rating %}
+      {{ _rating }} out of 5 stars
+    {% endcapture %}
+
+    {% assign _accessible_rating = _accessible_rating | strip %}
+
+    <!-- Reconstruct the element -->
     {% assign _new_content = _new_content
       | append: _open_tag
       | append: _element_content
       | append: newline
+      | append: '<span class="visually-hidden">'
+      | append: _accessible_rating
+      | append: '</span>'
+      | append: '<span aria-hidden="true">'
       | append: _stars
+      | append: '</span>'
       | append: _close_tag
       | append: _remaining_content
     %}
@@ -228,12 +240,24 @@
       {% endfor %}
     {% endif %}
 
-    <!-- Reconstruct the original element -->
+    <!-- Accessible text for screen readers -->
+    {% capture _accessible_price %}
+      Price level: {{ _price }} out of 5
+    {% endcapture %}
+
+    {% assign _accessible_price = _accessible_price | strip %}
+
+    <!-- Reconstruct the element -->
     {% assign _new_content = _new_content
       | append: _open_tag
       | append: _element_content
       | append: newline
+      | append: '<span class="visually-hidden">'
+      | append: _accessible_price
+      | append: '</span>'
+      | append: '<span aria-hidden="true">'
       | append: _price_icons
+      | append: '</span>'
       | append: _close_tag
       | append: _remaining_content
     %}

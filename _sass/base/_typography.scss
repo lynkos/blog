@@ -3,6 +3,10 @@
 @use '../abstracts/mixins' as mx;
 @use '../abstracts/placeholders';
 
+:root {
+  --arrow-padding: 16px;
+}
+
 p {
   margin: 1rem 0 !important;
 }
@@ -331,4 +335,149 @@ details {
       margin: 0;
     }
   }
+}
+
+/* GALLERY SLIDESHOW */
+/* Slideshow gallery style */
+#caption, .prev, .next, .content a.popup {
+  margin: 0;
+}
+
+/* Only apply if image completely fills gallery */
+.slides a.popup img.fills-slideshow {
+  border-radius: v.$radius-lg v.$radius-lg 0 0;
+}
+
+.gallery-container {
+  position: relative;
+  background: var(--highlight-bg-color);
+  border: 1px solid var(--language-border-color);
+  color: var(--code-color);
+  border-radius: v.$radius-lg;
+}
+
+/* Hide images by default */
+.slides {
+  display: none;
+}
+
+.slide-preview, .prev, .next {
+  cursor: pointer;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  z-index: 9; // Make sure > #caption z-index
+}
+
+.prev,
+.next {
+  @extend %no-cursor;
+  position: absolute;
+  color: var(--link-color);
+  width: auto;
+  padding: var(--arrow-padding);
+  font-weight: bold;
+  font-size: 20px;
+  transition: all .35s ease-in-out;
+  text-shadow: 0 0 1px var(--code-header-muted-color);
+
+  &:hover {
+    transition: all .35s ease-in-out;
+    color: white;
+    text-shadow: none;
+    background-color: var(--bs-link-color);
+  }
+}
+
+.next {
+  right: 0;
+  border-radius: v.$radius-sm 0 0 v.$radius-sm;
+}
+
+.prev {
+  left: 0;
+  border-radius: 0 v.$radius-sm v.$radius-sm 0;
+}
+
+.slide-index {
+  @extend %text-sm;
+  @extend %no-cursor;
+  top: calc(var(--arrow-padding) / 2);
+  left: calc(var(--arrow-padding) / 2);
+  padding: 0 calc(var(--arrow-padding) / 2);
+}
+
+.slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--language-border-color);
+}
+
+.slide-index, #caption, .prev, .next {
+  text-align: center;
+}
+
+.slide-index, #caption {
+  position: absolute;
+  color: var(--text-color);
+  background: var(--gallery-caption-bg);
+  border-radius: v.$radius-sm;
+  box-shadow: 0 0 calc(var(--arrow-padding) / 2) var(--gallery-caption-bg);
+}
+
+#caption {
+  overflow: auto;  
+  align-self: flex-end;
+  margin: calc(var(--arrow-padding) / 2);
+  margin-top: 0;
+  padding: calc(var(--arrow-padding) / 3) calc(var(--arrow-padding) / 2);
+  line-height: 1.4;
+  font-size: 90%;
+}
+
+/* Thumbnail images */
+.gallery {
+  &-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-column {
+    align-self: center;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--language-border-color);
+    }
+  }
+
+  &-row &-column {
+    @extend %no-cursor;
+    height: 100%;
+
+    &:first-child img {
+      border-radius: 0 0 0 v.$radius-lg;
+    }
+
+    &:last-child img {
+      border-radius: 0 0 v.$radius-lg 0;
+    }
+  }
+}
+
+.slide-preview {
+  /* Add a transparency effect for thumnbail images */
+  opacity: 0.6;
+
+  /* Make thumbnail images cover their containers */
+  object-fit: cover;
+  width: 100vw;
+  height: 125px;
+}
+
+.active,
+.slide-preview:hover {
+  opacity: 1;
 }

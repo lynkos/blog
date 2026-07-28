@@ -63,5 +63,5 @@ layout: compress
   "start_url": "{{ '/index.html' | relative_url }}",
   "theme_color": "#026841",
   "background_color": "#ffffff",
-  "display": "fullscreen"
+  "display": "standalone"
 }

@@ -8,7 +8,7 @@ export { initToc } from './components/toc';
 export { loadMermaid } from './components/mermaid';
 export { modeWatcher } from './components/mode-toggle';
 export { back2top } from './components/back-to-top';
-export { loadTooptip } from './components/tooltip-loader';
+export { loadTooltip } from './components/tooltip-loader';
 export { initLinkPreview } from './components/link-preview';
 export { initTabs } from './components/tabs';
 export { initCodeRunner } from './components/code-runner';

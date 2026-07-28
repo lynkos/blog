@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as v;
+@use '../abstracts/placeholders';
 
 $gap: calc(v.$code-dot-gap / 2);
 
@@ -87,6 +88,7 @@ $gap: calc(v.$code-dot-gap / 2);
 
 .node {
   text {
+    @extend %no-cursor;
     pointer-events: none;
     font-size: 12px;
     fill: var(--graph-label-color);

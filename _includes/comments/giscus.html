@@ -46,9 +46,17 @@
           }
         };
 
-        const giscus =
-          document.getElementsByClassName('giscus-frame')[0].contentWindow;
-        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+        const iframe = document.querySelector('.giscus-frame');
+
+        if (!iframe) return;
+
+        if (iframe.classList.contains('giscus-frame--loading')) {
+          let url = new URL(iframe.src);
+          url.searchParams.set('theme', newTheme);
+          iframe.src = url.toString();
+        }
+
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
       }
     });
   })();

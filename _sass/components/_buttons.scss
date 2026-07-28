@@ -1,11 +1,12 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/breakpoints' as bp;
+@use '../abstracts/placeholders';
 
 #back-to-top {
+  @extend %cursor-pointer;
   visibility: hidden;
   opacity: 0;
   z-index: 1;
-  cursor: pointer;
   position: fixed;
   right: 1rem;
   bottom: calc(v.$footer-height-large - v.$back2top-size / 2);

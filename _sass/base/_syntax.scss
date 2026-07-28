@@ -278,6 +278,7 @@ div {
 
   .execution-header {
     @extend %no-cursor;
+    @extend %cursor-pointer;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -285,7 +286,6 @@ div {
     background-color: var(--highlight-bg-color);
     color: var(--code-header-text-color);
     font-weight: 600;
-    cursor: pointer;
 
     &[aria-expanded="true"] {
       border-bottom: 1px solid var(--language-border-color);

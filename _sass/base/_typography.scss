@@ -362,7 +362,7 @@ details {
 }
 
 .slide-preview, .prev, .next {
-  cursor: pointer;
+  @extend %cursor-pointer;
 }
 
 .arrows {

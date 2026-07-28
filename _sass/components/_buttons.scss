@@ -1,6 +1,7 @@
 @use '../abstracts/variables' as v;
 @use '../abstracts/breakpoints' as bp;
 @use '../abstracts/placeholders';
+@use 'sass:math';
 
 #back-to-top {
   @extend %cursor-pointer;
@@ -60,8 +61,8 @@
   
   & circle {
     stroke: var(--toc-highlight);
-    stroke-dasharray: 2 * 3.14 * 20;
-    stroke-dashoffset: 2 * 3.14 * 20;
+    stroke-dasharray: 2 * math.$pi * 20;
+    stroke-dashoffset: 2 * math.$pi * 20;
     transition: stroke-dashoffset 0.2s;
   }
 }

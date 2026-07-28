@@ -678,6 +678,44 @@ To keep fork up-to-date with original repository (i.e. Chirpy)
 	```
 	{: .nolineno }
 
+### Update Submodules
+1. Enter submodules directory
+
+	```sh
+	cd assets/lib
+	```
+	{: .nolineno }
+
+2. Fetch new changes
+
+	```sh
+	git fetch
+	```
+	{: .nolineno }
+
+3. Merge changes into repo
+
+	```sh
+	git merge origin/main
+	```
+	{: .nolineno }
+
+4. Stage, commit, and push changes
+
+	```sh
+	git add assets/lib
+	git commit -m "Update submodule libs"
+	git push
+	```
+	{: .nolineno }
+
+> It's quicker to use this command, but sometimes I prefer doing it manually (like above)
+> ```sh
+> git submodule update --remote --merge
+> ```
+> {: .nolineno }
+{: .prompt-tip }
+
 ### Contribute Upstream
 Continue reading if you want to create a pull request in [`jekyll-theme-chirpy`](https://github.com/cotes2020/jekyll-theme-chirpy) with only a subset of your commits. This is useful if you want to add a feature to upstream without committing all your changes.
 

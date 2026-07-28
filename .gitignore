@@ -25,3 +25,8 @@ package-lock.json
 # Misc
 .husky
 _posts/*test*.md
+
+# Hidden system files
+*~
+.DS_Store
+Thumbs.db

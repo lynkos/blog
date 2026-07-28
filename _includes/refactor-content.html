@@ -151,6 +151,97 @@
   {% assign _content = _new_content %}
 {% endif %}
 
+<!-- Price widget shortcut, e.g. `{: price="3" }` -->
+
+{% assign PRICE_ATTR = ' price="' %}
+
+{% capture newline %}
+{% endcapture %}
+
+{% if _content contains PRICE_ATTR %}
+  {% assign _price_snippets = _content | split: PRICE_ATTR %}
+  {% assign _new_content = null %}
+
+  {% for _snippet in _price_snippets %}
+    {% if forloop.first %}
+      {% assign _new_content = _snippet %}
+      {% continue %}
+    {% endif %}
+
+    <!-- Find the element containing the price attribute -->
+    {% assign _tag_name = _new_content
+      | split: '<'
+      | last
+      | split: ' '
+      | first
+    %}
+
+    {% assign _open_marker = '<' | append: _tag_name %}
+    {% assign _open_tag = _open_marker | append: '>' %}
+    {% assign _close_tag = '</' | append: _tag_name | append: '>' %}
+
+    <!-- Remove the partial opening tag, e.g. "<p" -->
+    {% assign _trim_size = _new_content.size | minus: _open_marker.size %}
+    {% assign _new_content = _new_content | slice: 0, _trim_size %}
+
+    <!-- Extract and normalize the price value -->
+    {% assign _value = _snippet | split: '"' | first %}
+    {% assign _price = _value
+      | times: 1
+      | at_least: 0
+      | at_most: 5
+    %}
+
+    {% assign _after_value = _snippet
+      | remove_first: _value
+      | remove_first: '"'
+    %}
+
+    <!-- Separate this element from the remaining document -->
+    {% assign _element_parts = _after_value | split: _close_tag %}
+
+    {% assign _element_content = _element_parts
+      | first
+      | remove_first: '>'
+    %}
+
+    {% assign _remaining_content = '' %}
+
+    {% for _part in _element_parts offset: 1 %}
+      {% unless forloop.first %}
+        {% assign _remaining_content = _remaining_content
+          | append: _close_tag
+        %}
+      {% endunless %}
+
+      {% assign _remaining_content = _remaining_content | append: _part %}
+    {% endfor %}
+
+    <!-- Generate the dollar-sign icons -->
+    {% assign _price_icons = '' %}
+
+    {% if _price > 0 %}
+      {% for i in (1.._price) %}
+        {% assign _price_icons = _price_icons
+          | append: '<i class="fas fa-dollar-sign" aria-hidden="true"></i>'
+        %}
+      {% endfor %}
+    {% endif %}
+
+    <!-- Reconstruct the original element -->
+    {% assign _new_content = _new_content
+      | append: _open_tag
+      | append: _element_content
+      | append: newline
+      | append: _price_icons
+      | append: _close_tag
+      | append: _remaining_content
+    %}
+  {% endfor %}
+
+  {% assign _content = _new_content %}
+{% endif %}
+
 <!-- Handle images -->
 
 {% assign IMG_TAG = '<img ' %}

@@ -361,7 +361,14 @@ main {
 
 .embed-audio {
   width: 100%;
-  display: block;
+
+  &.file {
+    display: block;
+  }
+
+  &.spotify {
+    border-radius: 14px;
+  }
 
   @extend %img-caption;
 }

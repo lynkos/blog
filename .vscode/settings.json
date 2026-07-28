@@ -1,6 +1,6 @@
 {
   // Prettier
-  "editor.defaultFormatter": "GitHub.copilot",
+  "editor.defaultFormatter": "GitHub.copilot-chat",
   "editor.formatOnSave": true,
   // Shopify Liquid
   "files.associations": {
@@ -11,10 +11,10 @@
   },
   // Formatter
   "[html][liquid]": {
-    "editor.defaultFormatter": "GitHub.copilot"
+    "editor.defaultFormatter": "GitHub.copilot-chat"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "GitHub.copilot"
+    "editor.defaultFormatter": "GitHub.copilot-chat"
   },
   // Disable vscode built-in stylelint
   "css.validate": false,

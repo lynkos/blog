@@ -40,6 +40,117 @@
   %}
 {% endif %}
 
+<!-- Rating widget shortcut, e.g. `{: rating="3.5" }` -->
+
+{% assign RATING_ATTR = ' rating="' %}
+
+{% capture newline %}
+{% endcapture %}
+
+{% if _content contains RATING_ATTR %}
+  {% assign _rating_snippets = _content | split: RATING_ATTR %}
+  {% assign _new_content = null %}
+
+  {% for _snippet in _rating_snippets %}
+    {% if forloop.first %}
+      {% assign _new_content = _snippet %}
+      {% continue %}
+    {% endif %}
+
+    <!-- The opening tag is immediately before the split point -->
+    {% assign _tag_name = _new_content
+      | split: '<'
+      | last
+      | split: ' '
+      | first
+    %}
+
+    {% assign _open_marker = '<' | append: _tag_name %}
+    {% assign _open_tag = _open_marker | append: '>' %}
+    {% assign _close_tag = '</' | append: _tag_name | append: '>' %}
+
+    <!-- Remove the dangling opening tag, e.g. "<p" -->
+    {% assign _trim_size = _new_content.size | minus: _open_marker.size %}
+    {% assign _new_content = _new_content | slice: 0, _trim_size %}
+
+    <!-- Extract the rating value -->
+    {% assign _value = _snippet | split: '"' | first %}
+
+    {% assign _after_value = _snippet
+      | remove_first: _value
+      | remove_first: '"'
+    %}
+
+    <!-- Extract this element's contents -->
+    {% assign _element_parts = _after_value | split: _close_tag %}
+    {% assign _element_content = _element_parts
+      | first
+      | remove_first: '>'
+    %}
+
+    <!-- Preserve everything following this element -->
+    {% assign _remaining_content = '' %}
+
+    {% for _part in _element_parts offset: 1 %}
+      {% unless forloop.first %}
+        {% assign _remaining_content = _remaining_content
+          | append: _close_tag
+        %}
+      {% endunless %}
+
+      {% assign _remaining_content = _remaining_content | append: _part %}
+    {% endfor %}
+
+    <!-- Clamp 0–5 and round to the nearest half-star -->
+    {% assign _rating = _value
+      | times: 1.0
+      | at_least: 0
+      | at_most: 5
+    %}
+
+    {% assign _full = _rating | floor %}
+    {% assign _remainder = _rating | minus: _full %}
+    {% assign _half = 0 %}
+
+    {% if _remainder >= 0.75 %}
+      {% assign _full = _full | plus: 1 %}
+    {% elsif _remainder >= 0.25 %}
+      {% assign _half = 1 %}
+    {% endif %}
+
+    {% assign _half_index = _full | plus: 1 %}
+    {% assign _stars = '' %}
+
+    {% for i in (1..5) %}
+      {% if i <= _full %}
+        {% assign _stars = _stars
+          | append: '<i class="fas fa-star"></i>'
+        %}
+      {% elsif _half == 1 and i == _half_index %}
+        {% assign _stars = _stars
+          | append: '<i class="fas fa-star-half-stroke"></i>'
+        %}
+      {% else %}
+        {% assign _stars = _stars
+          | append: '<i class="far fa-star"></i>'
+        %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- Reconstruct the element with the stars after its text -->
+    {% assign _new_content = _new_content
+      | append: _open_tag
+      | append: _element_content
+      | append: newline
+      | append: _stars
+      | append: _close_tag
+      | append: _remaining_content
+    %}
+  {% endfor %}
+
+  {% assign _content = _new_content %}
+{% endif %}
+
 <!-- Handle images -->
 
 {% assign IMG_TAG = '<img ' %}

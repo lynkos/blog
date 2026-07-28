@@ -13,6 +13,11 @@ $gap: calc(v.$code-dot-gap / 2);
 .graph-settings-button {
   padding: 0.25rem 0.75rem;
   font-size: 1.25rem;
+  color: var(--sidebar-btn-color);
+
+  &:hover {
+    color: var(--sidebar-active-color);
+  }
 }
 
 #graph-container {
@@ -25,9 +30,8 @@ $gap: calc(v.$code-dot-gap / 2);
 .graph-button {
   border-radius: v.$radius-sm;
   cursor: pointer;
-  color: var(--text-color);
   background: transparent;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
   border: none;
   gap: $gap;
 
@@ -51,6 +55,11 @@ $gap: calc(v.$code-dot-gap / 2);
     align-items: center;
     padding: 4px 8px;
     font-size: 13px;
+    color: var(--text-color);
+
+    &:hover {
+      color: var(--sidebar-active-color);
+    }
 
     // dimmed state when not selected
     &:not(.selected) {

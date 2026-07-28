@@ -277,6 +277,7 @@ div {
   font-size: v.$code-font-size;
 
   .execution-header {
+    @extend %no-cursor;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -285,7 +286,6 @@ div {
     color: var(--code-header-text-color);
     font-weight: 600;
     cursor: pointer;
-    user-select: none;
 
     &[aria-expanded="true"] {
       border-bottom: 1px solid var(--language-border-color);

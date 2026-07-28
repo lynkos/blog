@@ -44,9 +44,6 @@
 
 {% assign RATING_ATTR = ' rating="' %}
 
-{% capture newline %}
-{% endcapture %}
-
 {% if _content contains RATING_ATTR %}
   {% assign _rating_snippets = _content | split: RATING_ATTR %}
   {% assign _new_content = null %}
@@ -148,7 +145,6 @@
     {% assign _new_content = _new_content
       | append: _open_tag
       | append: _element_content
-      | append: newline
       | append: '<span class="visually-hidden">'
       | append: _accessible_rating
       | append: '</span>'
@@ -166,9 +162,6 @@
 <!-- Price widget shortcut, e.g. `{: price="3" }` -->
 
 {% assign PRICE_ATTR = ' price="' %}
-
-{% capture newline %}
-{% endcapture %}
 
 {% if _content contains PRICE_ATTR %}
   {% assign _price_snippets = _content | split: PRICE_ATTR %}
@@ -251,7 +244,6 @@
     {% assign _new_content = _new_content
       | append: _open_tag
       | append: _element_content
-      | append: newline
       | append: '<span class="visually-hidden">'
       | append: _accessible_price
       | append: '</span>'

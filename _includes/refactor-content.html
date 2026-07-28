@@ -121,15 +121,15 @@
     {% for i in (1..5) %}
       {% if i <= _full %}
         {% assign _stars = _stars
-          | append: '<i class="fas fa-star" aria-hidden="true"></i>'
+          | append: '<i class="fas fa-star"></i>'
         %}
       {% elsif _half == 1 and i == _half_index %}
         {% assign _stars = _stars
-          | append: '<i class="fas fa-star-half-stroke" aria-hidden="true"></i>'
+          | append: '<i class="fas fa-star-half-stroke"></i>'
         %}
       {% else %}
         {% assign _stars = _stars
-          | append: '<i class="far fa-star" aria-hidden="true"></i>'
+          | append: '<i class="far fa-star"></i>'
         %}
       {% endif %}
     {% endfor %}
@@ -228,7 +228,7 @@
     {% if _price > 0 %}
       {% for i in (1.._price) %}
         {% assign _price_icons = _price_icons
-          | append: '<i class="fas fa-dollar-sign" aria-hidden="true"></i>'
+          | append: '<i class="fas fa-dollar-sign"></i>'
         %}
       {% endfor %}
     {% endif %}

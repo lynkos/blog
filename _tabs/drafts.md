@@ -14,6 +14,8 @@ order: 6
   - Guide on creating and customizing your own GitHub Profile
 - [ ] **My Journaling**
   - Some of my journal designs
+- [ ] **Evening Skincare Routine**
+  - My nightly skincare routines, where I detail which products and tools I currently use or formerly used
 - [ ] **Self-Care Regimen**
 - [ ] **Setting Up a Virtual Machine in macOS M-series**
 - [x] [**How to Run Windows Games and Programs on Mac**](https://blog.lynkos.dev/posts/play-windows-games)

@@ -187,10 +187,11 @@
           {% endfor %}
         {% endif %}
 
-        {% assign _accessible_text = 'Price level: '
-          | append: _price
-          | append: ' out of 5'
-        %}
+        {% assign _accessible_text = _price | append: ' dollar sign' %}
+
+        {% unless _price == 1 %}
+          {% assign _accessible_text = _accessible_text | append: 's' %}
+        {% endunless %}
 
         {% assign _widget_html = '<span class="visually-hidden">'
           | append: _accessible_text

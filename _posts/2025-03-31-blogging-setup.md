@@ -614,7 +614,7 @@ Results in this HTML code:
 ```html
 <p>
     <strong>Price:</strong>
-    <span class="visually-hidden">Price level: 3 out of 5</span>
+    <span class="visually-hidden">3 dollar signs</span>
     <span aria-hidden="true">
         <i class="fas fa-dollar-sign"></i>
         <i class="fas fa-dollar-sign"></i>

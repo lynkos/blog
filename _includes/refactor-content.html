@@ -40,182 +40,306 @@
   %}
 {% endif %}
 
-<!-- Rating and price widgets for paragraphs and definition-list values -->
+<!--
+  Rating and price widgets
 
-{% assign WIDGET_TAGS = 'p,dd' | split: ',' %}
+  Supported Markdown forms:
+
+    Text
+    {: rating="4.5" }
+
+    Term
+    : Definition
+    {: price="3" }
+
+    | Rating | {: rating="3.5" } |
+    | Price  | {: price="3" }    |
+-->
+
+{% assign WIDGET_TAGS = 'p,dd,td' | split: ',' %}
 
 {% for _widget_tag in WIDGET_TAGS %}
-  {% assign _close_tag = '</' | append: _widget_tag | append: '>' %}
   {% assign _open_marker = '<' | append: _widget_tag %}
+  {% assign _close_tag = '</' | append: _widget_tag | append: '>' %}
 
-  {% if _content contains _close_tag %}
-    {% assign _element_snippets = _content | split: _close_tag %}
-    {% assign _new_content = '' %}
+  {% unless _content contains _close_tag %}
+    {% continue %}
+  {% endunless %}
 
-    {% for _snippet in _element_snippets %}
-      {% if forloop.last %}
-        {% assign _new_content = _new_content | append: _snippet %}
-        {% continue %}
-      {% endif %}
+  {% assign _element_snippets = _content | split: _close_tag %}
+  {% assign _new_content = '' %}
 
-      <!-- Find the final opening tag for this complete element -->
-      {% assign _element_fragment = _snippet
-        | split: _open_marker
+  {% for _snippet in _element_snippets %}
+    {% if forloop.last %}
+      {% assign _new_content = _new_content | append: _snippet %}
+      {% continue %}
+    {% endif %}
+
+    <!-- Find the current element's final opening tag -->
+    {% assign _element_fragment = _snippet
+      | split: _open_marker
+      | last
+    %}
+
+    {% assign _fragment_size = _element_fragment | size %}
+    {% assign _snippet_size = _snippet | size %}
+    {% assign _marker_size = _open_marker | size %}
+
+    {% assign _prefix_size = _snippet_size
+      | minus: _fragment_size
+      | minus: _marker_size
+    %}
+
+    {% assign _prefix = _snippet | slice: 0, _prefix_size %}
+
+    <!--
+      Ignore elements inside code.
+
+      This is especially important for Rouge markup such as:
+
+        <code>
+          <table class="rouge-table">
+            <td>...</td>
+          </table>
+        </code>
+    -->
+    {% assign _pre_open_count = _prefix | split: '<pre' | size %}
+    {% assign _pre_close_count = _prefix | split: '</pre>' | size %}
+    {% assign _code_open_count = _prefix | split: '<code' | size %}
+    {% assign _code_close_count = _prefix | split: '</code>' | size %}
+
+    {% assign _inside_code = false %}
+
+    {% if _pre_open_count > _pre_close_count %}
+      {% assign _inside_code = true %}
+    {% endif %}
+
+    {% if _code_open_count > _code_close_count %}
+      {% assign _inside_code = true %}
+    {% endif %}
+
+    {% if _inside_code %}
+      {% assign _new_content = _new_content
+        | append: _snippet
+        | append: _close_tag
+      %}
+      {% continue %}
+    {% endif %}
+
+    <!-- Split opening-tag attributes from element contents -->
+    {% assign _opening_fragment = _element_fragment
+      | split: '>'
+      | first
+    %}
+
+    {% assign _element_content = _element_fragment
+      | remove_first: _opening_fragment
+      | remove_first: '>'
+    %}
+
+    {% assign _clean_opening_fragment = _opening_fragment %}
+    {% assign _widget_type = '' %}
+    {% assign _widget_value = '' %}
+
+    <!--
+      Case 1: Kramdown converted the IAL to an HTML attribute.
+
+        <p rating="4.5">Text</p>
+        <dd price="3">Text</dd>
+    -->
+    {% if _opening_fragment contains ' rating="' %}
+      {% assign _widget_type = 'rating' %}
+
+      {% assign _widget_value = _opening_fragment
+        | split: ' rating="'
         | last
-      %}
-
-      {% assign _fragment_size = _element_fragment | size %}
-      {% assign _snippet_size = _snippet | size %}
-
-      {% assign _prefix_size = _snippet_size
-        | minus: _fragment_size
-        | minus: _open_marker.size
-      %}
-
-      {% assign _prefix = _snippet | slice: 0, _prefix_size %}
-
-      <!-- Split opening attributes from element contents -->
-      {% assign _opening_fragment = _element_fragment
-        | split: '>'
+        | split: '"'
         | first
       %}
 
-      {% assign _element_content = _element_fragment
-        | remove_first: _opening_fragment
-        | remove_first: '>'
+      {% assign _widget_attribute = ' rating="'
+        | append: _widget_value
+        | append: '"'
       %}
 
-      {% assign _clean_opening_fragment = _opening_fragment %}
-      {% assign _widget_html = '' %}
+      {% assign _clean_opening_fragment = _clean_opening_fragment
+        | remove_first: _widget_attribute
+      %}
 
-      <!-- Rating -->
-      {% if _opening_fragment contains ' rating="' %}
-        {% assign _rating_value = _opening_fragment
-          | split: ' rating="'
+    {% elsif _opening_fragment contains ' price="' %}
+      {% assign _widget_type = 'price' %}
+
+      {% assign _widget_value = _opening_fragment
+        | split: ' price="'
+        | last
+        | split: '"'
+        | first
+      %}
+
+      {% assign _widget_attribute = ' price="'
+        | append: _widget_value
+        | append: '"'
+      %}
+
+      {% assign _clean_opening_fragment = _clean_opening_fragment
+        | remove_first: _widget_attribute
+      %}
+    {% endif %}
+
+    <!--
+      Case 2: Inside Markdown tables, Kramdown leaves the syntax
+      as literal cell text.
+
+        <td>{: rating="3.5" }</td>
+        <td>{: price="3" }</td>
+    -->
+    {% if _widget_type == '' and _widget_tag == 'td' %}
+      {% assign _normalized_content = _element_content
+        | strip
+        | replace: '“', '"'
+        | replace: '”', '"'
+      %}
+
+      {% if _normalized_content contains '{: rating="' %}
+        {% assign _candidate_value = _normalized_content
+          | split: '{: rating="'
           | last
           | split: '"'
           | first
         %}
 
-        {% assign _rating_attribute = ' rating="'
-          | append: _rating_value
-          | append: '"'
+        {% assign _expected_literal = '{: rating="'
+          | append: _candidate_value
+          | append: '" }'
         %}
 
-        {% assign _clean_opening_fragment = _clean_opening_fragment
-          | remove_first: _rating_attribute
-        %}
-
-        {% assign _rating = _rating_value
-          | times: 1.0
-          | at_least: 0
-          | at_most: 5
-        %}
-
-        {% assign _full = _rating | floor %}
-        {% assign _remainder = _rating | minus: _full %}
-        {% assign _half = 0 %}
-
-        {% if _remainder >= 0.75 %}
-          {% assign _full = _full | plus: 1 %}
-        {% elsif _remainder >= 0.25 %}
-          {% assign _half = 1 %}
+        <!-- Only transform when the entire cell is the widget -->
+        {% if _normalized_content == _expected_literal %}
+          {% assign _widget_type = 'rating' %}
+          {% assign _widget_value = _candidate_value %}
+          {% assign _element_content = '' %}
         {% endif %}
 
-        {% assign _half_index = _full | plus: 1 %}
-        {% assign _icons = '' %}
-
-        {% for i in (1..5) %}
-          {% if i <= _full %}
-            {% assign _icons = _icons
-              | append: '<i class="fas fa-star"></i>'
-            %}
-          {% elsif _half == 1 and i == _half_index %}
-            {% assign _icons = _icons
-              | append: '<i class="fas fa-star-half-stroke"></i>'
-            %}
-          {% else %}
-            {% assign _icons = _icons
-              | append: '<i class="far fa-star"></i>'
-            %}
-          {% endif %}
-        {% endfor %}
-
-        {% assign _accessible_text = _rating
-          | append: ' out of 5 stars'
-        %}
-
-        {% assign _widget_html = '<span class="visually-hidden">'
-          | append: _accessible_text
-          | append: '</span>'
-          | append: '<span aria-hidden="true">'
-          | append: _icons
-          | append: '</span>'
-        %}
-
-      <!-- Price -->
-      {% elsif _opening_fragment contains ' price="' %}
-        {% assign _price_value = _opening_fragment
-          | split: ' price="'
+      {% elsif _normalized_content contains '{: price="' %}
+        {% assign _candidate_value = _normalized_content
+          | split: '{: price="'
           | last
           | split: '"'
           | first
         %}
 
-        {% assign _price_attribute = ' price="'
-          | append: _price_value
-          | append: '"'
+        {% assign _expected_literal = '{: price="'
+          | append: _candidate_value
+          | append: '" }'
         %}
 
-        {% assign _clean_opening_fragment = _clean_opening_fragment
-          | remove_first: _price_attribute
-        %}
-
-        {% assign _price = _price_value
-          | times: 1
-          | at_least: 0
-          | at_most: 5
-        %}
-
-        {% assign _icons = '' %}
-
-        {% if _price > 0 %}
-          {% for i in (1.._price) %}
-            {% assign _icons = _icons
-              | append: '<i class="fas fa-dollar-sign"></i>'
-            %}
-          {% endfor %}
+        <!-- Only transform when the entire cell is the widget -->
+        {% if _normalized_content == _expected_literal %}
+          {% assign _widget_type = 'price' %}
+          {% assign _widget_value = _candidate_value %}
+          {% assign _element_content = '' %}
         {% endif %}
+      {% endif %}
+    {% endif %}
 
-        {% assign _accessible_text = _price | append: ' dollar sign' %}
+    {% assign _widget_html = '' %}
 
-        {% unless _price == 1 %}
-          {% assign _accessible_text = _accessible_text | append: 's' %}
-        {% endunless %}
+    <!-- Generate rating widget -->
+    {% if _widget_type == 'rating' %}
+      {% assign _rating = _widget_value
+        | times: 1.0
+        | at_least: 0
+        | at_most: 5
+      %}
 
-        {% assign _widget_html = '<span class="visually-hidden">'
-          | append: _accessible_text
-          | append: '</span>'
-          | append: '<span aria-hidden="true">'
-          | append: _icons
-          | append: '</span>'
-        %}
+      {% assign _full = _rating | floor %}
+      {% assign _remainder = _rating | minus: _full %}
+      {% assign _half = 0 %}
+
+      <!-- Round to the nearest half-star -->
+      {% if _remainder >= 0.75 %}
+        {% assign _full = _full | plus: 1 %}
+      {% elsif _remainder >= 0.25 %}
+        {% assign _half = 1 %}
       {% endif %}
 
-      <!-- Reconstruct the complete element -->
-      {% assign _new_content = _new_content
-        | append: _prefix
-        | append: _open_marker
-        | append: _clean_opening_fragment
-        | append: '>'
-        | append: _element_content
-        | append: _widget_html
-        | append: _close_tag
-      %}
-    {% endfor %}
+      {% assign _half_index = _full | plus: 1 %}
+      {% assign _icons = '' %}
 
-    {% assign _content = _new_content %}
-  {% endif %}
+      {% for i in (1..5) %}
+        {% if i <= _full %}
+          {% assign _icons = _icons
+            | append: '<i class="fas fa-star"></i>'
+          %}
+        {% elsif _half == 1 and i == _half_index %}
+          {% assign _icons = _icons
+            | append: '<i class="fas fa-star-half-stroke"></i>'
+          %}
+        {% else %}
+          {% assign _icons = _icons
+            | append: '<i class="far fa-star"></i>'
+          %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign _accessible_text = _rating
+        | append: ' out of 5 stars'
+      %}
+
+      {% assign _widget_html = '<span class="visually-hidden">'
+        | append: _accessible_text
+        | append: '</span>'
+        | append: '<span aria-hidden="true">'
+        | append: _icons
+        | append: '</span>'
+      %}
+
+    <!-- Generate price widget -->
+    {% elsif _widget_type == 'price' %}
+      {% assign _price = _widget_value
+        | times: 1
+        | at_least: 0
+        | at_most: 5
+      %}
+
+      {% assign _icons = '' %}
+
+      {% if _price > 0 %}
+        {% for i in (1.._price) %}
+          {% assign _icons = _icons
+            | append: '<i class="fas fa-dollar-sign"></i>'
+          %}
+        {% endfor %}
+      {% endif %}
+
+      {% assign _accessible_text = _price | append: ' dollar sign' %}
+
+      {% unless _price == 1 %}
+        {% assign _accessible_text = _accessible_text | append: 's' %}
+      {% endunless %}
+
+      {% assign _widget_html = '<span class="visually-hidden">'
+        | append: _accessible_text
+        | append: '</span>'
+        | append: '<span aria-hidden="true">'
+        | append: _icons
+        | append: '</span>'
+      %}
+    {% endif %}
+
+    <!-- Reconstruct this complete element -->
+    {% assign _new_content = _new_content
+      | append: _prefix
+      | append: _open_marker
+      | append: _clean_opening_fragment
+      | append: '>'
+      | append: _element_content
+      | append: _widget_html
+      | append: _close_tag
+    %}
+  {% endfor %}
+
+  {% assign _content = _new_content %}
 {% endfor %}
 
 <!-- Handle images -->

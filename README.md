@@ -49,7 +49,7 @@
 - [**Custom Image Proxy**](https://blog.lynkos.dev/posts/blogging-setup#setup-image-proxy) (e.g. for Twitter links)
 - [Auto-fix Malformed Markdown Links Plugin](_plugins/fix-anchor-links.rb)
 - [**Drafts** Tab](_tabs/drafts.md)
-- [**Ratings**](_includes/refactor-content.html#L43) (i.e. `{: rating="..."}` to stars) and [**Price**](_includes/refactor-content.html#L162) (i.e. `{: price="..."}` to dollars) shortcuts
+- [**Ratings**](_includes/refactor-content.html#L43) (i.e. `{: rating="..."}` to stars) and [**Price**](_includes/refactor-content.html#L43) (i.e. `{: price="..."}` to dollars) shortcuts
 - Custom "**Important**" prompt
 - Custom `dl` (description list) styling inspired by lined paper
 - Custom `details` styling

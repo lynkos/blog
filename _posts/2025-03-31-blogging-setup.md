@@ -567,6 +567,67 @@ main();
 ```
 {: run="js" }
 
+### Add Star Rating
+If you want to add a rating to your post, use `{: rating="<rating>" }`
+
+E.g. This Markdown code:
+
+```markdown
+**Rating:**
+{: rating="4.5" }
+```
+{: .nolineno }
+
+Results in this HTML code:
+
+```html
+<p><strong>Rating:</strong>
+    <span class="visually-hidden">4.5 out of 5 stars</span>
+    <span aria-hidden="true">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-stroke"></i>
+    </span>
+</p>
+```
+
+Which appears as this:
+
+**Rating:**
+{: rating="4.5" }
+
+### Add Price Indicator
+To add a price indicator, use `{: price="<price>" }`
+
+E.g. This Markdown code:
+
+```markdown
+**Price:**
+{: price="3" }
+```
+{: .nolineno }
+
+Results in this HTML code:
+
+```html
+<p>
+    <strong>Price:</strong>
+    <span class="visually-hidden">Price level: 3 out of 5</span>
+    <span aria-hidden="true">
+        <i class="fas fa-dollar-sign"></i>
+        <i class="fas fa-dollar-sign"></i>
+        <i class="fas fa-dollar-sign"></i>
+    </span>
+</p>
+```
+
+Which appears as this:
+
+**Price:**
+{: price="3" }
+
 ## Appendix
 ### Workflow
 ```mermaid

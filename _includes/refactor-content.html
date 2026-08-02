@@ -40,223 +40,182 @@
   %}
 {% endif %}
 
-<!-- Rating widget shortcut, e.g. `{: rating="3.5" }` -->
+<!-- Rating and price widgets for paragraphs and definition-list values -->
 
-{% assign RATING_ATTR = ' rating="' %}
+{% assign WIDGET_TAGS = 'p,dd' | split: ',' %}
 
-{% if _content contains RATING_ATTR %}
-  {% assign _rating_snippets = _content | split: RATING_ATTR %}
-  {% assign _new_content = null %}
+{% for _widget_tag in WIDGET_TAGS %}
+  {% assign _close_tag = '</' | append: _widget_tag | append: '>' %}
+  {% assign _open_marker = '<' | append: _widget_tag %}
 
-  {% for _snippet in _rating_snippets %}
-    {% if forloop.first %}
-      {% assign _new_content = _snippet %}
-      {% continue %}
-    {% endif %}
+  {% if _content contains _close_tag %}
+    {% assign _element_snippets = _content | split: _close_tag %}
+    {% assign _new_content = '' %}
 
-    <!-- The opening tag is immediately before the split point -->
-    {% assign _tag_name = _new_content
-      | split: '<'
-      | last
-      | split: ' '
-      | first
-    %}
+    {% for _snippet in _element_snippets %}
+      {% if forloop.last %}
+        {% assign _new_content = _new_content | append: _snippet %}
+        {% continue %}
+      {% endif %}
 
-    {% assign _open_marker = '<' | append: _tag_name %}
-    {% assign _open_tag = _open_marker | append: '>' %}
-    {% assign _close_tag = '</' | append: _tag_name | append: '>' %}
+      <!-- Find the final opening tag for this complete element -->
+      {% assign _element_fragment = _snippet
+        | split: _open_marker
+        | last
+      %}
 
-    <!-- Remove the dangling opening tag, e.g. "<p" -->
-    {% assign _trim_size = _new_content.size | minus: _open_marker.size %}
-    {% assign _new_content = _new_content | slice: 0, _trim_size %}
+      {% assign _fragment_size = _element_fragment | size %}
+      {% assign _snippet_size = _snippet | size %}
 
-    <!-- Extract the rating value -->
-    {% assign _value = _snippet | split: '"' | first %}
+      {% assign _prefix_size = _snippet_size
+        | minus: _fragment_size
+        | minus: _open_marker.size
+      %}
 
-    {% assign _after_value = _snippet
-      | remove_first: _value
-      | remove_first: '"'
-    %}
+      {% assign _prefix = _snippet | slice: 0, _prefix_size %}
 
-    <!-- Extract this element's contents -->
-    {% assign _element_parts = _after_value | split: _close_tag %}
-    {% assign _element_content = _element_parts
-      | first
-      | remove_first: '>'
-    %}
+      <!-- Split opening attributes from element contents -->
+      {% assign _opening_fragment = _element_fragment
+        | split: '>'
+        | first
+      %}
 
-    <!-- Preserve everything following this element -->
-    {% assign _remaining_content = '' %}
+      {% assign _element_content = _element_fragment
+        | remove_first: _opening_fragment
+        | remove_first: '>'
+      %}
 
-    {% for _part in _element_parts offset: 1 %}
-      {% unless forloop.first %}
-        {% assign _remaining_content = _remaining_content
-          | append: _close_tag
+      {% assign _clean_opening_fragment = _opening_fragment %}
+      {% assign _widget_html = '' %}
+
+      <!-- Rating -->
+      {% if _opening_fragment contains ' rating="' %}
+        {% assign _rating_value = _opening_fragment
+          | split: ' rating="'
+          | last
+          | split: '"'
+          | first
         %}
-      {% endunless %}
 
-      {% assign _remaining_content = _remaining_content | append: _part %}
-    {% endfor %}
-
-    <!-- Clamp 0–5 and round to the nearest half-star -->
-    {% assign _rating = _value
-      | times: 1.0
-      | at_least: 0
-      | at_most: 5
-    %}
-
-    {% assign _full = _rating | floor %}
-    {% assign _remainder = _rating | minus: _full %}
-    {% assign _half = 0 %}
-
-    {% if _remainder >= 0.75 %}
-      {% assign _full = _full | plus: 1 %}
-    {% elsif _remainder >= 0.25 %}
-      {% assign _half = 1 %}
-    {% endif %}
-
-    {% assign _half_index = _full | plus: 1 %}
-    {% assign _stars = '' %}
-
-    {% for i in (1..5) %}
-      {% if i <= _full %}
-        {% assign _stars = _stars
-          | append: '<i class="fas fa-star"></i>'
+        {% assign _rating_attribute = ' rating="'
+          | append: _rating_value
+          | append: '"'
         %}
-      {% elsif _half == 1 and i == _half_index %}
-        {% assign _stars = _stars
-          | append: '<i class="fas fa-star-half-stroke"></i>'
+
+        {% assign _clean_opening_fragment = _clean_opening_fragment
+          | remove_first: _rating_attribute
         %}
-      {% else %}
-        {% assign _stars = _stars
-          | append: '<i class="far fa-star"></i>'
+
+        {% assign _rating = _rating_value
+          | times: 1.0
+          | at_least: 0
+          | at_most: 5
+        %}
+
+        {% assign _full = _rating | floor %}
+        {% assign _remainder = _rating | minus: _full %}
+        {% assign _half = 0 %}
+
+        {% if _remainder >= 0.75 %}
+          {% assign _full = _full | plus: 1 %}
+        {% elsif _remainder >= 0.25 %}
+          {% assign _half = 1 %}
+        {% endif %}
+
+        {% assign _half_index = _full | plus: 1 %}
+        {% assign _icons = '' %}
+
+        {% for i in (1..5) %}
+          {% if i <= _full %}
+            {% assign _icons = _icons
+              | append: '<i class="fas fa-star"></i>'
+            %}
+          {% elsif _half == 1 and i == _half_index %}
+            {% assign _icons = _icons
+              | append: '<i class="fas fa-star-half-stroke"></i>'
+            %}
+          {% else %}
+            {% assign _icons = _icons
+              | append: '<i class="far fa-star"></i>'
+            %}
+          {% endif %}
+        {% endfor %}
+
+        {% assign _accessible_text = _rating
+          | append: ' out of 5 stars'
+        %}
+
+        {% assign _widget_html = '<span class="visually-hidden">'
+          | append: _accessible_text
+          | append: '</span>'
+          | append: '<span aria-hidden="true">'
+          | append: _icons
+          | append: '</span>'
+        %}
+
+      <!-- Price -->
+      {% elsif _opening_fragment contains ' price="' %}
+        {% assign _price_value = _opening_fragment
+          | split: ' price="'
+          | last
+          | split: '"'
+          | first
+        %}
+
+        {% assign _price_attribute = ' price="'
+          | append: _price_value
+          | append: '"'
+        %}
+
+        {% assign _clean_opening_fragment = _clean_opening_fragment
+          | remove_first: _price_attribute
+        %}
+
+        {% assign _price = _price_value
+          | times: 1
+          | at_least: 0
+          | at_most: 5
+        %}
+
+        {% assign _icons = '' %}
+
+        {% if _price > 0 %}
+          {% for i in (1.._price) %}
+            {% assign _icons = _icons
+              | append: '<i class="fas fa-dollar-sign"></i>'
+            %}
+          {% endfor %}
+        {% endif %}
+
+        {% assign _accessible_text = 'Price level: '
+          | append: _price
+          | append: ' out of 5'
+        %}
+
+        {% assign _widget_html = '<span class="visually-hidden">'
+          | append: _accessible_text
+          | append: '</span>'
+          | append: '<span aria-hidden="true">'
+          | append: _icons
+          | append: '</span>'
         %}
       {% endif %}
+
+      <!-- Reconstruct the complete element -->
+      {% assign _new_content = _new_content
+        | append: _prefix
+        | append: _open_marker
+        | append: _clean_opening_fragment
+        | append: '>'
+        | append: _element_content
+        | append: _widget_html
+        | append: _close_tag
+      %}
     {% endfor %}
 
-    <!-- Accessible text for screen readers -->
-    {% capture _accessible_rating %}
-      {{ _rating }} out of 5 stars
-    {% endcapture %}
-
-    {% assign _accessible_rating = _accessible_rating | strip %}
-
-    <!-- Reconstruct the element -->
-    {% assign _new_content = _new_content
-      | append: _open_tag
-      | append: _element_content
-      | append: '<span class="visually-hidden">'
-      | append: _accessible_rating
-      | append: '</span>'
-      | append: '<span aria-hidden="true">'
-      | append: _stars
-      | append: '</span>'
-      | append: _close_tag
-      | append: _remaining_content
-    %}
-  {% endfor %}
-
-  {% assign _content = _new_content %}
-{% endif %}
-
-<!-- Price widget shortcut, e.g. `{: price="3" }` -->
-
-{% assign PRICE_ATTR = ' price="' %}
-
-{% if _content contains PRICE_ATTR %}
-  {% assign _price_snippets = _content | split: PRICE_ATTR %}
-  {% assign _new_content = null %}
-
-  {% for _snippet in _price_snippets %}
-    {% if forloop.first %}
-      {% assign _new_content = _snippet %}
-      {% continue %}
-    {% endif %}
-
-    <!-- Find the element containing the price attribute -->
-    {% assign _tag_name = _new_content
-      | split: '<'
-      | last
-      | split: ' '
-      | first
-    %}
-
-    {% assign _open_marker = '<' | append: _tag_name %}
-    {% assign _open_tag = _open_marker | append: '>' %}
-    {% assign _close_tag = '</' | append: _tag_name | append: '>' %}
-
-    <!-- Remove the partial opening tag, e.g. "<p" -->
-    {% assign _trim_size = _new_content.size | minus: _open_marker.size %}
-    {% assign _new_content = _new_content | slice: 0, _trim_size %}
-
-    <!-- Extract and normalize the price value -->
-    {% assign _value = _snippet | split: '"' | first %}
-    {% assign _price = _value
-      | times: 1
-      | at_least: 0
-      | at_most: 5
-    %}
-
-    {% assign _after_value = _snippet
-      | remove_first: _value
-      | remove_first: '"'
-    %}
-
-    <!-- Separate this element from the remaining document -->
-    {% assign _element_parts = _after_value | split: _close_tag %}
-
-    {% assign _element_content = _element_parts
-      | first
-      | remove_first: '>'
-    %}
-
-    {% assign _remaining_content = '' %}
-
-    {% for _part in _element_parts offset: 1 %}
-      {% unless forloop.first %}
-        {% assign _remaining_content = _remaining_content
-          | append: _close_tag
-        %}
-      {% endunless %}
-
-      {% assign _remaining_content = _remaining_content | append: _part %}
-    {% endfor %}
-
-    <!-- Generate the dollar-sign icons -->
-    {% assign _price_icons = '' %}
-
-    {% if _price > 0 %}
-      {% for i in (1.._price) %}
-        {% assign _price_icons = _price_icons
-          | append: '<i class="fas fa-dollar-sign"></i>'
-        %}
-      {% endfor %}
-    {% endif %}
-
-    <!-- Accessible text for screen readers -->
-    {% capture _accessible_price %}
-      Price level: {{ _price }} out of 5
-    {% endcapture %}
-
-    {% assign _accessible_price = _accessible_price | strip %}
-
-    <!-- Reconstruct the element -->
-    {% assign _new_content = _new_content
-      | append: _open_tag
-      | append: _element_content
-      | append: '<span class="visually-hidden">'
-      | append: _accessible_price
-      | append: '</span>'
-      | append: '<span aria-hidden="true">'
-      | append: _price_icons
-      | append: '</span>'
-      | append: _close_tag
-      | append: _remaining_content
-    %}
-  {% endfor %}
-
-  {% assign _content = _new_content %}
-{% endif %}
+    {% assign _content = _new_content %}
+  {% endif %}
+{% endfor %}
 
 <!-- Handle images -->
 

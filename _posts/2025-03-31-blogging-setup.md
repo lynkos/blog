@@ -581,7 +581,8 @@ E.g. This Markdown code:
 Results in this HTML code:
 
 ```html
-<p><strong>Rating:</strong>
+<p>
+    <strong>Rating:</strong>
     <span class="visually-hidden">4.5 out of 5 stars</span>
     <span aria-hidden="true">
         <i class="fas fa-star"></i>

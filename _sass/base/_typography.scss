@@ -481,3 +481,22 @@ details {
 .slide-preview:hover {
   opacity: 1;
 }
+
+/* Shortcut icons colors */
+.shortcut-icon.fa {
+  &-thumbs-down {
+    color: var(--thumbs-down-color);
+  }
+
+  &-thumbs-up {
+    color: var(--thumbs-up-color);
+  }
+
+  &-star, &-star-half-stroke, {
+    color: var(--star-color);
+  }
+
+  &-dollar-sign {
+    color: var(--dollar-color);
+  }
+}

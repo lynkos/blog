@@ -40,6 +40,15 @@
   %}
 {% endif %}
 
+<!-- Add thumbs up/down icons -->
+
+{% if _content contains ' thumbs="' %}
+  {% assign _content = _content
+    | replace: ' thumbs="up">', '><i class="fas fa-thumbs-up shortcut-icon" aria-hidden="true"></i><span class="visually-hidden">Thumbs Up</span>'
+    | replace: ' thumbs="down">', '><i class="fas fa-thumbs-down shortcut-icon" aria-hidden="true"></i><span class="visually-hidden">Thumbs Down</span>'
+  %}
+{% endif %}
+
 <!--
   Rating and price widgets
 
@@ -269,15 +278,15 @@
       {% for i in (1..5) %}
         {% if i <= _full %}
           {% assign _icons = _icons
-            | append: '<i class="fas fa-star"></i>'
+            | append: '<i class="fas fa-star shortcut-icon"></i>'
           %}
         {% elsif _half == 1 and i == _half_index %}
           {% assign _icons = _icons
-            | append: '<i class="fas fa-star-half-stroke"></i>'
+            | append: '<i class="fas fa-star-half-stroke shortcut-icon"></i>'
           %}
         {% else %}
           {% assign _icons = _icons
-            | append: '<i class="far fa-star"></i>'
+            | append: '<i class="far fa-star shortcut-icon"></i>'
           %}
         {% endif %}
       {% endfor %}
@@ -307,7 +316,7 @@
       {% if _price > 0 %}
         {% for i in (1.._price) %}
           {% assign _icons = _icons
-            | append: '<i class="fas fa-dollar-sign"></i>'
+            | append: '<i class="fas fa-dollar-sign shortcut-icon"></i>'
           %}
         {% endfor %}
       {% endif %}

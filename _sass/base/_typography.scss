@@ -353,10 +353,13 @@ details {
     float: left;
     border: none;
     outline: none;
-    padding: 14px 16px;
+    padding: .5rem;
     transition: 0.3s;
-    font-size: 17px;
     color: var(--link-color);
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--btn-border-color);
+    }
 
     /* Change background color of buttons on hover */
     &:hover {

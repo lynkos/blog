@@ -943,10 +943,8 @@ You now have a convenient way to access both versions of Steam via your dock! If
 {: .prompt-info }
 
 #### Set game mode
-> **THIS NO LONGER WORKS WITH macOS 16!**
-> 
-> See ["Symbol not found" when setting game mode](2025-03-19-play-windows-games.md#symbol-not-found-when-setting-game-mode) for more details.
-{: .prompt-important }
+> See ["Symbol not found" when setting game mode](2025-03-19-play-windows-games.md#symbol-not-found-when-setting-game-mode) if it doesn't work for you.
+{: .prompt-tip }
 
 This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-games.md#requirements) (you should already have it by now).
 
@@ -1009,8 +1007,8 @@ This requires XCode, which is one of the [Requirements](2025-03-19-play-windows-
 #### Update MoltenVK
 [MoltenVK](https://github.com/KhronosGroup/MoltenVK) is a layered implementation of [Vulkan](https://www.khronos.org/vulkan) graphics and compute functionality, built on Apple's [Metal](https://developer.apple.com/metal) graphics and compute framework. This allows Vulkan applications to run on top of Metal on Apple's macOS, iOS, and tvOS operating systems.
 
-> Refer to 
-[MoltenVK's `README.md`](https://github.com/KhronosGroup/MoltenVK?tab=readme-ov-file#command_line_build) for steps on how to install MoltenVK from source
+> Refer to [MoltenVK's `README.md`](https://github.com/KhronosGroup/MoltenVK?tab=readme-ov-file#command_line_build) for steps on how to install MoltenVK from source
+{: .prompt-tip }
 
 ##### Method 1: Wine
 1. [Download latest MoltenVK release](https://github.com/KhronosGroup/MoltenVK/releases)

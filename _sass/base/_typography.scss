@@ -366,7 +366,6 @@ details {
 .arrows {
   display: flex;
   align-items: center;
-  z-index: 9; // Make sure > #caption z-index
 }
 
 .prev,

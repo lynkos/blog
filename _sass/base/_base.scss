@@ -177,36 +177,61 @@ main {
     }
   }
 
-  ul.task-list {
-    -webkit-padding-start: 1.25rem;
-    padding-inline-start: 1.25rem;
-
-    li {
+  ul {
+    /* pros and cons icon */
+    &.pros, &.cons {
       list-style-type: none;
-      padding-left: 0;
 
-      /* checkbox icon */
-      > i {
-        width: 2rem;
-        margin-left: -1.25rem;
-        color: var(--checkbox-color);
+      & li::before {
+        font-family: "Font Awesome 7 Free";
+        font-weight: 900;
+        display: inline-block;
+        width: 1.5rem;
+        margin-left: -1.5rem;
+      }
+    }
 
-        &.checked {
-          color: var(--checkbox-checked-color);
+    &.pros li::before {
+      color: var(--thumbs-up-color);
+      content: "\f055";
+    }
+
+    &.cons li::before {
+      color: var(--thumbs-down-color);
+      content: "\f056";
+    }
+
+    &.task-list {
+      -webkit-padding-start: 1.25rem;
+      padding-inline-start: 1.25rem;
+
+      li {
+        list-style-type: none;
+        padding-left: 0;
+
+        /* checkbox icon */
+        > i {
+          width: 2rem;
+          margin-left: -1.25rem;
+          color: var(--checkbox-color);
+
+          &.checked {
+            color: var(--checkbox-checked-color);
+          }
+        }
+
+        ul {
+          -webkit-padding-start: 1.75rem;
+          padding-inline-start: 1.75rem;
         }
       }
 
-      ul {
-        -webkit-padding-start: 1.75rem;
-        padding-inline-start: 1.75rem;
+      input[type='checkbox'] {
+        margin: 0 0.5rem 0.2rem -1.3rem;
+        vertical-align: middle;
       }
     }
-
-    input[type='checkbox'] {
-      margin: 0 0.5rem 0.2rem -1.3rem;
-      vertical-align: middle;
-    }
-  } /* ul */
+  }/* ul */
 
   dl > dt {
     padding-left: v.$desc-list-text-indent;

@@ -629,6 +629,42 @@ Which appears as this:
 **Price:**
 {: price="3" }
 
+### Add Pros
+To add pros, use `{: .pros }` after a Markdown list
+
+E.g. This Markdown code:
+
+```markdown
+* Pros 1
+* Pros 2
+{: .pros }
+```
+{: .nolineno }
+
+Appears as this:
+
+* Pros 1
+* Pros 2
+{: .pros }
+
+### Add Cons
+To add cons, append `{: .cons }` after a Markdown list
+
+E.g. This Markdown code:
+
+```markdown
+* Cons 1
+* Cons 2
+{: .cons }
+```
+{: .nolineno }
+
+Appears as this:
+
+* Cons 1
+* Cons 2
+{: .cons }
+
 ## Appendix
 ### Workflow
 ```mermaid

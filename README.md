@@ -54,6 +54,7 @@
 - Custom "**Important**" prompt
 - Custom `dl` (description list) styling inspired by lined paper
 - Custom `details` styling
+- Custom [Pros and Cons list](_sass/base/_base.scss#L181) styling
 - Auto-generates `CNAME` and `.nojekyll` files during [build and deployment](.github/workflows/pages-deploy.yml)
 - And more!
 

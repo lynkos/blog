@@ -1591,38 +1591,38 @@ This error is common when using an outdated version of Wine with a new version o
 
 5. Downgrade your Steam version
 
-> Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
-{: .prompt-warning }
-	
-{% tabs downgrade-steam %}
-	---TAB: 3/6/2025
-		This will restore an older Steam version from 3/6/2025
-		```sh
-		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
-		```
-		{: .nolineno }
-	---TAB: 1/28/2025
-		If that doesn't work, try this Steam version from 1/28/2025
-		```sh
-		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
-		```
-		{: .nolineno }
-	---TAB: 5/20/2024
-		If that doesn't work, try this Steam version from 5/20/2024
-		```sh
-		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
-		```
-		{: .nolineno }
-	---TAB: 7/2/2023
-		If that doesn't work, try this Steam version from 7/2/2023
-		```sh
-		steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl https://web.archive.org/web/20230702125953if_/media.steampowered.com/client -exitsteam
-		```
-		{: .nolineno }
-{% endtabs %}
+   > Running an outdated version of Steam is not recommended by Valve due to possible security risks. Proceed at your own risk.
+   {: .prompt-warning }
 
-> Visit the Internet Archive / Wayback Machine to view [all archived versions of Steam from 10/17/2007 to present](https://web.archive.org/web/20251001000000*/media.steampowered.com).
-{: .prompt-tip }
+   {% tabs downgrade-steam %}
+       ---TAB: 3/6/2025
+       This will restore an older Steam version from 3/6/2025
+       ```sh
+       steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250306194830if_/media.steampowered.com/client -exitsteam
+       ```
+       {: .nolineno }
+       ---TAB: 1/28/2025
+       If that doesn't work, try this Steam version from 1/28/2025
+       ```sh
+       steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20250128if_/media.steampowered.com/client -exitsteam
+       ```
+       {: .nolineno }
+       ---TAB: 5/20/2024
+       If that doesn't work, try this Steam version from 5/20/2024
+       ```sh
+       steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl http://web.archive.org/web/20240520if_/media.steampowered.com/client -exitsteam
+       ```
+       {: .nolineno }
+       ---TAB: 7/2/2023
+       If that doesn't work, try this Steam version from 7/2/2023
+       ```sh
+       steam.exe -forcesteamupdate -forcepackagedownload -overridepackageurl https://web.archive.org/web/20230702125953if_/media.steampowered.com/client -exitsteam
+       ```
+       {: .nolineno }
+   {% endtabs %}
+
+   > Visit the Internet Archive / Wayback Machine to view [all archived versions of Steam from 10/17/2007 to present](https://web.archive.org/web/20251001000000*/media.steampowered.com).
+   {: .prompt-tip }
 
 6. Exit
 
@@ -1654,13 +1654,13 @@ This error is common when using an outdated version of Wine with a new version o
 	```
 	{: .nolineno }
 
-> Optional args for `steam.exe` (tho including them caused some issues):
-> 
-> ```sh
-> -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
-> ```
-> {: .nolineno }
-{: .prompt-tip }
+   > Optional args for `steam.exe` (tho including them caused some issues):
+   > 
+   > ```sh
+   > -noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl
+   > ```
+   > {: .nolineno }
+   {: .prompt-tip }
 
 ##### Steam download freezes
 This is if you're unable to download a game via Steam (GUI/app). Usually it'll go up to a certain percentage (often 80%) and then immediately drops (i.e. stops downloading, graph goes flat to 0), giving an error like "content servers unreachable", "corrupt download", "content unavailable", etc.

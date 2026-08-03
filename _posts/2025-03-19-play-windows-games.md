@@ -1159,7 +1159,7 @@ Assuming you already have CrossOver, it is possible to add its support for Windo
    {% tabs save-exit-gaming-script %}
        ---TAB: Vim
         1. Exit insert mode by pressing <kbd>Esc</kbd>
-        2. Type `:wq` (write and quit) and press <kbd>Return</kbd>
+        2. Type `:wq` (write and quit), then press <kbd>Return</kbd>
        ---TAB: Nano
         3. Save changes with <kbd>CTRL</kbd> + <kbd>O</kbd>
         4. Press <kbd>Return</kbd> to confirm
@@ -1176,17 +1176,37 @@ Assuming you already have CrossOver, it is possible to add its support for Windo
    ```
    {: .nolineno }
 
-8. You can now use the following functions in your shell:
-    - `steam` — Launches Windows version of Steam
-    - `endwine <WINEPREFIX_NAME>` — Quit/stop a specific Wine prefix
-    - `wine <program> [args...]` — Run Wine with multiple arguments
-    - `retina <OPTION>` — Set retina mode for Windows gaming via Wine (Options: `on`, `off`)
-    - `game-mode <OPTION>` — Set macOS Game Mode (Options: `on`, `off`, `auto`)
-    - `anti-alias` — Enable font smoothing (i.e. anti-aliasing)
-    - `instm <WINEPREFIX_NAME>` — Install Windows Steam into specific Wine prefix
-    - `dlg <WINEPREFIX_NAME> <APP_ID>` — Download Windows Steam game to Wine prefix via SteamCMD
-    - `mvdlg <APP_ID> <SOURCE_WINEPREFIX_NAME> <TARGET_WINEPREFIX_NAME>` — Move Windows Steam game between Wine prefixes
-    - `clear-cache` — Clear Oblivion Remastered shader cache (used for debugging)
+8. You can now use these functions in your shell:
+
+   steam
+   : Launches Windows version of Steam
+
+   endwine &lt;PREFIX_NAME&gt;
+   : Quit/stop a specific Wine prefix
+
+   wine &lt;program&gt; [args...]
+   : Run Wine with multiple arguments
+
+   retina &lt;OPTION&gt;
+   : Set retina mode for Windows gaming via Wine (Options: **on**, **off**)
+
+   game-mode &lt;OPTION&gt;
+   : Set macOS Game Mode (Options: **on**, **off**, **auto**)
+
+   anti-alias
+   : Enable font smoothing (i.e. anti-aliasing)
+
+   instm &lt;PREFIX_NAME&gt;
+   : Install Windows Steam into specific Wine prefix
+
+   dlg &lt;PREFIX_NAME&gt; &lt;APP_ID&gt;
+   : Download Windows Steam game to Wine prefix via SteamCMD
+
+   mvdlg &lt;APP_ID&gt; &lt;SOURCE_PREFIX_NAME&gt; &lt;TARGET_PREFIX_NAME&gt;
+   : Move Windows Steam game between Wine prefixes
+
+   clear-cache
+   : Clear Oblivion Remastered shader cache (used for debugging)
 
 #### Steam Installer
 This script automatically installs the latest version of Windows Steam into a given Wine prefix.

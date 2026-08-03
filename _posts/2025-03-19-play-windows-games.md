@@ -2119,46 +2119,47 @@ winetricks fontsmooth=rgb
 ###### Method 2: Regedit
 
 {% tabs font-smoothing %}
-	---TAB: Anti-alias
-		Enable anti-alias
-		```sh
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
-		```
-		{: .nolineno }
-		If the fonts look somehow smeared, [disable anti-aliased fonts](https://support.codeweavers.com/en_US/bottles-associations-fonts/how-can-i-turn-off-anti-aliased-fonts)
-		```sh
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
-		wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
-		```
-		{: .nolineno }
-	---TAB: Subpixel smoothing
-		Enable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)/rendering/anti-aliasing (ClearType) RGB
-		```sh
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-		```
-		{: .nolineno }
-		Disable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)
-		```sh
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-		```
-	---TAB: Font smoothing
-		Enable [standard font smoothing](https://www.elevenforum.com/t/enable-or-disable-font-smoothing-in-windows-11.8476)
-		```sh
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
-		wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
-		```
-		{: .nolineno }
+    ---TAB: Anti-alias
+    Enable anti-alias
+    ```sh
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'Y' /f
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'Y' /f
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'Y' /f
+    ```
+    {: .nolineno }
+    If the fonts look somehow smeared, [disable anti-aliased fonts](https://support.codeweavers.com/en_US/bottles-associations-fonts/how-can-i-turn-off-anti-aliased-fonts)
+    ```sh
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithCore' /t REG_SZ /d 'N' /f
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideAntiAliasWithRender' /t REG_SZ /d 'N' /f
+    wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /v 'ClientSideWithRender' /t REG_SZ /d 'N' /f
+    ```
+    {: .nolineno }
+    ---TAB: Subpixel smoothing
+    Enable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)/rendering/anti-aliasing (ClearType) RGB
+    ```sh
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000002 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+    ```
+    {: .nolineno }
+    Disable [subpixel smoothing](https://askubuntu.com/questions/219791/improve-gui-appearance-of-wine-applications/219795#219795)
+    ```sh
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '0' /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000000 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+    ```
+    {: .nolineno }
+    ---TAB: Font smoothing
+    Enable [standard font smoothing](https://www.elevenforum.com/t/enable-or-disable-font-smoothing-in-windows-11.8476)
+    ```sh
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothing' /t REG_SZ /d '2' /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingOrientation' /t REG_DWORD /d 00000001 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingType' /t REG_DWORD /d 00000001 /f
+    wine reg add 'HKEY_CURRENT_USER\Control Panel\Desktop' /v 'FontSmoothingGamma' /t REG_DWORD /d 00000578 /f
+    ```
+    {: .nolineno }
 {% endtabs %}
 
 **`HKEY_CURRENT_USER\Control Panel\Desktop`  Keys**:

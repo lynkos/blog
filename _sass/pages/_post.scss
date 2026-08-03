@@ -342,7 +342,6 @@ header {
   height: v.$topbar-height;
   background: var(--main-bg);
   border-bottom: 1px solid var(--main-border-color);
-  transition: all 0.2s ease-in-out;
 
   @extend %btn-color;
 

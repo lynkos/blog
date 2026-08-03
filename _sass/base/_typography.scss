@@ -282,7 +282,7 @@ details {
   }
 }
 
-/* --- Begin of Markdown table style --- */
+/* --- Start of Markdown table style --- */
 
 /* it will be created by Liquid */
 .table-wrapper {
@@ -335,8 +335,64 @@ details {
   }
 }
 
-/* GALLERY SLIDESHOW */
-/* Slideshow gallery style */
+/* --- End of Markdown table style --- */
+
+/* --- Start of tabbed container style --- */
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border-radius: v.$radius-lg v.$radius-lg 0 0;
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--highlight-bg-color);
+  
+  /* Style the buttons inside the tab */
+  button {
+    @extend %cursor-pointer;
+    background-color: transparent;
+    float: left;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: var(--link-color);
+
+    /* Change background color of buttons on hover */
+    &:hover {
+      background-color: var(--bs-primary);
+      color: white;
+    }
+
+    /* Create an active/current tablink class */
+    &.active {
+      background-color: var(--bs-primary);
+      color: white;
+    }
+  }
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0 0 v.$radius-lg v.$radius-lg;
+  background-color: var(--card-bg);
+  border: 1px solid var(--btn-border-color);
+  border-top: none;
+  
+  p, pre, h4, ol {
+    margin: 0 !important;
+  }
+
+  div[class^="language-"] {
+    margin: 0.25rem 0 !important;
+  }
+}
+
+/* --- End of tabbed container style --- */
+
+/* --- Start of Slideshow gallery style --- */
 #caption, .prev, .next, .content a.popup {
   margin: 0;
 }
@@ -480,6 +536,8 @@ details {
 .slide-preview:hover {
   opacity: 1;
 }
+
+/* --- End of Slideshow gallery style --- */
 
 /* Shortcut icons colors */
 .shortcut-icon.fa {

@@ -1,6 +1,6 @@
 ---
 share: true
-title: Custom Storage
+title: Building a High-Performance External SSD for Mac
 date: 2026-01-20 20:15:03 -0400
 pin: true
 filename: 2025-01-20-custom-storage
